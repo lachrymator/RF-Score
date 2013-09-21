@@ -38,10 +38,7 @@ class tree : public vector<node>
 {
 public:
 	/// Train an empty tree from bootstrap samples
-	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01);
-
-	/// Calculate statistics
-	void stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()>& u01) const;
+	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes);
 
 	/// Save current tree to an ofstream.
 	void save(ofstream& ofs) const;
@@ -59,11 +56,14 @@ public:
 	/// Train trees
 	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed);
 
-	/// Calculate statistics
-	void stats(const vector<vector<float>>& x, const vector<float>& y) const;
-
 	/// Save current forest to an ofstream.
 	void save(ofstream& ofs) const;
+
+	float mse; ///< Mean of squared residuals
+	float rsq; ///< Var explained
+	vector<float> incPurity; ///< Tgini
+	vector<float> incMSE;
+	vector<float> impSD;
 private:
 	/// Get a random value from uniform distribution in [0, 1]
 	float get_uniform_01();

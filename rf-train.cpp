@@ -5,6 +5,14 @@
 #include "random_forest_train.hpp"
 using namespace std;
 
+void train(vector<forest>& forests, const size_t beg, const size_t end, const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed)
+{
+	for (size_t i = beg; i < end; ++i)
+	{
+		forests[i].train(x, y, num_trees, mtry, seed);
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 3)
@@ -47,30 +55,45 @@ int main(int argc, char* argv[])
 	vector<forest> forests(max_mtry - min_mtry + 1);
 	cout.setf(ios::fixed, ios::floatfield);
 	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " in parallel using " << num_threads << " threads" << endl << setprecision(3);
+	float best_mse = 1e9;
+	size_t best_mtry;
 	for (size_t mtry = min_mtry; mtry <= max_mtry; ++mtry)
 	{
-		cout << "mtry = " << mtry << endl;
+		// The larger the mtry value, the more nodes the trees will have, and thus the larger size of rf.data. This can be verified by saving the forests of different mtry values.
 		auto& f = forests[mtry - min_mtry];
 		f.train(x, y, num_trees, mtry, seed);
-		f.stats(x, y);
+		if (f.mse < best_mse)
+		{
+			best_mse = f.mse;
+			best_mtry = mtry;
+		}
 	}
+
+	// Output statistics of the best random forest and save it to file.
+	const auto& f = forests[best_mtry - min_mtry];
+	cout << "Mean of squared residuals: " << f.mse << endl;
+	cout << "            Var explained: " << f.rsq << endl;
+	cout << setw(3) << "Var" << setw(8) << "%incMSE" << setw(8) << "Tgini" << endl;
+	for (size_t i = 0, num_variables = x.front().size(); i < num_variables; ++i)
+	{
+		cout << setw(3) << i << setw(8) << (f.incMSE[i] / f.impSD[i]) << setw(8) << f.incPurity[i] << endl;
+	}
+	ofstream ofs(argv[2]);
+	f.save(ofs);
 /*
-	vector<thread> t;
-	t.reserve(num_threads);
-	const size_t avg = num_trees / num_threads;
-	const size_t spr = num_trees - avg * num_threads;
+	vector<thread> threads;
+	threads.reserve(num_threads);
+	const size_t avg = forests.size() / num_threads;
+	const size_t spr = forests.size() - avg * num_threads;
 	for (size_t i = 0, beg = 0, end; i < num_threads; ++i)
 	{
-		t.push_back(thread(bind(&forest::train, ref(f), beg, end = beg + avg + (i < spr))));
+		threads.push_back(thread(bind(&train, ref(forest), beg, end = beg + avg + (i < spr), x, y, num_trees, mtry, seed)));
 		beg = end;
 	}
-	for (size_t i = 0; i < num_threads; ++i)
+	for (auto& t : threads)
 	{
-		t[i].join();
+		threads[i].join();
 	}
 */
 
-	// Save the random forest to file.
-//	ofstream ofs(argv[2]);
-//	f.save(ofs);
 }

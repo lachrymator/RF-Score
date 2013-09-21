@@ -16,7 +16,7 @@ void node::save(ofstream& ofs) const
 	ofs.write((char*)&c1, 4);
 }
 
-void tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01)
+void tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes)
 {
 	const size_t num_samples = x.size();
 	const size_t num_variables = x.front().size();
@@ -100,19 +100,6 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 			(*this)[n.children[x[s][n.var] > n.val]].samples.push_back(s);
 		}
 	}
-}
-
-float tree::operator()(const vector<float>& x) const
-{
-	size_t k;
-	for (k = 0; (*this)[k].children[0]; k = (*this)[k].children[x[(*this)[k].var] > (*this)[k].val]);
-	return (*this)[k].y;
-}
-
-void tree::stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()>& u01) const
-{
-	const size_t num_samples = x.size();
-	const size_t num_variables = x.front().size();
 
 	// Aggregate NodeIncPurity
 	for (const auto& n : *this)
@@ -169,6 +156,13 @@ void tree::stats(const vector<vector<float>>& x, const vector<float>& y, vector<
 	}
 }
 
+float tree::operator()(const vector<float>& x) const
+{
+	size_t k;
+	for (k = 0; (*this)[k].children[0]; k = (*this)[k].children[x[(*this)[k].var] > (*this)[k].val]);
+	return (*this)[k].y;
+}
+
 void tree::save(ofstream& ofs) const
 {
 	const unsigned int nn = size();
@@ -185,27 +179,21 @@ forest::forest() : uniform_01(0, 1), u01(bind(&forest::get_uniform_01, ref(*this
 
 void forest::train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed)
 {
+	// Initialize
 	resize(num_trees);
 	rng.seed(seed);
-	for (auto& t : *this)
-	{
-		t.train(x, y, mtry, u01);
-	}
-}
 
-void forest::stats(const vector<vector<float>>& x, const vector<float>& y) const
-{
 	// Aggregate the statistics over all trees of the random forest
 	const size_t num_samples = x.size();
 	const size_t num_variables = x.front().size();
-	vector<float> incPurity(num_variables, 0);
-	vector<float> incMSE(num_variables, 0);
-	vector<float> impSD(num_variables, 0);
+	incPurity.resize(num_variables, 0);
+	incMSE.resize(num_variables, 0);
+	impSD.resize(num_variables, 0);
 	vector<float> oobPreds(num_samples, 0);
 	vector<size_t> oobTimes(num_samples, 0);
-	for (const auto& t : *this)
+	for (auto& t : *this)
 	{
-		t.stats(x, y, incPurity, incMSE, impSD, oobPreds, oobTimes, u01);
+		t.train(x, y, mtry, u01, incPurity, incMSE, impSD, oobPreds, oobTimes);
 	}
 
 	// Normalize incPurity, incMSE, impSD
@@ -217,7 +205,7 @@ void forest::stats(const vector<vector<float>>& x, const vector<float>& y) const
 	}
 
 	// Normalize oobPreds to calculate MSE
-	float mse = 0;
+	mse = 0;
 	size_t jout = 0;
 	for (size_t s = 0; s < num_samples; ++s)
 	{
@@ -240,16 +228,7 @@ void forest::stats(const vector<vector<float>>& x, const vector<float>& y) const
 	{
 		yVar += (y[i] - yAvg) * (y[i] - yAvg);
 	}
-	const auto rsq = 1 - mse * num_samples / yVar;
-
-	// Output statistics
-	cout << "Mean of squared residuals: " << mse << endl;
-	cout << "            Var explained: " << rsq << endl;
-	cout << setw(3) << "Var" << setw(8) << "%incMSE" << setw(8) << "Tgini" << endl; // IncNodePurity
-	for (size_t i = 0; i < num_variables; ++i)
-	{
-		cout << setw(3) << i << setw(8) << (incMSE[i] / impSD[i]) << setw(8) << incPurity[i] << endl;
-	}
+	rsq = 1 - mse * num_samples / yVar;
 }
 
 void forest::save(ofstream& ofs) const
