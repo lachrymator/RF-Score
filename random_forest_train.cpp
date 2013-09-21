@@ -173,18 +173,15 @@ void tree::save(ofstream& ofs) const
 	}
 }
 
-forest::forest() : u01([&]()
-{
-	return uniform_01(rng);
-})
-{
-}
-
 void forest::train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed)
 {
 	// Initialize
 	resize(num_trees);
 	rng.seed(seed);
+	u01 = [&]()
+	{
+		return uniform_01(rng);
+	};
 
 	// Aggregate the statistics over all trees of the random forest
 	const size_t num_samples = x.size();

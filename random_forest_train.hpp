@@ -45,9 +45,6 @@ private:
 class forest : public vector<tree>
 {
 public:
-	/// Construct an empty forest
-	forest();
-
 	/// Train trees
 	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed);
 
@@ -60,9 +57,9 @@ public:
 	vector<float> incMSE;
 	vector<float> impSD;
 private:
-	const function<float()> u01;
 	mt19937_64 rng;
 	uniform_real_distribution<float> uniform_01;
+	function<float()> u01;
 };
 
 #endif
