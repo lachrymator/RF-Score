@@ -1,6 +1,6 @@
 #pragma once
-#ifndef IDOCK_RANDOM_FOREST_HPP
-#define IDOCK_RANDOM_FOREST_HPP
+#ifndef RF_SCORE_RANDOM_FOREST_TEST_HPP
+#define RF_SCORE_RANDOM_FOREST_TEST_HPP
 
 #include <vector>
 #include <array>
