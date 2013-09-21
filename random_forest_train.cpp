@@ -173,7 +173,10 @@ void tree::save(ofstream& ofs) const
 	}
 }
 
-forest::forest() : uniform_01(0, 1), u01(bind(&forest::get_uniform_01, ref(*this)))
+forest::forest() : uniform_01(0, 1), u01([&]()->float
+{
+	return uniform_01(rng);
+})
 {
 }
 
@@ -239,9 +242,4 @@ void forest::save(ofstream& ofs) const
 	{
 		t.save(ofs);
 	}
-}
-
-float forest::get_uniform_01()
-{
-	return uniform_01(rng);
 }

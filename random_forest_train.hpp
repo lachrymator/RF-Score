@@ -65,9 +65,6 @@ public:
 	vector<float> incMSE;
 	vector<float> impSD;
 private:
-	/// Get a random value from uniform distribution in [0, 1]
-	float get_uniform_01();
-
 	const function<float()> u01;
 	mt19937_64 rng;
 	uniform_real_distribution<float> uniform_01;
