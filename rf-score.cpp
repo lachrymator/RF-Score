@@ -56,6 +56,6 @@ int main(int argc, char* argv[])
 			}
 		}
 		cout << f(v) << endl;
-		sf.weight(t); // The 5 Vina terms are now stored in t.
+		sf.weight(t); // The 5 Vina terms are now weighted.
 	}
 }
