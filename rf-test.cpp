@@ -3,7 +3,7 @@
 #include <fstream>
 #include <thread>
 #include <algorithm>
-#include "random_forest.hpp"
+#include "random_forest_test.hpp"
 using namespace std;
 
 inline float pearson(const vector<float>& x, const vector<float>& y)

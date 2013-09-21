@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <numeric>
 #include <algorithm>
-#include "random_forest.hpp"
+#include "random_forest_train.hpp"
 
 int tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()> u01)
 {

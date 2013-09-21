@@ -2,13 +2,13 @@ CC=g++ -std=c++0x -O3
 
 all: rf-train rf-test rf-score
 
-rf-train: random_forest.o rf-train.o
+rf-train: random_forest_train.o rf-train.o
 	$(CC) -o $@ $^ -pthread
 
-rf-test: random_forest.o rf-test.o
+rf-test: random_forest_test.o rf-test.o
 	$(CC) -o $@ $^
 
-rf-score: random_forest.o rf-score.o
+rf-score: random_forest_test.o rf-score.o
 	$(CC) -o $@ $^
 
 %.o: %.cpp
