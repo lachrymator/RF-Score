@@ -5,14 +5,6 @@
 #include "random_forest_train.hpp"
 using namespace std;
 
-void train(vector<forest>& forests, const size_t beg, const size_t end, const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t min_mtry, const size_t seed)
-{
-	for (size_t i = beg; i < end; ++i)
-	{
-		forests[i].train(x, y, num_trees, min_mtry + i, seed);
-	}
-}
-
 int main(int argc, char* argv[])
 {
 	if (argc != 3)
@@ -60,7 +52,14 @@ int main(int argc, char* argv[])
 	const size_t spr = forests.size() - avg * num_threads;
 	for (size_t tid = 0, beg = 0, end; tid < num_threads; ++tid)
 	{
-		threads.push_back(thread(bind(&train, ref(forests), beg, end = beg + avg + (tid < spr), x, y, num_trees, min_mtry, seed)));
+		end = beg + avg + (tid < spr);
+		threads.push_back(thread([=, &forests, &x, &y]()
+		{
+			for (size_t i = beg; i < end; ++i)
+			{
+				forests[i].train(x, y, num_trees, min_mtry + i, seed);
+			}
+		}));
 		beg = end;
 	}
 	for (auto& t : threads)
