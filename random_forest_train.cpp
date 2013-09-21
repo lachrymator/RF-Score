@@ -16,7 +16,7 @@ void node::save(ofstream& ofs) const
 	ofs.write((char*)&c1, 4);
 }
 
-int tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()> u01)
+void tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01)
 {
 	const size_t num_samples = x.size();
 	const size_t num_variables = x.front().size();
@@ -100,7 +100,6 @@ int tree::train(const vector<vector<float>>& x, const vector<float>& y, const si
 			(*this)[n.children[x[s][n.var] > n.val]].samples.push_back(s);
 		}
 	}
-	return 0;
 }
 
 float tree::operator()(const vector<float>& x) const
@@ -110,7 +109,7 @@ float tree::operator()(const vector<float>& x) const
 	return (*this)[k].y;
 }
 
-void tree::stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()> u01) const
+void tree::stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()>& u01) const
 {
 	const size_t num_samples = x.size();
 	const size_t num_variables = x.front().size();
@@ -173,7 +172,6 @@ void tree::stats(const vector<vector<float>>& x, const vector<float>& y, vector<
 void tree::save(ofstream& ofs) const
 {
 	const unsigned int nn = size();
-	cout << nn << endl;
 	ofs.write((char*)&nn, 4);
 	for (const auto& n : *this)
 	{
@@ -181,19 +179,21 @@ void tree::save(ofstream& ofs) const
 	}
 }
 
-forest::forest(const size_t num_trees, const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const size_t seed) : vector<tree>(num_trees), x(x), y(y), mtry(mtry), rng(seed), uniform_01(0, 1), u01(bind(&forest::get_uniform_01, ref(*this))), u01_s(bind(&forest::get_uniform_01_s, ref(*this)))
+forest::forest() : uniform_01(0, 1), u01(bind(&forest::get_uniform_01, ref(*this)))
 {
 }
 
-void forest::train(const size_t beg, const size_t end)
+void forest::train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed)
 {
-	for (size_t i = beg; i < end; ++i)
+	resize(num_trees);
+	rng.seed(seed);
+	for (auto& t : *this)
 	{
-		(*this)[i].train(x, y, mtry, u01_s);
+		t.train(x, y, mtry, u01);
 	}
 }
 
-void forest::stats() const
+void forest::stats(const vector<vector<float>>& x, const vector<float>& y) const
 {
 	// Aggregate the statistics over all trees of the random forest
 	const size_t num_samples = x.size();
@@ -255,7 +255,6 @@ void forest::stats() const
 void forest::save(ofstream& ofs) const
 {
 	const unsigned int nt = size();
-	cout << nt << endl;
 	ofs.write((char*)&nt, 4);
 	for (const auto& t : *this)
 	{
@@ -266,10 +265,4 @@ void forest::save(ofstream& ofs) const
 float forest::get_uniform_01()
 {
 	return uniform_01(rng);
-}
-
-float forest::get_uniform_01_s()
-{
-	unique_lock<mutex> lock(m);
-	return get_uniform_01();
 }

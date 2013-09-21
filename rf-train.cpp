@@ -40,11 +40,21 @@ int main(int argc, char* argv[])
 
 	// Train a random forest in parallel.
 	const size_t num_trees = 500;
-	const size_t mtry = 5;
 	const size_t seed = 89757; // time(0)
 	const size_t num_threads = 2;
-	cout << "Training " << num_trees << " trees with mtry " << mtry << " and seed " << seed << " in parallel using " << num_threads << " threads" << endl;
-	forest f(num_trees, x, y, mtry, seed);
+	const size_t min_mtry = 2;
+	const size_t max_mtry = x.front().size() / 4;
+	vector<forest> forests(max_mtry - min_mtry + 1);
+	cout.setf(ios::fixed, ios::floatfield);
+	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " in parallel using " << num_threads << " threads" << endl << setprecision(3);
+	for (size_t mtry = min_mtry; mtry <= max_mtry; ++mtry)
+	{
+		cout << "mtry = " << mtry << endl;
+		auto& f = forests[mtry - min_mtry];
+		f.train(x, y, num_trees, mtry, seed);
+		f.stats(x, y);
+	}
+/*
 	vector<thread> t;
 	t.reserve(num_threads);
 	const size_t avg = num_trees / num_threads;
@@ -58,13 +68,9 @@ int main(int argc, char* argv[])
 	{
 		t[i].join();
 	}
-
-	// Calculate statistics
-	cout.setf(ios::fixed, ios::floatfield);
-	cout << setprecision(3);
-	f.stats();
+*/
 
 	// Save the random forest to file.
-	ofstream ofs(argv[2]);
-	f.save(ofs);
+//	ofstream ofs(argv[2]);
+//	f.save(ofs);
 }

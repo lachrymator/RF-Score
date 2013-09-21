@@ -5,7 +5,6 @@
 #include <vector>
 #include <array>
 #include <random>
-#include <mutex>
 #include <functional>
 #include <fstream>
 using namespace std;
@@ -39,10 +38,10 @@ class tree : public vector<node>
 {
 public:
 	/// Train an empty tree from bootstrap samples
-	int train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()> u01);
+	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01);
 
 	/// Calculate statistics
-	void stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()> u01) const;
+	void stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()>& u01) const;
 
 	/// Save current tree to an ofstream.
 	void save(ofstream& ofs) const;
@@ -54,13 +53,14 @@ private:
 class forest : public vector<tree>
 {
 public:
-	forest(const size_t num_trees, const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const size_t seed);
+	/// Construct an empty forest
+	forest();
 
-	/// Train trees from beg to end
-	void train(const size_t beg, const size_t end);
+	/// Train trees
+	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed);
 
 	/// Calculate statistics
-	void stats() const;
+	void stats(const vector<vector<float>>& x, const vector<float>& y) const;
 
 	/// Save current forest to an ofstream.
 	void save(ofstream& ofs) const;
@@ -68,17 +68,9 @@ private:
 	/// Get a random value from uniform distribution in [0, 1]
 	float get_uniform_01();
 
-	/// Get a random value from uniform distribution in [0, 1] in a thread safe manner.
-	float get_uniform_01_s();
-
-	const vector<vector<float>>& x;
-	const vector<float>& y;
-	const size_t mtry;
 	const function<float()> u01;
-	const function<float()> u01_s;
 	mt19937_64 rng;
 	uniform_real_distribution<float> uniform_01;
-	mutable mutex m;
 };
 
 #endif
