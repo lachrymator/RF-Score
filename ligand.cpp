@@ -1,3 +1,4 @@
+#include <string>
 #include <fstream>
 #include "ligand.hpp"
 
