@@ -17,11 +17,6 @@ public:
 
 	/// Load current node from an ifstream
 	void load(ifstream& ifs);
-
-	node(const node&) = default;
-	node(node&&) = default;
-	node& operator=(const node&) = default;
-	node& operator=(node&&) = default;
 };
 
 class tree : public vector<node>
