@@ -7,6 +7,7 @@
 #include <random>
 #include <mutex>
 #include <functional>
+#include <fstream>
 using namespace std;
 
 class node
@@ -19,11 +20,14 @@ public:
 	float val; ///< Value used for node split
 	array<size_t, 2> children; ///< Two child nodes
 
-	/// Constructs an empty leaf node.
+	/// Construct an empty leaf node.
 	explicit node()
 	{
 		children[0] = 0;
 	}
+
+	/// Save current node to an ofstream.
+	void save(ofstream& ofs) const;
 
 	node(const node&) = default;
 	node(node&&) = default;
@@ -37,14 +41,14 @@ public:
 	/// Train an empty tree from bootstrap samples
 	int train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()> u01);
 
-	/// Predict the y value of the given sample x
-	float operator()(const vector<float>& x) const;
-
 	/// Calculate statistics
 	void stats(const vector<vector<float>>& x, const vector<float>& y, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes, const function<float()> u01) const;
 
-	/// Clear node samples to save memory
-	void clear();
+	/// Save current tree to an ofstream.
+	void save(ofstream& ofs) const;
+private:
+	/// Predict the y value of the given sample x
+	float operator()(const vector<float>& x) const;
 };
 
 class forest : public vector<tree>
@@ -55,14 +59,11 @@ public:
 	/// Train trees from beg to end
 	void train(const size_t beg, const size_t end);
 
-	/// Predict the y value of the given sample x
-	float operator()(const vector<float>& x) const;
-
 	/// Calculate statistics
 	void stats() const;
 
-	/// Clear node samples to save memory
-	void clear();
+	/// Save current forest to an ofstream.
+	void save(ofstream& ofs) const;
 private:
 	/// Get a random value from uniform distribution in [0, 1]
 	float get_uniform_01();

@@ -4,6 +4,18 @@
 #include <algorithm>
 #include "random_forest_train.hpp"
 
+void node::save(ofstream& ofs) const
+{
+	const unsigned int var = this->var;
+	const unsigned int c0 = this->children[0];
+	const unsigned int c1 = this->children[1];
+	ofs.write((char*)&y, 4);
+	ofs.write((char*)&var, 4);
+	ofs.write((char*)&val, 4);
+	ofs.write((char*)&c0, 4);
+	ofs.write((char*)&c1, 4);
+}
+
 int tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()> u01)
 {
 	const size_t num_samples = x.size();
@@ -158,11 +170,14 @@ void tree::stats(const vector<vector<float>>& x, const vector<float>& y, vector<
 	}
 }
 
-void tree::clear()
+void tree::save(ofstream& ofs) const
 {
-	for (node& n : *this)
+	const unsigned int nn = size();
+	cout << nn << endl;
+	ofs.write((char*)&nn, 4);
+	for (const auto& n : *this)
 	{
-		n.samples.clear();
+		n.save(ofs);
 	}
 }
 
@@ -176,16 +191,6 @@ void forest::train(const size_t beg, const size_t end)
 	{
 		(*this)[i].train(x, y, mtry, u01_s);
 	}
-}
-
-float forest::operator()(const vector<float>& x) const
-{
-	float y = 0;
-	for (const tree& t : *this)
-	{
-		y += t(x);
-	}
-	return y /= size();
 }
 
 void forest::stats() const
@@ -247,11 +252,14 @@ void forest::stats() const
 	}
 }
 
-void forest::clear()
+void forest::save(ofstream& ofs) const
 {
-	for (tree& t : *this)
+	const unsigned int nt = size();
+	cout << nt << endl;
+	ofs.write((char*)&nt, 4);
+	for (const auto& t : *this)
 	{
-		t.clear();
+		t.save(ofs);
 	}
 }
 

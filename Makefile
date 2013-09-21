@@ -8,7 +8,7 @@ rf-train: random_forest_train.o rf-train.o
 rf-test: random_forest_test.o rf-test.o
 	$(CC) -o $@ $^
 
-rf-score: random_forest_test.o rf-score.o
+rf-score: random_forest_test.o atom.o scoring_function.o receptor.o ligand.o rf-score.o
 	$(CC) -o $@ $^
 
 %.o: %.cpp
