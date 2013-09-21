@@ -40,11 +40,11 @@ int main(int argc, char* argv[])
 	while (true)
 	{
 		ligand lig(ligifs);
-		if (lig.atoms.empty()) break;
+		if (lig.empty()) break;
 		vector<float> v(36);
-		for (const auto& l : lig.atoms)
+		for (const auto& l : lig)
 		{
-			for (const auto& r : rec.atoms)
+			for (const auto& r : rec)
 			{
 				const auto d0 = l.coord[0] - r.coord[0];
 				const auto d1 = l.coord[1] - r.coord[1];
