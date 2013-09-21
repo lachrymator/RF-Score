@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <numeric>
 #include <algorithm>
 #include "random_forest_test.hpp"
 using namespace std;
