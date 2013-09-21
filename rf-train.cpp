@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 3)
 	{
-		cout << "Usage: rf-train train.csv rf.data" << endl;
+		cout << "Usage: rf-train rf-train.csv rf.data" << endl;
 		return 0;
 	}
 

@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 4)
 	{
-		cout << "Usage: rf-test rf.data test.csv pred.csv" << endl;
+		cout << "Usage: rf-test rf.data rf-test.csv rf-pred.csv" << endl;
 		return 0;
 	}
 
