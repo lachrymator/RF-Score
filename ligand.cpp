@@ -141,5 +141,6 @@ ligand::ligand(ifstream& ifs)
 				}
 			}
 		}
+		else if (record == "TORSDO") break;
 	}
 }
