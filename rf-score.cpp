@@ -21,18 +21,10 @@ int main(int argc, char* argv[])
 	f.load(dataifs);
 	dataifs.close();
 
-	/// Precalculate Vina's scoring function.
-	scoring_function sf;
-	for (size_t t2 = 0; t2 < sf.n; ++t2)
-	for (size_t t1 = 0; t1 <=  t2; ++t1)
-	{
-		sf.precalculate(t1, t2);
-	}
-	sf.clear();
-
 	// Parse receptor and ligand to calculate RF-Score features and Vina terms.
 	cout.setf(ios::fixed, ios::floatfield);
 	cout << setprecision(3);
+	scoring_function sf;
 	ifstream recifs(argv[2]);
 	receptor rec(recifs);
 	recifs.close();
@@ -42,17 +34,28 @@ int main(int argc, char* argv[])
 		ligand lig(ligifs);
 		if (lig.empty()) break;
 		vector<float> v(36);
+		vector<float> t(5);
 		for (const auto& l : lig)
 		{
 			for (const auto& r : rec)
 			{
-				const auto d0 = l.coord[0] - r.coord[0];
-				const auto d1 = l.coord[1] - r.coord[1];
-				const auto d2 = l.coord[2] - r.coord[2];
-				if (d0*d0 + d1*d1 + d2*d2 >= 144) continue;
-				++v[l.rf * 4 + r.rf];
+				const float d0 = l.coord[0] - r.coord[0];
+				const float d1 = l.coord[1] - r.coord[1];
+				const float d2 = l.coord[2] - r.coord[2];
+				const float ds = d0 * d0 + d1 * d1 + d2 * d2;
+				if (ds >= 144) continue; // RF-Score cutoff
+				if (!l.rf_unsupported() && !r.rf_unsupported())
+				{
+					++v[l.rf * 4 + r.rf];
+				}
+				if (ds >= 64) continue; // Vina score cutoff
+				if (!l.xs_unsupported() && !r.xs_unsupported())
+				{
+					sf.score(t, l.xs, r.xs, sqrt(ds));
+				}
 			}
 		}
 		cout << f(v) << endl;
+		sf.weight(t); // The 5 Vina terms are now stored in t.
 	}
 }
