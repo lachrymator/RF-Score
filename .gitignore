@@ -1,0 +1,9 @@
+*
+!.gitignore
+!LICENSE
+!README.md
+!Makefile
+!rf.sln
+!*.vcxproj
+!*.hpp
+!*.cpp
