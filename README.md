@@ -230,13 +230,16 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
     <th></th><th>original RF-Score</th><th>new RF-Score</th>
   </tr>
   <tr>
+    <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
+  </tr>
+  <tr>
     <td>mse</td><td>2.295</td><td>2.162</td>
   </tr>
   <tr>
     <td>rsq</td><td>0.487</td><td>0.517</td>
   </tr>
   <tr>
-    <td colspan="3">N = 1105</td>
+    <td colspan="3">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
     <td>rmse</td><td>0.701</td><td>0.672</td>
@@ -254,7 +257,7 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
     <td>kcor</td><td>0.827</td><td>0.837</td>
   </tr>
   <tr>
-    <td>N = 195</td><td></td><td></td>
+    <td colspan="3">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
     <td>rmse</td><td>1.582</td><td>1.535</td>
