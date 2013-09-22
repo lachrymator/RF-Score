@@ -28,8 +28,64 @@ Validation
 Two csv files, `rf-train.csv` and `rf-test.csv`, are provided in order to reproduce the results as presented in the original paper [DOI: 10.1093/bioinformatics/btq112]. They are extracted from PDBbind 2007, and contain the 36 RF-Score features only, without the 5 Vina terms.
 
 	rf-train rf-train.csv rf.data
+
+	Mean of squared residuals: 2.295
+		        Var explained: 0.487
+	Var %incMSE   Tgini
+	  0  26.754 706.563
+	  1  24.746 571.341
+	  2  25.498 562.224
+	  3  25.468 214.609
+	  4  24.218 314.675
+	  5  21.091 250.225
+	  6  21.956 264.612
+	  7  18.045 109.038
+	  8  22.495 229.941
+	  9  23.605 219.915
+	 10  22.769 215.147
+	 11  18.024 161.819
+	 12  17.378 120.783
+	 13  18.027 129.200
+	 14  14.495  99.326
+	 15  10.538  34.460
+	 16  15.303  75.130
+	 17  14.033  73.445
+	 18  13.181  66.374
+	 19   6.880  31.776
+	 20   4.395  22.980
+	 21   4.921  23.319
+	 22   3.231  17.694
+	 23   3.685  10.843
+	 24   4.204  18.543
+	 25   2.578  17.949
+	 26   2.979  19.666
+	 27   4.526  11.598
+	 28   4.155   9.643
+	 29   3.946   8.970
+	 30   3.641   8.237
+	 31   3.335   6.444
+	 32   0.106   1.771
+	 33   1.493   2.695
+	 34  -2.125   2.554
+	 35   1.524   3.278
+
 	rf-test rf.data rf-train.csv rf-pred.csv
+
+	N 1105
+	rmse 0.701
+	sdev 0.492
+	pcor 0.957
+	scor 0.958
+	kcor 0.827
+
 	rf-test rf.data rf-test.csv rf-pred.csv
+
+	N 195
+	rmse 1.582
+	sdev 2.513
+	pcor 0.772
+	scor 0.762
+	kcor 0.566
 
 
 Usage
