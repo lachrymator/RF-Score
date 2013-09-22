@@ -94,9 +94,7 @@ int main(int argc, char* argv[])
 
 	// Load a random forest from file.
 	forest f;
-	ifstream dataifs(argv[1]);
-	f.load(dataifs);
-	dataifs.close();
+	f.load(argv[1]);
 
 	// Parse testing samples, predict RF-Score and write output to file.
 	string line;

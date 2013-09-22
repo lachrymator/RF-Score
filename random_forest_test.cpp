@@ -33,6 +33,12 @@ float tree::operator()(const vector<float>& x) const
 	return (*this)[k].y;
 }
 
+void forest::load(const char* const path)
+{
+	ifstream ifs(path);
+	load(ifs);
+}
+
 void forest::load(ifstream& ifs)
 {
 	unsigned int nt;

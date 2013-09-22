@@ -32,6 +32,9 @@ public:
 class forest : public vector<tree>
 {
 public:
+	/// Load current forest from a file
+	void load(const char* const path);
+
 	/// Load current forest from an ifstream
 	void load(ifstream& ifs);
 

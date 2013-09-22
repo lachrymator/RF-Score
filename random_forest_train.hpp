@@ -19,13 +19,13 @@ public:
 	float val; ///< Value used for node split
 	array<size_t, 2> children; ///< Two child nodes
 
-	/// Construct an empty leaf node.
+	/// Construct an empty leaf node
 	explicit node()
 	{
 		children[0] = 0;
 	}
 
-	/// Save current node to an ofstream.
+	/// Save current node to an ofstream
 	void save(ofstream& ofs) const;
 };
 
@@ -35,7 +35,7 @@ public:
 	/// Train an empty tree from bootstrap samples
 	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes);
 
-	/// Save current tree to an ofstream.
+	/// Save current tree to an ofstream
 	void save(ofstream& ofs) const;
 private:
 	/// Predict the y value of the given sample x
@@ -48,7 +48,10 @@ public:
 	/// Train trees
 	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed);
 
-	/// Save current forest to an ofstream.
+	/// Save current forest to a file
+	void save(const char* const path) const;
+
+	/// Save current forest to an ofstream
 	void save(ofstream& ofs) const;
 
 	float mse; ///< Mean of squared residuals

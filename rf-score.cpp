@@ -17,9 +17,7 @@ int main(int argc, char* argv[])
 
 	// Load a random forest from file.
 	forest f;
-	ifstream dataifs(argv[1]);
-	f.load(dataifs);
-	dataifs.close();
+	f.load(argv[1]);
 
 	// Parse receptor and ligand to calculate RF-Score features and Vina terms.
 	cout.setf(ios::fixed, ios::floatfield);

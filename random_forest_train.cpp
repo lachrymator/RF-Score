@@ -231,6 +231,12 @@ void forest::train(const vector<vector<float>>& x, const vector<float>& y, const
 	rsq = 1 - mse * num_samples / yVar;
 }
 
+void forest::save(const char* const path) const
+{
+	ofstream ofs(path);
+	save(ofs);
+}
+
 void forest::save(ofstream& ofs) const
 {
 	const unsigned int nt = size();

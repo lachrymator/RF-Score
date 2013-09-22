@@ -92,6 +92,5 @@ int main(int argc, char* argv[])
 	{
 		cout << setw(3) << i << setw(8) << (f.incMSE[i] / f.impSD[i]) << setw(8) << f.incPurity[i] << endl;
 	}
-	ofstream ofs(argv[2]);
-	f.save(ofs);
+	f.save(argv[2]);
 }
