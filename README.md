@@ -13,13 +13,13 @@ Four executables, `rf-prepare`, `rf-train`, `rf-test` and `rf-score`, will be co
 
 GCC 4.6 or higher is required.
 
-    make
+	make
 
 ### Windows
 
 Visual Studio 2012 or higher is required.
 
-    msbuild /t:Build /p:Configuration=Release
+	msbuild /t:Build /p:Configuration=Release
 
 
 Usage
@@ -47,20 +47,20 @@ It parses PDBbind proteins and ligands in pdbqt format, and extracts 36 RF-Score
 
 It trains multiple random forests of different mtry values in parallel, selects the best one with the minimum MSE, outputs its statistics, and saves it to a binary file.
 
-    rf-train rf-train.csv rf.data
+	rf-train rf-train.csv rf.data
 
 ### rf-test
 
 It loads a random forest from a binary file, predicts the RF-Score values of testing samples, saves them to a csv file, and evaluates the prediction performance.
 
 	rf-test rf.data rf-train.csv rf-pred.csv
-    rf-test rf.data rf-test.csv rf-pred.csv
+	rf-test rf.data rf-test.csv rf-pred.csv
 
 ### rf-score
 
 It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, and generates their RF-Score features and Vina terms.
 
-    rf-score rf.data receptor.pdbqt ligand.pdbqt
+	rf-score rf.data receptor.pdbqt ligand.pdbqt
 
 
 Author
