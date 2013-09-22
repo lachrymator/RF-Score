@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
 	// Load a receptor and multiple ligands to calculate RF-Score features and Vina terms.
 	cout.setf(ios::fixed, ios::floatfield);
 	cout << setprecision(3);
-	scoring_function sf;
 	receptor rec;
 	rec.load(argv[2]);
 	for (ifstream ifs(argv[3]); true;)
@@ -28,7 +27,7 @@ int main(int argc, char* argv[])
 		ligand lig;
 		lig.load(ifs);
 		if (lig.empty()) break;
-		const vector<float> v = feature(sf, rec, lig);
+		const vector<float> v = feature(rec, lig);
 		cout << f(v) << endl;
 	}
 }

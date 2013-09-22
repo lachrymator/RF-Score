@@ -7,8 +7,9 @@
 #include "ligand.hpp"
 using namespace std;
 
-inline vector<float> feature(const scoring_function& sf, const receptor& rec, const ligand& lig)
+inline vector<float> feature(const receptor& rec, const ligand& lig)
 {
+	static const scoring_function sf;
 	vector<float> v(41); // 36 RF-Score features and 5 Vina terms
 	for (const auto& l : lig)
 	{
