@@ -1,6 +1,9 @@
 CC=g++ -std=c++0x -O3
 
-all: rf-train rf-test rf-score
+all: rf-prepare rf-train rf-test rf-score
+
+rf-prepare: atom.o scoring_function.o receptor.o ligand.o rf-prepare.o
+	$(CC) -o $@ $^
 
 rf-train: random_forest_train.o rf-train.o
 	$(CC) -o $@ $^ -pthread
