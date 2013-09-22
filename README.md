@@ -29,6 +29,8 @@ Two csv files, `rf-train.csv` and `rf-test.csv`, are provided in order to reprod
 
 	rf-train rf-train.csv rf.data
 
+	Training 10 random forests of 500 trees with mtry from 1 to 10 and seed 89757 in parallel using 4 threads
+	mtry = 6 yields the minimum MSE
 	Mean of squared residuals: 2.295
 		        Var explained: 0.487
 	Var %incMSE   Tgini
@@ -160,6 +162,8 @@ The original RF-Score was trained on the PDBbind 2007 refined set minus the core
 
 	rf-train rf-train.csv rf.data
 
+	Training 11 random forests of 500 trees with mtry from 1 to 11 and seed 89757 in  parallel using 4 threads
+	mtry = 5 yields the minimum MSE
 	Mean of squared residuals: 2.162
 		        Var explained: 0.517
 	Var %incMSE   Tgini
