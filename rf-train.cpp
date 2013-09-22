@@ -43,8 +43,8 @@ int main(int argc, char* argv[])
 	const size_t num_trees = 500;
 	const size_t seed = 89757; // time(0), random_device()()
 	const size_t num_threads = 4;
-	const size_t min_mtry = 2;
-	const size_t max_mtry = x.front().size() / 4;
+	const size_t min_mtry = 1;
+	const size_t max_mtry = 1 + x.front().size() / 4;
 	vector<forest> forests(max_mtry - min_mtry + 1);
 	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " in parallel using " << num_threads << " threads" << endl;
 	vector<thread> threads;
@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
 			best_idx = idx;
 		}
 	}
+	cout << "mtry = " << min_mtry + best_idx << " yields the minimum MSE" << endl;
 
 	// Output statistics of the best random forest and save it to file.
 	const auto& f = forests[best_idx];
