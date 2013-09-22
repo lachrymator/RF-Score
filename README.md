@@ -152,6 +152,12 @@ It loads a random forest from a binary file, parses a receptor and multiple conf
 Results
 -------
 
+The original RF-Score was trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To make a fair comparison, two data files, `rf_core_data.2007` and `rf_refined-core_data.2007`, are provided to train and test the new RF-Score on the same data sets.
+
+	cp rf_core_data.2007 rf_refined-core_data.2007 /path/to/PDBbind/v2007/
+	rf-prepare rf_core_data.2007 rf-test.csv
+	rf-prepare rf_refined-core_data.2007 rf-train.csv
+
 	rf-train rf-train.csv rf.data
 
 	Mean of squared residuals: 2.162
