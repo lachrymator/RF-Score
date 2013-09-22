@@ -27,7 +27,7 @@ inline vector<float> feature(const receptor& rec, const ligand& lig)
 			if (ds >= 64) continue; // Vina score cutoff 8A
 			if (!l.xs_unsupported() && !r.xs_unsupported())
 			{
-				sf.score(v.data() + 36, l.xs, r.xs, sqrt(ds));
+				sf.score(v.data() + 36, l.xs, r.xs, ds);
 			}
 		}
 	}
