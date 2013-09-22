@@ -152,7 +152,7 @@ It loads a random forest from a binary file, parses a receptor and multiple conf
 Results
 -------
 
-The original RF-Score was trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To make a fair comparison, two data files, `rf_core_data.2007` and `rf_refined-core_data.2007`, are provided to train and test the new RF-Score on the same data sets.
+The original RF-Score was trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To make a fair comparison, two data files, `rf_core_data.2007` and `rf_refined-core_data.2007`, are provided to train and test the new RF-Score on the same data sets. Make sure the PDBbind 2007 proteins and ligands are converted into pdbqt format so that `rf-prepare` can parse them.
 
 	cp rf_core_data.2007 rf_refined-core_data.2007 /path/to/PDBbind/v2007/
 	rf-prepare rf_core_data.2007 rf-test.csv
@@ -222,6 +222,56 @@ The original RF-Score was trained on the PDBbind 2007 refined set minus the core
 	pcor 0.796
 	scor 0.789
 	kcor 0.597
+
+Here is a comparison of prediction performance of the original and the new RF-Score.
+
+<table>
+  <tr>
+    <th></th><th>original RF-Score</th><th>new RF-Score</th>
+  </tr>
+  <tr>
+    <td>mse</td><td>2.295</td><td>2.162</td>
+  </tr>
+  <tr>
+    <td>rsq</td><td>0.487</td><td>0.517</td>
+  </tr>
+  <tr>
+    <td>N = 1105</td><td></td><td></td>
+  </tr>
+  <tr>
+    <td>rmse</td><td>0.701</td><td>0.672</td>
+  </tr>
+  <tr>
+    <td>sdev</td><td>0.492</td><td>0.452</td>
+  </tr>
+  <tr>
+    <td>pcor</td><td>0.957</td><td>0.962</td>
+  </tr>
+  <tr>
+    <td>scor</td><td>0.958</td><td>0.963</td>
+  </tr>
+  <tr>
+    <td>kcor</td><td>0.827</td><td>0.837</td>
+  </tr>
+  <tr>
+    <td>N = 195</td><td></td><td></td>
+  </tr>
+  <tr>
+    <td>rmse</td><td>1.582</td><td>1.535</td>
+  </tr>
+  <tr>
+    <td>sdev</td><td>2.513</td><td>2.364</td>
+  </tr>
+  <tr>
+    <td>pcor</td><td>0.772</td><td>0.796</td>
+  </tr>
+  <tr>
+    <td>scor</td><td>0.762</td><td>0.789</td>
+  </tr>
+  <tr>
+    <td>kcor</td><td>0.566</td><td>0.597</td>
+  </tr>
+</table>
 
 
 Author
