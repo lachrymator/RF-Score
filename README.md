@@ -22,12 +22,24 @@ Visual Studio 2012 or higher is required.
 	msbuild /t:Build /p:Configuration=Release
 
 
+Validation
+----------
+
+Two csv files, `rf-train.csv` and `rf-test.csv`, are provided in order to reproduce the results as presented in the original paper [DOI: 10.1093/bioinformatics/btq112]. They are extracted from PDBbind 2007, and contain the 36 RF-Score features only, without the 5 Vina terms.
+
+	rf-train rf-train.csv rf.data
+	rf-test rf.data rf-train.csv rf-pred.csv
+	rf-test rf.data rf-test.csv rf-pred.csv
+
+
 Usage
 -----
 
 ### rf-prepare
 
-It parses PDBbind proteins and ligands in pdbqt format, and extracts 36 RF-Score features and 5 Vina terms to a csv file.
+It traverses the PDBbind folder to load proteins and ligands in pdbqt format, and extracts 36 RF-Score features and 5 Vina terms to a csv file.
+
+It requires PDBbind and MGLTools as prerequisites.
 
 	curl -O http://pdbbind.org.cn/download/pdbbind_v2012.tar.gz
 	tar zxf pdbbind_v2012.tar.gz
@@ -35,13 +47,31 @@ It parses PDBbind proteins and ligands in pdbqt format, and extracts 36 RF-Score
 	tar zxf mgltools_x86_64Linux2_1.5.6.tar.gz
 	cd mgltools_x86_64Linux2_1.5.6
 	./install.sh -c 1
-	cat ../v2012/INDEX_core_data.2012 | while IFS= read -r line; do
-		if [[ $line =~ ^# ]]; then continue; fi
+
+It requires pdbqt as input format in order to extract the 5 Vina terms.
+
+	tail -n +6 ../v2012/INDEX_refined_data.2012 | while IFS= read -r line; do
 		code=${line:0:4}
 		bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -U waters -r ../v2012/${code}/${code}_protein.pdb
 		bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.py -U '' -l ../v2012/${code}/${code}_ligand.mol2
 	done
-	rf-prepare ../v2012/INDEX_core_data.2012 rf-test.csv
+
+Here shows how to prepare testing samples from the PDBbind 2012 core set.
+
+	cd ../v2012
+	tail -n +6 INDEX_core_data.2012 | while read -r line; do
+		echo $line | cut -d' ' -f1,4 >> rf_core_data.2012
+	done
+	rf-prepare rf_core_data.2012 rf-test.csv
+
+Here shows how to prepare training samples from the PDBbind 2012 refined set minus the core set.
+
+	core=$(tail -n +6 INDEX_core_data.2012 | cut -d' ' -f1);\
+	tail -n +6 INDEX_refined_data.2012 | while read -r line; do
+		if [[ 1 = $(echo ${core} | grep ${line:0:4} | wc -l) ]]; then continue; fi
+		echo $line | cut -d' ' -f1,4 >> rf_refined-core_data.2012
+	done
+	rf-prepare rf_refined-core_data.2012 rf-train.csv
 
 ### rf-train
 
@@ -58,7 +88,7 @@ It loads a random forest from a binary file, predicts the RF-Score values of tes
 
 ### rf-score
 
-It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, and generates their RF-Score features and Vina terms.
+It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, generates their RF-Score features and Vina terms, and score them.
 
 	rf-score rf.data receptor.pdbqt ligand.pdbqt
 
