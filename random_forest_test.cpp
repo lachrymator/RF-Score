@@ -35,7 +35,7 @@ float tree::operator()(const vector<float>& x) const
 
 void forest::load(const string path)
 {
-	ifstream ifs(path);
+	ifstream ifs(path, ios::binary);
 	load(ifs);
 }
 

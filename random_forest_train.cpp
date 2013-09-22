@@ -233,7 +233,7 @@ void forest::train(const vector<vector<float>>& x, const vector<float>& y, const
 
 void forest::save(const string path) const
 {
-	ofstream ofs(path);
+	ofstream ofs(path, ios::binary);
 	save(ofs);
 }
 
