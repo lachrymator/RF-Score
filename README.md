@@ -19,7 +19,7 @@ GCC 4.6 or higher is required.
 
 Visual Studio 2012 or higher is required.
 
-	msbuild /t:Build /p:Configuration=Release
+	msbuild RF-Score.sln /t:Build /p:Configuration=Release
 
 
 Validation
