@@ -2,7 +2,7 @@
 #include <fstream>
 #include "receptor.hpp"
 
-void receptor::load(const char* const path)
+void receptor::load(const string path)
 {
 	ifstream ifs(path);
 	load(ifs);

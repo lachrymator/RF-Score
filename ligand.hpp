@@ -10,7 +10,7 @@ class ligand : public vector<atom>
 {
 public:
 	/// Load current ligand from a file
-	void load(const char* const path);
+	void load(const string path);
 
 	/// Load current ligand from an ifstream
 	void load(ifstream& ifs);

@@ -49,7 +49,7 @@ public:
 	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t num_trees, const size_t mtry, const size_t seed);
 
 	/// Save current forest to a file
-	void save(const char* const path) const;
+	void save(const string path) const;
 
 	/// Save current forest to an ofstream
 	void save(ofstream& ofs) const;

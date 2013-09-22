@@ -14,7 +14,7 @@ public:
 	explicit frame(const size_t parent, const size_t rotorXidx, const size_t rotorYidx) : parent(parent), rotorXidx(rotorXidx), rotorYidx(rotorYidx) {}
 };
 
-void ligand::load(const char* const path)
+void ligand::load(const string path)
 {
 	ifstream ifs(path);
 	load(ifs);
