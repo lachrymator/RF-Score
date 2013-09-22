@@ -45,7 +45,11 @@ void ligand::load(ifstream& ifs)
 			// Skip unsupported atom types.
 			if (a.ad_unsupported()) continue;
 
-			if (a.is_hydrogen()) // Current atom is a hydrogen.
+			// Skip non-polar hydrogens.
+			if (a.is_nonpolar_hydrogen()) continue;
+
+			// For a polar hydrogen, the bonded hetero atom must be a hydrogen bond donor.
+			if (a.is_polar_hydrogen())
 			{
 				bool unsaved = true;
 				for (size_t i = size(); i > f->rotorYidx;)
@@ -53,11 +57,7 @@ void ligand::load(ifstream& ifs)
 					atom& b = (*this)[--i];
 					if (a.has_covalent_bond(b))
 					{
-						// For a polar hydrogen, the bonded hetero atom must be a hydrogen bond donor.
-						if (a.is_polar_hydrogen())
-						{
-							b.donorize();
-						}
+						b.donorize();
 						unsaved = false;
 						break;
 					}
@@ -138,11 +138,7 @@ void ligand::load(ifstream& ifs)
 					atom& b = (*this)[--i];
 					if (a.has_covalent_bond(b))
 					{
-						// For a polar hydrogen, the bonded hetero atom must be a hydrogen bond donor.
-						if (a.is_polar_hydrogen())
-						{
-							b.donorize();
-						}
+						b.donorize();
 						break;
 					}
 				}
