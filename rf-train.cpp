@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	const size_t min_mtry = 1;
 	const size_t max_mtry = 1 + x.front().size() / 4;
 	vector<forest> forests(max_mtry - min_mtry + 1);
-	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " in parallel using " << num_threads << " threads" << endl;
+	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " using " << num_threads << " threads" << endl;
 	vector<thread> threads;
 	threads.reserve(num_threads);
 	const size_t avg = forests.size() / num_threads;
