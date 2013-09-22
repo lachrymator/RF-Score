@@ -9,8 +9,11 @@
 class ligand : public vector<atom>
 {
 public:
-	/// Construct a ligand by parsing a ligand file in pdbqt format.
-	explicit ligand(ifstream& ifs);
+	/// Load current ligand from a file
+	void load(const char* const path);
+
+	/// Load current ligand from an ifstream
+	void load(ifstream& ifs);
 };
 
 #endif

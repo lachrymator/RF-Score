@@ -19,17 +19,17 @@ int main(int argc, char* argv[])
 	forest f;
 	f.load(argv[1]);
 
-	// Parse receptor and ligand to calculate RF-Score features and Vina terms.
+	// Load receptor and ligand to calculate RF-Score features and Vina terms.
 	cout.setf(ios::fixed, ios::floatfield);
 	cout << setprecision(3);
 	scoring_function sf;
-	ifstream recifs(argv[2]);
-	receptor rec(recifs);
-	recifs.close();
+	receptor rec;
+	rec.load(argv[2]);
 	ifstream ligifs(argv[3]);
 	while (true)
 	{
-		ligand lig(ligifs);
+		ligand lig;
+		lig.load(ligifs);
 		if (lig.empty()) break;
 		vector<float> v(36);
 		vector<float> t(5);
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 				if (ds >= 144) continue; // RF-Score cutoff
 				if (!l.rf_unsupported() && !r.rf_unsupported())
 				{
-					++v[l.rf * 4 + r.rf];
+					++v[(l.rf << 2) + r.rf];
 				}
 				if (ds >= 64) continue; // Vina score cutoff
 				if (!l.xs_unsupported() && !r.xs_unsupported())

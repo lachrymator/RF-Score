@@ -14,7 +14,13 @@ public:
 	explicit frame(const size_t parent, const size_t rotorXidx, const size_t rotorYidx) : parent(parent), rotorXidx(rotorXidx), rotorYidx(rotorYidx) {}
 };
 
-ligand::ligand(ifstream& ifs)
+void ligand::load(const char* const path)
+{
+	ifstream ifs(path);
+	load(ifs);
+}
+
+void ligand::load(ifstream& ifs)
 {
 	// Initialize necessary variables for constructing a ligand.
 	vector<frame> frames; ///< ROOT and BRANCH frames.

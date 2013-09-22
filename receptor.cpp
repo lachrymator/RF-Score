@@ -2,7 +2,13 @@
 #include <fstream>
 #include "receptor.hpp"
 
-receptor::receptor(ifstream& ifs)
+void receptor::load(const char* const path)
+{
+	ifstream ifs(path);
+	load(ifs);
+}
+
+void receptor::load(ifstream& ifs)
 {
 	// Parse the receptor line by line.
 	reserve(2000); // A receptor typically consists of <= 2,000 atoms within bound.

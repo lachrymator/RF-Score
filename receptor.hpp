@@ -9,8 +9,11 @@
 class receptor : public vector<atom>
 {
 public:
-	/// Construct a receptor by parsing a receptor file in pdbqt format.
-	explicit receptor(ifstream& ifs);
+	/// Load current receptor from a file
+	void load(const char* const path);
+
+	/// Load current receptor from an ifstream
+	void load(ifstream& ifs);
 };
 
 #endif
