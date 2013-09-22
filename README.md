@@ -236,7 +236,7 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
     <td>rsq</td><td>0.487</td><td>0.517</td>
   </tr>
   <tr>
-    <td>N = 1105</td><td></td><td></td>
+    <td colspan="3">N = 1105</td>
   </tr>
   <tr>
     <td>rmse</td><td>0.701</td><td>0.672</td>
