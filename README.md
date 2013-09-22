@@ -110,8 +110,8 @@ It requires pdbqt as input format in order to extract the 5 Vina terms.
 
 	tail -n +6 ../v2012/INDEX_refined_data.2012 | while read -r line; do
 		code=${line:0:4}
-		bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -U waters -r ../v2012/${code}/${code}_protein.pdb
-		bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.py -U '' -l ../v2012/${code}/${code}_ligand.mol2
+		bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -r ../v2012/${code}/${code}_protein.pdb
+		bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.py -l ../v2012/${code}/${code}_ligand.mol2
 	done
 
 Here shows how to prepare testing samples from the PDBbind 2012 core set.
