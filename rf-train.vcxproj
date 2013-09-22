@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{18C1C79D-266C-45A1-8163-761A8285DBC0}</ProjectGuid>
+    <ProjectGuid>{72513881-313C-477C-B5DD-036F19F0A2DF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>rf-train</RootNamespace>
     <ProjectName>rf-train</ProjectName>

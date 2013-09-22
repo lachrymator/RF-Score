@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CCEEB36A-CC32-458D-9158-64619D21E1C4}</ProjectGuid>
+    <ProjectGuid>{1A42FE3F-A66A-46CD-84DC-E1084095BAB5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>rf-score</RootNamespace>
     <ProjectName>rf-score</ProjectName>
@@ -138,6 +138,7 @@
     <ClInclude Include="random_forest_test.hpp" />
     <ClInclude Include="receptor.hpp" />
     <ClInclude Include="scoring_function.hpp" />
+    <ClInclude Include="feature.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
