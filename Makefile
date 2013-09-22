@@ -18,4 +18,4 @@ rf-score: random_forest_test.o atom.o scoring_function.o receptor.o ligand.o rf-
 	$(CC) -o $@ $< -c
 
 clean:
-	rm -f rf-score rf-test rf-train *.o
+	rm -f rf-score rf-test rf-train rf-prepare *.o
