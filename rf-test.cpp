@@ -9,7 +9,7 @@ using namespace std;
 inline float pearson(const vector<float>& x, const vector<float>& y)
 {
 	float x1sum = 0, y1sum = 0, x2sum = 0, y2sum = 0, xysum = 0;
-	const auto n = x.size();
+	const size_t n = x.size();
 	for (size_t i = 0; i < n; ++i)
 	{
 		x1sum += x[i];
@@ -23,7 +23,7 @@ inline float pearson(const vector<float>& x, const vector<float>& y)
 
 inline float spearman(const vector<float>& x, const vector<float>& y)
 {
-	const auto n = y.size();
+	const size_t n = y.size();
 	vector<size_t> xcase(n), ycase(n);
 	iota(xcase.begin(), xcase.end(), 0);
 	iota(ycase.begin(), ycase.end(), 0);
@@ -55,7 +55,7 @@ inline int sgn(T x)
 
 inline float kendall(const vector<float>& x, const vector<float>& y)
 {
-	const auto n = y.size();
+	const size_t n = y.size();
 	float numer = 0;
 	for (size_t i = 0; i < n - 1; ++i)
 	{
@@ -69,7 +69,7 @@ inline float kendall(const vector<float>& x, const vector<float>& y)
 
 static void stats(const vector<float>& x, const vector<float>& y)
 {
-	const auto n = y.size();
+	const size_t n = y.size();
 	float se1 = 0, se2 = 0;
 	for (size_t i = 0; i < n; ++i)
 	{

@@ -10,10 +10,10 @@ class scoring_function
 {
 public:
 	/// Return the scoring function evaluated at (t1, t2, r).
-	void score(vector<float>& t, const size_t t1, const size_t t2, const float r) const;
+	void score(float* const v, const size_t t1, const size_t t2, const float r) const;
 
 	/// Weight the terms
-	void weight(vector<float>& t) const;
+	void weight(float* const v) const;
 private:
 	static const array<float, 15> vdw;
 	static const array<float, 5> weights;

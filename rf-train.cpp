@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 
 	// Train random forests of different mtry values in parallel.
 	const size_t num_trees = 500;
-	const size_t seed = 89757; // time(0)
+	const size_t seed = 89757; // time(0), random_device()()
 	const size_t num_threads = 4;
 	const size_t min_mtry = 2;
 	const size_t max_mtry = x.front().size() / 4;

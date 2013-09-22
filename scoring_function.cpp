@@ -59,20 +59,20 @@ inline bool is_hbond(const size_t t1, const size_t t2)
 	return (is_hbdonor(t1) && is_hbacceptor(t2)) || (is_hbdonor(t2) && is_hbacceptor(t1));
 }
 
-void scoring_function::score(vector<float>& t, const size_t t1, const size_t t2, const float r) const
+void scoring_function::score(float* const v, const size_t t1, const size_t t2, const float r) const
 {
 	const float d = r - (vdw[t1] + vdw[t2]);
-	t[0] += exp(-4.0f * d * d);
-	t[1] += exp(-0.25f * (d - 3.0f) * (d - 3.0f));
-	t[2] += d < 0.0f ? d * d : 0.0f;
-	t[3] += is_hydrophobic(t1, t2) ? (d >= 1.5f ? 0.0f : (d <= 0.5f ? 1.0f : 1.5f - d)) : 0.0f;
-	t[4] += is_hbond(t1, t2) ? (d >= 0.0f ? 0.0f : (d <= -0.7f ? 1.0f : d * -1.4285714285714286f)) : 0.0f;
+	v[0] += exp(-4.0f * d * d);
+	v[1] += exp(-0.25f * (d - 3.0f) * (d - 3.0f));
+	v[2] += d < 0.0f ? d * d : 0.0f;
+	v[3] += is_hydrophobic(t1, t2) ? (d >= 1.5f ? 0.0f : (d <= 0.5f ? 1.0f : 1.5f - d)) : 0.0f;
+	v[4] += is_hbond(t1, t2) ? (d >= 0.0f ? 0.0f : (d <= -0.7f ? 1.0f : d * -1.4285714285714286f)) : 0.0f;
 }
 
-void scoring_function::weight(vector<float>& t) const
+void scoring_function::weight(float* const v) const
 {
 	for (size_t i = 0; i < weights.size(); ++i)
 	{
-		t[i] *= weights[i];
+		v[i] *= weights[i];
 	}
 }
