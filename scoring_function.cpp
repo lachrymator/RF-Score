@@ -59,9 +59,9 @@ inline bool is_hbond(const size_t t1, const size_t t2)
 	return (is_hbdonor(t1) && is_hbacceptor(t2)) || (is_hbdonor(t2) && is_hbacceptor(t1));
 }
 
-void scoring_function::score(float* const v, const size_t t1, const size_t t2, const float r) const
+void scoring_function::score(float* const v, const size_t t1, const size_t t2, const float r2) const
 {
-	const float d = r - (vdw[t1] + vdw[t2]);
+	const float d = sqrt(r2) - (vdw[t1] + vdw[t2]);
 	v[0] += exp(-4.0f * d * d);
 	v[1] += exp(-0.25f * (d - 3.0f) * (d - 3.0f));
 	v[2] += d < 0.0f ? d * d : 0.0f;

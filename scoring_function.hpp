@@ -10,7 +10,7 @@ class scoring_function
 {
 public:
 	/// Return the scoring function evaluated at (t1, t2, r).
-	void score(float* const v, const size_t t1, const size_t t2, const float r) const;
+	void score(float* const v, const size_t t1, const size_t t2, const float r2) const;
 
 	/// Weight the terms
 	void weight(float* const v) const;
