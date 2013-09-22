@@ -7,7 +7,7 @@ A machine learning approach to predicting protein-ligand binding affinity.
 Compilation
 -----------
 
-Three executables, `rf-train`, `rf-test` and `rf-score`, will be compiled.
+Four executables, `rf-prepare`, `rf-train`, `rf-test` and `rf-score`, will be compiled.
 
 ### Linux, Mac OS X, Solaris and FreeBSD
 
@@ -24,6 +24,24 @@ Visual Studio 2012 or higher is required.
 
 Usage
 -----
+
+### rf-prepare
+
+It parses PDBbind proteins and ligands in pdbqt format, and extracts 36 RF-Score features and 5 Vina terms to a csv file.
+
+    curl -O http://pdbbind.org.cn/download/pdbbind_v2012.tar.gz
+    tar zxf pdbbind_v2012.tar.gz
+    curl -O http://mgltools.scripps.edu/downloads/downloads/tars/releases/REL1.5.6/mgltools_x86_64Linux2_1.5.6.tar.gz
+    tar zxf mgltools_x86_64Linux2_1.5.6.tar.gz
+    cd mgltools_x86_64Linux2_1.5.6
+    ./install.sh -c 1
+    cat ../v2012/INDEX_core_data.2012 | while IFS= read -r line; do
+        if [[ $line =~ ^# ]]; then continue; fi
+        code=${line:0:4}
+        bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -U waters -r ../v2012/${code}/${code}_protein.pdb
+        bin/pythonsh MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.py -U '' -l ../v2012/${code}/${code}_ligand.mol2
+    done
+    rf-prepare ../v2012/INDEX_core_data.2012 rf-test.csv
 
 ### rf-train
 
