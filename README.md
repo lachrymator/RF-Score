@@ -231,52 +231,52 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
 
 <table>
   <tr>
-    <th></th><th>original RF-Score</th><th>new RF-Score</th>
+    <th></th><th>original RF-Score</th><th>new RF-Score with weighted Vina terms</th><th>new RF-Score with unweighted Vina terms</th>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
+    <td colspan="4">Evaluation on OOB (out-of-bag) data</td>
   </tr>
   <tr>
-    <td>mse</td><td>2.295</td><td>2.162</td>
+    <td>mse</td><td>2.295</td><td>2.162</td><td>2.163</td>
   </tr>
   <tr>
-    <td>rsq</td><td>0.487</td><td>0.517</td>
+    <td>rsq</td><td>0.487</td><td>0.517</td><td>0.517</td>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on training samples (N = 1105)</td>
+    <td colspan="4">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.701</td><td>0.672</td>
+    <td>rmse</td><td>0.701</td><td>0.672</td><td>0.635</td>
   </tr>
   <tr>
-    <td>sdev</td><td>0.492</td><td>0.452</td>
+    <td>sdev</td><td>0.492</td><td>0.452</td><td>0.404</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.957</td><td>0.962</td>
+    <td>pcor</td><td>0.957</td><td>0.962</td><td>0.966</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.958</td><td>0.963</td>
+    <td>scor</td><td>0.958</td><td>0.963</td><td>0.968</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.827</td><td>0.837</td>
+    <td>kcor</td><td>0.827</td><td>0.837</td><td>0.848</td>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on testing samples (N = 195)</td>
+    <td colspan="4">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.582</td><td>1.535</td>
+    <td>rmse</td><td>1.582</td><td>1.535</td><td>1.525</td>
   </tr>
   <tr>
-    <td>sdev</td><td>2.513</td><td>2.364</td>
+    <td>sdev</td><td>2.513</td><td>2.364</td><td>2.331</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.772</td><td>0.796</td>
+    <td>pcor</td><td>0.772</td><td>0.796</td><td>0.797</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.762</td><td>0.789</td>
+    <td>scor</td><td>0.762</td><td>0.789</td><td>0.790</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.566</td><td>0.597</td>
+    <td>kcor</td><td>0.566</td><td>0.597</td><td>0.594</td>
   </tr>
 </table>
 
