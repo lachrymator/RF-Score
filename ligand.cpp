@@ -25,7 +25,7 @@ void ligand::load(ifstream& ifs)
 	// Initialize necessary variables for constructing a ligand.
 	vector<frame> frames; ///< ROOT and BRANCH frames.
 	frames.reserve(30); // A ligand typically consists of <= 30 frames.
-	frames.push_back(frame(0, 0, 0)); // ROOT is also treated as a frame. The parent, rotorXsrn, rotorYsrn, rotorXidx of ROOT frame are dummy.
+	frames.emplace_back(0, 0, 0); // ROOT is also treated as a frame. The parent, rotorXsrn, rotorYsrn, rotorXidx of ROOT frame are dummy.
 	reserve(100); // A ligand typically consists of <= 100 heavy atoms.
 
 	// Initialize helper variables for parsing.
@@ -64,7 +64,7 @@ void ligand::load(ifstream& ifs)
 				}
 				if (unsaved)
 				{
-					hydrogens.push_back(a);
+					hydrogens.push_back(move(a));
 				}
 			}
 			else // Current atom is a heavy atom.
@@ -89,7 +89,7 @@ void ligand::load(ifstream& ifs)
 				}
 
 				// Save the heavy atom.
-				push_back(a);
+				push_back(move(a));
 			}
 		}
 		else if (record == "BRANCH")

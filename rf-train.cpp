@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 			v.push_back(stof(line.substr(c0 + 1, c1 - c0 - 1)));
 			c0 = c1;
 		}
-		x.push_back(static_cast<vector<float>&&>(v));
+		x.push_back(move(v));
 	}
 	ifs.close();
 
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 	for (size_t tid = 0, beg = 0, end; tid < num_threads; ++tid)
 	{
 		end = beg + avg + (tid < spr);
-		threads.push_back(thread([=, &forests, &x, &y]()
+		threads.emplace_back(([=, &forests, &x, &y]()
 		{
 			for (size_t i = beg; i < end; ++i)
 			{

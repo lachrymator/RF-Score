@@ -23,7 +23,7 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 
 	// Create bootstrap samples with replacement
 	reserve(num_samples);
-	push_back(node());
+	emplace_back();
 	node& root = front();
 	root.samples.resize(num_samples);
 	for (size_t& s : root.samples)
@@ -92,9 +92,9 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 
 		// Create two child nodes and distribute samples
 		n.children[0] = size();
-		push_back(node());
+		emplace_back();
 		n.children[1] = size();
-		push_back(node());
+		emplace_back();
 		for (const size_t s : n.samples)
 		{
 			(*this)[n.children[x[s][n.var] > n.val]].samples.push_back(s);

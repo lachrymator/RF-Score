@@ -80,7 +80,7 @@ void receptor::load(ifstream& ifs)
 			}
 
 			// Save the atom.
-			push_back(a);
+			push_back(move(a));
 		}
 		else if (record == "TER   ")
 		{
