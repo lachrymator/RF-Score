@@ -31,7 +31,7 @@ inline vector<float> feature(const receptor& rec, const ligand& lig)
 			}
 		}
 	}
-	sf.weight(v.data() + 36); // The 5 Vina terms are now weighted.
+//	sf.weight(v.data() + 36); // The 5 Vina terms are now weighted.
 	return v;
 }
 
