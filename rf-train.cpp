@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 3)
 	{
-		cout << "Usage: rf-train rf-train.csv rf.data" << endl;
+		cout << "Usage: rf-train pdbbind2012-refined-core-yxi.csv pdbbind2012-refined-core.rf" << endl;
 		return 0;
 	}
 
