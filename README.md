@@ -97,7 +97,7 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 Results
 -------
 
-The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files, `pdbbind2007-refined-core-yx41i.csv` and `pdbbind2007-core-yx41i.csv`, are provided and they contain both the 36 RF-Score features and the 5 Vina terms.
+The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind2007-refined-core-yx41i.csv` and `pdbbind2007-core-yx41i.csv` are provided and they contain both the 36 RF-Score features and the 5 Vina terms.
 
 	rf-train pdbbind2007-refined-core-yx41i.csv pdbbind2007-refined-core-x41.rf
 
