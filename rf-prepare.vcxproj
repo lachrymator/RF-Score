@@ -61,23 +61,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)</OutDir>
-    <IntDir>$(SolutionDir)</IntDir>
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)</OutDir>
-    <IntDir>$(SolutionDir)</IntDir>
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)</OutDir>
-    <IntDir>$(SolutionDir)</IntDir>
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)</OutDir>
-    <IntDir>$(SolutionDir)</IntDir>
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,18 +125,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="atom.cpp" />
-    <ClCompile Include="ligand.cpp" />
-    <ClCompile Include="receptor.cpp" />
-    <ClCompile Include="rf-prepare.cpp" />
-    <ClCompile Include="scoring_function.cpp" />
+    <ClCompile Include="src/atom.cpp" />
+    <ClCompile Include="src/ligand.cpp" />
+    <ClCompile Include="src/receptor.cpp" />
+    <ClCompile Include="src/rf-prepare.cpp" />
+    <ClCompile Include="src/scoring_function.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="atom.hpp" />
-    <ClInclude Include="ligand.hpp" />
-    <ClInclude Include="receptor.hpp" />
-    <ClInclude Include="scoring_function.hpp" />
-    <ClInclude Include="feature.hpp" />
+    <ClInclude Include="src/atom.hpp" />
+    <ClInclude Include="src/ligand.hpp" />
+    <ClInclude Include="src/receptor.hpp" />
+    <ClInclude Include="src/scoring_function.hpp" />
+    <ClInclude Include="src/feature.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

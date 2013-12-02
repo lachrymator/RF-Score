@@ -1,21 +1,21 @@
 CC=g++ -std=c++0x -O3
 
-all: rf-prepare rf-train rf-test rf-score
+all: bin/rf-prepare bin/rf-train bin/rf-test bin/rf-score
 
-rf-prepare: atom.o scoring_function.o receptor.o ligand.o rf-prepare.o
+bin/rf-prepare: obj/atom.o obj/scoring_function.o obj/receptor.o obj/ligand.o obj/rf-prepare.o
 	$(CC) -o $@ $^
 
-rf-train: random_forest_train.o rf-train.o
+bin/rf-train: obj/random_forest_train.o obj/rf-train.o
 	$(CC) -o $@ $^ -pthread
 
-rf-test: random_forest_test.o rf-test.o
+bin/rf-test: obj/random_forest_test.o obj/rf-test.o
 	$(CC) -o $@ $^
 
-rf-score: random_forest_test.o atom.o scoring_function.o receptor.o ligand.o rf-score.o
+bin/rf-score: obj/random_forest_test.o obj/atom.o obj/scoring_function.o obj/receptor.o obj/ligand.o obj/rf-score.o
 	$(CC) -o $@ $^
 
-%.o: %.cpp
+obj/%.o: src/%.cpp
 	$(CC) -o $@ $< -c
 
 clean:
-	rm -f rf-score rf-test rf-train rf-prepare *.o
+	rm -f bin/* obj/*
