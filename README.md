@@ -34,64 +34,64 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 	rf-train pdbbind2007-refined-core-yx36i.csv pdbbind2007-refined-core-x36.rf
 
 	Training 10 random forests of 500 trees with mtry from 1 to 10 and seed 89757 using 4 threads
-	mtry = 6 yields the minimum MSE
-	Mean of squared residuals: 2.288
-		        Var explained: 0.489
+	mtry = 5 yields the minimum MSE
+	Mean of squared residuals: 2.302
+		        Var explained: 0.485
 	Var %incMSE   Tgini
-	  0  27.145 694.927
-	  1  26.064 631.766
-	  2  25.287 534.830
-	  3  22.775 218.108
-	  4  22.531 319.658
-	  5  22.694 243.093
-	  6  20.228 250.335
-	  7  16.408 111.282
-	  8  26.192 224.810
-	  9  23.324 226.473
-	 10  21.817 214.546
-	 11  18.760 160.839
-	 12  16.031 122.119
-	 13  17.509 132.622
-	 14  14.212  98.977
-	 15   8.868  31.616
-	 16  14.311  78.965
-	 17  14.456  74.805
-	 18  10.695  61.024
-	 19   6.791  29.388
-	 20   5.351  18.906
-	 21   5.996  22.805
-	 22   4.501  16.311
-	 23   4.827  11.587
-	 24   3.588  17.133
-	 25   4.251  17.087
-	 26   4.088  19.714
-	 27   4.045  13.816
-	 28   4.234   9.368
-	 29   3.134   8.808
-	 30   4.447   9.262
-	 31   4.361   7.159
-	 32  -1.103   2.718
-	 33   0.053   2.006
-	 34  -1.519   2.465
-	 35   2.013   2.356
+	  0  25.935 642.539
+	  1  24.288 602.268
+	  2  25.544 545.174
+	  3  22.687 217.975
+	  4  22.638 294.269
+	  5  21.110 258.209
+	  6  20.850 246.132
+	  7  18.806 116.258
+	  8  23.999 223.278
+	  9  24.044 226.904
+	 10  22.484 214.130
+	 11  17.475 156.319
+	 12  15.090 128.506
+	 13  17.245 113.058
+	 14  14.720  97.564
+	 15   9.433  34.583
+	 16  14.510  76.825
+	 17  14.990  72.074
+	 18  11.962  62.495
+	 19   5.183  33.337
+	 20   4.752  19.646
+	 21   6.724  23.967
+	 22   4.169  18.251
+	 23   3.834  11.693
+	 24   3.341  18.307
+	 25   3.726  17.843
+	 26   2.288  18.412
+	 27   6.616  14.567
+	 28   4.257   9.090
+	 29   3.712   8.617
+	 30   5.405   8.909
+	 31   3.787   6.518
+	 32  -1.710   3.140
+	 33  -2.608   2.629
+	 34  -1.333   2.478
+	 35   1.526   2.951
 
 	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-refined-core-yx36i.csv pred-ipy.csv
 
 	N 1105
-	rmse 0.701
-	sdev 0.491
-	pcor 0.957
-	scor 0.958
-	kcor 0.828
+	rmse 0.738
+	sdev 0.545
+	pcor 0.952
+	scor 0.953
+	kcor 0.817
 
 	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-core-yx36i.csv pred-ipy.csv
 
 	N 195
-	rmse 1.585
-	sdev 2.522
-	pcor 0.771
-	scor 0.755
-	kcor 0.562
+	rmse 1.584
+	sdev 2.520
+	pcor 0.775
+	scor 0.760
+	kcor 0.566
 
 
 Results
@@ -102,69 +102,69 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 	rf-train pdbbind2007-refined-core-yx41i.csv pdbbind2007-refined-core-x41.rf
 
 	Training 11 random forests of 500 trees with mtry from 1 to 11 and seed 89757 using 4 threads
-	mtry = 6 yields the minimum MSE
-	Mean of squared residuals: 2.165
-		        Var explained: 0.516
+	mtry = 5 yields the minimum MSE
+	Mean of squared residuals: 2.152
+		        Var explained: 0.519
 	Var %incMSE   Tgini
-	  0  23.094 522.200
-	  1  18.493 389.844
-	  2  20.699 355.149
-	  3  19.118 146.437
-	  4  20.324 225.023
-	  5  19.036 181.106
-	  6  20.942 183.265
-	  7  16.495  83.164
-	  8  18.468 157.290
-	  9  20.248 154.510
-	 10  18.812 151.513
-	 11  14.699 116.381
-	 12  13.942 115.347
-	 13  13.736 108.732
-	 14  13.419  90.339
-	 15   8.078  25.094
-	 16  11.583  55.075
-	 17  10.755  55.469
-	 18  11.589  54.571
-	 19   6.473  22.722
-	 20   2.747  16.329
-	 21   5.937  17.453
-	 22   3.212  15.115
-	 23   3.097  10.341
-	 24   2.283  13.952
-	 25   4.499  14.221
-	 26   2.758  15.725
-	 27   3.554   9.449
-	 28   3.296   6.674
-	 29   3.050   6.655
-	 30   1.817   7.444
-	 31   3.886   5.304
-	 32  -0.060   1.657
-	 33  -1.413   1.630
-	 34  -0.127   1.478
-	 35  -1.639   2.357
-	 36  19.473 323.774
-	 37  17.644 406.938
-	 38  18.471 164.638
-	 39  23.297 310.548
-	 40  15.854 175.989
+	  0  21.487 465.368
+	  1  19.547 402.833
+	  2  19.361 347.540
+	  3  19.890 143.541
+	  4  20.534 230.964
+	  5  18.461 192.873
+	  6  17.987 165.694
+	  7  13.532  84.628
+	  8  18.819 153.822
+	  9  21.225 166.770
+	 10  17.900 146.185
+	 11  13.699 119.640
+	 12  14.680 107.858
+	 13  15.297  94.251
+	 14  13.273  97.268
+	 15   8.955  28.373
+	 16  11.676  54.727
+	 17  11.134  52.022
+	 18  10.644  52.076
+	 19   4.133  27.430
+	 20   3.856  16.642
+	 21   3.663  20.207
+	 22   3.519  15.770
+	 23   4.014  10.507
+	 24   2.337  14.060
+	 25   2.326  13.154
+	 26   3.888  15.627
+	 27   2.724  10.550
+	 28   3.698   7.677
+	 29   4.867   6.127
+	 30   3.049   6.524
+	 31   2.348   5.455
+	 32  -0.973   1.925
+	 33   0.112   2.214
+	 34  -0.637   1.498
+	 35  -0.594   1.942
+	 36  18.707 332.743
+	 37  17.558 397.357
+	 38  18.260 162.003
+	 39  22.403 312.299
+	 40  17.186 169.003
 
 	rf-test pdbbind2007-refined-core-x41.rf pdbbind2007-refined-core-yx41i.csv pred-ipy.csv
 
 	N 1105
-	rmse 0.652
-	sdev 0.426
-	pcor 0.965
-	scor 0.965
-	kcor 0.843
+	rmse 0.668
+	sdev 0.447
+	pcor 0.963
+	scor 0.963
+	kcor 0.838
 
 	rf-test pdbbind2007-refined-core-x41.rf pdbbind2007-core-yx41i.csv pred-ipy.csv
 
 	N 195
-	rmse 1.534
-	sdev 2.361
-	pcor 0.796
-	scor 0.791
-	kcor 0.597
+	rmse 1.554
+	sdev 2.423
+	pcor 0.787
+	scor 0.775
+	kcor 0.582
 
 Here is a comparison of prediction performance of the original and the new RF-Score.
 
@@ -176,46 +176,46 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
     <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
   </tr>
   <tr>
-    <td>mse</td><td>2.288</td><td>2.165</td>
+    <td>mse</td><td>2.302</td><td>2.152</td>
   </tr>
   <tr>
-    <td>rsq</td><td>0.489</td><td>0.516</td>
+    <td>rsq</td><td>0.485</td><td>0.519</td>
   </tr>
   <tr>
     <td colspan="3">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.701</td><td>0.652</td>
+    <td>rmse</td><td>0.738</td><td>0.668</td>
   </tr>
   <tr>
-    <td>sdev</td><td>0.491</td><td>0.426</td>
+    <td>sdev</td><td>0.545</td><td>0.447</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.957</td><td>0.965</td>
+    <td>pcor</td><td>0.952</td><td>0.963</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.958</td><td>0.965</td>
+    <td>scor</td><td>0.953</td><td>0.963</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.828</td><td>0.843</td>
+    <td>kcor</td><td>0.817</td><td>0.838</td>
   </tr>
   <tr>
     <td colspan="3">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.585</td><td>1.534</td>
+    <td>rmse</td><td>1.584</td><td>1.554</td>
   </tr>
   <tr>
-    <td>sdev</td><td>2.522</td><td>2.361</td>
+    <td>sdev</td><td>2.520</td><td>2.423</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.771</td><td>0.796</td>
+    <td>pcor</td><td>0.775</td><td>0.787</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.755</td><td>0.791</td>
+    <td>scor</td><td>0.760</td><td>0.775</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.562</td><td>0.597</td>
+    <td>kcor</td><td>0.566</td><td>0.582</td>
   </tr>
 </table>
 
