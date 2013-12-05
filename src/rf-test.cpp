@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 4)
 	{
-		cout << "Usage: rf-test pdbbind2012-refined-core.rf pdbbind2012-core-yxi.csv pred-ipy.csv" << endl;
+		cout << "Usage: rf-test pdbbind2012-refined-core-x41.rf pdbbind2012-core-yx41i.csv pred-ipy.csv" << endl;
 		return 0;
 	}
 
