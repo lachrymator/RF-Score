@@ -170,52 +170,52 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
 
 <table>
   <tr>
-    <th></th><th>original RF-Score</th><th>new RF-Score</th>
+    <th></th><th>original RF-Score</th><th>new RF-Score</th><th>new RF-Score</th>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
+    <td colspan="4">Evaluation on OOB (out-of-bag) data</td>
   </tr>
   <tr>
-    <td>mse</td><td>2.302</td><td>2.152</td>
+    <td>mse</td><td>2.302</td><td>2.152</td><td>2.123</td>
   </tr>
   <tr>
-    <td>rsq</td><td>0.485</td><td>0.519</td>
+    <td>rsq</td><td>0.485</td><td>0.519</td><td>0.525</td>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on training samples (N = 1105)</td>
+    <td colspan="4">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.738</td><td>0.668</td>
+    <td>rmse</td><td>0.738</td><td>0.668</td><td>0.618</td>
   </tr>
   <tr>
-    <td>sdev</td><td>0.545</td><td>0.447</td>
+    <td>sdev</td><td>0.545</td><td>0.447</td><td>0.382</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.952</td><td>0.963</td>
+    <td>pcor</td><td>0.952</td><td>0.963</td><td>0.969</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.953</td><td>0.963</td>
+    <td>scor</td><td>0.953</td><td>0.963</td><td>0.970</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.817</td><td>0.838</td>
+    <td>kcor</td><td>0.817</td><td>0.838</td><td>0.854</td>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on testing samples (N = 195)</td>
+    <td colspan="4">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.584</td><td>1.554</td>
+    <td>rmse</td><td>1.584</td><td>1.554</td><td>1.534</td>
   </tr>
   <tr>
-    <td>sdev</td><td>2.520</td><td>2.423</td>
+    <td>sdev</td><td>2.520</td><td>2.423</td><td>2.363</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.775</td><td>0.787</td>
+    <td>pcor</td><td>0.775</td><td>0.787</td><td>0.798</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.760</td><td>0.775</td>
+    <td>scor</td><td>0.760</td><td>0.775</td><td>0.787</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.566</td><td>0.582</td>
+    <td>kcor</td><td>0.566</td><td>0.582</td><td>0.592</td>
   </tr>
 </table>
 
