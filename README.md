@@ -11,7 +11,7 @@ The new RF-Score uses as features both the number of occurrences of 36 particula
 Compilation
 -----------
 
-Four executables, `rf-prepare`, `rf-train`, `rf-test` and `rf-score`, will be compiled in the `bin` folder.
+Five executables, `rf-prepare`, `rf-train`, `rf-test`, `rf-stat` and `rf-score`, will be compiled in the `bin` folder.
 
 ### Linux, Mac OS X, Solaris and FreeBSD
 
@@ -275,6 +275,12 @@ It loads a random forest from a binary file, predicts the RF-Score values of tes
 
 	rf-test pdbbind2012-refined-core-x41.rf pdbbind2012-refined-core-yx41i.csv pred-ipy.csv
 	rf-test pdbbind2012-refined-core-x41.rf pdbbind2012-core-yx41i.csv pred-ipy.csv
+
+### rf-stat
+
+It loads two vectors of values from standard input and computes their rmse, sdev, pcor, scor and kcor.
+
+	tail -n +2 pred-ipy.csv | cut -d',' -f2,3 | rf-stat
 
 ### rf-score
 
