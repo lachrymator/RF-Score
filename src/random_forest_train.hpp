@@ -19,12 +19,6 @@ public:
 	float val; ///< Value used for node split
 	array<size_t, 2> children; ///< Two child nodes
 
-	/// Construct an empty leaf node
-	explicit node()
-	{
-		children[0] = 0;
-	}
-
 	/// Save current node to an ofstream
 	void save(ofstream& ofs) const;
 };
