@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <cassert>
 #include "ligand.hpp"
 
 /// Represents a ROOT or a BRANCH in PDBQT structure.
@@ -23,7 +24,7 @@ void ligand::load(const string path)
 void ligand::load(ifstream& ifs)
 {
 	// Initialize necessary variables for constructing a ligand.
-	num_active_torsions = 0;
+	num_active_torsions = num_inactive_torsions = 0;
 	vector<frame> frames; ///< ROOT and BRANCH frames.
 	frames.reserve(30); // A ligand typically consists of <= 30 frames.
 	frames.emplace_back(0, 0, 0); // ROOT is also treated as a frame. The parent, rotorXsrn, rotorYsrn, rotorXidx of ROOT frame are dummy.
@@ -122,6 +123,7 @@ void ligand::load(ifstream& ifs)
 			// the torsion of this frame will have no effect on scoring and is thus redundant.
 			if (current + 1 == frames.size() && f->rotorYidx + 1 == size())
 			{
+				++num_inactive_torsions;
 			}
 			else
 			{
@@ -159,5 +161,6 @@ void ligand::load(ifstream& ifs)
 	}
 
 	// Determine flexibility_penalty_factor.
-	flexibility_penalty_factor = 1 / (1 + /*0.05846 **/ (num_active_torsions + 0.5 * (frames.size() - 1 - num_active_torsions)));
+	assert(1 + num_active_torsions + num_inactive_torsions == frames.size());
+	flexibility_penalty_factor = 1 / (1 + /*0.05846 **/ (num_active_torsions + 0.5 * num_inactive_torsions));
 }
