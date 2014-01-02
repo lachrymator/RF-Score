@@ -14,6 +14,10 @@ public:
 
 	/// Load current ligand from an ifstream
 	void load(ifstream& ifs);
+
+	/// Number of active torsions to calculate Nrot.
+	size_t num_active_torsions;
+	float flexibility_penalty_factor;
 };
 
 #endif

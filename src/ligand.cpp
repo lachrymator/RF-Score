@@ -23,6 +23,7 @@ void ligand::load(const string path)
 void ligand::load(ifstream& ifs)
 {
 	// Initialize necessary variables for constructing a ligand.
+	num_active_torsions = 0;
 	vector<frame> frames; ///< ROOT and BRANCH frames.
 	frames.reserve(30); // A ligand typically consists of <= 30 frames.
 	frames.emplace_back(0, 0, 0); // ROOT is also treated as a frame. The parent, rotorXsrn, rotorYsrn, rotorXidx of ROOT frame are dummy.
@@ -117,6 +118,16 @@ void ligand::load(ifstream& ifs)
 		}
 		else if (record == "ENDBRA")
 		{
+			// If the current frame consists of rotor Y and a few hydrogens only, e.g. -OH, -NH2 or -CH3,
+			// the torsion of this frame will have no effect on scoring and is thus redundant.
+			if (current + 1 == frames.size() && f->rotorYidx + 1 == size())
+			{
+			}
+			else
+			{
+				++num_active_torsions;
+			}
+
 			// Dehydrophobicize rotorX and rotorY if necessary.
 			atom& rotorY = (*this)[f->rotorYidx];
 			atom& rotorX = (*this)[f->rotorXidx];
@@ -146,4 +157,7 @@ void ligand::load(ifstream& ifs)
 		}
 		else if (record == "TORSDO") break;
 	}
+
+	// Determine flexibility_penalty_factor.
+	flexibility_penalty_factor = 1 / (1 + /*0.05846 **/ (num_active_torsions + 0.5 * (frames.size() - 1 - num_active_torsions)));
 }
