@@ -171,7 +171,7 @@ Here is a comparison of prediction performance of the original and the new RF-Sc
 
 <table>
   <tr>
-    <th></th><th>original RF-Score</th><th>new RF-Score</th>
+    <th></th><th>RF-Score with 36 features</th><th>RF-Score with 42 features</th>
   </tr>
   <tr>
     <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
