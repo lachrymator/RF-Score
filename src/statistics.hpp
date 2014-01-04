@@ -80,7 +80,7 @@ static void stats(const vector<float>& x, const vector<float>& y)
 	}
 	cout << "N " << n << endl;
 	cout << "rmse " << sqrt(se2 / n) << endl;
-	cout << "sdev " << (se2 - se1 * se1 / n) / (n - 1) << endl;
+	cout << "sdev " << sqrt(se2 / (n - 1))/*(se2 - se1 * se1 / n) / (n - 1)*/ << endl;
 	cout << "pcor " <<  pearson(x, y) << endl;
 	cout << "scor " << spearman(x, y) << endl;
 	cout << "kcor " <<  kendall(x, y) << endl;
