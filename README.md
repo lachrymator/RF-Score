@@ -5,7 +5,7 @@ RF-Score is a machine learning approach to predicting protein-ligand binding aff
 
 The original RF-Score uses as features the number of occurrences of 36 particular protein-ligand atom type pairs interacting within a certain distance range.
 
-The new RF-Score uses as features both the number of occurrences of 36 particular protein-ligand atom type pairs interacting within a certain distance range and the 5 Vina terms.
+The new RF-Score uses as features both the number of occurrences of 36 particular protein-ligand atom type pairs interacting within a certain distance range and the 6 Vina terms.
 
 
 Compilation
@@ -29,66 +29,66 @@ Visual Studio 2012 or higher is required.
 Validation
 ----------
 
-The original RF-Score is trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To reproduce the results presented in the original paper [DOI: 10.1093/bioinformatics/btq112], two csv files `pdbbind2007-refined-core-yx36i.csv` and `pdbbind2007-core-yx36i.csv` are provided and they contain the 36 RF-Score features only, without the 5 Vina terms.
+The original RF-Score is trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To reproduce the results presented in the original paper [DOI: 10.1093/bioinformatics/btq112], two csv files `pdbbind2007-refined-core-yx36i.csv` and `pdbbind2007-core-yx36i.csv` are provided and they contain the 36 RF-Score features only, without the 6 Vina terms.
 
 	rf-train pdbbind2007-refined-core-yx36i.csv pdbbind2007-refined-core-x36.rf
 
-	Training 10 random forests of 500 trees with mtry from 1 to 10 and seed 89757 using 4 threads
-	mtry = 5 yields the minimum MSE
-	Mean of squared residuals: 2.302
+	Training 13 random forests of 500 trees with mtry from 1 to 13 and seed 89757 using 4 threads
+	mtry = 4 yields the minimum MSE
+	Mean of squared residuals: 2.301
 		        Var explained: 0.485
 	Var %incMSE   Tgini
-	  0  25.935 642.539
-	  1  24.288 602.268
-	  2  25.544 545.174
-	  3  22.687 217.975
-	  4  22.638 294.269
-	  5  21.110 258.209
-	  6  20.850 246.132
-	  7  18.806 116.258
-	  8  23.999 223.278
-	  9  24.044 226.904
-	 10  22.484 214.130
-	 11  17.475 156.319
-	 12  15.090 128.506
-	 13  17.245 113.058
-	 14  14.720  97.564
-	 15   9.433  34.583
-	 16  14.510  76.825
-	 17  14.990  72.074
-	 18  11.962  62.495
-	 19   5.183  33.337
-	 20   4.752  19.646
-	 21   6.724  23.967
-	 22   4.169  18.251
-	 23   3.834  11.693
-	 24   3.341  18.307
-	 25   3.726  17.843
-	 26   2.288  18.412
-	 27   6.616  14.567
-	 28   4.257   9.090
-	 29   3.712   8.617
-	 30   5.405   8.909
-	 31   3.787   6.518
-	 32  -1.710   3.140
-	 33  -2.608   2.629
-	 34  -1.333   2.478
-	 35   1.526   2.951
+	  0  26.164 621.519
+	  1  23.905 554.511
+	  2  24.408 518.618
+	  3  25.432 205.484
+	  4  22.116 289.809
+	  5  20.306 247.300
+	  6  19.495 240.324
+	  7  17.961 109.529
+	  8  22.250 214.313
+	  9  19.536 204.726
+	 10  19.018 211.767
+	 11  18.881 154.099
+	 12  14.733 114.316
+	 13  15.313 118.103
+	 14  14.545 102.707
+	 15   9.883  35.830
+	 16  14.244  79.191
+	 17  15.433  72.213
+	 18  11.154  59.153
+	 19   7.155  34.209
+	 20   5.888  24.767
+	 21   6.419  25.161
+	 22   4.153  23.133
+	 23   3.965  12.435
+	 24   3.447  20.416
+	 25   4.753  18.495
+	 26   5.551  20.016
+	 27   5.264  14.582
+	 28   3.728  10.901
+	 29   3.065   7.803
+	 30   5.365   8.106
+	 31   5.062   6.758
+	 32  -0.510   3.391
+	 33   0.698   3.532
+	 34  -0.235   3.380
+	 35   1.380   3.250
 
 	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-refined-core-yx36i.csv pred-ipy.csv
 
 	N 1105
-	rmse 0.738
-	sdev 0.545
-	pcor 0.952
-	scor 0.953
-	kcor 0.817
+	rmse 0.796
+	sdev 0.797
+	pcor 0.943
+	scor 0.944
+	kcor 0.800
 
 	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-core-yx36i.csv pred-ipy.csv
 
 	N 195
-	rmse 1.584
-	sdev 2.520
+	rmse 1.589
+	sdev 1.594
 	pcor 0.775
 	scor 0.760
 	kcor 0.566
@@ -97,125 +97,126 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 Results
 -------
 
-The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind2007-refined-core-yx41i.csv` and `pdbbind2007-core-yx41i.csv` are provided and they contain both the 36 RF-Score features and the 5 Vina terms.
+The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind2007-refined-core-yx42i.csv` and `pdbbind2007-core-yx42i.csv` are provided and they contain both the 36 RF-Score features and the 6 Vina terms.
 
-	rf-train pdbbind2007-refined-core-yx41i.csv pdbbind2007-refined-core-x41.rf
+	rf-train pdbbind2007-refined-core-yx42i.csv pdbbind2007-refined-core-x42.rf
 
-	Training 11 random forests of 500 trees with mtry from 1 to 11 and seed 89757 using 4 threads
-	mtry = 5 yields the minimum MSE
-	Mean of squared residuals: 2.152
-		        Var explained: 0.519
+	Training 15 random forests of 500 trees with mtry from 1 to 15 and seed 89757 using 4 threads
+	mtry = 9 yields the minimum MSE
+	Mean of squared residuals: 2.128
+		        Var explained: 0.524
 	Var %incMSE   Tgini
-	  0  21.487 465.368
-	  1  19.547 402.833
-	  2  19.361 347.540
-	  3  19.890 143.541
-	  4  20.534 230.964
-	  5  18.461 192.873
-	  6  17.987 165.694
-	  7  13.532  84.628
-	  8  18.819 153.822
-	  9  21.225 166.770
-	 10  17.900 146.185
-	 11  13.699 119.640
-	 12  14.680 107.858
-	 13  15.297  94.251
-	 14  13.273  97.268
-	 15   8.955  28.373
-	 16  11.676  54.727
-	 17  11.134  52.022
-	 18  10.644  52.076
-	 19   4.133  27.430
-	 20   3.856  16.642
-	 21   3.663  20.207
-	 22   3.519  15.770
-	 23   4.014  10.507
-	 24   2.337  14.060
-	 25   2.326  13.154
-	 26   3.888  15.627
-	 27   2.724  10.550
-	 28   3.698   7.677
-	 29   4.867   6.127
-	 30   3.049   6.524
-	 31   2.348   5.455
-	 32  -0.973   1.925
-	 33   0.112   2.214
-	 34  -0.637   1.498
-	 35  -0.594   1.942
-	 36  18.707 332.743
-	 37  17.558 397.357
-	 38  18.260 162.003
-	 39  22.403 312.299
-	 40  17.186 169.003
+	  0  21.755 550.266
+	  1  17.598 438.100
+	  2  19.657 373.636
+	  3  17.243 133.640
+	  4  19.444 198.714
+	  5  19.721 174.132
+	  6  17.926 153.351
+	  7  14.230  70.972
+	  8  17.174 141.562
+	  9  19.377 147.133
+	 10  18.503 136.075
+	 11  12.324 109.298
+	 12  15.398 115.930
+	 13  16.713 119.591
+	 14  13.023  83.390
+	 15   8.315  21.282
+	 16   9.978  44.357
+	 17  11.073  47.533
+	 18   9.712  43.058
+	 19   4.909  19.091
+	 20   1.567  10.963
+	 21   4.232  14.235
+	 22   3.021  11.361
+	 23   3.412   8.474
+	 24   1.806  11.733
+	 25   0.922  10.777
+	 26   2.978  13.660
+	 27   3.512   9.201
+	 28   2.472   6.546
+	 29   2.447   6.091
+	 30   3.093   6.100
+	 31   2.876   4.858
+	 32   0.874   1.437
+	 33   0.982   1.432
+	 34   0.082   1.548
+	 35  -0.034   1.508
+	 36  20.893 332.244
+	 37  17.516 392.059
+	 38  13.692 159.278
+	 39  22.114 295.859
+	 40  15.090 183.206
+	 41  17.639 155.409
 
-	rf-test pdbbind2007-refined-core-x41.rf pdbbind2007-refined-core-yx41i.csv pred-ipy.csv
+	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-refined-core-yx42i.csv pred-ipy.csv
 
 	N 1105
-	rmse 0.668
-	sdev 0.447
-	pcor 0.963
-	scor 0.963
-	kcor 0.838
+	rmse 0.621
+	sdev 0.622
+	pcor 0.968
+	scor 0.969
+	kcor 0.853
 
-	rf-test pdbbind2007-refined-core-x41.rf pdbbind2007-core-yx41i.csv pred-ipy.csv
+	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-core-yx42i.csv pred-ipy.csv
 
 	N 195
-	rmse 1.554
-	sdev 2.423
-	pcor 0.787
-	scor 0.775
-	kcor 0.582
+	rmse 1.530
+	sdev 1.534
+	pcor 0.794
+	scor 0.788
+	kcor 0.591
 
 Here is a comparison of prediction performance of the original and the new RF-Score.
 
 <table>
   <tr>
-    <th></th><th>original RF-Score</th><th>new RF-Score</th><th>new RF-Score</th>
+    <th></th><th>original RF-Score</th><th>new RF-Score</th>
   </tr>
   <tr>
-    <td colspan="4">Evaluation on OOB (out-of-bag) data</td>
+    <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
   </tr>
   <tr>
-    <td>mse</td><td>2.302</td><td>2.152</td><td>2.123</td>
+    <td>mse</td><td>2.301</td><td>2.128</td>
   </tr>
   <tr>
-    <td>rsq</td><td>0.485</td><td>0.519</td><td>0.525</td>
+    <td>rsq</td><td>0.485</td><td>0.524</td>
   </tr>
   <tr>
-    <td colspan="4">Evaluation on training samples (N = 1105)</td>
+    <td colspan="3">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.738</td><td>0.668</td><td>0.618</td>
+    <td>rmse</td><td>0.796</td><td>0.621</td>
   </tr>
   <tr>
-    <td>sdev</td><td>0.545</td><td>0.447</td><td>0.382</td>
+    <td>sdev</td><td>0.797</td><td>0.622</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.952</td><td>0.963</td><td>0.969</td>
+    <td>pcor</td><td>0.943</td><td>0.968</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.953</td><td>0.963</td><td>0.970</td>
+    <td>scor</td><td>0.944</td><td>0.969</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.817</td><td>0.838</td><td>0.854</td>
+    <td>kcor</td><td>0.800</td><td>0.853</td>
   </tr>
   <tr>
-    <td colspan="4">Evaluation on testing samples (N = 195)</td>
+    <td colspan="3">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.584</td><td>1.554</td><td>1.534</td>
+    <td>rmse</td><td>1.589</td><td>1.530</td>
   </tr>
   <tr>
-    <td>sdev</td><td>2.520</td><td>2.423</td><td>2.363</td>
+    <td>sdev</td><td>1.594</td><td>1.534</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.775</td><td>0.787</td><td>0.798</td>
+    <td>pcor</td><td>0.775</td><td>0.794</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.760</td><td>0.775</td><td>0.787</td>
+    <td>scor</td><td>0.760</td><td>0.788</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.566</td><td>0.582</td><td>0.592</td>
+    <td>kcor</td><td>0.566</td><td>0.591</td>
   </tr>
 </table>
 
@@ -227,7 +228,7 @@ RF-Score can be easily re-trained and re-tested on newer version of PDBbind (e.g
 
 ### rf-prepare
 
-It traverses the PDBbind folder to load proteins and ligands in pdbqt format, and extracts 36 RF-Score features and 5 Vina terms to a csv file.
+It traverses the PDBbind folder to load proteins and ligands in pdbqt format, and extracts 36 RF-Score features and 6 Vina terms to a csv file.
 
 It requires PDBbind and MGLTools as prerequisites.
 
@@ -238,7 +239,7 @@ It requires PDBbind and MGLTools as prerequisites.
 	cd mgltools_x86_64Linux2_1.5.6
 	./install.sh -c 1
 
-It requires pdbqt as input format in order to extract the 5 Vina terms.
+It requires pdbqt as input format in order to extract the 6 Vina terms.
 
 	tail -n +6 ../v2012/INDEX_refined_data.2012 | while read -r line; do
 		code=${line:0:4}
@@ -252,7 +253,7 @@ Here shows how to prepare testing samples from the PDBbind 2012 core set.
 	tail -n +6 INDEX_core_data.2012 | while read -r line; do
 		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind2012-core-iy.csv
 	done
-	rf-prepare pdbbind2012-core-iy.csv pdbbind2012-core-yx41i.csv
+	rf-prepare pdbbind2012-core-iy.csv pdbbind2012-core-yx42i.csv
 
 Here shows how to prepare training samples from the PDBbind 2012 refined set minus the core set.
 
@@ -261,20 +262,20 @@ Here shows how to prepare training samples from the PDBbind 2012 refined set min
 		if [[ 1 = $(echo ${core} | grep ${line:0:4} | wc -l) ]]; then continue; fi
 		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind2012-refined-core-iy.csv
 	done
-	rf-prepare pdbbind2012-refined-core-iy.csv pdbbind2012-refined-core-yx41i.csv
+	rf-prepare pdbbind2012-refined-core-iy.csv pdbbind2012-refined-core-yx42i.csv
 
 ### rf-train
 
 It trains multiple random forests of different mtry values in parallel, selects the best one with the minimum MSE, outputs its statistics, and saves it to a binary file.
 
-	rf-train pdbbind2012-refined-core-yx41i.csv pdbbind2012-refined-core-x41.rf
+	rf-train pdbbind2012-refined-core-yx42i.csv pdbbind2012-refined-core-x42.rf
 
 ### rf-test
 
 It loads a random forest from a binary file, predicts the RF-Score values of testing samples, saves them to a csv file, and evaluates the prediction performance.
 
-	rf-test pdbbind2012-refined-core-x41.rf pdbbind2012-refined-core-yx41i.csv pred-ipy.csv
-	rf-test pdbbind2012-refined-core-x41.rf pdbbind2012-core-yx41i.csv pred-ipy.csv
+	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-refined-core-yx42i.csv pred-ipy.csv
+	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-core-yx42i.csv pred-ipy.csv
 
 ### rf-stat
 
@@ -286,7 +287,7 @@ It loads two vectors of values from standard input and computes their rmse, sdev
 
 It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, generates their RF-Score features and Vina terms, and score them.
 
-	rf-score pdbbind2012-refined-core-x41.rf receptor.pdbqt ligand.pdbqt
+	rf-score pdbbind2012-refined-core-x42.rf receptor.pdbqt ligand.pdbqt
 
 
 Author

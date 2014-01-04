@@ -7,3 +7,7 @@
 !*.vcxproj
 !*.hpp
 !*.cpp
+!pdbbind2007-core-yx36i.csv
+!pdbbind2007-core-yx42i.csv
+!pdbbind2007-refined-core-yx36i.csv
+!pdbbind2007-refined-core-yx42i.csv
