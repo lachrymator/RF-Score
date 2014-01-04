@@ -10,7 +10,7 @@ using namespace std;
 inline vector<float> feature(const receptor& rec, const ligand& lig)
 {
 	static const scoring_function sf;
-	vector<float> v(41); // 36 RF-Score features and 5 Vina terms
+	vector<float> v(42); // 36 RF-Score features and 6 Vina terms
 	for (const auto& l : lig)
 	{
 		for (const auto& r : rec)
@@ -31,6 +31,7 @@ inline vector<float> feature(const receptor& rec, const ligand& lig)
 			}
 		}
 	}
+	v.back() = 1 / (1 + 0.05846f * (lig.num_active_torsions + 0.5f * lig.num_inactive_torsions));
 //	sf.weight(v.data() + 36); // The 5 Vina terms are now weighted.
 	return v;
 }
