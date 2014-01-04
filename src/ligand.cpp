@@ -159,8 +159,5 @@ void ligand::load(ifstream& ifs)
 		}
 		else if (record == "TORSDO") break;
 	}
-
-	// Determine flexibility_penalty_factor.
 	assert(1 + num_active_torsions + num_inactive_torsions == frames.size());
-	flexibility_penalty_factor = 1 / (1 + /*0.05846 **/ (num_active_torsions + 0.5 * num_inactive_torsions));
 }

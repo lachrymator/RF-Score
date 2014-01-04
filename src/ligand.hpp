@@ -18,7 +18,6 @@ public:
 	/// Variables to calculate Nrot.
 	size_t num_active_torsions;
 	size_t num_inactive_torsions;
-	float flexibility_penalty_factor;
 };
 
 #endif
