@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	getline(tstifs, line);
 	ofstream prdofs(argv[3]);
 	prdofs.setf(ios::fixed, ios::floatfield);
-	prdofs << "PDB,pbindaff,RF-Score" << endl << setprecision(2);
+	prdofs << "PDB,pbindaff,predicted" << endl << setprecision(2);
 	while (getline(tstifs, line))
 	{
 		size_t c0 = line.find(',');
