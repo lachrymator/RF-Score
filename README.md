@@ -77,21 +77,13 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 
 	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-refined-core-yx36i.csv pdbbind2007-refined-core-ipy.csv
 
-	N 1105
-	rmse 0.796
-	sdev 0.797
-	pcor 0.943
-	scor 0.944
-	kcor 0.800
+	n,rmse,sdev,pcor,scor,kcor
+	1105,0.796,0.797,0.943,0.944,0.800
 
 	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-core-yx36i.csv pdbbind2007-core-ipy.csv
 
-	N 195
-	rmse 1.589
-	sdev 1.594
-	pcor 0.775
-	scor 0.760
-	kcor 0.566
+	n,rmse,sdev,pcor,scor,kcor
+	195,1.589,1.594,0.775,0.760,0.566
 
 
 Results
@@ -151,21 +143,13 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 
 	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-refined-core-yx42i.csv pdbbind2007-refined-core-ipy.csv
 
-	N 1105
-	rmse 0.621
-	sdev 0.622
-	pcor 0.968
-	scor 0.969
-	kcor 0.853
+	n,rmse,sdev,pcor,scor,kcor
+	1105,0.621,0.622,0.968,0.969,0.853
 
 	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-core-yx42i.csv pdbbind2007-core-ipy.csv
 
-	N 195
-	rmse 1.530
-	sdev 1.534
-	pcor 0.794
-	scor 0.788
-	kcor 0.591
+	n,rmse,sdev,pcor,scor,kcor
+	195,1.530,1.534,0.794,0.788,0.591
 
 Here is a comparison of prediction performance of the original and the new RF-Score.
 
