@@ -18,10 +18,5 @@ for (i in c('v','p')) # For both the Vina score and the newly-trained model, pri
 	pcor=cor(d[i], d[1], method="pearson")
 	scor=cor(d[i], d[1], method="spearman")
 	kcor=cor(d[i], d[1], method="kendall")
-	cat(sprintf("N %d\n", n))
-	cat(sprintf("rmse %.3f\n", rmse))
-	cat(sprintf("sdev %.3f\n", sdev))
-	cat(sprintf("pcor %.3f\n", pcor))
-	cat(sprintf("scor %.3f\n", scor))
-	cat(sprintf("kcor %.3f\n", kcor))
+	cat(sprintf("n,rmse,sdev,pcor,scor,kcor\n%d,%.3f,%.3f,%.3f,%.3f,%.3f\n", n, rmse, sdev, pcor, scor, kcor))
 }
