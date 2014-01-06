@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 g=-0.73349480509 # Conversion factor from kcal/mol to pKd.
 w=c(-0.035579,-0.005156,0.840245,-0.035069,-0.587439,0.05846) # Vina's 6 weights.
 d=read.csv('pdbbind2007-refined-yxi.csv') # d[1] is pbindaff in pKd unit, d[2] to d[6] are Vina's 5 unweighted terms, d[7] and d[8] are N(ActTors) and N(InactTors).
