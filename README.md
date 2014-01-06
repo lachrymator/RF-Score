@@ -263,7 +263,7 @@ It loads a random forest from a binary file, predicts the RF-Score values of tes
 
 ### rf-stat
 
-It loads two vectors of values from standard input and computes their rmse, sdev, pcor, scor and kcor.
+It loads two vectors of values from standard input and computes their n, rmse, sdev, pcor, scor and kcor.
 
 	tail -n +2 pdbbind2012-core-iyp.csv | cut -d',' -f2,3 | rf-stat
 
