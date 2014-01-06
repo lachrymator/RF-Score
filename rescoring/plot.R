@@ -1,0 +1,13 @@
+#!/usr/bin/env Rscript
+iyp=read.csv('pdbbind2007-core-iyp.csv',check.names=F)
+plot(iyp[,2], iyp[,3], asp=1, xlim=c(2,14), ylim=c(2,14), xlab="Measured binding affinity (pKd)", ylab="Predicted binding affinity (pKd)")
+abline(lm(iyp[,3] ~ iyp[,2]))
+grid()
+n=nrow(iyp)
+se=sum((iyp[3] - iyp[2])^2)
+rmse=sqrt(se/n)
+sdev=sqrt(se/(n-1))
+pcor=cor(iyp[3], iyp[2], method="pearson")
+scor=cor(iyp[3], iyp[2], method="spearman")
+kcor=cor(iyp[3], iyp[2], method="kendall")
+title(paste0("RMSE=", round(rmse,2), ", Rp=", round(pcor,3), ", Rs=", round(scor,3), " on PDBbind v2007 core set (N = ", n, ")"))
