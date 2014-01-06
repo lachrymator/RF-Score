@@ -12,7 +12,7 @@ d['p']=fitted(r)/d['t']*g # Binding affinity predicted by the newly-trained mode
 n=nrow(d) # Number of training samples. For PDBbind v2007 refined set, n = 1300.
 for (i in c('v','p')) # For both the Vina score and the newly-trained model, print their RMSE, standard deviation, Pearson/Spearman/Kendall correlation coefficients.
 {
-	se=sum((d[i] - d[1])^2)
+	se=sum((d[i] - d[1])^2) # Square error.
 	rmse=sqrt(se/n)
 	sdev=sqrt(se/(n-1))
 	pcor=cor(d[i], d[1], method="pearson")
