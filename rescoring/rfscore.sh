@@ -1,5 +1,3 @@
-#rm -f obj/rf-prepare.o
-#make
 rf-prepare ~/PDBbind/v2007/pdbbind2007-core-iy.csv pdbbind2007-core-yxi.csv
 rf-prepare ~/PDBbind/v2007/pdbbind2007-refined-core-iy.csv pdbbind2007-refined-core-yxi.csv
 echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind2007-core-statistics.csv
