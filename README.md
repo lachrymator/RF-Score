@@ -75,7 +75,7 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 	 34  -0.235   3.380
 	 35   1.380   3.250
 
-	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-refined-core-yx36i.csv pred-ipy.csv
+	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-refined-core-yx36i.csv pdbbind2007-refined-core-ipy.csv
 
 	N 1105
 	rmse 0.796
@@ -84,7 +84,7 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 	scor 0.944
 	kcor 0.800
 
-	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-core-yx36i.csv pred-ipy.csv
+	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-core-yx36i.csv pdbbind2007-core-ipy.csv
 
 	N 195
 	rmse 1.589
@@ -149,7 +149,7 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 	 40  15.090 183.206
 	 41  17.639 155.409
 
-	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-refined-core-yx42i.csv pred-ipy.csv
+	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-refined-core-yx42i.csv pdbbind2007-refined-core-ipy.csv
 
 	N 1105
 	rmse 0.621
@@ -158,7 +158,7 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 	scor 0.969
 	kcor 0.853
 
-	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-core-yx42i.csv pred-ipy.csv
+	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-core-yx42i.csv pdbbind2007-core-ipy.csv
 
 	N 195
 	rmse 1.530
@@ -274,14 +274,14 @@ It trains multiple random forests of different mtry values in parallel, selects 
 
 It loads a random forest from a binary file, predicts the RF-Score values of testing samples, saves them to a csv file, and evaluates the prediction performance.
 
-	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-refined-core-yx42i.csv pred-ipy.csv
-	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-core-yx42i.csv pred-ipy.csv
+	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-refined-core-yx42i.csv pdbbind2012-refined-core-ipy.csv
+	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-core-yx42i.csv pdbbind2012-core-ipy.csv
 
 ### rf-stat
 
 It loads two vectors of values from standard input and computes their rmse, sdev, pcor, scor and kcor.
 
-	tail -n +2 pred-ipy.csv | cut -d',' -f2,3 | rf-stat
+	tail -n +2 pdbbind2012-core-ipy.csv | cut -d',' -f2,3 | rf-stat
 
 ### rf-score
 
