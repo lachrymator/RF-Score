@@ -10,9 +10,7 @@ for s in $(cat ../seed.csv); do
 	cd $s
 	rf-train ../pdbbind2007-refined-core-yxi.csv pdbbind2007-refined-core.rf $s > rf-train-refined-core.txt
 	rf-test pdbbind2007-refined-core.rf ../pdbbind2007-refined-core-yxi.csv pdbbind2007-refined-core-iyp.csv > rf-test-refined-core.txt
-#	tail -n +2 pdbbind2007-refined-core-iyp.csv | cut -d',' -f3 > pdbbind2007-refined-core-p.csv
 	rf-test pdbbind2007-refined-core.rf ../pdbbind2007-core-yxi.csv pdbbind2007-core-iyp.csv > rf-test-core.txt
-#	tail -n +2 pdbbind2007-core-iyp.csv | cut -d',' -f3 > pdbbind2007-core-p.csv
 	cd ..
 	echo -n $s, >> pdbbind2007-core-statistics.csv
 	echo -n $s, >> pdbbind2007-refined-core-statistics.csv
