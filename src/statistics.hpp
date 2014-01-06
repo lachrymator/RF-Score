@@ -78,12 +78,9 @@ static void stats(const vector<float>& x, const vector<float>& y)
 		se1 +=  x[i] - y[i];
 		se2 += (x[i] - y[i]) * (x[i] - y[i]);
 	}
-	cout << "N " << n << endl;
-	cout << "rmse " << sqrt(se2 / n) << endl;
-	cout << "sdev " << sqrt(se2 / (n - 1))/*(se2 - se1 * se1 / n) / (n - 1)*/ << endl;
-	cout << "pcor " <<  pearson(x, y) << endl;
-	cout << "scor " << spearman(x, y) << endl;
-	cout << "kcor " <<  kendall(x, y) << endl;
+	cout
+	<< "n,rmse,sdev,pcor,scor,kcor" << endl
+	<< n << ',' << sqrt(se2 / n) << ',' << sqrt(se2 / (n - 1))/*(se2 - se1 * se1 / n) / (n - 1)*/ << ',' << pearson(x, y) << ',' << spearman(x, y) << ',' << kendall(x, y) << endl;
 }
 
 #endif
