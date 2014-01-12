@@ -1,7 +1,7 @@
 Rescoring models
 ================
 
-Several models for rescoring protein-ligand binding affinity are evaluated and compared in terms of prediction performance on PDBbind v2007 core set (N = 195).
+Several models for rescoring protein-ligand binding affinity are evaluated and compared in terms of prediction performance on the PDBbind v2007 core set (N = 195).
 
 
 Model 1
@@ -13,7 +13,9 @@ Model 1 is the Vina score, whose parameters are tuned by nonlinear optimization 
 Model 2
 -------
 
-Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. It is trained on four training sets:
+Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, yielding the MLR equation z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. For w6, multiple values are sampled from 0 to 1 with a step size of 0.1 and from 0.01 to 0.02 with a step size of 0.0001. When the PDBbind v2007 refined set minus core set (N = 1105) is used as the training set, w6 = 0.0165 yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.604, scor = 0.663 and kcor = 0.472. Therefore w6 = 0.0165 is used in all the subsequent experiments.
+
+It is separately trained on four training sets:
 
 ### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
 
@@ -35,16 +37,16 @@ There are 165 complexes in common in both sets. Therefore this training set has 
 Model 3
 -------
 
-
+Model 3 is a random forest of 500 trees trained on PDBbind v2007 refined set minus core set (N = 1105) using 6 Vina features, i.e. gauss1, gauss2, repulsion, hydrophobic, hydrogenbonding and Nrot. It is separately trained with 10 different seeds, i.e. 89757,35577,51105,72551,10642,69834,47945,52857,26894,99789. For a given seed, 6 random forests are trained with mtry = 1 to 6, and the one with the minimum RMSE(OOB) is chosen.
 
 
 Model 4
 -------
 
-
+Model 5 is a random forest of 500 trees trained on PDBbind v2007 refined set minus core set (N = 1105) using 36 RF-Score features and 6 Vina features. It is separately trained with the same 10 seeds as used in model 3. For a given seed, 15 random forests are trained with mtry = 1 to 15, and the one with the minimum RMSE(OOB) is chosen.
 
 
 Model 5
 -------
 
-
+Model 5 is a random forest of 500 trees trained on PDBbind v2007 refined set minus core set (N = 1105) using 5 Vina features, i.e. gauss1, gauss2, repulsion, hydrophobic and hydrogenbonding. It is separately trained with the same 10 seeds as used in model 3. For a given seed, 5 random forests are trained with mtry = 1 to 5, and the one with the minimum RMSE(OOB) is chosen.
