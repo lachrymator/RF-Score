@@ -1,8 +1,8 @@
 #!/usr/bin/env Rscript
-model1=read.csv('model1/pdbbind2007-core-statistics.csv')
-model2=read.csv('model2/pdbbind2007-core-statistics.csv')
-model3=read.csv('model3/pdbbind2007-core-statistics.csv')
-model4=read.csv('model4/pdbbind2007-core-statistics.csv')
+model1=read.csv('model1/pdbbind-2007-core-statistics.csv')
+model2=read.csv('model2/pdbbind-2007-core-statistics.csv')
+model3=read.csv('model3/pdbbind-2007-core-statistics.csv')
+model4=read.csv('model4/pdbbind-2007-core-statistics.csv')
 rmse=c(model1['rmse'],model2['rmse'],model3['rmse'],model4['rmse'])
 sdev=c(model1['sdev'],model2['sdev'],model3['sdev'],model4['sdev'])
 pcor=c(model1['pcor'],model2['pcor'],model3['pcor'],model4['pcor'])
