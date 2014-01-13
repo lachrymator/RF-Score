@@ -37,7 +37,9 @@ There are 165 complexes in common in both sets. Therefore this training set has 
 Model 3
 -------
 
-Model 3 is a random forest of 500 trees trained on PDBbind v2007 refined set minus core set (N = 1105) using 6 Vina features, i.e. gauss1, gauss2, repulsion, hydrophobic, hydrogenbonding and Nrot. It is separately trained with 10 different seeds, i.e. 89757,35577,51105,72551,10642,69834,47945,52857,26894,99789. For a given seed, 6 random forests are trained with mtry = 1 to 6, and the one with the minimum RMSE(OOB) is chosen.
+Model 3 is a random forest of 500 trees using 6 Vina features, i.e. gauss1, gauss2, repulsion, hydrophobic, hydrogenbonding and Nrot. It is separately trained on the same four training sets as in model 2 and each with 10 different seeds, i.e. 89757,35577,51105,72551,10642,69834,47945,52857,26894,99789. For a given seed, 6 random forests are trained with mtry = 1 to 6, and the one with the minimum RMSE(OOB) is chosen.
+
+The prediction performance on the PDBbind v2007 core set (N = 195) are in four files: pdbbind2004-core-statistics.csv, pdbbind2007-core-statistics.csv, pdbbind2010-core-statistics.csv and pdbbind2013-core-statistics.csv.
 
 
 Model 4
