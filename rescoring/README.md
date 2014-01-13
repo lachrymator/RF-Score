@@ -13,7 +13,7 @@ Model 1 is the Vina score, whose parameters are tuned by nonlinear optimization 
 Model 2
 -------
 
-Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, transforming the equation into z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 11 values are sampled from 0.01 to 0.03 with a step size of 0.002. The range [0.01, 0.03] is chosen because the optimal value of w6 always falls in it.
+Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, transforming the equation into z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 11 values are sampled from 0.01 to 0.02 with a step size of 0.001. The range [0.01, 0.02] is chosen because the optimal value of w6 always falls in it.
 
 This model is separately trained on four training sets:
 
@@ -23,7 +23,7 @@ There are 138 complexes in common in both sets. The 1oko protein fails PDB-to-PD
 
 ### PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195)
 
-This training set is the one used in the RF-Score paper. Therefore it has N = 1105. When w6 = 0.018, the model yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.603, scor = 0.661 and kcor = 0.469.
+This training set is the one used in the RF-Score paper. Therefore it has N = 1105. When w6 = 0.017, the model yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.603, scor = 0.661 and kcor = 0.470.
 
 ### PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195)
 
