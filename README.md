@@ -29,9 +29,9 @@ Visual Studio 2012 or higher is required.
 Validation
 ----------
 
-The original RF-Score is trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To reproduce the results presented in the original paper [DOI: 10.1093/bioinformatics/btq112], two csv files `pdbbind2007-refined-core-yx36i.csv` and `pdbbind2007-core-yx36i.csv` are provided and they contain the 36 RF-Score features only, without the 6 Vina terms.
+The original RF-Score is trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To reproduce the results presented in the original paper [DOI: 10.1093/bioinformatics/btq112], two csv files `pdbbind-2007-refined-core-yx36i.csv` and `pdbbind-2007-core-yx36i.csv` are provided and they contain the 36 RF-Score features only, without the 6 Vina terms.
 
-	rf-train pdbbind2007-refined-core-yx36i.csv pdbbind2007-refined-core-x36.rf
+	rf-train pdbbind-2007-refined-core-yx36i.csv pdbbind-2007-refined-core-x36.rf
 
 	Training 13 random forests of 500 trees with mtry from 1 to 13 and seed 89757 using 4 threads
 	mtry = 4 yields the minimum MSE
@@ -75,12 +75,12 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 	 34  -0.235   3.380
 	 35   1.380   3.250
 
-	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-refined-core-yx36i.csv pdbbind2007-refined-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-refined-core-yx36i.csv pdbbind-2007-refined-core-iyp.csv
 
 	n,rmse,sdev,pcor,scor,kcor
 	1105,0.796,0.797,0.943,0.944,0.800
 
-	rf-test pdbbind2007-refined-core-x36.rf pdbbind2007-core-yx36i.csv pdbbind2007-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-core-yx36i.csv pdbbind-2007-core-iyp.csv
 
 	n,rmse,sdev,pcor,scor,kcor
 	195,1.589,1.594,0.775,0.760,0.566
@@ -89,9 +89,9 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 Results
 -------
 
-The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind2007-refined-core-yx42i.csv` and `pdbbind2007-core-yx42i.csv` are provided and they contain both the 36 RF-Score features and the 6 Vina terms.
+The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind-2007-refined-core-yx42i.csv` and `pdbbind-2007-core-yx42i.csv` are provided and they contain both the 36 RF-Score features and the 6 Vina terms.
 
-	rf-train pdbbind2007-refined-core-yx42i.csv pdbbind2007-refined-core-x42.rf
+	rf-train pdbbind-2007-refined-core-yx42i.csv pdbbind-2007-refined-core-x42.rf
 
 	Training 15 random forests of 500 trees with mtry from 1 to 15 and seed 89757 using 4 threads
 	mtry = 9 yields the minimum MSE
@@ -141,12 +141,12 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 	 40  15.090 183.206
 	 41  17.639 155.409
 
-	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-refined-core-yx42i.csv pdbbind2007-refined-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x42.rf pdbbind-2007-refined-core-yx42i.csv pdbbind-2007-refined-core-iyp.csv
 
 	n,rmse,sdev,pcor,scor,kcor
 	1105,0.621,0.622,0.968,0.969,0.853
 
-	rf-test pdbbind2007-refined-core-x42.rf pdbbind2007-core-yx42i.csv pdbbind2007-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x42.rf pdbbind-2007-core-yx42i.csv pdbbind-2007-core-iyp.csv
 
 	n,rmse,sdev,pcor,scor,kcor
 	195,1.530,1.534,0.794,0.788,0.591
@@ -235,43 +235,43 @@ Here shows how to prepare testing samples from the PDBbind 2012 core set.
 
 	cd ../v2012
 	tail -n +6 INDEX_core_data.2012 | while read -r line; do
-		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind2012-core-iy.csv
+		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind-2012-core-iy.csv
 	done
-	rf-prepare pdbbind2012-core-iy.csv pdbbind2012-core-yx42i.csv
+	rf-prepare pdbbind-2012-core-iy.csv pdbbind-2012-core-yx42i.csv
 
 Here shows how to prepare training samples from the PDBbind 2012 refined set minus the core set.
 
 	core=$(tail -n +6 INDEX_core_data.2012 | cut -d' ' -f1);\
 	tail -n +6 INDEX_refined_data.2012 | while read -r line; do
 		if [[ 1 = $(echo ${core} | grep ${line:0:4} | wc -l) ]]; then continue; fi
-		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind2012-refined-core-iy.csv
+		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind-2012-refined-core-iy.csv
 	done
-	rf-prepare pdbbind2012-refined-core-iy.csv pdbbind2012-refined-core-yx42i.csv
+	rf-prepare pdbbind-2012-refined-core-iy.csv pdbbind-2012-refined-core-yx42i.csv
 
 ### rf-train
 
 It trains multiple random forests of different mtry values in parallel, selects the best one with the minimum MSE, outputs its statistics, and saves it to a binary file.
 
-	rf-train pdbbind2012-refined-core-yx42i.csv pdbbind2012-refined-core-x42.rf
+	rf-train pdbbind-2012-refined-core-yx42i.csv pdbbind-2012-refined-core-x42.rf
 
 ### rf-test
 
 It loads a random forest from a binary file, predicts the RF-Score values of testing samples, saves them to a csv file, and evaluates the prediction performance.
 
-	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-refined-core-yx42i.csv pdbbind2012-refined-core-iyp.csv
-	rf-test pdbbind2012-refined-core-x42.rf pdbbind2012-core-yx42i.csv pdbbind2012-core-iyp.csv
+	rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-refined-core-yx42i.csv pdbbind-2012-refined-core-iyp.csv
+	rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-core-yx42i.csv pdbbind-2012-core-iyp.csv
 
 ### rf-stat
 
 It loads two vectors of values from standard input and computes their n, rmse, sdev, pcor, scor and kcor.
 
-	tail -n +2 pdbbind2012-core-iyp.csv | cut -d',' -f2,3 | rf-stat
+	tail -n +2 pdbbind-2012-core-iyp.csv | cut -d',' -f2,3 | rf-stat
 
 ### rf-score
 
 It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, generates their RF-Score features and Vina terms, and score them.
 
-	rf-score pdbbind2012-refined-core-x42.rf receptor.pdbqt ligand.pdbqt
+	rf-score pdbbind-2012-refined-core-x42.rf receptor.pdbqt ligand.pdbqt
 
 
 Author
