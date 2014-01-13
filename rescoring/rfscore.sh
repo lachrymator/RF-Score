@@ -1,5 +1,3 @@
-#rf-prepare ~/PDBbind/v2007/pdbbind-2007-core-iy.csv pdbbind-2007-core-yxi.csv
-#rf-prepare ~/PDBbind/v2007/pdbbind-2007-refined-core-iy.csv pdbbind-2007-refined-core-yxi.csv
 echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-2007-core-statistics.csv
 echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-2007-refined-core-statistics.csv
 for s in $(cat ../seed.csv); do
