@@ -10,4 +10,5 @@ for s in $(cat weight.csv); do
 	echo -n $s, >> pdbbind2007-refined-core-statistics.csv
 	tail -1 $s/pdbbind2007-core-statistics.csv >> pdbbind2007-core-statistics.csv
 	tail -1 $s/pdbbind2007-refined-core-statistics.csv >> pdbbind2007-refined-core-statistics.csv
+	rm -rf $s
 done
