@@ -16,7 +16,7 @@ void node::save(ofstream& ofs) const
 	ofs.write((char*)&c1, 4);
 }
 
-void tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes)
+void tree::train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<double()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes)
 {
 	const size_t num_samples = x.size();
 	const size_t num_variables = x.front().size();

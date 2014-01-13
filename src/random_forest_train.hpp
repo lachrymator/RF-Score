@@ -34,7 +34,7 @@ class tree : public vector<node>
 {
 public:
 	/// Train an empty tree from bootstrap samples
-	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<float()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes);
+	void train(const vector<vector<float>>& x, const vector<float>& y, const size_t mtry, const function<double()>& u01, vector<float>& incPurity, vector<float>& incMSE, vector<float>& impSD, vector<float>& oobPreds, vector<size_t>& oobTimes);
 
 	/// Save current tree to an ofstream
 	void save(ofstream& ofs) const;
@@ -62,8 +62,8 @@ public:
 	vector<float> impSD;
 private:
 	mt19937_64 rng;
-	uniform_real_distribution<float> uniform_01;
-	function<float()> u01;
+	uniform_real_distribution<double> uniform_01;
+	function<double()> u01;
 };
 
 #endif
