@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 	ifs.close();
 
 	// Train random forests of different mtry values in parallel.
+	const size_t num_samples = y.size();
 	const size_t num_variables = x.front().size();
 	const size_t num_trees = 500;
 	const size_t seed = argc == 3 ? 89757 : stoul(argv[3]); // time(0), random_device()()
@@ -47,7 +48,7 @@ int main(int argc, char* argv[])
 	const size_t min_mtry = 1;
 	const size_t max_mtry = num_variables <= 6 ? num_variables : 1 + num_variables / 3;
 	vector<forest> forests(max_mtry - min_mtry + 1);
-	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " using " << num_threads << " threads" << endl;
+	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " on " << num_samples << " samples using " << num_threads << " threads" << endl;
 	vector<thread> threads;
 	threads.reserve(num_threads);
 	const size_t avg = forests.size() / num_threads;
