@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
-iyp=read.csv('pdbbind-2007-core-iyp.csv',check.names=F)
-#pdf('pdbbind-2007-core-iyp.pdf')
-tiff('pdbbind-2007-core-iyp.tiff',compress="lzw")
+v=commandArgs(trailingOnly=T)[1]
+iyp=read.csv(sprintf('pdbbind-%s-core-iyp.csv',v),check.names=F)
+#pdf(sprintf('pdbbind-%s-core-iyp.pdf',v))
+tiff(sprintf('pdbbind-%s-core-iyp.tiff',v),compress="lzw")
 plot(iyp[,2], iyp[,3], asp=1, xlim=c(2,14), ylim=c(2,14), xlab="Measured binding affinity (pKd)", ylab="Predicted binding affinity (pKd)")
 abline(lm(iyp[,3] ~ iyp[,2]))
 grid()
