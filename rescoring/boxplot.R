@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 v=commandArgs(trailingOnly=T)[1]
-model1=read.csv(sprintf("model1/pdbbind-%s-core-statistics.csv",v))
+model1=read.csv(sprintf("model1/pdbbind-%s-core-statistics.csv",2007))
 model2=read.csv(sprintf("model2/pdbbind-%s-core-statistics.csv",v))
 model3=read.csv(sprintf("model3/pdbbind-%s-core-statistics.csv",v))
 model4=read.csv(sprintf("model4/pdbbind-%s-core-statistics.csv",v))
