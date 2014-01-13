@@ -13,25 +13,25 @@ Model 1 is the Vina score, whose parameters are tuned by nonlinear optimization 
 Model 2
 -------
 
-Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, yielding the MLR equation z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. For w6, multiple values are sampled from 0 to 1 with a step size of 0.1 and from 0.01 to 0.02 with a step size of 0.0001. When the PDBbind v2007 refined set minus core set (N = 1105) is used as the training set, w6 = 0.0165 yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.604, scor = 0.663 and kcor = 0.472. Therefore w6 = 0.0165 is used in all the subsequent experiments.
+Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, yielding the MLR equation z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 11 values are sampled from 0.01 to 0.03 with a step size of 0.002.
 
 It is separately trained on four training sets:
 
 ### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
 
-There are 138 complexes in common in both sets. The 1oko protein fails PDB-to-PDBQT conversion because of a ZeroDivisionError raised by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
+There are 138 complexes in common in both sets. The 1oko protein fails PDB-to-PDBQT conversion because of a ZeroDivisionError raised by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes. When w6 = 0.018, the model yields the best prediction performance with rmsd = 1.937, sdev = 1.942, pcor = 0.605, scor = 0.662 and kcor = 0.475.
 
 ### PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195)
 
-This training set is the one used in the RF-Score paper. Therefore it has N = 1105.
+This training set is the one used in the RF-Score paper. Therefore it has N = 1105. When w6 = 0.018, the model yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.603, scor = 0.661 and kcor = 0.469.
 
 ### PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195)
 
-There are 181 complexes in common in both sets. The 2bo4 protein fails PDB-to-PDBQT conversion because of a ZeroDivisionError raised by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.
+There are 181 complexes in common in both sets. The 2bo4 protein fails PDB-to-PDBQT conversion because of a ZeroDivisionError raised by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.When w6 = 0.012, the model yields the best prediction performance with rmsd = 1.983, sdev = 1.988, pcor = 0.577, scor = 0.649 and kcor = 0.461.
 
 ### PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195)
 
-There are 165 complexes in common in both sets. Therefore this training set has N = 2959 - 165 = 2794 complexes.
+There are 165 complexes in common in both sets. Therefore this training set has N = 2959 - 165 = 2794 complexes. When w6 = 0.014, the model yields the best prediction performance with rmsd = 1.960, sdev = 1.965, pcor = 0.586, scor = 0.653 and kcor = 0.465.
 
 
 Model 3
