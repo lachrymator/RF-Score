@@ -10,6 +10,8 @@ for s in $(cat ../seed.csv); do
 	rf-test pdbbind2007-refined-core.rf ../pdbbind2007-refined-core-yxi.csv pdbbind2007-refined-core-iyp.csv > pdbbind2007-refined-core-statistics.csv
 	rf-test pdbbind2007-refined-core.rf ../pdbbind2007-core-yxi.csv pdbbind2007-core-iyp.csv > pdbbind2007-core-statistics.csv
 	rm pdbbind2007-refined-core.rf
+	../../plot.R
+	tail -n +6 pdbbind2007-refined-core.txt | ~/idock/utilities/substr 3 8 | ../../varImpPlot.R
 	cd ..
 	echo -n $s, >> pdbbind2007-core-statistics.csv
 	echo -n $s, >> pdbbind2007-refined-core-statistics.csv
