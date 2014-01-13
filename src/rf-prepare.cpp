@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 3)
 	{
-		cout << "Usage: rf-prepare /path/to/PDBbind/v2012/pdbbind2012-core-iy.csv pdbbind2012-core-yx42i.csv" << endl;
+		cout << "Usage: rf-prepare /path/to/PDBbind/v2012/pdbbind-2012-core-iy.csv pdbbind-2012-core-yx42i.csv" << endl;
 		return 0;
 	}
 
