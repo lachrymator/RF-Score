@@ -62,7 +62,7 @@ public:
 	vector<float> impSD;
 private:
 	mt19937_64 rng;
-	uniform_real_distribution<double> uniform_01;
+	uniform_real_distribution<double> uniform_01; ///< double is required because float could possibly generate 1.
 	function<double()> u01;
 };
 
