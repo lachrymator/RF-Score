@@ -1,9 +1,10 @@
 #!/usr/bin/env Rscript
-v=commandArgs(trailingOnly=T)[1]
-model1=read.csv(sprintf("model1/pdbbind-%s-tst-stat.csv",2007))
-model2=read.csv(sprintf("model2/pdbbind-%s-tst-stat.csv",v))
-model3=read.csv(sprintf("model3/pdbbind-%s-tst-stat.csv",v))
-model4=read.csv(sprintf("model4/pdbbind-%s-tst-stat.csv",v))
+s=commandArgs(trailingOnly=T)[1]
+v=commandArgs(trailingOnly=T)[2]
+model1=read.csv(sprintf("model1/set%s/pdbbind-%s-tst-stat.csv",s,2007))
+model2=read.csv(sprintf("model2/set%s/pdbbind-%s-tst-stat.csv",s,v))
+model3=read.csv(sprintf("model3/set%s/pdbbind-%s-tst-stat.csv",s,v))
+model4=read.csv(sprintf("model4/set%s/pdbbind-%s-tst-stat.csv",s,v))
 rmse=c(model1["rmse"],model2["rmse"],model3["rmse"],model4["rmse"])
 sdev=c(model1["sdev"],model2["sdev"],model3["sdev"],model4["sdev"])
 pcor=c(model1["pcor"],model2["pcor"],model3["pcor"],model4["pcor"])
