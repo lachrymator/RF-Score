@@ -69,33 +69,13 @@ Model 1 is the Vina score, whose parameters are tuned by nonlinear optimization 
 Model 2
 -------
 
-Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, transforming the equation into z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 11 values are sampled from 0.01 to 0.02 with a step size of 0.001. The range [0.01, 0.02] is chosen because the optimal value of w6 always falls in it.
-
-This model is separately trained on four training sets:
-
-### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
-
-When w6 = 0.018, the model yields the best prediction performance with rmsd = 1.937, sdev = 1.942, pcor = 0.605, scor = 0.662 and kcor = 0.475.
-
-### PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195)
-
-When w6 = 0.017, the model yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.603, scor = 0.661 and kcor = 0.470.
-
-### PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195)
-
-When w6 = 0.012, the model yields the best prediction performance with rmsd = 1.983, sdev = 1.988, pcor = 0.577, scor = 0.649 and kcor = 0.461.
-
-### PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195)
-
-When w6 = 0.014, the model yields the best prediction performance with rmsd = 1.960, sdev = 1.965, pcor = 0.586, scor = 0.653 and kcor = 0.465.
+Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, transforming the equation into z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 11 values are sampled from 0.01 to 0.02 with a step size of 0.001. The range [0.01, 0.02] is chosen because the optimal value of w6 always falls in it for all the eight training sets of the two datasets.
 
 
 Model 3
 -------
 
 Model 3 is a random forest of 500 trees using 6 Vina features, i.e. gauss1, gauss2, repulsion, hydrophobic, hydrogenbonding and Nrot. It is separately trained on the same four training sets as in model 2 and each with 10 different seeds, i.e. 89757,35577,51105,72551,10642,69834,47945,52857,26894,99789. For a given seed, 6 random forests are trained with mtry = 1 to 6, and the one with the minimum RMSE(OOB) is chosen.
-
-The prediction performance on the PDBbind v2007 core set (N = 195) are in four files: pdbbind2004-core-statistics.csv, pdbbind2007-core-statistics.csv, pdbbind2010-core-statistics.csv and pdbbind2013-core-statistics.csv.
 
 
 Model 4
