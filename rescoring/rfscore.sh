@@ -1,4 +1,4 @@
-for v in 2004 2007 2010 2013; do
+for v in $(ls -1 pdbbind-*-trn-yxi.csv | ~/idock/utilities/substr 8 4); do
 	echo $v
 	echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-tst-stat.csv
 	echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-stat.csv
