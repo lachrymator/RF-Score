@@ -1,19 +1,17 @@
 Rescoring models
 ================
 
-Several models for rescoring protein-ligand binding affinity are evaluated and compared in terms of prediction performance on two datasets, both of which consist of four training sets and one test set.
+Several models for rescoring protein-ligand binding affinity are evaluated and compared in terms of prediction performance on two datasets, both of which consist of four training sets and one test set. For each of the two datasets, the test set has no overlapping complexes in either of the four training sets.
 
 
 Dataset 1
 ---------
 
-The test set is as folows:
+The test set and the four training sets are as follows:
 
 ### PDBbind v2007 core set (N = 195)
 
 This test set is the one used in the RF-Score paper. Therefore it has N = 195.
-
-The four training sets are as follows:
 
 ### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
 
@@ -35,13 +33,11 @@ Both sets have 165 complexes in common. Therefore this training set has N = 2959
 Dataset 2
 ---------
 
-The test set is as follows:
+The test set and the four training sets are as follows:
 
 ### PDBbind v2013 refined set (N = 2959) minus PDBbind v2012 refined set (N = 2897)
 
-Both sets have 2576 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. Therefore is has N = 2959 - 2576 - 1 = 382 complexes.
-
-The four training sets are as follows:
+Both sets have 2576 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. Therefore this test set has N = 2959 - 2576 - 1 = 382 complexes.
 
 ### PDBbind v2002 refined set (N = 800)
 
