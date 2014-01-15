@@ -1,7 +1,63 @@
 Rescoring models
 ================
 
-Several models for rescoring protein-ligand binding affinity are evaluated and compared in terms of prediction performance on the PDBbind v2007 core set (N = 195).
+Several models for rescoring protein-ligand binding affinity are evaluated and compared in terms of prediction performance on two datasets, both of which consist of four training sets and one test set.
+
+
+Dataset 1
+---------
+
+The test set is as folows:
+
+### PDBbind v2007 core set (N = 195)
+
+This test set is the one used in the RF-Score paper. Therefore it has N = 195.
+
+The four training sets are as follows:
+
+### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
+
+Both sets have 138 complexes in common. The 1oko protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
+
+### PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195)
+
+This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
+
+### PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195)
+
+Both sets have 181 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.
+
+### PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195)
+
+Both sets have 165 complexes in common. Therefore this training set has N = 2959 - 165 = 2794 complexes.
+
+
+Dataset 2
+---------
+
+The test set is as follows:
+
+### PDBbind v2013 refined set (N = 2959) minus PDBbind v2012 refined set (N = 2897)
+
+Both sets have 2576 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. Therefore is has N = 2959 - 2576 - 1 = 382 complexes.
+
+The four training sets are as follows:
+
+### PDBbind v2002 refined set (N = 800)
+
+The 1tha protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1lkk, 1mfi, 7std, 1cet, 2std, 1els, 1c3x ligands fail PDB-to-PDBQT conversion by prepare_ligand4.py. Therefore this training set has N = 800 - 8 = 792 complexes.
+
+### PDBbind v2007 refined set (N = 1300)
+
+This training set has N = 1300 complexes.
+
+### PDBbind v2010 refined set (N = 2061)
+
+The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 2 = 2059 complexes.
+
+### PDBbind v2012 refined set (N = 2897)
+
+This training set has N = 2897 complexes.
 
 
 Model 1
@@ -19,19 +75,19 @@ This model is separately trained on four training sets:
 
 ### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
 
-There are 138 complexes in common in both sets. The 1oko protein fails PDB-to-PDBQT conversion because of a ZeroDivisionError raised by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes. When w6 = 0.018, the model yields the best prediction performance with rmsd = 1.937, sdev = 1.942, pcor = 0.605, scor = 0.662 and kcor = 0.475.
+When w6 = 0.018, the model yields the best prediction performance with rmsd = 1.937, sdev = 1.942, pcor = 0.605, scor = 0.662 and kcor = 0.475.
 
 ### PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195)
 
-This training set is the one used in the RF-Score paper. Therefore it has N = 1105. When w6 = 0.017, the model yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.603, scor = 0.661 and kcor = 0.470.
+When w6 = 0.017, the model yields the best prediction performance with rmsd = 1.920, sdev = 1.925, pcor = 0.603, scor = 0.661 and kcor = 0.470.
 
 ### PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195)
 
-There are 181 complexes in common in both sets. The 2bo4 protein fails PDB-to-PDBQT conversion because of a ZeroDivisionError raised by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes. When w6 = 0.012, the model yields the best prediction performance with rmsd = 1.983, sdev = 1.988, pcor = 0.577, scor = 0.649 and kcor = 0.461.
+When w6 = 0.012, the model yields the best prediction performance with rmsd = 1.983, sdev = 1.988, pcor = 0.577, scor = 0.649 and kcor = 0.461.
 
 ### PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195)
 
-There are 165 complexes in common in both sets. Therefore this training set has N = 2959 - 165 = 2794 complexes. When w6 = 0.014, the model yields the best prediction performance with rmsd = 1.960, sdev = 1.965, pcor = 0.586, scor = 0.653 and kcor = 0.465.
+When w6 = 0.014, the model yields the best prediction performance with rmsd = 1.960, sdev = 1.965, pcor = 0.586, scor = 0.653 and kcor = 0.465.
 
 
 Model 3
