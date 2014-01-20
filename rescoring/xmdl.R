@@ -34,4 +34,4 @@ boxplot(scor,main="Median of Rs of models 1, 2, 3 and 4",xlab="Model",ylab="Spea
 tiff(sprintf("pdbbind-%s-tst-kcor-boxplot.tiff",v),compression="lzw")
 boxplot(kcor,main="Boxplot of Rk of models 1, 2, 3 and 4",xlab="Model",ylab="Kendall correlation coefficient")
 tiff(sprintf("pdbbind-%s-tst-kcor-median.tiff",v),compression="lzw")
-boxplot(kcor,main="Median of Rk of models 1, 2, 3 and 4",xlab="Model",ylab="Kendall correlation coefficient")
+boxplot(kcor,main="Median of Rk of models 1, 2, 3 and 4",xlab="Model",ylab="Kendall correlation coefficient",outline=F,boxlty=0,whisklty=0,staplelty=0)
