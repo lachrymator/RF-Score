@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <string>
 #include <thread>
+#include <mutex>
 #include <algorithm>
 #include "random_forest_train.hpp"
 using namespace std;
@@ -46,23 +47,35 @@ int main(int argc, char* argv[])
 	const size_t seed = argc == 3 ? 89757 : stoul(argv[3]); // time(0), random_device()()
 	const size_t num_threads = 4;
 	const size_t min_mtry = 1;
-	const size_t max_mtry = num_variables <= 6 ? num_variables : 1 + num_variables / 3;
-	vector<forest> forests(max_mtry - min_mtry + 1);
-	cout << "Training " << forests.size() << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " on " << num_samples << " samples using " << num_threads << " threads" << endl;
+	const size_t max_mtry = num_variables;
+	const size_t num_forests = max_mtry - min_mtry + 1;
+	cout << "Training " << num_forests << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " on " << num_samples << " samples using " << num_threads << " threads" << endl;
+	mutex m;
+	forest f;
+	size_t mtry;
 	vector<thread> threads;
 	threads.reserve(num_threads);
-	const size_t avg = forests.size() / num_threads;
-	const size_t spr = forests.size() - avg * num_threads;
+	const size_t avg = num_forests / num_threads;
+	const size_t spr = num_forests - avg * num_threads;
 	for (size_t tid = 0, beg = 0, end; tid < num_threads; ++tid)
 	{
 		end = beg + avg + (tid < spr);
-		threads.emplace_back(([=, &forests, &x, &y]()
+		threads.emplace_back([=, &x, &y, &m, &f, &mtry]()
 		{
 			for (size_t i = beg; i < end; ++i)
 			{
-				forests[i].train(x, y, num_trees, min_mtry + i, seed);
+				const size_t this_mtry = min_mtry + i;
+				forest this_f;
+				this_f.train(x, y, num_trees, this_mtry, seed);
+				// Choose the random forest that has the minimum MSE. The larger the mtry value, the more nodes the trees will have, and thus the larger size of rf.data. This can be verified by saving the forests of different mtry values.
+				lock_guard<mutex> guard(m);
+				if (f.empty() || this_f.mse < f.mse)
+				{
+					f = move(this_f);
+					mtry = this_mtry;
+				}
 			}
-		}));
+		});
 		beg = end;
 	}
 	for (auto& t : threads)
@@ -70,22 +83,9 @@ int main(int argc, char* argv[])
 		t.join();
 	}
 
-	// Choose the random forest that has the minimum MSE. The larger the mtry value, the more nodes the trees will have, and thus the larger size of rf.data. This can be verified by saving the forests of different mtry values.
-	float best_mse = 1e9;
-	size_t best_idx;
-	for (size_t idx = 0; idx < forests.size(); ++idx)
-	{
-		const auto& f = forests[idx];
-		if (f.mse < best_mse)
-		{
-			best_mse = f.mse;
-			best_idx = idx;
-		}
-	}
-	cout << "mtry = " << min_mtry + best_idx << " yields the minimum MSE" << endl;
+	cout << "mtry = " << mtry << " yields the minimum MSE" << endl;
 
 	// Output statistics of the best random forest and save it to file.
-	const auto& f = forests[best_idx];
 	cout.setf(ios::fixed, ios::floatfield);
 	cout << setprecision(3)
 	     << "Mean of squared residuals: " << f.mse << endl
