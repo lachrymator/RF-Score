@@ -13,10 +13,10 @@ for (i in 1:nrow(vs))
 	tst_stat=read.csv(sprintf("pdbbind-%s-tst-stat.csv",v))
 	ntrn=c(ntrn,trn_stat["n"][1,1])
 	rmse=c(rmse,tst_stat["rmse"])
-	sdev=c(rmse,tst_stat["sdev"])
-	pcor=c(rmse,tst_stat["pcor"])
-	scor=c(rmse,tst_stat["scor"])
-	kcor=c(rmse,tst_stat["kcor"])
+	sdev=c(sdev,tst_stat["sdev"])
+	pcor=c(pcor,tst_stat["pcor"])
+	scor=c(scor,tst_stat["scor"])
+	kcor=c(kcor,tst_stat["kcor"])
 }
 names(rmse)=ntrn
 names(sdev)=ntrn
