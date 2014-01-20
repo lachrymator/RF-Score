@@ -55,16 +55,12 @@ int main(int argc, char* argv[])
 	size_t mtry;
 	vector<thread> threads;
 	threads.reserve(num_threads);
-	const size_t avg = num_forests / num_threads;
-	const size_t spr = num_forests - avg * num_threads;
-	for (size_t tid = 0, beg = 0, end; tid < num_threads; ++tid)
+	for (size_t tid = 0; tid < num_threads; ++tid)
 	{
-		end = beg + avg + (tid < spr);
-		threads.emplace_back([=, &x, &y, &m, &f, &mtry]()
+		threads.emplace_back([&,tid]()
 		{
-			for (size_t i = beg; i < end; ++i)
+			for (size_t this_mtry = min_mtry + tid; this_mtry <= max_mtry; this_mtry += num_threads)
 			{
-				const size_t this_mtry = min_mtry + i;
 				forest this_f;
 				this_f.train(x, y, num_trees, this_mtry, seed);
 				// Choose the random forest that has the minimum MSE. The larger the mtry value, the more nodes the trees will have, and thus the larger size of rf.data. This can be verified by saving the forests of different mtry values.
@@ -76,7 +72,6 @@ int main(int argc, char* argv[])
 				}
 			}
 		});
-		beg = end;
 	}
 	for (auto& t : threads)
 	{
