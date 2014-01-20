@@ -23,18 +23,13 @@ names(sdev)=ntrn
 names(pcor)=ntrn
 names(scor)=ntrn
 names(kcor)=ntrn
-#pdf("tst-rmse.pdf")
 tiff("tst-rmse.tiff",compression="lzw")
 boxplot(rmse,main="Boxplot of RMSE",xlab="Number of training complexes",ylab="Root Mean Square Error (Å)")
-#pdf("tst-sdev.pdf")
 tiff("tst-sdev.tiff",compression="lzw")
 boxplot(sdev,main="Boxplot of SD",xlab="Number of training complexes",ylab="Standard Deviation (Å)")
-#pdf("tst-pcor.pdf")
 tiff("tst-pcor.tiff",compression="lzw")
 boxplot(pcor,main="Boxplot of Rp",xlab="Number of training complexes",ylab="Pearson correlation coefficient")
-#pdf("tst-scor.pdf")
 tiff("tst-scor.tiff",compression="lzw")
 boxplot(scor,main="Boxplot of Rs",xlab="Number of training complexes",ylab="Spearman correlation coefficient")
-#pdf("tst-kcor.pdf")
 tiff("tst-kcor.tiff",compression="lzw")
 boxplot(kcor,main="Boxplot of Rk",xlab="Number of training complexes",ylab="Kendall correlation coefficient")
