@@ -11,7 +11,7 @@ for s in 1 2; do
 			mkdir -p $s
 			cd $s
 			../../m2score.R $v $s
-			../../../plot.R $v
+			../../../corplot.R $v
 			cd ..
 			echo -n $s, >> pdbbind-$v-tst-stat.csv
 			echo -n $s, >> pdbbind-$v-trn-stat.csv

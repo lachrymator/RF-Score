@@ -16,7 +16,7 @@ for m in 3 4 5; do
 				rf-test pdbbind-$v-trn.rf ../pdbbind-$v-trn-yxi.csv pdbbind-$v-trn-iyp.csv > pdbbind-$v-trn-stat.csv
 				rf-test pdbbind-$v-trn.rf ../tst-yxi.csv pdbbind-$v-tst-iyp.csv > pdbbind-$v-tst-stat.csv
 				rm pdbbind-$v-trn.rf
-				../../../plot.R $v
+				../../../corplot.R $v
 				tail -n +6 pdbbind-$v-trn.txt | ~/idock/utilities/substr 3 8 | ../../../varImpPlot.R $v
 				cd ..
 				echo -n $s, >> pdbbind-$v-tst-stat.csv
