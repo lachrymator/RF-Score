@@ -48,6 +48,19 @@ The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
 4) PDBbind v2012 refined set (N = 2897). This training set has N = 2897 complexes.
 
+Their intersections are as follows:
+
+* |0 ∩ 1| = 0
+* |0 ∩ 2| = 0
+* |0 ∩ 3| = 0
+* |0 ∩ 4| = 0
+* |1 ∩ 2| = 592
+* |1 ∩ 3| = 536
+* |1 ∩ 4| = 565
+* |2 ∩ 3| = 1178
+* |2 ∩ 4| = 1173
+* |3 ∩ 4| = 2032
+
 
 Model 1
 -------
