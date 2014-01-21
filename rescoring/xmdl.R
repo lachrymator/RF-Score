@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
-s=commandArgs(trailingOnly=T)[1]
-v=commandArgs(trailingOnly=T)[2]
+a=commandArgs(trailingOnly=T)
+s=a[1]
+v=a[2]
 model1=read.csv(sprintf("model1/set%s/pdbbind-%s-tst-stat.csv",s,2007))
 model2=read.csv(sprintf("model2/set%s/pdbbind-%s-tst-stat.csv",s,v))
 model3=read.csv(sprintf("model3/set%s/pdbbind-%s-tst-stat.csv",s,v))
