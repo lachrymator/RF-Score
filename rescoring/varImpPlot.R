@@ -10,5 +10,5 @@ if (nrow(imp) > 6)
 }
 ord=order(imp)
 tiff(sprintf("pdbbind-%s-trn-varimpplot.tiff",v), compression="lzw", height=h)
-par(cex=1.3)
+par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 dotchart(imp[ord,1], labels=labels[ord], xlab="%IncMSE", main="Variable Importance")
