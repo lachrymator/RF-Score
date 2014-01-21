@@ -7,53 +7,33 @@ Several models for rescoring protein-ligand binding affinity are evaluated and c
 Dataset 1
 ---------
 
-The test set and the four training sets are as follows:
+The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
-### PDBbind v2007 core set (N = 195)
+0) PDBbind v2007 core set (N = 195). This test set is the one used in the RF-Score paper. Therefore it has N = 195.
 
-This test set is the one used in the RF-Score paper. Therefore it has N = 195.
+1) PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195). Both sets have 138 complexes in common. The 1oko protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
 
-### PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195)
+2) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
 
-Both sets have 138 complexes in common. The 1oko protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
+3) PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195). Both sets have 181 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.
 
-### PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195)
-
-This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
-
-### PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195)
-
-Both sets have 181 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.
-
-### PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195)
-
-Both sets have 165 complexes in common. Therefore this training set has N = 2959 - 165 = 2794 complexes.
+4) PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195). Both sets have 165 complexes in common. Therefore this training set has N = 2959 - 165 = 2794 complexes.
 
 
 Dataset 2
 ---------
 
-The test set and the four training sets are as follows:
+The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
-### PDBbind v2013 refined set (N = 2959) minus PDBbind v2012 refined set (N = 2897)
+0) PDBbind v2013 refined set (N = 2959) minus PDBbind v2012 refined set (N = 2897). Both sets have 2576 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. Therefore this test set has N = 2959 - 2576 - 1 = 382 complexes.
 
-Both sets have 2576 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. Therefore this test set has N = 2959 - 2576 - 1 = 382 complexes.
+1) PDBbind v2002 refined set (N = 800). The 1tha protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1lkk, 1mfi, 7std, 1cet, 2std, 1els, 1c3x ligands fail PDB-to-PDBQT conversion by prepare_ligand4.py. Therefore this training set has N = 800 - 8 = 792 complexes.
 
-### PDBbind v2002 refined set (N = 800)
+2) PDBbind v2007 refined set (N = 1300). This training set has N = 1300 complexes.
 
-The 1tha protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1lkk, 1mfi, 7std, 1cet, 2std, 1els, 1c3x ligands fail PDB-to-PDBQT conversion by prepare_ligand4.py. Therefore this training set has N = 800 - 8 = 792 complexes.
+3) PDBbind v2010 refined set (N = 2061). The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 2 = 2059 complexes.
 
-### PDBbind v2007 refined set (N = 1300)
-
-This training set has N = 1300 complexes.
-
-### PDBbind v2010 refined set (N = 2061)
-
-The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 2 = 2059 complexes.
-
-### PDBbind v2012 refined set (N = 2897)
-
-This training set has N = 2897 complexes.
+4) PDBbind v2012 refined set (N = 2897). This training set has N = 2897 complexes.
 
 
 Model 1
