@@ -2,6 +2,7 @@
 v=commandArgs(trailingOnly=T)[1]
 iyp=read.csv(sprintf("pdbbind-%s-tst-iyp.csv",v),check.names=F)
 tiff(sprintf("pdbbind-%s-tst-iyp.tiff",v),compress="lzw")
+par(cex=1.3)
 plot(iyp[,2], iyp[,3], asp=1, xlim=c(2,14), ylim=c(2,14), xlab="Measured binding affinity (pKd)", ylab="Predicted binding affinity (pKd)")
 abline(lm(iyp[,3] ~ iyp[,2]))
 grid()
