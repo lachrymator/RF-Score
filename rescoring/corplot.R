@@ -12,6 +12,6 @@ xylim=c(2,14) # Set1's range.
 if (n == 382) xylim=c(1,12) # Set2's range.
 tiff(sprintf("pdbbind-%s-tst-iyp.tiff",v),compress="lzw")
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-plot(iyp[,2], iyp[,3], xlim=xylim, ylim=xylim, xlab="Measured binding affinity (pKd)", ylab="Predicted binding affinity (pKd)", main=sprintf("RMSE=%.2f, SD=%.2f, Rp=%.3f, Rs=%.3f", rmse, sdev, pcor, scor))
+plot(iyp[,2], iyp[,3], xlim=xylim, ylim=xylim, xlab="Measured binding affinity (pKd)", ylab="Predicted binding affinity (pKd)", main=sprintf("N=%d, RMSE=%.2f, SD=%.2f, Rp=%.3f, Rs=%.3f", n, rmse, sdev, pcor, scor))
 abline(lm(iyp[,3] ~ iyp[,2]))
 grid()
