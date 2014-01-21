@@ -19,6 +19,19 @@ The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
 4) PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195). Both sets have 165 complexes in common. Therefore this training set has N = 2959 - 165 = 2794 complexes.
 
+Their intersections are as follows:
+
+|0 ∩ 1| = 0
+|0 ∩ 2| = 0
+|0 ∩ 3| = 0
+|0 ∩ 4| = 0
+|1 ∩ 2| = 786
+|1 ∩ 3| = 708
+|1 ∩ 4| = 695
+|2 ∩ 3| = 997
+|2 ∩ 4| = 909
+|3 ∩ 4| = 1676
+
 
 Dataset 2
 ---------
