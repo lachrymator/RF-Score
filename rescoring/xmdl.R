@@ -6,7 +6,7 @@ model1=read.csv(sprintf("model1/set%s/pdbbind-%s-tst-stat.csv",s,2007))
 model2=read.csv(sprintf("model2/set%s/pdbbind-%s-tst-stat.csv",s,v))
 model3=read.csv(sprintf("model3/set%s/pdbbind-%s-tst-stat.csv",s,v))
 model4=read.csv(sprintf("model4/set%s/pdbbind-%s-tst-stat.csv",s,v))
-# Call boxplot() to create pdbbind-$v-tst-stat-boxplot.tiff
+# Use boxplot() to create pdbbind-$v-tst-*-boxplot.tiff
 rmse=c(model1["rmse"],model2["rmse"],model3["rmse"],model4["rmse"])
 sdev=c(model1["sdev"],model2["sdev"],model3["sdev"],model4["sdev"])
 pcor=c(model1["pcor"],model2["pcor"],model3["pcor"],model4["pcor"])
@@ -32,7 +32,7 @@ boxplot(scor,main="Boxplot of Rs of models 1, 2, 3 and 4",xlab="Model",ylab="Rs"
 tiff(sprintf("pdbbind-%s-tst-kcor-boxplot.tiff",v),compression="lzw")
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 boxplot(kcor,main="Boxplot of Rk of models 1, 2, 3 and 4",xlab="Model",ylab="Rk",range=0)
-# Call plot() to create pdbbind-$v-tst-stat-median.tiff
+# Use plot() to create pdbbind-$v-tst-*-median.tiff
 rmse=c(median(model1["rmse"][,1]),median(model2["rmse"][,1]),median(model3["rmse"][,1]),median(model4["rmse"][,1]))
 sdev=c(median(model1["sdev"][,1]),median(model2["sdev"][,1]),median(model3["sdev"][,1]),median(model4["sdev"][,1]))
 pcor=c(median(model1["pcor"][,1]),median(model2["pcor"][,1]),median(model3["pcor"][,1]),median(model4["pcor"][,1]))
