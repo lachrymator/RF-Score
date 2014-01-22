@@ -4,6 +4,6 @@ for s in 1 2; do
 		echo $v
 		./xmdl.R $s $v
 	done
-	mkdir -p set$s
-	mv *.tiff set$s
+	mkdir -p xmdl/set$s
+	mv *.tiff xmdl/set$s
 done
