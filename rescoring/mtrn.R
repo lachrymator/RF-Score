@@ -29,7 +29,7 @@ tiff("tst-rmse-median.tiff",compression="lzw")
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 for (m in 2:4)
 {
-	plot(ntrn,rmsem[m,],ylim=c(1.4,2.4),type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
+	plot(ntrn,rmsem[m,],ylim=c(min(rmsem,na.rm=T),max(rmsem,na.rm=T)),type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
 	par(new=T)
 }
 abline(h=rmsem[1,1])
