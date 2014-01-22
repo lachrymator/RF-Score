@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
-vs=read.table(file("stdin"))
+vs=read.table(file("stdin"))[,]
+nv=length(vs)
 ntrn=c()
 rmse=c()
 sdev=c()
@@ -11,9 +12,9 @@ sdevm=c()
 pcorm=c()
 scorm=c()
 kcorm=c()
-for (i in 1:nrow(vs))
+for (i in 1:nv)
 {
-	v=vs[i,1]
+	v=vs[i]
 	trn_stat=read.csv(sprintf("pdbbind-%s-trn-stat.csv",v))
 	tst_stat=read.csv(sprintf("pdbbind-%s-tst-stat.csv",v))
 	ntrn=c(ntrn,trn_stat["n"][1,1])

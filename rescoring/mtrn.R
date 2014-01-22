@@ -1,12 +1,13 @@
 #!/usr/bin/env Rscript
 a=commandArgs(trailingOnly=T)
 s=a[1]
-vs=read.table(file("stdin")) # vs[,1]=c(2004,2007,2010,2013) for set1 and vs[,1]=c(2002,2007,2010,2012) for set2.
+vs=read.table(file("stdin"))[,] # vs=c(2004,2007,2010,2013) for set1 and vs=c(2002,2007,2010,2012) for set2.
+nv=length(vs)
 # Read the number of training complexes.
 ntrn=c()
-for (i in 1:nrow(vs))
+for (i in 1:nv)
 {
-	v=vs[i,1]
+	v=vs[i]
 	trn_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-stat.csv",2,s,v))
 	ntrn=c(ntrn,trn_stat["n"][1,1])
 }
@@ -14,9 +15,9 @@ for (i in 1:nrow(vs))
 rmsem=array(dim=c(4,4))
 for (m in 2:4)
 {
-	for (i in 1:nrow(vs))
+	for (i in 1:nv)
 	{
-		v=vs[i,1]
+		v=vs[i]
 		tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-tst-stat.csv",m,s,v))
 		rmsem[m,i]=median(tst_stat["rmse"][,1])
 	}
