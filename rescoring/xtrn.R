@@ -79,3 +79,16 @@ for (s in 1:ns)
 		}
 	}
 }
+# Plot figures with y axis being the performance measure, x axis being the numbers of training complexes, and legends being the models.
+cat(sprintf("mtrn\n"))
+for (s in 1:ns)
+{
+	cat(sprintf("set%d\n",s))
+	ntrn=array(dim=nv)
+	for (vi in 1:nv)
+	{
+		v=setv[s,vi]
+		trn_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-stat.csv",2,s,v))
+		ntrn[vi]=trn_stat["n"][1,1]
+	}
+}
