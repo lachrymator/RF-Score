@@ -33,7 +33,7 @@ names(sdev)=ntrn
 names(pcor)=ntrn
 names(scor)=ntrn
 names(kcor)=ntrn
-# Call boxplot() to create tst-stat-boxplot.tiff
+# Use boxplot() to create tst-*-boxplot.tiff
 tiff("tst-rmse-boxplot.tiff",compression="lzw")
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 boxplot(rmse,main="Boxplot of RMSE",xlab="Number of training complexes",ylab="RMSE",range=0)
@@ -49,7 +49,7 @@ boxplot(scor,main="Boxplot of Rs",xlab="Number of training complexes",ylab="Rs",
 tiff("tst-kcor-boxplot.tiff",compression="lzw")
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 boxplot(kcor,main="Boxplot of Rk",xlab="Number of training complexes",ylab="Rk",range=0)
-# Call plot() to create tst-stat-median.tiff
+# Use plot() to create tst-*-median.tiff
 tiff("tst-rmse-median.tiff",compression="lzw")
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 plot(ntrn,rmsem,main="Median of RMSE",xlab="Number of training complexes",ylab="RMSE",pch=3)
