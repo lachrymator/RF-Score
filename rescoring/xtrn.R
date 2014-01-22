@@ -1,68 +1,31 @@
 #!/usr/bin/env Rscript
+statc=c("rmse","sdev","pcor","scor","kcor")
+statx=c("RMSE","SD","Rp","Rs","Rk")
+ns=length(statc)
 vs=read.table(file("stdin"))[,]
 nv=length(vs)
-ntrn=c()
-rmse=c()
-sdev=c()
-pcor=c()
-scor=c()
-kcor=c()
-rmsem=c()
-sdevm=c()
-pcorm=c()
-scorm=c()
-kcorm=c()
-for (i in 1:nv)
+ntrn=array(dim=nv)
+box=array(list(),dim=c(ns,nv))
+med=array(dim=c(ns,nv))
+for (vi in 1:nv)
 {
-	v=vs[i]
+	v=vs[vi]
 	trn_stat=read.csv(sprintf("pdbbind-%s-trn-stat.csv",v))
 	tst_stat=read.csv(sprintf("pdbbind-%s-tst-stat.csv",v))
-	ntrn=c(ntrn,trn_stat["n"][1,1])
-	rmse=c(rmse,tst_stat["rmse"][1])
-	sdev=c(sdev,tst_stat["sdev"][1])
-	pcor=c(pcor,tst_stat["pcor"][1])
-	scor=c(scor,tst_stat["scor"][1])
-	kcor=c(kcor,tst_stat["kcor"][1])
-	rmsem=c(rmsem,median(tst_stat["rmse"][,1]))
-	sdevm=c(sdevm,median(tst_stat["sdev"][,1]))
-	pcorm=c(pcorm,median(tst_stat["pcor"][,1]))
-	scorm=c(scorm,median(tst_stat["scor"][,1]))
-	kcorm=c(kcorm,median(tst_stat["kcor"][,1]))
+	ntrn[vi]=trn_stat["n"][1,]
+	for (si in 1:ns)
+	{
+		box[si,vi]=tst_stat[statc[si]]
+		med[si,vi]=median(tst_stat[statc[si]][,])
+	}
 }
-names(rmse)=ntrn
-names(sdev)=ntrn
-names(pcor)=ntrn
-names(scor)=ntrn
-names(kcor)=ntrn
-# Use boxplot() to create tst-*-boxplot.tiff
-tiff("tst-rmse-boxplot.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-boxplot(rmse,main="Boxplot of RMSE",xlab="Number of training complexes",ylab="RMSE",range=0)
-tiff("tst-sdev-boxplot.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-boxplot(sdev,main="Boxplot of SD",xlab="Number of training complexes",ylab="SD",range=0)
-tiff("tst-pcor-boxplot.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-boxplot(pcor,main="Boxplot of Rp",xlab="Number of training complexes",ylab="Rp",range=0)
-tiff("tst-scor-boxplot.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-boxplot(scor,main="Boxplot of Rs",xlab="Number of training complexes",ylab="Rs",range=0)
-tiff("tst-kcor-boxplot.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-boxplot(kcor,main="Boxplot of Rk",xlab="Number of training complexes",ylab="Rk",range=0)
-# Use plot() to create tst-*-median.tiff
-tiff("tst-rmse-median.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-plot(ntrn,rmsem,main="Median of RMSE",xlab="Number of training complexes",ylab="RMSE",pch=3)
-tiff("tst-sdev-median.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-plot(ntrn,sdevm,main="Median of SD",xlab="Number of training complexes",ylab="SD",pch=3)
-tiff("tst-pcor-median.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-plot(ntrn,pcorm,main="Median of Rp",xlab="Number of training complexes",ylab="Rp",pch=3)
-tiff("tst-scor-median.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-plot(ntrn,scorm,main="Median of Rs",xlab="Number of training complexes",ylab="Rs",pch=3)
-tiff("tst-kcor-median.tiff",compression="lzw")
-par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-plot(ntrn,kcorm,main="Median of Rk",xlab="Number of training complexes",ylab="Rk",pch=3)
+for (si in 1:ns)
+{
+	tiff(sprintf("tst-%s-boxplot.tiff",statc[si]),compression="lzw")
+	par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
+	boxplot(box[si,],main="Boxplot of RMSE",xlab="Number of training complexes",ylab="RMSE",range=0,xaxt="n")
+	axis(1,at=1:nv,labels=ntrn)
+	tiff(sprintf("tst-%s-median.tiff",statc[si]),compression="lzw")
+	par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
+	plot(ntrn,med[si,],main=sprintf("Median of %s",statx[si]),xlab="Number of training complexes",ylab=statx[si],pch=3)
+}
