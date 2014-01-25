@@ -19,7 +19,7 @@ for s in 1 2; do
 			tail -1 $s/pdbbind-$v-trn-stat.csv >> pdbbind-$v-trn-stat.csv
 #			rm -rf $s
 		done
-		b=$(tail -n +2 pdbbind-$v-tst-stat.csv | sort -n -t, -k3 -k4 -k5r -k6r -k7r | head -1)
+		b=$(tail -n +2 pdbbind-$v-tst-stat.csv | sort -n -t, -k3,3 -k4,4 -k5,5r -k6,6r -k7,7r | head -1)
 		echo $v,$b >> tst-stat.csv
 		echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-tst-stat.csv
 		echo $b >> pdbbind-$v-tst-stat.csv
