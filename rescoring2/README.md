@@ -61,6 +61,15 @@ Their intersections are as follows:
 * |2 ∩ 4| = 1173
 * |3 ∩ 4| = 2032
 
+PDBbind v2002
+584 *_protein.pdbqt sed 's/Ho/HD/g', e.g. line 2874 of 1gvu_protein.pdbqt contains a HOCA atom of Ho atom type.
+7 *_ligand.mol2 shifted x, y, z.
+
+
+PDBbind v2010 refined set
+2rio,the Sr atom type is present at line 7844.
+2ov4,the Cs atom type is present at line 6401.
+
 
 Model 1
 -------
