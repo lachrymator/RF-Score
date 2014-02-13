@@ -85,7 +85,7 @@ Features are calculated for the docking pose with a Vina score closest the measu
 
 ### Scheme 5
 
-Features are calculated for all the 9 docking poses. If a structure produces less than 9 docking poses, the 10 features of the pose with the lowest Vina score are repeated, e.g. 1 + 1 + 1 + 2 + 3 + 4 + 5 + 6 + 7. Altogether there are 10 * 9 + 1 = 91 features.
+Features are calculated for all the 9 docking poses. If a structure produces less than 9 docking poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1 + 1 + 2 + 3 + 4 + 5 + 6 + 7. Therefore there are 10 * 9 + 1 = 91 features for model 2 and 3, and (36 + 10) * 9 + 1 = 415 features for model 4.
 
 ## Benchmarks
 
