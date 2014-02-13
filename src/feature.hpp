@@ -10,7 +10,7 @@ using namespace std;
 inline vector<float> feature(const receptor& rec, const ligand& lig)
 {
 	static const scoring_function sf;
-	vector<float> v(42); // 36 RF-Score features and 6 Vina terms
+	vector<float> v(47); // 36 RF-Score features, 5 Vina features from e_inter, 5 Vina features from e_intra, and 1 Vina feature from Nrot.
 	for (const auto& l : lig)
 	{
 		for (const auto& r : rec)
@@ -31,7 +31,21 @@ inline vector<float> feature(const receptor& rec, const ligand& lig)
 			}
 		}
 	}
-	v.back() = 1 / (1 + /*0.05846f **/ (lig.num_active_torsions + 0.5f * lig.num_inactive_torsions));
+	for (const auto& ip : lig.interacting_pairs)
+	{
+		const auto& a0 = lig[ip.i0];
+		const auto& a1 = lig[ip.i1];
+		const float d0 = a0.coord[0] - a1.coord[0];
+		const float d1 = a0.coord[1] - a1.coord[1];
+		const float d2 = a0.coord[2] - a1.coord[2];
+		const float ds = d0 * d0 + d1 * d1 + d2 * d2;
+		if (ds >= 64) continue; // Vina score cutoff 8A
+		if (!a0.xs_unsupported() && !a1.xs_unsupported())
+		{
+			sf.score(v.data() + 41, a0.xs, a1.xs, ds);
+		}
+	}
+	v.back() = 1 / (1 + /*0.05846f **/ (lig.num_active_torsions + 0.5f * lig.num_inactive_torsions)); // idock daemon uses lig.flexibility_penalty as the last feature, so wNrot should be uncommented.
 //	sf.weight(v.data() + 36); // The 5 Vina terms are now weighted.
 	return v;
 }
