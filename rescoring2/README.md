@@ -1,36 +1,51 @@
-Rescoring models
-================
+Rescoring models 2
+==================
 
-Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on five training-test set partitions.
+Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on five schemes of five training-test set partitions, and these models are evaluated in terms of discriminating between active and inactive ligands on the DUD-E benchmark.
+
+
+Scheme 1
+--------
+
+11 features are calculated for the crystal structure.
+
+
+Scheme 2
+--------
+
+11 features are calculated for the docking pose with the lowest Vina score.
+
+
+Scheme 3
+--------
+
+11 features are calculated for the docking pose with the lowest RMSD.
+
+
+Scheme 4
+--------
+
+11 features are calculated for the docking pose with a Vina score closest the measured binding affinity of that complex.
+
+
+Scheme 5
+--------
+
+91=10*9+1 features are calculated for the 9 docking poses. If the docking output has less than 9 poses, the 10 features of the pose with the lowest Vina score are be repeated, e.g. 1 + 1 + 1 + 2 + 3 + 4 + 5 + 6 + 7.
 
 
 Dataset 1
 ---------
 
-The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
+The test set 0) and the training set 1) are as follows:
 
 0) PDBbind v2007 core set (N = 195). This test set is the one used in the RF-Score paper. Therefore it has N = 195.
 
-1) PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195). Both sets have 138 complexes in common. The 1oko protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
-
-2) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
-
-3) PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195). Both sets have 181 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.
-
-4) PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195). Both sets have 165 complexes in common. Therefore this training set has N = 2959 - 165 = 2794 complexes.
+1) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
 
 Their intersections are as follows:
 
 * |0 ∩ 1| = 0
-* |0 ∩ 2| = 0
-* |0 ∩ 3| = 0
-* |0 ∩ 4| = 0
-* |1 ∩ 2| = 786
-* |1 ∩ 3| = 708
-* |1 ∩ 4| = 695
-* |2 ∩ 3| = 997
-* |2 ∩ 4| = 909
-* |3 ∩ 4| = 1676
 
 
 Dataset 2
@@ -40,11 +55,11 @@ The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
 0) PDBbind v2013 refined set (N = 2959) minus PDBbind v2012 refined set (N = 2897). Both sets have 2576 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. Therefore this test set has N = 2959 - 2576 - 1 = 382 complexes.
 
-1) PDBbind v2002 refined set (N = 800). The 1tha protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1lkk, 1mfi, 7std, 1cet, 2std, 1els, 1c3x ligands fail PDB-to-PDBQT conversion by prepare_ligand4.py. Therefore this training set has N = 800 - 8 = 792 complexes.
+1) PDBbind v2002 refined set (N = 800). The 1tha protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1lkk, 1mfi, 7std, 1cet, 2std, 1els, 1c3x ligands fail PDB-to-PDBQT conversion by prepare_ligand4.py. Therefore this training set has N = 800 - 8 = 792 complexes. Note that in 584 *_protein.pdbqt's (e.g. 1gvu, 1bxo) the Ho atom type is incorrectly assigned to the HOCA atom, which is a polar hydrogen atom bonded to the OXT atom of the last residue. Therefore these *_protein.pdbqt's are curated by sed 's/Ho/HD/g' in batch. Also note that in 39 *_ligand.mol2's (e.g. 1cil, 1duv) the x, y, z coordinates are of 14.8 format instead of the official 10.4 format.
 
 2) PDBbind v2007 refined set (N = 1300). This training set has N = 1300 complexes.
 
-3) PDBbind v2010 refined set (N = 2061). The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 2 = 2059 complexes.
+3) PDBbind v2010 refined set (N = 2061). The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. The 2rio protein contains Sr atoms and the 2ov4 protein contains Cs atoms, which cannot be recognized by Vina. Therefore this training set has N = 2061 - 4 = 2057 complexes.
 
 4) PDBbind v2012 refined set (N = 2897). This training set has N = 2897 complexes.
 
@@ -60,15 +75,6 @@ Their intersections are as follows:
 * |2 ∩ 3| = 1178
 * |2 ∩ 4| = 1173
 * |3 ∩ 4| = 2032
-
-PDBbind v2002
-584 *_protein.pdbqt sed 's/Ho/HD/g', e.g. line 2874 of 1gvu_protein.pdbqt contains a HOCA atom of Ho atom type.
-7 *_ligand.mol2 shifted x, y, z.
-
-
-PDBbind v2010 refined set
-2rio,the Sr atom type is present at line 7844.
-2ov4,the Cs atom type is present at line 6401.
 
 
 Model 1
