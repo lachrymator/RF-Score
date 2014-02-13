@@ -91,7 +91,7 @@ Features are calculated for all the 9 docking poses. If a structure produces les
 
 * 1 models (i.e. 1) \* 2 test schemes (i.e. 1, 2) \* 1 training schemes (i.e. 1) = 2 variants
 * 3 models (i.e. 2, 3, 4) \* 2 test schemes (i.e. 1, 2) \* 4 training schemes (i.e. 1, 2, 3, 4) = 24 variants
-* 3 models (i.e. 2, 3, 4) \* 1 test schemes (i.e. 1) \* 1 training schemes (i.e. 1) = 3 variants
+* 3 models (i.e. 2, 3, 4) \* 1 test schemes (i.e. 5) \* 1 training schemes (i.e. 5) = 3 variants
 
 There are 29 variants and 5 training-test set partitions, so altogether there are 29 * 5 = 145 sets of performance measures.
 
