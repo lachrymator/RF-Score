@@ -7,31 +7,34 @@ for m in 3 4; do
 		for trn in 1 2 3 4 5; do
 			echo trn$trn
 			if [[ $trn -eq 5 ]]; then
-				tsts = $(seq 5 5)
+				tsts=$(seq 5 5)
 			else
-				tsts = $(seq 1 2)
+				tsts=$(seq 1 2)
 			fi
-			for tst in $tsts; do
-				echo tst$tst
-				for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | ~/idock/utilities/substr 8 4); do
-					echo $v
+			for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | ~/idock/utilities/substr 8 4); do
+				echo $v
+				echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+				for tst in $tsts; do
 					echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-#					echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
-					for s in $(cat ~/RF-Score/rescoring/seed.csv); do
-						echo $s
-						mkdir -p $s
-						cd $s
-						rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $s > pdbbind-$v-trn-$trn.txt
-#						rf-test pdbbind-$v-trn-$trn.rf ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn-iyp.csv > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+				done
+				for s in $(cat ../../seed.csv); do
+					echo $s
+					mkdir -p $s
+					cd $s
+					rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $s > pdbbind-$v-trn-$trn.txt
+					rf-test pdbbind-$v-trn-$trn.rf ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn-trn-$trn-iyp.csv > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					for tst in $tsts; do
 						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv pdbbind-$v-trn-$trn-tst-$tst-iyp.csv > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-						rm pdbbind-$v-trn-$trn.rf
 						../../../corplot.R $v $trn $tst
-						tail -n +6 pdbbind-$v-trn-$trn.txt | ~/idock/utilities/substr 3 8 | ../../../varImpPlot.R $v $trn
-						cd ..
+					done
+					rm pdbbind-$v-trn-$trn.rf
+					tail -n +6 pdbbind-$v-trn-$trn.txt | ~/idock/utilities/substr 3 8 | ../../../varImpPlot.R $v $trn
+					cd ..
+					echo -n $s, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					tail -1 $s/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					for tst in $tsts; do
 						echo -n $s, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-#						echo -n $s, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 						tail -1 $s/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-#						tail -1 $s/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					done
 				done
 			done
