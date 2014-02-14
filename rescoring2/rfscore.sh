@@ -3,29 +3,40 @@ for m in 3 4; do
 	cd model$m
 	for s in 1 2; do
 		echo set$s
-		cd set$s/tst1/trn1
-		for v in $(ls -1 pdbbind-*-trn-yxi.csv | ~/idock/utilities/substr 8 4); do
-			echo $v
-			echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-tst-stat.csv
-			echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-stat.csv
-			for s in $(cat ~/RF-Score/rescoring/seed.csv); do
-				echo $s
-				mkdir -p $s
-				cd $s
-				rf-train ../pdbbind-$v-trn-yxi.csv pdbbind-$v-trn.rf $s > pdbbind-$v-trn.txt
-				rf-test pdbbind-$v-trn.rf ../pdbbind-$v-trn-yxi.csv pdbbind-$v-trn-iyp.csv > pdbbind-$v-trn-stat.csv
-				rf-test pdbbind-$v-trn.rf ../tst-yxi.csv pdbbind-$v-tst-iyp.csv > pdbbind-$v-tst-stat.csv
-				rm pdbbind-$v-trn.rf
-				~/RF-Score/rescoring/corplot.R $v
-				tail -n +6 pdbbind-$v-trn.txt | ~/idock/utilities/substr 3 8 | ~/RF-Score/rescoring2/varImpPlot.R $v
-				cd ..
-				echo -n $s, >> pdbbind-$v-tst-stat.csv
-				echo -n $s, >> pdbbind-$v-trn-stat.csv
-				tail -1 $s/pdbbind-$v-tst-stat.csv >> pdbbind-$v-tst-stat.csv
-				tail -1 $s/pdbbind-$v-trn-stat.csv >> pdbbind-$v-trn-stat.csv
+		cd set$s
+		for trn in 1 2 3 4 5; do
+			echo trn$trn
+			if [[ $trn -eq 5 ]]; then
+				tsts = $(seq 5 5)
+			else
+				tsts = $(seq 1 2)
+			fi
+			for tst in $tsts; do
+				echo tst$tst
+				for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | ~/idock/utilities/substr 8 4); do
+					echo $v
+					echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+#					echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					for s in $(cat ~/RF-Score/rescoring/seed.csv); do
+						echo $s
+						mkdir -p $s
+						cd $s
+						rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $s > pdbbind-$v-trn-$trn.txt
+#						rf-test pdbbind-$v-trn-$trn.rf ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn-iyp.csv > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv pdbbind-$v-trn-$trn-tst-$tst-iyp.csv > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						rm pdbbind-$v-trn-$trn.rf
+						../../../corplot.R $v $trn $tst
+						tail -n +6 pdbbind-$v-trn-$trn.txt | ~/idock/utilities/substr 3 8 | ../../../varImpPlot.R $v $trn
+						cd ..
+						echo -n $s, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+#						echo -n $s, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+						tail -1 $s/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+#						tail -1 $s/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					done
+				done
 			done
 		done
-		cd ../../..
+		cd ..
 	done
 	cd ..
 done

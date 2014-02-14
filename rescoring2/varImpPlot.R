@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
-v=commandArgs(trailingOnly=T)[1]
+args=commandArgs(trailingOnly=T)
+v=args[1]
+trn=args[2]
 labels=c("gauss1_inter","gauss2_inter","repulsion_inter","hydrophobic_inter","hydrogenbonding_inter","gauss1_intra","gauss2_intra","repulsion_intra","hydrophobic_intra","hydrogenbonding_intra","flexibility")
 imp=read.table(file("stdin"))
 h=580
@@ -9,6 +11,6 @@ if (nrow(imp) > 11)
 	h=900
 }
 ord=order(imp)
-tiff(sprintf("pdbbind-%s-trn-varimpplot.tiff",v), compression="lzw", height=h)
+tiff(sprintf("pdbbind-%s-trn-%s-varimpplot.tiff",v,trn), compression="lzw", height=h)
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 dotchart(imp[ord,1], labels=labels[ord], xlab="%IncMSE", main="Variable Importance")
