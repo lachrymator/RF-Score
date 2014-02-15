@@ -89,10 +89,10 @@ Features are calculated for all the 9 docking poses. If a structure produces les
 
 ## Benchmarks
 
-* 1 models (i.e. 1) \* 2 test schemes (i.e. 1, 2) \* 1 training schemes (i.e. 1) = 2 variants
-* 3 models (i.e. 2, 3, 4) \* 2 test schemes (i.e. 1, 2) \* 4 training schemes (i.e. 1, 2, 3, 4) = 24 variants
-* 3 models (i.e. 2, 3, 4) \* 1 test schemes (i.e. 5) \* 1 training schemes (i.e. 5) = 3 variants
+* 1 models (1) \* 1 training schemes (1) \* 2 test schemes (1, 2) = 2 variants
+* 3 models (2, 3, 4) \* 4 training schemes (1, 2, 3, 4) \* 2 test schemes (1, 2) = 24 variants
+* 3 models (2, 3, 4) \* 1 training schemes (5) \* 1 test schemes (5) = 3 variants
 
 There are 29 variants and 5 training-test set partitions, so altogether there are 29 * 5 = 145 sets of performance measures.
 
-The folders are organized hierarchically, e.g. model3/set1/tst1/trn1 means model 3 using dataset 1, test scheme 1 and training scheme 1.
+The folders and files are organized hierarchically, e.g. model3/set1/pdbbind-2007-trn-1-tst-2-stat.csv means the statistics CSV of model 3 on dataset 1 and PDBbind v2007 trained in scheme 1 and tested in scheme 2.
