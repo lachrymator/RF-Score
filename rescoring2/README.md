@@ -10,7 +10,7 @@ Vina
 
 ### Model 2
 
-MLR::Vina
+MLR::Vina. The sampling range for wNrot is extended to [0.000 to 0.030] with a step size of 0.001 because of more variability in the 5 schemes.
 
 ### Model 3
 
