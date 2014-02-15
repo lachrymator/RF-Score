@@ -15,7 +15,7 @@ for s in 1 2; do
 			for tst in $tsts; do
 				echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 			done
-			for s in $(seq 0.005 0.001 0.020); do
+			for s in $(seq 0.000 0.001 0.030); do
 				echo $s
 				mkdir -p $s
 				cd $s
