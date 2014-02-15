@@ -19,8 +19,8 @@ for s in 1 2; do
 				echo $s
 				mkdir -p $s
 				cd $s
+				../../m2score.R $v $trn $s $tsts
 				for tst in $tsts; do
-					../../m2score.R $v $trn $tst $s
 					../../../corplot.R $v $trn $tst
 				done
 				cd ..
