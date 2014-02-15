@@ -1,6 +1,7 @@
 for s in 1 2; do
 	echo set$s
 	cd set$s
+	echo v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor > tst-stat.csv
 	for trn in 1 2 3 4 5; do
 		echo trn$trn
 		if [[ $trn -eq 5 ]]; then
@@ -8,7 +9,6 @@ for s in 1 2; do
 		else
 			tsts=$(seq 1 2)
 		fi
-		echo v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor > tst-stat.csv
 		for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | ~/idock/utilities/substr 8 4); do
 			echo $v
 			echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
