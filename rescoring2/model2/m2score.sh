@@ -15,22 +15,22 @@ for s in 1 2; do
 			for tst in $tsts; do
 				echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 			done
-			for s in $(seq 0.000 0.001 0.030); do
-				echo $s
-				mkdir -p $s
-				cd $s
-				../../m2score.R $v $trn $s $tsts
+			for w in $(seq 0.000 0.001 0.030); do
+				echo $w
+				mkdir -p $w
+				cd $w
+				../../m2score.R $v $trn $w $tsts
 				for tst in $tsts; do
 					../../../corplot.R $v $trn $tst
 				done
 				cd ..
-				echo -n $s, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
-				tail -1 $s/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+				echo -n $w, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+				tail -1 $w/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 				for tst in $tsts; do
-					echo -n $s, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-					tail -1 $s/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+					echo -n $w, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+					tail -1 $w/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 				done
-#				rm -rf $s
+#				rm -rf $w
 			done
 			for tst in $tsts; do
 				b=$(tail -n +2 pdbbind-$v-trn-$trn-tst-$tst-stat.csv | sort -n -t, -k3,3 -k4,4 -k5,5r -k6,6r -k7,7r | head -1)

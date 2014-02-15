@@ -17,11 +17,11 @@ for m in 3 4; do
 				for tst in $tsts; do
 					echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 				done
-				for s in $(cat ../../seed.csv); do
-					echo $s
-					mkdir -p $s
-					cd $s
-					rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $s > pdbbind-$v-trn-$trn.txt
+				for w in $(cat ../../seed.csv); do
+					echo $w
+					mkdir -p $w
+					cd $w
+					rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $w > pdbbind-$v-trn-$trn.txt
 					rf-test pdbbind-$v-trn-$trn.rf ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn-trn-$trn-iyp.csv > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					for tst in $tsts; do
 						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv pdbbind-$v-trn-$trn-tst-$tst-iyp.csv > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
@@ -30,11 +30,11 @@ for m in 3 4; do
 					rm pdbbind-$v-trn-$trn.rf
 					tail -n +6 pdbbind-$v-trn-$trn.txt | ~/idock/utilities/substr 3 8 | ../../../varImpPlot.R $v $trn
 					cd ..
-					echo -n $s, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
-					tail -1 $s/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					echo -n $w, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					tail -1 $w/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					for tst in $tsts; do
-						echo -n $s, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-						tail -1 $s/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						echo -n $w, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						tail -1 $w/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 					done
 				done
 			done
