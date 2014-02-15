@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 	const size_t num_variables = x.front().size();
 	const size_t num_trees = 500;
 	const size_t seed = argc == 3 ? 89757 : stoul(argv[3]); // time(0), random_device()()
-	const size_t num_threads = 4;
+	const size_t num_threads = thread::hardware_concurrency();
 	const size_t min_mtry = 1;
 	const size_t max_mtry = num_variables;
 	const size_t num_forests = max_mtry - min_mtry + 1;
