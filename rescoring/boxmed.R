@@ -9,7 +9,7 @@ setv[2,]=c(2002,2007,2010,2012)
 statc=c("rmse","sdev","pcor","scor","kcor")
 statx=c("RMSE","SD","Rp","Rs","Rk")
 # Plot figures with y axis being the performance measure and x axis being the numbers of training complexes.
-cat(sprintf("xtrn\n"))
+cat(sprintf("model$m/set$s/tst-$c-boxplot.tiff\n"))
 for (m in 2:5)
 {
 	cat(sprintf("model%d\n",m))
@@ -46,7 +46,7 @@ for (m in 2:5)
 	}
 }
 # Plot figures with y axis being the performance measure and x axis being the models trained on a specific training set.
-cat(sprintf("xmdl\n"))
+cat(sprintf("set$s/pdbbind-$v-tst-$c-boxplot.tiff\n"))
 for (s in 1:ns)
 {
 	cat(sprintf("set%d\n",s))
@@ -80,7 +80,7 @@ for (s in 1:ns)
 	}
 }
 # Plot figures with y axis being the performance measure, x axis being the numbers of training complexes, and legends being the models.
-cat(sprintf("mtrn\n"))
+cat(sprintf("set$s/tst-$c-boxplot.tiff\n"))
 for (s in 1:ns)
 {
 	cat(sprintf("set%d\n",s))
