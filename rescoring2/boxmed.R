@@ -10,9 +10,11 @@ statc=c("rmse","sdev","pcor","scor","kcor")
 statx=c("RMSE","SD","Rp","Rs","Rk")
 for (trn in 1:5)
 {
+cat(sprintf("trn%s\n",trn))
 if (trn == 5) tsts = 5:5 else tsts = 1:2
 for (tst in tsts)
 {
+cat(sprintf("tst%s\n",tst))
 # Plot figures with y axis being the performance measure and x axis being the numbers of training complexes.
 cat(sprintf("model$m/set$s/trn-$trn-tst-$tst-$c-boxplot.tiff\n"))
 for (m in 2:5)
