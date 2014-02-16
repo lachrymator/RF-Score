@@ -17,7 +17,7 @@ for (tst in tsts)
 cat(sprintf("tst%s\n",tst))
 # Plot figures with y axis being the performance measure and x axis being the numbers of training complexes.
 cat(sprintf("model$m/set$s/trn-$trn-tst-$tst-$c-boxplot.tiff\n"))
-for (m in 2:5)
+for (m in 2:nm)
 {
 	cat(sprintf("model%d\n",m))
 	for (s in 1:ns)
