@@ -11,7 +11,7 @@ for m in 3 4; do
 			else
 				tsts=$(seq 1 2)
 			fi
-			for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | ~/idock/utilities/substr 8 4); do
+			for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | cut -d- -f2); do
 				echo $v
 				echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 				for tst in $tsts; do
@@ -28,7 +28,7 @@ for m in 3 4; do
 						../../../corplot.R $v $trn $tst
 					done
 					rm pdbbind-$v-trn-$trn.rf
-					tail -n +6 pdbbind-$v-trn-$trn.txt | ~/idock/utilities/substr 3 8 | ../../../varImpPlot.R $v $trn
+					tail -n +6 pdbbind-$v-trn-$trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v $trn
 					cd ..
 					echo -n $w, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					tail -1 $w/pdbbind-$v-trn-$trn-trn-$trn-stat.csv >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv

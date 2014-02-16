@@ -2,7 +2,7 @@ for s in 1 2; do
 	echo set$s
 	cd set$s
 	echo v,w,n,rmse,sdev,pcor,scor,kcor > tst-stat.csv
-	for v in $(ls -1 pdbbind-*-trn-yxi.csv | ~/idock/utilities/substr 8 4); do
+	for v in $(ls -1 pdbbind-*-trn-yxi.csv | cut -d- -f2); do
 		echo $v
 		echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-tst-stat.csv
 		echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-stat.csv

@@ -9,7 +9,7 @@ for s in 1 2; do
 		else
 			tsts=$(seq 1 2)
 		fi
-		for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | ~/idock/utilities/substr 8 4); do
+		for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | cut -d- -f2); do
 			echo $v
 			echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 			for tst in $tsts; do
