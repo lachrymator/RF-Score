@@ -7,8 +7,10 @@ d["t"]=1+w*(d["nacttors"]+0.5*d["ninacttors"]) # Flexibility penalty = 1 + w * N
 d["z"]=d["pbindaff"]*d["t"] # Measured pKd times the flexibility penalty.
 r=lm(z~gauss1+gauss2+repulsion+hydrophobic+hydrogenbonding,d) # Linear regression of Vina's 5 unweighted terms.
 c=coefficients(r) # Trained weights.
+write.csv(round(c,6),quote=F,file=sprintf("pdbbind-%s-trn-coeff.csv",v))
 
 # Evaluate on training set.
+c=read.csv(sprintf("pdbbind-%s-trn-coeff.csv",v))[,2]
 d["predicted"]=(c[1]+d[2]*c[2]+d[3]*c[3]+d[4]*c[4]+d[5]*c[5]+d[6]*c[6])/d["t"] # Binding affinity predicted by the newly-trained model, with kcal/mol converted to pKd.
 write.csv(c(d["PDB"],round(d["pbindaff"],2),round(d["predicted"],2)),row.names=F,quote=F,file=sprintf("pdbbind-%s-trn-iyp.csv",v)) # Write the measured binding affinities and the predicted ones in CSV format.
 # Print RMSE, standard deviation, Pearson/Spearman/Kendall correlation coefficients.
