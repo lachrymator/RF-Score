@@ -13,7 +13,9 @@ for m in 2; do
 				echo $w
 				mkdir -p $w
 				cd $w
-				../../../m2score.R $v $w
+				../../../m2train.R $v $w
+				../../../m2test.R $v $w trn
+				../../../m2test.R $v $w tst
 				../../../corplot.R $v
 				cd ..
 				echo -n $w, >> pdbbind-$v-tst-stat.csv
