@@ -8,9 +8,10 @@ setv[1,]=c(2004,2007,2010,2013)
 setv[2,]=c(2002,2007,2010,2012)
 statc=c("rmse","sdev","pcor","scor","kcor")
 statx=c("RMSE","SD","Rp","Rs","Rk")
-for (trn in 1:1)
+for (trn in 1:5)
 {
-for (tst in 1:2)
+if (trn == 5) tsts = 5:5 else tsts = 1:2
+for (tst in tsts)
 {
 # Plot figures with y axis being the performance measure and x axis being the numbers of training complexes.
 cat(sprintf("model$m/set$s/trn-$trn-tst-$tst-$c-boxplot.tiff\n"))
