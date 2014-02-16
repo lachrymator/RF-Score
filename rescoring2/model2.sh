@@ -37,7 +37,7 @@ for m in 2; do
 					done
 				done
 				for tst in $tsts; do
-					b=$(tail -n +2 pdbbind-$v-trn-$trn-tst-$tst-stat.csv | sort -n -t, -k3,3 -k4,4 -k5,5r -k6,6r -k7,7r | head -1)
+					b=$(tail -n +2 pdbbind-$v-trn-$trn-tst-$tst-stat.csv | sort -t, -k3,3n -k4,4n -k5,5nr -k6,6nr -k7,7nr | head -1)
 					echo $v,$trn,$tst,$b >> tst-stat.csv
 					echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 					echo $b >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
