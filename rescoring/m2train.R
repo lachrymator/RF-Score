@@ -7,4 +7,4 @@ d["t"]=1+w*(d["nacttors"]+0.5*d["ninacttors"]) # Flexibility penalty = 1 + w * N
 d["z"]=d["pbindaff"]*d["t"] # Measured pKd times the flexibility penalty.
 r=lm(z~gauss1+gauss2+repulsion+hydrophobic+hydrogenbonding,d) # Linear regression of Vina's 5 unweighted terms.
 c=coefficients(r) # Trained weights.
-write.csv(round(c,6),quote=F,file=sprintf("pdbbind-%s-trn-coeff.csv",v))
+write.csv(round(c,6),quote=F,file=sprintf("pdbbind-%s-trn-coef.csv",v))
