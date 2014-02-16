@@ -17,7 +17,7 @@ for m in 3 4; do
 				for tst in $tsts; do
 					echo seed,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 				done
-				for w in $(cat ../../seed.csv); do
+				for w in 89757 35577 51105 72551 10642 69834 47945 52857 26894 99789; do
 					echo $w
 					mkdir -p $w
 					cd $w
