@@ -22,8 +22,10 @@ for m in 2; do
 					echo $w
 					mkdir -p $w
 					cd $w
-					../../../m2score.R $v $trn $w $tsts
+					../../../m2train.R $v $trn $w
+					../../../m2test.R $v $trn 0 $w trn
 					for tst in $tsts; do
+						../../../m2test.R $v $trn $tst $w tst
 						../../../corplot.R $v $trn $tst
 					done
 					cd ..
