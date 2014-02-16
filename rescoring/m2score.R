@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
-v=commandArgs(trailingOnly=T)[1]
-w=as.numeric(commandArgs(trailingOnly=T)[2])
+args=commandArgs(trailingOnly=T)
+v=args[1]
+w=as.numeric(args[2])
 d=read.csv(sprintf("../pdbbind-%s-trn-yxi.csv",v)) # d[1] is pbindaff in pKd unit, d[2] to d[6] are Vina's 5 unweighted terms, d[7] and d[8] are N(ActTors) and N(InactTors).
 d["t"]=1+w*(d["nacttors"]+0.5*d["ninacttors"]) # Flexibility penalty = 1 + w * Nrot. In Vina's implementation, active torsions are counted as 1, while inactive torsions (i.e. -OH,-NH2,-CH3) are counted as 0.5.
 d["z"]=d["pbindaff"]*d["t"] # Measured pKd times the flexibility penalty.
