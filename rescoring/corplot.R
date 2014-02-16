@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
-v=commandArgs(trailingOnly=T)[1]
+args=commandArgs(trailingOnly=T)
+v=args[1]
 iyp=read.csv(sprintf("pdbbind-%s-tst-iyp.csv",v),check.names=F)
 n=nrow(iyp)
 se=sum((iyp[3] - iyp[2])^2)

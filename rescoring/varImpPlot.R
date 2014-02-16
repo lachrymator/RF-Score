@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
-v=commandArgs(trailingOnly=T)[1]
+args=commandArgs(trailingOnly=T)
+v=args[1]
 labels=c("gauss1","gauss2","repulsion","hydrophobic","hydrogenbonding","flexibility")
 imp=read.table(file("stdin"))
 h=480
