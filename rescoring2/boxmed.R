@@ -113,7 +113,7 @@ for (trn in 1:5)
 			{
 				tiff(sprintf("set%d/trn-%s-tst-%s-%s-boxplot.tiff",s,trn,tst,statc[ci]),compression="lzw")
 				par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-				ylim=c(min(med[,,ci]),max(med[,,ci]))
+				ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
 				for (m in 1:nm)
 				{
 					boxplot(box[m,,ci],ylim=ylim,xaxt="n",yaxt="n",xlab="",ylab="",range=0,border=m)
