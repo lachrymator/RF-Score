@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 nm=4 # Number of models.
-ns=1 # Number of datasets.
-nv=1 # Number of training sets per dataset.
+ns=1 # Number of datasets, e.g. 2.
+nv=1 # Number of training sets per dataset, e.g. 4.
 nc=5 # Number of performance measures.
 setv=array(dim=c(2,4))
 setv[1,]=c(2007)
@@ -20,7 +20,7 @@ for (trn in 1:5)
 		for (m in 2:nm)
 		{
 			cat(sprintf("model%d\n",m))
-			for (s in 1:ns)
+			s=ns
 			{
 				cat(sprintf("set%d\n",s))
 				ntrn=array(dim=nv)
@@ -54,7 +54,7 @@ for (trn in 1:5)
 		}
 		# Plot figures with y axis being the performance measure and x axis being the models trained on a specific training set.
 		cat(sprintf("set$s/pdbbind-$v-trn-$trn-tst-$tst-$c-boxplot.tiff\n"))
-		for (s in 1:ns)
+		s=ns
 		{
 			cat(sprintf("set%d\n",s))
 			for (vi in 1:nv)
@@ -88,7 +88,7 @@ for (trn in 1:5)
 		}
 		# Plot figures with y axis being the performance measure, x axis being the numbers of training complexes, and legends being the models.
 		cat(sprintf("set$s/trn-$trn-tst-$tst-$c-boxplot.tiff\n"))
-		for (s in 1:ns)
+		s=ns
 		{
 			cat(sprintf("set%d\n",s))
 			ntrn=array(dim=nv)
