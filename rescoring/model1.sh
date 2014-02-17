@@ -6,7 +6,7 @@ for m in 1; do
 		cd set$s
 #		tail -n +2 pdbbind-2007-trn-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-2007-trn-stat.csv
 		tail -n +2 pdbbind-2007-tst-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-2007-tst-stat.csv
-		../../corplot.R 2007
+		../../iypplot.R 2007
 		cd ..
 	done
 	cd ..

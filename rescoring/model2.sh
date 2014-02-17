@@ -16,7 +16,7 @@ for m in 2; do
 				../../../mlrtrain.R $v $w
 				../../../mlrtest.R $v $w trn
 				../../../mlrtest.R $v $w tst
-				../../../corplot.R $v
+				../../../iypplot.R $v
 				cd ..
 				echo -n $w, >> pdbbind-$v-tst-stat.csv
 				echo -n $w, >> pdbbind-$v-trn-stat.csv
