@@ -8,7 +8,7 @@ for m in 1; do
 			tail -n +2 pdbbind-2007-trn-1-tst-$tst-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-2007-trn-1-tst-$tst-stat.csv
 			../../corplot.R 2007 1 $tst
 		done
-		cut -d, -f3 pdbbind-2007-trn-1-tst-2-iyp.csv | paste -d, ../../set$s/tst-id.csv - > pdbbind-2007-trn-1-tst-2-idp.csv
+		cut -d, -f3 pdbbind-2007-trn-1-tst-2-iyp.csv | paste -d, ../../set$s/tst-2-id.csv - > pdbbind-2007-trn-1-tst-2-idp.csv
 		../../idpplot.R 2007 1 2
 		cd ..
 	done
