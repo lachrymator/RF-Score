@@ -65,7 +65,7 @@ for (trn in 1:5)
 				med=array(dim=c(nc,nm))
 				for (m in 1:nm)
 				{
-					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),trn,tst))
+					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,1,trn),tst))
 					for (ci in 1:nc)
 					{
 						box[ci,m]=tst_stat[statc[ci]]
@@ -101,7 +101,7 @@ for (trn in 1:5)
 				ntrn[vi]=trn_stat["n"][1,1]
 				for (m in 1:nm)
 				{
-					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),trn,tst))
+					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,1,trn),tst))
 					for (ci in 1:nc)
 					{
 						box[m,vi,ci]=tst_stat[statc[ci]]
