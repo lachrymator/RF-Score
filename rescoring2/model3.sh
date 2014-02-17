@@ -30,7 +30,7 @@ for m in 3 4; do
 					rm pdbbind-$v-trn-$trn.rf
 					tail -n +6 pdbbind-$v-trn-$trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v $trn
 					if [[ $trn -ne 5 ]]; then
-						cut -d, -f3 $pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
+						cut -d, -f3 pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
 						../../../idpplot.R $v $trn 2
 					fi
 					cd ..

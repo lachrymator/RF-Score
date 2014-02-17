@@ -29,7 +29,7 @@ for m in 2; do
 						../../../corplot.R $v $trn $tst
 					done
 					if [[ $trn -ne 5 ]]; then
-						cut -d, -f3 $pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
+						cut -d, -f3 pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
 						../../../idpplot.R $v $trn 2
 					fi
 					cd ..
