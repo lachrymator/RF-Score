@@ -34,6 +34,20 @@ Their intersections are as follows:
 
 * |0 ∩ 1| = 0
 
+Having the test set docked by Vina, the numbers of complexes whose ith (i=0,1,...,9) docking pose has the lowest RMSD are as follows:
+
+* |RMSD1 = RMSDmin| = 93
+* |RMSD2 = RMSDmin| = 27
+* |RMSD3 = RMSDmin| = 13
+* |RMSD4 = RMSDmin| = 14
+* |RMSD5 = RMSDmin| = 10
+* |RMSD6 = RMSDmin| = 11
+* |RMSD7 = RMSDmin| = 14
+* |RMSD8 = RMSDmin| = 6
+* |RMSD9 = RMSDmin| = 7
+
+Therefore, the % of complexes where the pose with lowest Vina score also has the lowest RMSD is 93 / 195 = 48%.
+
 ### Dataset 2
 
 The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
@@ -60,6 +74,20 @@ Their intersections are as follows:
 * |2 ∩ 3| = 1178
 * |2 ∩ 4| = 1173
 * |3 ∩ 4| = 2030
+
+Having the test set docked by Vina, the numbers of complexes whose ith (i=0,1,...,9) docking pose has the lowest RMSD are as follows:
+
+* |RMSD1 = RMSDmin| = 208
+* |RMSD2 = RMSDmin| = 52
+* |RMSD3 = RMSDmin| = 34
+* |RMSD4 = RMSDmin| = 17
+* |RMSD5 = RMSDmin| = 19
+* |RMSD6 = RMSDmin| = 13
+* |RMSD7 = RMSDmin| = 16
+* |RMSD8 = RMSDmin| = 9
+* |RMSD9 = RMSDmin| = 14
+
+Therefore, the % of complexes where the pose with lowest Vina score also has the lowest RMSD is 208 / 382 = 54%.
 
 ## Schemes
 
