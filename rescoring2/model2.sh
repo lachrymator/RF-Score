@@ -4,7 +4,6 @@ for m in 2; do
 	for s in 1 2; do
 		echo set$s
 		cd set$s
-		echo v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor > tst-stat.csv
 		for trn in 1 2 3 4 5; do
 			echo trn$trn
 			if [[ $trn -eq 5 ]]; then
@@ -42,12 +41,15 @@ for m in 2; do
 				done
 				for tst in $tsts; do
 					b=$(tail -n +2 pdbbind-$v-trn-$trn-tst-$tst-stat.csv | sort -t, -k3,3n -k4,4n -k5,5nr -k6,6nr -k7,7nr | head -1)
-					echo $v,$trn,$tst,$b >> tst-stat.csv
+					echo $v,$trn,$tst,$b >> tst-stat-0.csv
 					echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 					echo $b >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 				done
 			done
 		done
+		echo v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor > tst-stat.csv
+		sort -t, -k1,1n tst-stat-0.csv >> tst-stat.csv
+		rm tst-stat-0.csv
 		cd ..
 	done
 	cd ..
