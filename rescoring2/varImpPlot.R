@@ -13,6 +13,24 @@ if (nr == 11) {
 } else if (nr == 47) {
 	labels=labels46
 	h=900
+} else if (nr == 21) {
+	for (p in 1:2)
+	{
+		for (f in labels10)
+		{
+			labels=c(labels,sprintf("%s_%d",f,p))
+		}
+	}
+	h=1780
+} else if (nr == 93) {
+	for (p in 1:2)
+	{
+		for (f in labels46)
+		{
+			labels=c(labels,sprintf("%s_%d",f,p))
+		}
+	}
+	h=8260
 } else if (nr == 91) {
 	for (p in 1:9)
 	{

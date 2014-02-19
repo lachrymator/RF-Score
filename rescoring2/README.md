@@ -1,6 +1,6 @@
 # Rescoring models 2
 
-Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on five schemes of five training-test set partitions, and these models are evaluated in terms of discriminating between active and inactive ligands on the DUD-E benchmark.
+Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on six schemes of five training-test set partitions, and these models are evaluated in terms of discriminating between active and inactive ligands on the DUD-E benchmark.
 
 ## Models
 
@@ -115,12 +115,17 @@ Features are calculated for the docking pose with a Vina score closest the measu
 
 Features are calculated for all the 9 docking poses. If a structure produces less than 9 docking poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1 + 1 + 2 + 3 + 4 + 5 + 6 + 7. Therefore there are 10 * 9 + 1 = 91 features for model 2 and 3, and (36 + 10) * 9 + 1 = 415 features for model 4.
 
+### Scheme 6
+
+Features are calculated for the 2 docking poses with the lowest and the second lowest Vina score. If a structure produces less than 2 docking poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1. Therefore there are 10 * 2 + 1 = 21 features for model 2 and 3, and (36 + 10) * 2 + 1 = 93 features for model 4.
+
 ## Benchmarks
 
 * 1 models (1) \* 1 training schemes (1) \* 2 test schemes (1, 2) = 2 variants
 * 3 models (2, 3, 4) \* 4 training schemes (1, 2, 3, 4) \* 2 test schemes (1, 2) = 24 variants
 * 3 models (2, 3, 4) \* 1 training schemes (5) \* 1 test schemes (5) = 3 variants
+* 3 models (2, 3, 4) \* 1 training schemes (6) \* 1 test schemes (6) = 3 variants
 
-There are 29 variants and 5 training-test set partitions, so altogether there are 29 * 5 = 145 sets of performance measures.
+There are 32 variants and 5 training-test set partitions, so altogether there are 32 * 5 = 160 sets of performance measures.
 
 The folders and files are organized hierarchically, e.g. model3/set1/pdbbind-2007-trn-1-tst-2-stat.csv means the statistics CSV of model 3 on dataset 1 and PDBbind v2007 trained in scheme 1 and tested in scheme 2.

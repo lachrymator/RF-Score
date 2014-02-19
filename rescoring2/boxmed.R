@@ -8,10 +8,10 @@ setv[1,]=c(2007)
 setv[2,]=c(2002,2007,2010,2012)
 statc=c("rmse","sdev","pcor","scor","kcor")
 statx=c("RMSE","SD","Rp","Rs","Rk")
-for (trn in 1:5)
+for (trn in 1:6)
 {
 	cat(sprintf("trn%s\n",trn))
-	if (trn == 5) tsts = 5:5 else tsts = 1:2
+	if (trn >= 5) tsts = trn:trn else tsts = 1:2
 	for (tst in tsts)
 	{
 		cat(sprintf("tst%s\n",tst))
@@ -63,7 +63,7 @@ for (trn in 1:5)
 				cat(sprintf("v%d\n",v))
 				box=array(list(),dim=c(nc,nm))
 				med=array(dim=c(nc,nm))
-				for (m in ifelse(trn==5,2,1):nm)
+				for (m in ifelse(trn>=5,2,1):nm)
 				{
 					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,1,trn),tst))
 					for (ci in 1:nc)
@@ -99,7 +99,7 @@ for (trn in 1:5)
 				v=setv[s,vi]
 				trn_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-trn-%s-stat.csv",2,s,v,trn,trn))
 				ntrn[vi]=trn_stat["n"][1,1]
-				for (m in ifelse(trn==5,2,1):nm)
+				for (m in ifelse(trn>=5,2,1):nm)
 				{
 					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,1,trn),tst))
 					for (ci in 1:nc)
@@ -114,13 +114,13 @@ for (trn in 1:5)
 				tiff(sprintf("set%d/trn-%s-tst-%s-%s-boxplot.tiff",s,trn,tst,statc[ci]),compression="lzw")
 				par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 				ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
-				for (m in ifelse(trn==5,2,1):nm)
+				for (m in ifelse(trn>=5,2,1):nm)
 				{
 					boxplot(box[m,,ci],ylim=ylim,xaxt="n",yaxt="n",xlab="",ylab="",range=0,border=m)
 					par(new=T)
 				}
 				title(main=sprintf("Boxplot of %s",statx[ci]),xlab="Number of training complexes",ylab=statx[ci])
-				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=ifelse(trn==5,2,1):nm,fill=ifelse(trn==5,2,1):nm,cex=1.3)
+				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=ifelse(trn>=5,2,1):nm,fill=ifelse(trn>=5,2,1):nm,cex=1.3)
 				axis(1,at=1:nv,labels=ntrn)
 				axis(2)
 				dev.off()
@@ -133,7 +133,7 @@ for (trn in 1:5)
 				}
 				abline(h=med[1,,ci])
 				title(main=sprintf("Median of %s",statx[ci]),xlab="Number of training complexes",ylab=statx[ci])
-				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=ifelse(trn==5,2,1):nm,fill=ifelse(trn==5,2,1):nm,cex=1.3)
+				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=ifelse(trn>=5,2,1):nm,fill=ifelse(trn>=5,2,1):nm,cex=1.3)
 				axis(1)
 				axis(2)
 				dev.off()

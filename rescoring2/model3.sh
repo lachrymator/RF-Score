@@ -4,10 +4,10 @@ for m in 3 4; do
 	for s in 1 2; do
 		echo set$s
 		cd set$s
-		for trn in 1 2 3 4 5; do
+		for trn in 1 2 3 4 5 6; do
 			echo trn$trn
-			if [[ $trn -eq 5 ]]; then
-				tsts=$(seq 5 5)
+			if [[ $trn -ge 5 ]]; then
+				tsts=$(seq $trn $trn)
 			else
 				tsts=$(seq 1 2)
 			fi

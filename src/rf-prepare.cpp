@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	string line;
 	ofstream ofs(argv[2]);
 	ofs.setf(ios::fixed, ios::floatfield);
-	ofs << "pbindaff,6.6,7.6,8.6,16.6,6.7,7.7,8.7,16.7,6.8,7.8,8.8,16.8,6.16,7.16,8.16,16.16,6.15,7.15,8.15,16.15,6.9,7.9,8.9,16.9,6.17,7.17,8.17,16.17,6.35,7.35,8.35,16.35,6.53,7.53,8.53,16.53,gauss1_inter,gauss2_inter,repulsion_inter,hydrophobic_inter,hydrogenbonding_inter,gauss1_intra,gauss2_intra,repulsion_intra,hydrophobic_intra,hydrogenbonding_intra,flexibility,PDB\n" << setprecision(4);
+	ofs << "pbindaff,gauss1_inter_1,gauss2_inter_1,repulsion_inter_1,hydrophobic_inter_1,hydrogenbonding_inter_1,gauss1_intra_1,gauss2_intra_1,repulsion_intra_1,hydrophobic_intra_1,hydrogenbonding_intra_1,gauss1_inter_2,gauss2_inter_2,repulsion_inter_2,hydrophobic_inter_2,hydrogenbonding_inter_2,gauss1_intra_2,gauss2_intra_2,repulsion_intra_2,hydrophobic_intra_2,hydrogenbonding_intra_2,nacttors,ninacttors,PDB\n" << setprecision(4);
 	for (ifstream dataifs(argv[1]); getline(dataifs, line);)
 	{
 		const string code = line.substr(0, 4);
@@ -42,14 +42,14 @@ int main(int argc, char* argv[])
 			const size_t n = scheme == "6" ? 2 : 9;
 			const size_t m = min<size_t>(c, n);
 			vector<float> t;
-			v.resize((36 + 10) * n + 1);
+			v.resize((10) * n + 2);
 			size_t p = 0;
 			for (size_t i = c; i < n; ++i)
 			{
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_1.pdbqt");
 				t = feature(rec, lig);
-				for (size_t j = 0; j < 36 + 10; ++j)
+				for (size_t j = 0; j < 10; ++j)
 				{
 					v[p++] = t[j];
 				}
@@ -59,12 +59,13 @@ int main(int argc, char* argv[])
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_" + to_string(i) + ".pdbqt");
 				t = feature(rec, lig);
-				for (size_t j = 0; j < 36 + 10; ++j)
+				for (size_t j = 0; j < 10; ++j)
 				{
 					v[p++] = t[j];
 				}
 			}
-			v[p++] = t.back();
+			v[p++] = t[10];
+			v[p++] = t[11];
 		}
 		else
 		{
