@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <algorithm>
 #include "feature.hpp"
 using namespace std;
 
@@ -33,15 +34,17 @@ int main(int argc, char* argv[])
 			lig.load(root + code + "/" + code + "_ligand.pdbqt");
 			v = feature(rec, lig);
 		}
-		else if (scheme == "5")
+		else if (scheme == "5" || scheme == "6")
 		{
 			ifstream ifs(root + code + "/out/conformation_count.txt");
 			getline(ifs, line);
 			const size_t c = stoul(line);
+			const size_t n = scheme == "6" ? 2 : 9;
+			const size_t m = min<size_t>(c, n);
 			vector<float> t;
-			v.resize((36 + 10) * 9 + 1);
+			v.resize((36 + 10) * n + 1);
 			size_t p = 0;
-			for (size_t i = c; i < 9; ++i)
+			for (size_t i = c; i < n; ++i)
 			{
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_1.pdbqt");
@@ -51,7 +54,7 @@ int main(int argc, char* argv[])
 					v[p++] = t[j];
 				}
 			}
-			for (size_t i = 1; i <= c; ++i)
+			for (size_t i = 1; i <= m; ++i)
 			{
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_" + to_string(i) + ".pdbqt");
