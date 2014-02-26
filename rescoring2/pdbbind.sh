@@ -5,9 +5,9 @@ for v in 2002 2007 2010 2012 2013; do
 		cd $c
 		python2.5 ${MGLTOOLS_ROOT}/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.pyo -U waters -r ${c}_protein.pdb
 		python2.5 ${MGLTOOLS_ROOT}/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.pyo -U '' -l ${c}_ligand.mol2
-		~/PDBbind/definebox/bin/definebox ${c}_ligand.mol2 > box.cfg
+		~/PDBbind/definebox/bin/definebox ${c}_ligand.mol2 > box.conf
 		mkdir -p log out
-		vina --config box.cfg --receptor ${c}_protein.pdbqt --ligand ${c}_ligand.pdbqt --log log/${c}_ligand.txt --out out/${c}_ligand.pdbqt
+		vina --config box.conf --receptor ${c}_protein.pdbqt --ligand ${c}_ligand.pdbqt --log log/${c}_ligand.txt --out out/${c}_ligand.pdbqt
 		~/idock/utilities/rmsd ${c}_ligand.pdbqt out/${c}_ligand.pdbqt > vina.rmsd
 		vina_split --input out/${c}_ligand.pdbqt
 #		ln -s ../${c}_ligand.pdbqt out/${c}_ligand_ligand_0.pdbqt
