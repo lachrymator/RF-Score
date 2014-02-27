@@ -45,10 +45,10 @@ int main(int argc, char* argv[])
 	const size_t num_variables = x.front().size();
 	const size_t num_trees = 500;
 	const size_t seed = argc == 3 ? 89757 : stoul(argv[3]); // time(0), random_device()()
-	const size_t num_threads = thread::hardware_concurrency();
 	const size_t min_mtry = 1;
 	const size_t max_mtry = num_variables;
 	const size_t num_forests = max_mtry - min_mtry + 1;
+	const size_t num_threads = min<size_t>(thread::hardware_concurrency(), num_forests);
 	cout << "Training " << num_forests << " random forests of " << num_trees << " trees with mtry from " << min_mtry << " to " << max_mtry << " and seed " << seed << " on " << num_samples << " samples using " << num_threads << " threads" << endl;
 	mutex m;
 	forest f;
