@@ -17,10 +17,77 @@ int main(int argc, char* argv[])
 	const string path = argv[1];
 	const string root = path.substr(0, path.find_last_of("/\\") + 1);
 	const string scheme = argc == 3 ? "1" : argv[3];
+	const size_t np = (scheme == "5" ? 9 : (scheme == "6" ? 2 : 1));
+	const size_t nf = 36 + 10;
+	const array<string, nf> headers =
+	{
+		"6.6",
+		"7.6",
+		"8.6",
+		"16.6",
+		"6.7",
+		"7.7",
+		"8.7",
+		"16.7",
+		"6.8",
+		"7.8",
+		"8.8",
+		"16.8",
+		"6.16",
+		"7.16",
+		"8.16",
+		"16.16",
+		"6.15",
+		"7.15",
+		"8.15",
+		"16.15",
+		"6.9",
+		"7.9",
+		"8.9",
+		"16.9",
+		"6.17",
+		"7.17",
+		"8.17",
+		"16.17",
+		"6.35",
+		"7.35",
+		"8.35",
+		"16.35",
+		"6.53",
+		"7.53",
+		"8.53",
+		"16.53",
+		"gauss1_inter",
+		"gauss2_inter",
+		"repulsion_inter",
+		"hydrophobic_inter",
+		"hydrogenbonding_inter",
+		"gauss1_intra",
+		"gauss2_intra",
+		"repulsion_intra",
+		"hydrophobic_intra",
+		"hydrogenbonding_intra",
+	};
 	string line;
 	ofstream ofs(argv[2]);
 	ofs.setf(ios::fixed, ios::floatfield);
-	ofs << "pbindaff,6.6,7.6,8.6,16.6,6.7,7.7,8.7,16.7,6.8,7.8,8.8,16.8,6.16,7.16,8.16,16.16,6.15,7.15,8.15,16.15,6.9,7.9,8.9,16.9,6.17,7.17,8.17,16.17,6.35,7.35,8.35,16.35,6.53,7.53,8.53,16.53,gauss1_inter,gauss2_inter,repulsion_inter,hydrophobic_inter,hydrogenbonding_inter,gauss1_intra,gauss2_intra,repulsion_intra,hydrophobic_intra,hydrogenbonding_intra,flexibility,PDB\n" << setprecision(4);
+	ofs << "pbindaff";
+	if (np == 1)
+	{
+		for (const auto& h : headers)
+		{
+			ofs << ',' << h;
+		}
+	}
+	else
+	{
+		for (size_t p = 1; p <= np; ++p)
+		for (const auto& h : headers)
+		{
+			ofs << ',' << h << '_' << p;
+		}
+	}
+	ofs << ",flexibility,PDB\n" << setprecision(4);
 	for (ifstream dataifs(argv[1]); getline(dataifs, line);)
 	{
 		const string code = line.substr(0, 4);
@@ -39,17 +106,16 @@ int main(int argc, char* argv[])
 			ifstream ifs(root + code + "/out/conformation_count.txt");
 			getline(ifs, line);
 			const size_t c = stoul(line);
-			const size_t n = scheme == "6" ? 2 : 9;
-			const size_t m = min<size_t>(c, n);
+			const size_t m = min<size_t>(c, np);
 			vector<float> t;
-			v.resize((36 + 10) * n + 1);
+			v.resize(nf * np + 1);
 			size_t p = 0;
-			for (size_t i = c; i < n; ++i)
+			for (size_t i = c; i < np; ++i)
 			{
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_1.pdbqt");
 				t = feature(rec, lig);
-				for (size_t j = 0; j < 36 + 10; ++j)
+				for (size_t j = 0; j < nf; ++j)
 				{
 					v[p++] = t[j];
 				}
@@ -59,7 +125,7 @@ int main(int argc, char* argv[])
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_" + to_string(i) + ".pdbqt");
 				t = feature(rec, lig);
-				for (size_t j = 0; j < 36 + 10; ++j)
+				for (size_t j = 0; j < nf; ++j)
 				{
 					v[p++] = t[j];
 				}
