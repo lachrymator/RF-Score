@@ -1,4 +1,4 @@
-prefix=~/PDBbind/
+prefix=~/PDBbind
 m=1
 cd model$m
 echo model$m
