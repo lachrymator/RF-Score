@@ -126,18 +126,18 @@ For example,
 For script files, their functions and execution orders are as follows:
 
 * `pdbbind.sh` does file format conversion, binding site detection, docking by Vina, RMSD computation, and finding the corresponding pose in schemes 1, 2, 3, 4, all in the PDBbind folder.
-* `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-iyp.csv from ~/PDBbind/v{2007}/\${c}/{vina_score.txt,out/\${c}_ligand_ligand_1.txt} and set{1,2}/tst-1-iy.csv.
-* `model4prepare.sh` generates model4/set{1,2}/{tst-{1,2,3,4,5,6}-yxi.csv,pdbbind-\$v-trn-{1,2,3,4,5,6}-yxi.csv} from ~/PDBbind/v\$v/rescoring2-iy.csv
+* `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-iyp.csv.
+* `model4prepare.sh` generates model4/set{1,2}/{tst-{1,2,3,4,5,6}-yxi.csv,pdbbind-$v-trn-{1,2,3,4,5,6}-yxi.csv}.
 * `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-stat.csv.
-* `model2.sh` trains and tests model 2 with a grid search of wNrot in $(seq 0.000 0.001 0.030), and generates model2/set{1,2}/tst-stat.csv.
+* `model2.sh` trains and tests model 2 with a grid search of wNrot in [0.000 to 0.030] with a step size of 0.001, and generates model2/set{1,2}/tst-stat.csv.
 * `model3.sh` trains and tests models 3 and 4 with 10 seeds, and generates model{3,4}/set{1,2}/tst-stat.csv.
 * `maxerr.sh` finds the top 10 complexes with the largest absolute error between measured pKd and model 1 pKd and between measured pKd and model 4 pKd in test schemes 1 and 2. Its output is saved to maxerr.csv.
-* `mlrtrain.R` trains model 2 on model2/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-yxi.csv using multiple linear regression, and writes the coefficients to model2/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-coef.csv.
-* `mlrtest.R` tests model 2 on model2/set{1,2}/tst-{1,2}-yxi.csv, and writes the statistics to model2/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2}-stat.csv.
-* `iypplot.R` plots models{1,2,3,4}/set{1,2}/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2}-iyp.tiff.
-* `idpplot.R` plots models{1,2,3,4}/set{1,2}/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2}-idp.tiff.
-* `varImpPlot.R` plots models{3,4}/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-varimpplot.tiff.
-* `boxmed.R` plots model{2,3,4}/set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, and set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
+* `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-yxi.csv using multiple linear regression, and writes the coefficients to model2/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-coef.csv.
+* `mlrtest.R` tests model 2 on model2/set{1,2}/tst-{1,2}-yxi.csv, and writes the statistics to model2/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-stat.csv.
+* `iypplot.R` plots models{1,2,3,4}/set{1,2}/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-iyp.tiff.
+* `idpplot.R` plots models{1,2,3,4}/set{1,2}/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-idp.tiff.
+* `varImpPlot.R` plots models{3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-varimpplot.tiff.
+* `boxmed.R` plots model{2,3,4}/set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, and set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
 
 ## Results
 
