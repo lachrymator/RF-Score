@@ -1,6 +1,6 @@
 # Rescoring models 2
 
-Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on six schemes of five training-test set partitions, and these models are evaluated in terms of discriminating between active and inactive ligands on the DUD-E benchmark.
+Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on six schemes of five training-test set partitions.
 
 ## Models
 
@@ -10,7 +10,7 @@ Vina
 
 ### Model 2
 
-MLR::Vina. The sampling range for wNrot is extended to [0.000 to 0.030] with a step size of 0.001 because of more variability in the 5 schemes.
+MLR::Vina
 
 ### Model 3
 
@@ -63,54 +63,89 @@ Their intersections are as follows:
 
 ## Schemes
 
-There are 11 features from Vina for each pose, either crystal of docked. They are gauss1, gauss2, repulsion, hydrophobic, hydrogenbonding from e_inter and e_intra, and Nrot, which is independent of pose.
-
-There are 36 features from RF-Score for each pose.
+In the schemes below, different poses are chosen to calculate the features.
 
 ### Scheme 1
 
-Features are calculated for the crystal structure.
+The chosen pose is the crystal pose.
 
 ### Scheme 2
 
-Features are calculated for the docking pose with the lowest Vina score.
+The chosen pose is the docked pose with the lowest Vina score.
 
 ### Scheme 3
 
-Features are calculated for the docking pose with the lowest RMSD.
+The chosen pose is the docked pose with the lowest RMSD.
 
 ### Scheme 4
 
-Features are calculated for the docking pose with a Vina score closest the measured binding affinity of that complex.
+The chosen pose is the docked pose with a Vina score closest the measured binding affinity of that complex.
 
 ### Scheme 5
 
-Features are calculated for all the 9 docking poses. If a structure produces less than 9 docking poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1 + 1 + 2 + 3 + 4 + 5 + 6 + 7. Therefore there are 10 * 9 + 1 = 91 features for model 2 and 3, and (36 + 10) * 9 + 1 = 415 features for model 4.
+The chosen poses are all the 9 docked poses. If a structure produces less than 9 docked poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1 + 1 + 2 + 3 + 4 + 5 + 6 + 7. Therefore there are 10 * 9 + 1 = 91 features for model 2 and 3, and (36 + 10) * 9 + 1 = 415 features for model 4.
 
 ### Scheme 6
 
-Features are calculated for the 2 docking poses with the lowest and the second lowest Vina score. If a structure produces less than 2 docking poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1. Therefore there are 10 * 2 + 1 = 21 features for model 2 and 3, and (36 + 10) * 2 + 1 = 93 features for model 4.
+The chosen poses are the 2 docked poses with the lowest and the second lowest Vina score. If a structure produces less than 2 docked poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1. Therefore there are 10 * 2 + 1 = 21 features for model 2 and 3, and (36 + 10) * 2 + 1 = 93 features for model 4.
 
-## Benchmarks
+## Experiments
 
-* 1 models (1) \* 1 training schemes (1) \* 2 test schemes (1, 2) = 2 variants
-* 3 models (2, 3, 4) \* 4 training schemes (1, 2, 3, 4) \* 2 test schemes (1, 2) = 24 variants
-* 3 models (2, 3, 4) \* 1 training schemes (5) \* 1 test schemes (5) = 3 variants
-* 3 models (2, 3, 4) \* 1 training schemes (6) \* 1 test schemes (6) = 3 variants
+By combining the 4 models and the 6 schemes, 32 combinations are evaluated:
 
-There are 32 variants and 5 training-test set partitions, so altogether there are 32 * 5 = 160 sets of performance measures.
+* 1 models (1) \* 1 training schemes (1) \* 2 test schemes (1, 2) = 2 combinations
+* 3 models (2, 3, 4) \* 4 training schemes (1, 2, 3, 4) \* 2 test schemes (1, 2) = 24 combinations
+* 3 models (2, 3, 4) \* 1 training schemes (5) \* 1 test schemes (5) = 3 combinations
+* 3 models (2, 3, 4) \* 1 training schemes (6) \* 1 test schemes (6) = 3 combinations
+
+There are 5 training-test set partitions, so altogether there are 32 * 5 = 160 sets of performance measures.
+
+For model 2, the sampling range for wNrot is extended to [0.000 to 0.030] with a step size of 0.001 because of more variability in the 6 schemes.
+
+For models 3 and 4, the mtry values are exhausted from 1 to the number of features.
+
+## Files
+
+The folders and files are organized hierarchically. Model-specific files are in the model{1,2,3,4} folders. Cross-model files are in the set{1,2} folders.
+
+For data files, their nomenclature are as follows:
+
+* i means PDB ID
+* y means measured pKd
+* p means predicted pKd
+* d means RMSD
+
+For example,
+
+* `set1/tst-1-iy.csv` means the [PDB,pbindaff] file of the test set in scheme 1 of dataset 1, i.e. the PDB ID and measured pKd of the crystal poses of PDBbind v2007 core set.
+* `set1/tst-2-id.csv` means the [PDB,RMSD1] file of the test set in scheme 2 of dataset 1, i.e. the PDB ID and RMSD of the docked pose with the lowest Vina score of PDBbind v2007 core set.
+* `model3/set1/89757/pdbbind-2007-trn-3-tst-2-iyp.csv` means the [PDB,pbindaff,predicted] file of model 3 on dataset 1 and PDBbind v2007 trained in scheme 3 with seed 89757 and tested in scheme 2.
+* `model3/set1/pdbbind-2007-trn-4-tst-1-stat.csv` means the [seed,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1 and PDBbind v2007 trained in scheme 4 and tested in scheme 1, over all seeds.
+* `model3/set1/tst-stat.csv` means the [v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1, over all PDBbind versions, all training schemes and all test schemes. For each [v,trn,tst] combination, only the best seed for models 3 and 4 or the best weight for model 2 is shown in the w column.
+
+For script files, their functions and execution orders are as follows:
+
+* `pdbbind.sh` does file format conversion, binding site detection, docking by Vina, RMSD computation, and finding the corresponding pose in schemes 1, 2, 3, 4, all in the PDBbind folder.
+* `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-iyp.csv from ~/PDBbind/v{2007}/\${c}/{vina_score.txt,out/\${c}_ligand_ligand_1.txt} and set{1,2}/tst-1-iy.csv.
+* `model4prepare.sh` generates model4/set{1,2}/{tst-{1,2,3,4,5,6}-yxi.csv,pdbbind-\$v-trn-{1,2,3,4,5,6}-yxi.csv} from ~/PDBbind/v\$v/rescoring2-iy.csv
+* `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-stat.csv.
+* `model2.sh` trains and tests model 2 with a grid search of wNrot in $(seq 0.000 0.001 0.030), and generates model2/set{1,2}/tst-stat.csv.
+* `model3.sh` trains and tests models 3 and 4 with 10 seeds, and generates model{3,4}/set{1,2}/tst-stat.csv.
+* `maxerr.sh` finds the top 10 complexes with the largest absolute error between measured pKd and model 1 pKd and between measured pKd and model 4 pKd in test schemes 1 and 2. Its output is saved to maxerr.csv.
+* `mlrtrain.R` trains model 2 on model2/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-yxi.csv using multiple linear regression, and writes the coefficients to model2/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-coef.csv.
+* `mlrtest.R` tests model 2 on model2/set{1,2}/tst-{1,2}-yxi.csv, and writes the statistics to model2/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2}-stat.csv.
+* `iypplot.R` plots models{1,2,3,4}/set{1,2}/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2}-iyp.tiff.
+* `idpplot.R` plots models{1,2,3,4}/set{1,2}/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2}-idp.tiff.
+* `varImpPlot.R` plots models{3,4}/set{1,2}/\$w/pdbbind-\$v-trn-{1,2,3,4,5,6}-varimpplot.tiff.
+* `boxmed.R` plots model{2,3,4}/set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-\$v-trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, and set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
 
 ## Results
 
-The folders and files are organized hierarchically, e.g. model3/set1/pdbbind-2007-trn-1-tst-2-stat.csv means the statistics CSV of model 3 on dataset 1 and PDBbind v2007 trained in scheme 1 and tested in scheme 2.
-
-Model-specific files are in the model{1,2,3,4} folders. Cross-model files are in the set{1,2} folders.
-
-### Rescoring docking poses on dataset 1
+### Rescoring docked poses on dataset 1
 
 Having the test set docked by Vina, the number of complexes where the pose with the lowest Vina score has RMSD < 2.0 is 100 (100 / 195 = 51%).
 
-The numbers of complexes whose docking pose with the ith (i=0,1,...,9) best model score has the lowest RMSD are as follows:
+The numbers of complexes whose docked pose with the ith (i=0,1,...,9) best model score has the lowest RMSD are as follows:
 
 #### For model 1
 
@@ -168,9 +203,9 @@ Therefore, the % of complexes where the pose with the best model 3 score also ha
 
 Therefore, the % of complexes where the pose with the best model 3 score also has the lowest RMSD is 39 / 195 = 20%.
 
-### Rescoring docking poses on dataset 2
+### Rescoring docked poses on dataset 2
 
-Having the test set docked by Vina, the number of complexes where the pose with the lowest Vina score has RMSD < 2.0 is 219 (219 / 382 = 57%), and the numbers of complexes whose ith (i=0,1,...,9) docking pose has the lowest RMSD are as follows:
+Having the test set docked by Vina, the number of complexes where the pose with the lowest Vina score has RMSD < 2.0 is 219 (219 / 382 = 57%), and the numbers of complexes whose ith (i=0,1,...,9) docked pose has the lowest RMSD are as follows:
 
 * |RMSD1 = RMSDmin| = 208
 * |RMSD2 = RMSDmin| = 52
