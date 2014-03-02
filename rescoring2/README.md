@@ -143,7 +143,7 @@ For script files, their functions and execution orders are as follows:
 
 ### Rescoring docked poses on dataset 1
 
-Having the test set docked by Vina, the number of complexes where the pose with the lowest Vina score has RMSD < 2.0 is 100 (100 / 195 = 51%).
+Having the test set docked by Vina, the number of complexes where the pose with the lowest Vina score has RMSD < 2.0 is 101 (101 / 195 = 52%).
 
 The numbers of complexes whose docked pose with the ith (i=0,1,...,9) best model score has the lowest RMSD are as follows:
 
@@ -159,9 +159,9 @@ The numbers of complexes whose docked pose with the ith (i=0,1,...,9) best model
 * |RMSD8 = RMSDmin| = 6
 * |RMSD9 = RMSDmin| = 7
 
-Therefore, the % of complexes where the pose with the best model 1 score (i.e. the lowest Vina score) also has the lowest RMSD is 93 / 195 = 48%.
+Therefore, the % of complexes where the pose with the best model 1 score also has the lowest RMSD is 93 / 195 = 48%.
 
-#### For model 2, trained on scheme 1 using the best weight 0.015
+#### For model 2 trained on scheme 1 using the best weight 0.015
 
 * |RMSD1 = RMSDmin| = 60
 * |RMSD2 = RMSDmin| = 28
@@ -175,7 +175,7 @@ Therefore, the % of complexes where the pose with the best model 1 score (i.e. t
 
 Therefore, the % of complexes where the pose with the best model 2 score also has the lowest RMSD is 60 / 195 = 31%.
 
-#### For model 3, trained on scheme 1 using the best seed 10642
+#### For model 3 trained on scheme 1 using the best seed 26894
 
 * |RMSD1 = RMSDmin| = 33
 * |RMSD2 = RMSDmin| = 30
@@ -189,7 +189,7 @@ Therefore, the % of complexes where the pose with the best model 2 score also ha
 
 Therefore, the % of complexes where the pose with the best model 3 score also has the lowest RMSD is 33 / 195 = 17%.
 
-#### For model 4, trained on scheme 1 using the best seed 89757
+#### For model 4 trained on scheme 1 using the best seed 26894
 
 * |RMSD1 = RMSDmin| = 39
 * |RMSD2 = RMSDmin| = 29
@@ -217,4 +217,4 @@ Having the test set docked by Vina, the number of complexes where the pose with 
 * |RMSD8 = RMSDmin| = 9
 * |RMSD9 = RMSDmin| = 14
 
-Therefore, the % of complexes where the pose with the lowest Vina score also has the lowest RMSD is 208 / 382 = 54%.
+Therefore, the % of complexes where the pose with the best model 1 score also has the lowest RMSD is 208 / 382 = 54%.
