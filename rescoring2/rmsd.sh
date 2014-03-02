@@ -1,20 +1,24 @@
 prefix=~/PDBbind
+pwd=$(pwd)
 rmsdt=2.0 # RMSD threshold, e.g. 0.5, 1.0, 1.5, 2.0, 2.5, 3.0
-for s in 1; do
+v=(2007 2013)
+c=(pdbbind-2007-core-i.csv rescoring2.csv)
+for s in 1 2; do
 	echo set$s
-	w2=$(tail -n +2 model2/set$s/tst-stat.csv | head -1 | cut -d, -f4)
-	w3=$(tail -n +2 model3/set$s/tst-stat.csv | head -1 | cut -d, -f4)
+	w2=$(tail -n +2 model2/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4)
+	w3=$(tail -n +2 model3/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4)
 	if [[ ! -s model3/set$s/$w3/pdbbind-2007-trn-1.rf ]]; then
 		rf-train model3/set$s/pdbbind-2007-trn-1-yxi.csv model3/set$s/$w3/pdbbind-2007-trn-1.rf $w3
 	fi
-	w4=$(tail -n +2 model4/set$s/tst-stat.csv | head -1 | cut -d, -f4)
+	w4=$(tail -n +2 model4/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4)
 	if [[ ! -s model4/set$s/$w4/pdbbind-2007-trn-1.rf ]]; then
 		rf-train model4/set$s/pdbbind-2007-trn-1-yxi.csv model4/set$s/$w4/pdbbind-2007-trn-1.rf $w4
 	fi
-	cd $prefix/v2007
+	i=$((s-1))
+	cd $prefix/v${v[$i]}
 	rmsd1s=0
 	k=0
-	for c in $(cat pdbbind-2007-core-i.csv); do
+	for c in $(cat ${c[$i]}); do
 		k=$((k+1))
 		echo $k $c
 		cd $c
@@ -40,4 +44,5 @@ for s in 1; do
 		cd ..
 	done
 	echo "The number of complexes where the pose with the lowest Vina score has RMSD < $rmsdt is $rmsd1s out of $k."
+	cd $pwd
 done
