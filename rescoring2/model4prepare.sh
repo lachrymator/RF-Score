@@ -1,5 +1,5 @@
 prefix=~/PDBbind
-m=4
+m=4 # Update src/rf-prepare.cpp and src/feature.hpp before changing m from 4 to 3 or 2.
 cd model$m
 echo model$m
 cd set1
