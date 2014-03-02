@@ -2,7 +2,7 @@ prefix=~/PDBbind
 s=1
 w2=$(tail -n +2 model2/set$s/tst-stat.csv | head -1 | cut -d, -f4)
 w3=$(tail -n +2 model3/set$s/tst-stat.csv | head -1 | cut -d, -f4)
-if [[ -s model3/set$s/$w3/pdbbind-2007-trn-1.rf ]]; then
+if [[ ! -s model3/set$s/$w3/pdbbind-2007-trn-1.rf ]]; then
 	rf-train model3/set$s/pdbbind-2007-trn-1-yxi.csv model3/set$s/$w3/pdbbind-2007-trn-1.rf $w3
 fi
 w4=$(tail -n +2 model4/set$s/tst-stat.csv | head -1 | cut -d, -f4)
