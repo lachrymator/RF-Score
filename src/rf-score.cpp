@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iomanip>
-#include <algorithm>
 #include "random_forest_test.hpp"
 #include "feature.hpp"
 using namespace std;
