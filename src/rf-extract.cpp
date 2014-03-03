@@ -1,19 +1,10 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <array>
 #include <cassert>
 #include "feature.hpp"
 using namespace std;
-
-template<typename T>
-void writeline(const vector<T>& v)
-{
-	cout << v[0];
-	for (size_t i = 1, n = v.size(); i < n; ++i)
-	{
-		cout << ',' << v[i];
-	}
-	cout << endl;
-}
 
 int main(int argc, char* argv[])
 {
@@ -23,7 +14,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	const vector<string> headers =
+	const array<string, 47> h =
 	{
 		"6.6",
 		"7.6",
@@ -73,7 +64,12 @@ int main(int argc, char* argv[])
 		"hydrogenbonding_intra",
 		"flexibility",
 	};
-	writeline<string>(headers);
+	cout << h[0];
+	for (size_t i = 1, n = h.size(); i < n; ++i)
+	{
+		cout << ',' << h[i];
+	}
+	cout << endl;
 
 	// Load a receptor and multiple conformations of a ligand to calculate RF-Score features and Vina terms.
 	cout.setf(ios::fixed, ios::floatfield);
@@ -86,7 +82,12 @@ int main(int argc, char* argv[])
 		lig.load(ifs);
 		if (lig.empty()) break;
 		const vector<float> v = feature(rec, lig);
-		assert(v.size() == headers.size());
-		writeline<float>(v);
+		assert(v.size() == h.size());
+		cout << v[0];
+		for (size_t i = 1, n = v.size(); i < n; ++i)
+		{
+			cout << ',' << v[i];
+		}
+		cout << endl;
 	}
 }
