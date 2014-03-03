@@ -21,11 +21,11 @@ for s in 1 2; do
 	k=0
 	for c in $(cat ${c[$i]}); do
 		k=$((k+1))
-		echo $k $c
+#		echo $k $c
 		cd $c
 		rmsd1=$(head -1 vina.rmsd)
 		for i in $(seq 0 5); do
-			if [[ $(echo "$rmsd1 < ${rmsdts[$i]}" | bc) == 1 ]]; then
+			if [[ $(bc <<< "$rmsd1 < ${rmsdts[$i]}") == 1 ]]; then
 				rmsd1s[$i]=$((rmsd1s[$i]+1))
 			fi
 		done
@@ -47,8 +47,9 @@ for s in 1 2; do
 		cd ..
 		cd ..
 	done
+	echo "condition,#,%"
 	for i in $(seq 0 5); do
-		echo "The number of complexes where the pose with the lowest Vina score has RMSD < ${rmsdts[$i]} is ${rmsd1s[$i]} out of $k."
+		echo RMSD1"<"${rmsdts[$i]},${rmsd1s[$i]},$(printf "%.0f\n" $(bc -l <<< "${rmsd1s[$i]} * 100 / $k"))%
 	done
 	echo $rmsdim1
 	cd $pwd
