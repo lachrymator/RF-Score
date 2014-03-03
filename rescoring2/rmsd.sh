@@ -14,13 +14,13 @@ for s in 1 2; do
 	if [[ ! -s model4/set$s/$w4/pdbbind-2007-trn-1.rf ]]; then
 		rf-train model4/set$s/pdbbind-2007-trn-1-yxi.csv model4/set$s/$w4/pdbbind-2007-trn-1.rf $w4
 	fi
-	i=$((s-1))
-	cd $prefix/v${v[$i]}
+	si=$((s-1))
+	cd $prefix/v${v[si]}
 	rmsd1s=(0 0 0 0 0 0)
 	rmsdms=(0 0 0 0 0 0)
-	rmsdim=0
+	rmsdis1=(0 0 0 0 0 0 0 0 0)
 	k=0
-	for c in $(cat ${c[$i]}); do
+	for c in $(cat ${c[si]}); do
 		k=$((k+1))
 #		echo $k $c
 		cd $c
@@ -28,11 +28,11 @@ for s in 1 2; do
 		rmsd1=$(head -1 $rmsdf)
 		rmsdm=$(sort -n $rmsdf | head -1)
 		for i in $(seq 0 5); do
-			if [[ $(bc <<< "$rmsd1 < ${rmsdts[$i]}") == 1 ]]; then
-				rmsd1s[$i]=$((rmsd1s[$i]+1))
+			if [[ $(bc <<< "$rmsd1 < ${rmsdts[i]}") == 1 ]]; then
+				rmsd1s[i]=$((rmsd1s[i]+1))
 			fi
-			if [[ $(bc <<< "$rmsdm < ${rmsdts[$i]}") == 1 ]]; then
-				rmsdms[$i]=$((rmsdms[$i]+1))
+			if [[ $(bc <<< "$rmsdm < ${rmsdts[i]}") == 1 ]]; then
+				rmsdms[i]=$((rmsdms[i]+1))
 			fi
 		done
 		s3=$(cat vina-scheme-3.txt)
@@ -42,24 +42,31 @@ for s in 1 2; do
 #			rf-score dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_${i}.pdbqt | tail -1 >> model2-x.csv
 #		done
 		w=$(grep "WARNING" log/${c}_ligand.txt | wc -l)
-		tail -n +$((26+w)) log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}' > out/model1-p.csv
+		model1p=$(tail -n +$((26+w)) log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}')
 		cd out
 #		../../mlrtest.R 2007 1 dummy $w2 dummy > model2-p.csv
 #		tail -n +2 model3-x.csv | rf-score model3/set$s/$w3/pdbbind-2007-trn-1.rf > model3-p.csv
 #		tail -n +2 model4-x.csv | rf-score model4/set$s/$w4/pdbbind-2007-trn-1.rf > model4-p.csv
-		if [[ $s3 == $(paste ../../../seq$n model1-p.csv | sort -k2,2nr | tail -n +1 | head -1 | cut -f1) ]]; then # tail -n +$1
-			rmsdim1=$((rmsd1m+1))
-		fi
+		i=0
+		for r in $(echo model1p | paste ../../../seq$n - | sort -k2,2nr | cut -f1); do
+			if [[ $s3 == $r ]]; then
+				rmsdis1[i]=$((rmsdis1[i]+1))
+				echo $c $i
+			fi
+			i=$((i+1))
+		done
 		cd ..
 		cd ..
 	done
 	echo "condition,#,%"
-	for i in $(seq 0 5); do
-		echo RMSD1"<"${rmsdts[$i]},${rmsd1s[$i]},$(printf "%.0f\n" $(bc -l <<< "${rmsd1s[$i]} * 100 / $k"))%
+	for i in {0..8}; do
+		echo "RMSD$[i+1]=RMSDm",${rmsdis1[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis1[i]} * 100 / $k"))%
 	done
 	for i in $(seq 0 5); do
-		echo RMSDm"<"${rmsdts[$i]},${rmsdms[$i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdms[$i]} * 100 / $k"))%
+		echo RMSD1"<"${rmsdts[i]},${rmsd1s[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsd1s[i]} * 100 / $k"))%
 	done
-	echo $rmsdim1
+	for i in $(seq 0 5); do
+		echo RMSDm"<"${rmsdts[i]},${rmsdms[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdms[i]} * 100 / $k"))%
+	done
 	cd $pwd
 done
