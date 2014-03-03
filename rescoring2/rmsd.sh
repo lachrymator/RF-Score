@@ -37,13 +37,13 @@ for s in 1 2; do
 		n=$(wc -l < $pvc/$rmsdf)
 		w=$(grep "WARNING" $pvc/log/${c}_ligand.txt | wc -l)
 		p1=$(tail -n +$((26+w)) $pvc/log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}')
-#		rf-score dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_1.pdbqt > model2-x.csv
+#		rf-extract dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_1.pdbqt > x2.csv
 #		for i in $(seq 2 $n); do
-#			rf-score dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_${i}.pdbqt | tail -1 >> model2-x.csv
+#			rf-extract dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_${i}.pdbqt | tail -n +2 >> x2.csv
 #		done
-#		../../mlrtest.R 2007 1 dummy $w2 > model2-p.csv
-#		tail -n +2 model3-x.csv | rf-score model3/set$s/$w3/pdbbind-2007-trn-1.rf > model3-p.csv
-#		tail -n +2 model4-x.csv | rf-score model4/set$s/$w4/pdbbind-2007-trn-1.rf > model4-p.csv
+#		p2=$(../../mlrtest.R 2007 1 dummy $w2)
+#		p3=$(tail -n +2 x3.csv | rf-predict model3/set$s/$w3/pdbbind-2007-trn-1.rf)
+#		p4=$(tail -n +2 x4.csv | rf-predict model4/set$s/$w4/pdbbind-2007-trn-1.rf)
 		i=0
 		for r in $(paste $prefix/seq$n - <<< $p1 | sort -k2,2nr | cut -f1); do
 			if [[ $s3 == $r ]]; then
