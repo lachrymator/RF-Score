@@ -44,7 +44,7 @@ for s in 1 2; do
 		done
 		tail -n +2 /tmp/x4.csv | rf-predict model4/set$s/$w4/pdbbind-2007-trn-1.rf > /tmp/p4.csv
 #		tail -n +2 /tmp/x3.csv | rf-predict model3/set$s/$w3/pdbbind-2007-trn-1.rf > /tmp/p3.csv
-#		mlrtestp.R 2007 1 $w2 > /tmp/p2.csv
+#		tail -n +2 /tmp/x2.csv | mlrtestp.R model2/set$s/$w2/pdbbind-2007-trn-1-coef.csv $w2 > /tmp/p2.csv
 		i=0
 		for r in $(paste $prefix/seq$n /tmp/p1.csv | sort -k2,2nr | cut -f1); do
 			if [[ $s3 == $r ]]; then
