@@ -11,7 +11,7 @@ The new RF-Score uses as features both the number of occurrences of 36 particula
 Compilation
 -----------
 
-Five executables, `rf-prepare`, `rf-train`, `rf-test`, `rf-stat` and `rf-score`, will be compiled in the `bin` folder.
+Seven executables, `rf-prepare`, `rf-train`, `rf-test`, `rf-stat`, `rf-extract`, `rf-predict` and `rf-score`, will be compiled in the `bin` folder.
 
 ### Linux, Mac OS X, Solaris and FreeBSD
 
@@ -267,11 +267,27 @@ It loads two vectors of values from standard input and computes their n, rmse, s
 
 	tail -n +2 pdbbind-2012-core-iyp.csv | cut -d',' -f2,3 | rf-stat
 
+### rf-extract
+
+It parses a receptor and multiple conformations of a ligand, and extracts their RF-Score features and Vina terms.
+
+	rf-extract receptor.pdbqt ligand.pdbqt
+
+### rf-predict
+
+It loads a random forest from a binary file, reads features from standard input, and score them.
+
+	rf-predict pdbbind-2012-refined-core-x42.rf < x.csv
+
 ### rf-score
 
-It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, generates their RF-Score features and Vina terms, and score them.
+It loads a random forest from a binary file, parses a receptor and multiple conformations of a ligand, extracts their RF-Score features and Vina terms, and score them.
 
 	rf-score pdbbind-2012-refined-core-x42.rf receptor.pdbqt ligand.pdbqt
+
+rf-score is a streamlined combination of rf-extract and rf-predict. The above command is equivalent to
+
+	rf-extract receptor.pdbqt ligand.pdbqt | tail -n +2 | rf-predict pdbbind-2012-refined-core-x42.rf
 
 
 Author
