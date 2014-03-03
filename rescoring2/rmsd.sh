@@ -17,16 +17,22 @@ for s in 1 2; do
 	i=$((s-1))
 	cd $prefix/v${v[$i]}
 	rmsd1s=(0 0 0 0 0 0)
+	rmsdms=(0 0 0 0 0 0)
 	rmsdim=0
 	k=0
 	for c in $(cat ${c[$i]}); do
 		k=$((k+1))
 #		echo $k $c
 		cd $c
-		rmsd1=$(head -1 vina.rmsd)
+		rmsdf=vina.rmsd
+		rmsd1=$(head -1 $rmsdf)
+		rmsdm=$(sort -n $rmsdf | head -1)
 		for i in $(seq 0 5); do
 			if [[ $(bc <<< "$rmsd1 < ${rmsdts[$i]}") == 1 ]]; then
 				rmsd1s[$i]=$((rmsd1s[$i]+1))
+			fi
+			if [[ $(bc <<< "$rmsdm < ${rmsdts[$i]}") == 1 ]]; then
+				rmsdms[$i]=$((rmsdms[$i]+1))
 			fi
 		done
 		s3=$(cat vina-scheme-3.txt)
@@ -50,6 +56,9 @@ for s in 1 2; do
 	echo "condition,#,%"
 	for i in $(seq 0 5); do
 		echo RMSD1"<"${rmsdts[$i]},${rmsd1s[$i]},$(printf "%.0f\n" $(bc -l <<< "${rmsd1s[$i]} * 100 / $k"))%
+	done
+	for i in $(seq 0 5); do
+		echo RMSDm"<"${rmsdts[$i]},${rmsdms[$i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdms[$i]} * 100 / $k"))%
 	done
 	echo $rmsdim1
 	cd $pwd
