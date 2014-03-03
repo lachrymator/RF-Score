@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 
 	// Load a receptor and multiple conformations of a ligand to calculate RF-Score features and Vina terms.
 	cout.setf(ios::fixed, ios::floatfield);
-	cout << setprecision(3);
+	cout << setprecision(2);
 	receptor rec;
 	rec.load(argv[2]);
 	for (ifstream ifs(argv[3]); true;)
