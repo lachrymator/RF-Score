@@ -1,6 +1,7 @@
 for v in 2002 2007 2010 2012 2013; do
 	cd v$v
-	for c in $(cat rescoring2.csv); do
+	for iy in $(cat rescoring-2-set-2-trn-iy.csv); do
+		c=${iy:0:4}
 		echo $v $c
 		cd $c
 		python2.5 ${MGLTOOLS_ROOT}/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.pyo -U waters -r ${c}_protein.pdb

@@ -1,7 +1,6 @@
 prefix=~/PDBbind
 rmsdts=(0.5 1.0 1.5 2.0 2.5 3.0) # RMSD thresholds
 v=(2007 2013)
-c=(pdbbind-2007-core-i.csv rescoring2.csv) # rescoring-2-set-1-tst-iy.csv
 for s in 1 2; do
 	echo set$s
 	w2=$(tail -n +2 model2/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4) # Always use PDBbind v2007 as training set, no matter what set is.
@@ -20,7 +19,8 @@ for s in 1 2; do
 	rmsdis1=(0 0 0 0 0 0 0 0 0)
 	rmsdis4=(0 0 0 0 0 0 0 0 0)
 	k=0
-	for c in $(< $pv/${c[si]}); do
+	for iy in $(< $pv/rescoring-2-set-$s-tst-iy.csv); do
+		c=${iy:0:4}
 		k=$((k+1))
 		pvc=$pv/$c
 		rmsdf=vina.rmsd
