@@ -20,7 +20,7 @@ for s in 1 2; do
 	rmsdms=(0 0 0 0 0 0)
 	rmsdis1=(0 0 0 0 0 0 0 0 0)
 	k=0
-	for c in $(cat ${c[si]}); do
+	for c in $(< ${c[si]}); do
 		k=$((k+1))
 #		echo $k $c
 		cd $c
@@ -35,23 +35,22 @@ for s in 1 2; do
 				rmsdms[i]=$((rmsdms[i]+1))
 			fi
 		done
-		s3=$(cat vina-scheme-3.txt)
+		s3=$(< vina-scheme-3.txt)
 		n=$(wc -l < vina.rmsd)
 #		rf-score dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_1.pdbqt > model2-x.csv
 #		for i in $(seq 2 $n); do
 #			rf-score dummy ../${c}_protein.pdbqt ${c}_ligand_ligand_${i}.pdbqt | tail -1 >> model2-x.csv
 #		done
 		w=$(grep "WARNING" log/${c}_ligand.txt | wc -l)
-		model1p=$(tail -n +$((26+w)) log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}')
+		p1=$(tail -n +$((26+w)) log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}')
 		cd out
 #		../../mlrtest.R 2007 1 dummy $w2 dummy > model2-p.csv
 #		tail -n +2 model3-x.csv | rf-score model3/set$s/$w3/pdbbind-2007-trn-1.rf > model3-p.csv
 #		tail -n +2 model4-x.csv | rf-score model4/set$s/$w4/pdbbind-2007-trn-1.rf > model4-p.csv
 		i=0
-		for r in $(echo model1p | paste ../../../seq$n - | sort -k2,2nr | cut -f1); do
+		for r in $(paste ../../../seq$n - <<< $p1 | sort -k2,2nr | cut -f1); do
 			if [[ $s3 == $r ]]; then
 				rmsdis1[i]=$((rmsdis1[i]+1))
-				echo $c $i
 			fi
 			i=$((i+1))
 		done
