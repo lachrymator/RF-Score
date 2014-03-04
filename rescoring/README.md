@@ -71,7 +71,7 @@ Model 1 is the Vina score, whose parameters are tuned by nonlinear optimization 
 Model 2
 -------
 
-Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, transforming the equation into z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 11 values are sampled from 0.005 to 0.020 with a step size of 0.001. The range [0.01, 0.02] is chosen because the optimal value of w6 always falls in it for all the eight training sets of the two datasets.
+Model 2 is a multiple linear regression model with the same functional form and cutoff as the Vina score. The denominator (1 + w6*Nrot) is moved to the left hand side, transforming the equation into z = e * (1 + w6*Nrot) = w1*gauss1 + w2*gauss2 + w3*repulsion + w4*hydrophobic + w5*hydrogenbonding. To find the optimal value of w6, 16 values are sampled from 0.005 to 0.020 with a step size of 0.001. The range [0.005, 0.020] is chosen because the optimal value of w6 always falls in it for all the eight training sets of the two datasets.
 
 
 Model 3
