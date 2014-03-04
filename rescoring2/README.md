@@ -1,6 +1,6 @@
 # Rescoring models 2
 
-Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on six schemes of five training-test set partitions.
+Several models for ranking protein-ligand complexes according to predicted binding affinity in the presence of pose generation error are evaluated and compared on six schemes of two datasets.
 
 ## Models
 
@@ -24,15 +24,30 @@ RF-Score::VinaUElem
 
 ### Dataset 1
 
-The test set 0) and the training set 1) are as follows:
+The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
 0) PDBbind v2007 core set (N = 195). This test set is the one used in the RF-Score paper. Therefore it has N = 195.
 
-1) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
+1) PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195). Both sets have 138 complexes in common. The 1oko protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
+
+2) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
+
+3) PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195). Both sets have 181 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. The 2rio protein contains Sr atoms and the 2ov4 protein contains Cs atoms, which cannot be recognized by Vina. Therefore this training set has N = 2061 - 181 - 4 = 1876 complexes.
+
+4) PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195). Both sets have 165 complexes in common. The 2rio protein contains Sr atoms and the 3rv4 protein contains Cs atoms, which cannot be recognized by Vina. Therefore this training set has N = 2959 - 165 - 2 = 2792 complexes.
 
 Their intersections are as follows:
 
 * |0 ∩ 1| = 0
+* |0 ∩ 2| = 0
+* |0 ∩ 3| = 0
+* |0 ∩ 4| = 0
+* |1 ∩ 2| = 786
+* |1 ∩ 3| = 708
+* |1 ∩ 4| = 695
+* |2 ∩ 3| = 997
+* |2 ∩ 4| = 909
+* |3 ∩ 4| = 1674
 
 ### Dataset 2
 
@@ -98,7 +113,7 @@ By combining the 4 models and the 6 schemes, 32 combinations are evaluated:
 * 3 models (2, 3, 4) \* 1 training schemes (5) \* 1 test schemes (5) = 3 combinations
 * 3 models (2, 3, 4) \* 1 training schemes (6) \* 1 test schemes (6) = 3 combinations
 
-There are 5 training-test set partitions, so altogether there are 32 * 5 = 160 sets of performance measures.
+There are 8 training-test set partitions in the 2 datasets, so altogether there are 32 * 8 = 256 sets of performance measures.
 
 For model 2, the sampling range for wNrot is extended to [0.000 to 0.030] with a step size of 0.001 because of more variability in the 6 schemes.
 
@@ -126,6 +141,7 @@ For example,
 For script files, their functions and execution orders are as follows:
 
 * `pdbbind.sh` does file format conversion, binding site detection, docking by Vina, RMSD computation, and finding the corresponding pose in schemes 1, 2, 3, 4, all in the PDBbind folder.
+* `duplicates.sh` computes the number of duplicate complexes between training sets and test set and among training sets in each of the 2 datasets.
 * `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-iyp.csv.
 * `model4prepare.sh` generates model4/set{1,2}/{tst-{1,2,3,4,5,6}-yxi.csv,pdbbind-$v-trn-{1,2,3,4,5,6}-yxi.csv}.
 * `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-stat.csv.
