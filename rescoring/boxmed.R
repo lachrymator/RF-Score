@@ -73,8 +73,8 @@ for (s in 1:ns)
 			dev.off()
 			tiff(sprintf("set%d/pdbbind-%s-tst-%s-median.tiff",s,v,statc[ci]),compression="lzw")
 			par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-			plot(1:4,med[ci,],main=sprintf("Median of %s",statx[ci]),xlab="Model",ylab=statx[ci],pch=3,xaxt="n")
-			axis(1,1:4)
+			plot(1:nm,med[ci,],main=sprintf("Median of %s",statx[ci]),xlab="Model",ylab=statx[ci],pch=3,xaxt="n")
+			axis(1,1:nm)
 			dev.off()
 		}
 	}
