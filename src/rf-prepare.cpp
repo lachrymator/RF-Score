@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	const string root = path.substr(0, path.find_last_of("/\\") + 1);
 	const string scheme = argc == 3 ? "1" : argv[3];
 	const size_t np = (scheme == "5" ? 9 : (scheme == "6" ? 2 : 1));
-	const size_t nf = 36 + 10;
+	const size_t nf = 36 + 10; // nf = 10 for models 3 and 2.
 	const array<string, nf> headers =
 	{
 		"6.6",
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 			const size_t c = stoul(line);
 			const size_t m = min<size_t>(c, np);
 			vector<float> t;
-			v.resize(nf * np + 1);
+			v.resize(nf * np + 1); // +2 for model 2.
 			size_t p = 0;
 			for (size_t i = c; i < np; ++i)
 			{
@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
 					v[p++] = t[j];
 				}
 			}
-			v[p++] = t.back();
+			v[p++] = t.back(); // v[p++] = v[10]; v[p++] = v[11]; for model 2.
 		}
 		else
 		{
