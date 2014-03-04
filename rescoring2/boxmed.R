@@ -76,12 +76,12 @@ for (trn in 1:6)
 				{
 					tiff(sprintf("set%d/pdbbind-%s-trn-%s-tst-%s-%s-boxplot.tiff",s,v,trn,tst,statc[ci]),compression="lzw")
 					par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-					boxplot(box[ci,],main=sprintf("Boxplot of %s",statx[ci]),xlab="Model",ylab=statx[ci],range=0)
+					boxplot(box[ci,ifelse(trn>=5,2,1):nm],main=sprintf("Boxplot of %s",statx[ci]),xlab="Model",ylab=statx[ci],range=0,names=ifelse(trn>=5,2,1):nm)
 					dev.off()
 					tiff(sprintf("set%d/pdbbind-%s-trn-%s-tst-%s-%s-median.tiff",s,v,trn,tst,statc[ci]),compression="lzw")
 					par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-					plot(1:4,med[ci,],main=sprintf("Median of %s",statx[ci]),xlab="Model",ylab=statx[ci],pch=3,xaxt="n")
-					axis(1,1:4)
+					plot(ifelse(trn>=5,2,1):nm,med[ci,ifelse(trn>=5,2,1):nm],main=sprintf("Median of %s",statx[ci]),xlab="Model",ylab=statx[ci],pch=3,xaxt="n")
+					axis(1,ifelse(trn>=5,2,1):nm)
 					dev.off()
 				}
 			}
