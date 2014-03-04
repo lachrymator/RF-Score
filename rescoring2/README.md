@@ -14,11 +14,11 @@ MLR::Vina
 
 ### Model 3
 
-RF-Score::Vina
+RF::Vina
 
 ### Model 4
 
-RF-Score::VinaUElem
+RF::VinaElem
 
 ## Datasets
 
