@@ -1,4 +1,4 @@
-prefix=~/PDBbind
+pdbbind=~/PDBbind
 declare -A v
 v[1,0]=2007
 v[1,1]=2004
@@ -20,10 +20,10 @@ for s in 1 2; do
 		for trn in {1..6}; do
 			if [[ $vi == 0 ]]; then
 				echo tst-$trn-yxi.csv
-				rf-prepare $prefix/v${v[$s,$vi]}/rescoring-2-set-$s-tst-iy.csv tst-$trn-yxi.csv $trn
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-2-set-$s-tst-iy.csv tst-$trn-yxi.csv $trn
 			else
 				echo pdbbind-${v[$s,$vi]}-trn-$trn-yxi.csv
-				rf-prepare $prefix/v${v[$s,$vi]}/rescoring-2-set-$s-trn-iy.csv pdbbind-${v[$s,$vi]}-trn-$trn-yxi.csv $trn
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-2-set-$s-trn-iy.csv pdbbind-${v[$s,$vi]}-trn-$trn-yxi.csv $trn
 			fi
 		done
 	done
