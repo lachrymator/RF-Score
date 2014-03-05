@@ -141,3 +141,55 @@ for (trn in 1:6)
 		}
 	}
 }
+# Plot figures with y axis being the performance measure, x axis being the test schemes, and legends being the models.
+ntst=2
+for (trn in 1:4)
+{
+	cat(sprintf("set$s/pdbbind-2007-trn-$trn-$c-boxplot.tiff\n"))
+	for (s in 1:ns)
+	{
+		cat(sprintf("set%d\n",s))
+		box=array(list(),dim=c(nm,ntst,nc))
+		med=array(dim=c(nm,ntst,nc))
+		for (tst in 1:ntst)
+		{
+			for (m in 1:nm)
+			{
+				tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,2007,ifelse(m==1,1,trn),tst))
+				for (ci in 1:nc)
+				{
+					box[m,tst,ci]=tst_stat[statc[ci]]
+					med[m,tst,ci]=median(tst_stat[statc[ci]][,])
+				}
+			}
+		}
+		for (ci in 1:nc)
+		{
+			ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
+			tiff(sprintf("set%d/pdbbind-%s-trn-%s-%s-boxplot.tiff",s,2007,trn,statc[ci]),compression="lzw")
+			par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
+			for (m in 1:nm)
+			{
+				boxplot(box[m,,ci],ylim=ylim,xaxt="n",yaxt="n",xlab="",ylab="",range=0,border=m)
+				par(new=T)
+			}
+			title(main=sprintf("Boxplot of %s",statx[ci]),xlab="Test pose",ylab=statx[ci])
+			legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
+			axis(1,at=1:ntst,labels=c("crystal","docked"))
+			axis(2)
+			dev.off()
+			tiff(sprintf("set%d/pdbbind-%s-trn-%s-%s-median.tiff",s,2007,trn,statc[ci]),compression="lzw")
+			par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
+			for (m in 1:nm)
+			{
+				plot(1:ntst,med[m,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
+				par(new=T)
+			}
+			title(main=sprintf("Median of %s",statx[ci]),xlab="Test pose",ylab=statx[ci])
+			legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
+			axis(1,at=1:ntst,labels=c("crystal","docked"))
+			axis(2)
+			dev.off()
+		}
+	}
+}
