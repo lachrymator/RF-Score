@@ -55,6 +55,11 @@ public:
 
 	/// Returns true if the current atom is covalently bonded to a given atom.
 	bool has_covalent_bond(const atom& a) const;
+
+	bool is_hydrophobic() const;
+	bool is_aromatic() const;
+	bool is_hbd() const;
+	bool is_hba() const;
 };
 
 #endif

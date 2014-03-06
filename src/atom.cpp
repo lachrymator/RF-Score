@@ -226,3 +226,23 @@ bool atom::has_covalent_bond(const atom& a) const
 	const float s = covalent_radius() + a.covalent_radius();
 	return d0 * d0 + d1 * d1 + d2 * d2 < s * s;
 }
+
+bool atom::is_hydrophobic() const
+{
+	return xs == 0 || (10 <= xs && xs <= 13);
+}
+
+bool atom::is_aromatic() const
+{
+	return ad == 3;
+}
+
+bool atom::is_hbd() const
+{
+	return xs == 3 || xs == 5 || xs == 7;
+}
+
+bool atom::is_hba() const
+{
+	return 4 <= xs && xs <= 7;
+}
