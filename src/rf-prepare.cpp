@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 	const size_t nf = 36 + 10; // nf = 10 for models 3 and 2.
 	const array<string, nf> headers =
 	{
-		"6.6",
+		"6.6", // No L.P features for models 3 and 2.
 		"7.6",
 		"8.6",
 		"16.6",
@@ -87,7 +87,7 @@ int main(int argc, char* argv[])
 			ofs << ',' << h << '_' << p;
 		}
 	}
-	ofs << ",flexibility,PDB\n" << setprecision(4);
+	ofs << ",flexibility,PDB\n" << setprecision(4); // nacttors, ninacttors for model 2.
 	for (ifstream dataifs(argv[1]); getline(dataifs, line);)
 	{
 		const string code = line.substr(0, 4);
