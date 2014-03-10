@@ -38,7 +38,7 @@ for s in 1 2; do
 		n=$(wc -l < $pvc/$rmsdf)
 		w=$(grep "WARNING" $pvc/log/${c}_ligand.txt | wc -l)
 		tail -n +$((26+w)) $pvc/log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}' > /tmp/p1.csv
-		rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_1.pdbqt > /tmp/x4.csv # Extract features and predict binding affinity values for model 4. Update src/rf-extract and src/feature.hpp before changing the model from 4 to 3 or 2.
+		rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_1.pdbqt > /tmp/x4.csv # Extract features and predict binding affinity values for model 4. Update src/rf-extract.cpp and src/feature.hpp before changing the model from 4 to 3 or 2.
 		for i in $(seq 2 $n); do
 			rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_${i}.pdbqt | tail -n +2 >> /tmp/x4.csv
 		done
