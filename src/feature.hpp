@@ -5,6 +5,6 @@
 #include "receptor.hpp"
 #include "ligand.hpp"
 
-vector<float> feature(const receptor& rec, const ligand& lig);
+vector<float> feature(const receptor& rec, const ligand& lig, const size_t model = 4);
 
 #endif
