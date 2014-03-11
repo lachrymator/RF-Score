@@ -8,13 +8,13 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc != 3)
+	if (argc < 3)
 	{
-		cout << "Usage: rf-extract receptor.pdbqt ligand.pdbqt" << endl;
+		cout << "Usage: rf-extract receptor.pdbqt ligand.pdbqt model" << endl;
 		return 0;
 	}
 
-	const array<string, 47> h =
+	const array<string, 36> h36 =
 	{
 		"6.6",
 		"7.6",
@@ -52,6 +52,9 @@ int main(int argc, char* argv[])
 		"7.53",
 		"8.53",
 		"16.53",
+	};
+	const array<string, 10> h10 =
+	{
 		"gauss1_inter",
 		"gauss2_inter",
 		"repulsion_inter",
@@ -62,8 +65,34 @@ int main(int argc, char* argv[])
 		"repulsion_intra",
 		"hydrophobic_intra",
 		"hydrogenbonding_intra",
+	};
+	const array<string, 1> h1 =
+	{
 		"flexibility",
 	};
+	const array<string, 2> h2 =
+	{
+		"nacttors",
+		"ninacttors",
+	};
+	const size_t model = argc == 3 ? 4 : stoul(argv[3]); // model can be 2, 3 or 4.
+
+	// Construct the header based on model.
+	vector<string> h;
+	h.reserve(11);
+	if (model == 4)
+	{
+		h.insert(h.end(), h36.cbegin(), h36.cend());
+	}
+	h.insert(h.end(), h10.cbegin(), h10.cend());
+	if (model == 2)
+	{
+		h.insert(h.end(), h2.cbegin(), h2.cend());
+	}
+	else
+	{
+		h.insert(h.end(), h1.cbegin(), h1.cend());
+	}
 	cout << h[0];
 	for (size_t i = 1, n = h.size(); i < n; ++i)
 	{
@@ -81,7 +110,7 @@ int main(int argc, char* argv[])
 		ligand lig;
 		lig.load(ifs);
 		if (lig.empty()) break;
-		const vector<float> v = feature(rec, lig);
+		const vector<float> v = feature(rec, lig, model);
 		assert(v.size() == h.size());
 		cout << v[0];
 		for (size_t i = 1, n = v.size(); i < n; ++i)
