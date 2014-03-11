@@ -3,10 +3,6 @@ RF-Score
 
 RF-Score is a machine learning approach to predicting protein-ligand binding affinity.
 
-The original RF-Score uses as features the number of occurrences of 36 particular protein-ligand atom type pairs interacting within a certain distance range.
-
-The new RF-Score uses as features both the number of occurrences of 36 particular protein-ligand atom type pairs interacting within a certain distance range and the 6 Vina terms.
-
 
 Compilation
 -----------
@@ -29,11 +25,11 @@ Visual Studio 2012 or higher is required.
 Validation
 ----------
 
-The original RF-Score is trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To reproduce the results presented in the original paper [DOI: 10.1093/bioinformatics/btq112], two csv files `pdbbind-2007-refined-core-yx36i.csv` and `pdbbind-2007-core-yx36i.csv` are provided and they contain the 36 RF-Score features only, without the 6 Vina terms.
+The original RF-Score is trained on the PDBbind 2007 refined set minus the core set (N = 1105), and tested on the PDBbind 2007 core set (N = 195). To reproduce the results presented in the original paper [DOI: 10.1093/bioinformatics/btq112], two csv files `pdbbind-2007-refined-core-yx36i.csv` and `pdbbind-2007-core-yx36i.csv` are provided and they contain the 36 RF-Score features only.
 
 	rf-train pdbbind-2007-refined-core-yx36i.csv pdbbind-2007-refined-core-x36.rf
 
-	Training 13 random forests of 500 trees with mtry from 1 to 13 and seed 89757 on 1105 samples using 4 threads
+	Training 36 random forests of 500 trees with mtry from 1 to 36 and seed 89757 on 1105 samples using 4 threads
 	mtry = 5 yields the minimum MSE
 	Mean of squared residuals: 2.298
 		        Var explained: 0.486
@@ -83,17 +79,17 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-core-yx36i.csv pdbbind-2007-core-iyp.csv
 
 	n,rmse,sdev,pcor,scor,kcor
-	195,1.575,1.579,0.778,0.761,0.566
+	195,1.575,1.579,0.778,0.760,0.566
 
 
-Results
--------
+Variants
+--------
 
-The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind-2007-refined-core-yx42i.csv` and `pdbbind-2007-core-yx42i.csv` are provided and they contain both the 36 RF-Score features and the 6 Vina terms.
+The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind-2007-refined-core-yx42i.csv` and `pdbbind-2007-core-yx42i.csv` are provided and they contain both the 36 RF-Score features, the 5 intermolecular Vina terms, and the flexibility Vina term.
 
 	rf-train pdbbind-2007-refined-core-yx42i.csv pdbbind-2007-refined-core-x42.rf
 
-	Training 15 random forests of 500 trees with mtry from 1 to 15 and seed 89757 on 1105 samples using 4 threads
+	Training 42 random forests of 500 trees with mtry from 1 to 42 and seed 89757 on 1105 samples using 4 threads
 	mtry = 6 yields the minimum MSE
 	Mean of squared residuals: 2.108
 		        Var explained: 0.528
@@ -151,56 +147,121 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 	n,rmse,sdev,pcor,scor,kcor
 	195,1.524,1.528,0.800,0.793,0.599
 
-Here is a comparison of prediction performance of the original and the new RF-Score.
+Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-core-yx47i.csv` are provided and they contain both the 36 RF-Score features, the 5 intermolecular Vina terms, the 5 intramolecular Vina terms and the flexibility Vina term.
+
+	Training 47 random forests of 500 trees with mtry from 1 to 47 and seed 89757 on 1105 samples using 4 threads
+	mtry = 14 yields the minimum MSE
+	Mean of squared residuals: 2.100
+				Var explained: 0.530
+	Var %incMSE   Tgini
+	  0  22.011 603.026
+	  1  17.171 392.254
+	  2  20.080 334.209
+	  3  17.172 106.181
+	  4  19.597 152.876
+	  5  20.051 139.475
+	  6  17.252 120.709
+	  7  12.315  55.863
+	  8  14.947 110.444
+	  9  14.269 128.201
+	 10  14.574 113.906
+	 11  11.450  89.073
+	 12  16.396 131.198
+	 13  17.156 119.081
+	 14  13.165  72.720
+	 15   5.890  13.860
+	 16   8.759  33.934
+	 17   8.669  33.614
+	 18   8.256  30.827
+	 19   3.622  14.243
+	 20   1.417   8.759
+	 21   3.121  11.202
+	 22   3.174   7.919
+	 23   1.121   5.241
+	 24   1.670   8.742
+	 25   3.101   8.106
+	 26  -0.126  10.087
+	 27   2.004   6.619
+	 28   2.369   5.886
+	 29   1.995   4.073
+	 30   2.168   4.725
+	 31   1.529   4.640
+	 32  -0.316   1.146
+	 33   0.261   0.891
+	 34  -1.479   1.064
+	 35  -1.179   1.298
+	 36  20.550 280.021
+	 37  17.343 415.407
+	 38  13.455 129.370
+	 39  20.603 242.488
+	 40  17.895 164.915
+	 41  16.726 124.547
+	 42  17.149 145.521
+	 43  12.952 106.211
+	 44  15.128 150.050
+	 45   6.188  42.951
+	 46  14.357 126.615
+
+	rf-test pdbbind-2007-refined-core-x47.rf pdbbind-2007-refined-core-yx47i.csv pdbbind-2007-refined-core-iyp.csv
+
+	n,rmse,sdev,pcor,scor,kcor
+	1105,0.601,0.601,0.971,0.972,0.859
+
+	rf-test pdbbind-2007-refined-core-x47.rf pdbbind-2007-core-yx47i.csv pdbbind-2007-core-iyp.csv
+
+	n,rmse,sdev,pcor,scor,kcor
+	195,1.528,1.532,0.796,0.792,0.595
+
+Here is a comparison of prediction performance of the RF-Score variants.
 
 <table>
   <tr>
-    <th></th><th>RF-Score with 36 features</th><th>RF-Score with 42 features</th>
+    <th></th><th>RF-Score with 36 features</th><th>RF-Score with 42 features</th><th>RF-Score with 47 features</th>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on OOB (out-of-bag) data</td>
+    <td colspan="4">Evaluation on OOB (out-of-bag) data</td>
   </tr>
   <tr>
-    <td>mse</td><td>2.298</td><td>2.108</td>
+    <td>mse</td><td>2.298</td><td>2.108</td><td>2.100</td>
   </tr>
   <tr>
-    <td>rsq</td><td>0.486</td><td>0.528</td>
+    <td>rsq</td><td>0.486</td><td>0.528</td><td>0.530</td>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on training samples (N = 1105)</td>
+    <td colspan="4">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.737</td><td>0.645</td>
+    <td>rmse</td><td>0.737</td><td>0.645</td><td>0.601</td>
   </tr>
   <tr>
-    <td>sdev</td><td>0.737</td><td>0.645</td>
+    <td>sdev</td><td>0.737</td><td>0.645</td><td>0.601</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.952</td><td>0.965</td>
+    <td>pcor</td><td>0.952</td><td>0.965</td><td>0.971</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.954</td><td>0.967</td>
+    <td>scor</td><td>0.954</td><td>0.967</td><td>0.972</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.818</td><td>0.847</td>
+    <td>kcor</td><td>0.818</td><td>0.847</td><td>0.859</td>
   </tr>
   <tr>
-    <td colspan="3">Evaluation on testing samples (N = 195)</td>
+    <td colspan="4">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.575</td><td>1.524</td>
+    <td>rmse</td><td>1.575</td><td>1.524</td><td>1.528</td>
   </tr>
   <tr>
-    <td>sdev</td><td>1.579</td><td>1.528</td>
+    <td>sdev</td><td>1.579</td><td>1.528</td><td>1.532</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.778</td><td>0.800</td>
+    <td>pcor</td><td>0.778</td><td>0.800</td><td>0.796</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.761</td><td>0.793</td>
+    <td>scor</td><td>0.760</td><td>0.793</td><td>0.792</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.566</td><td>0.599</td>
+    <td>kcor</td><td>0.566</td><td>0.599</td><td>0.595</td>
   </tr>
 </table>
 
