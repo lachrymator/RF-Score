@@ -17,6 +17,8 @@ for s in 1 2; do
 	rmsd1s=(0 0 0 0 0 0)
 	rmsdms=(0 0 0 0 0 0)
 	rmsdis1=(0 0 0 0 0 0 0 0 0)
+	rmsdis2=(0 0 0 0 0 0 0 0 0)
+	rmsdis3=(0 0 0 0 0 0 0 0 0)
 	rmsdis4=(0 0 0 0 0 0 0 0 0)
 	k=0
 	for iy in $(< $pv/rescoring-2-set-$s-tst-iy.csv); do
@@ -38,17 +40,33 @@ for s in 1 2; do
 		n=$(wc -l < $pvc/$rmsdf)
 		w=$(grep "WARNING" $pvc/log/${c}_ligand.txt | wc -l)
 		tail -n +$((26+w)) $pvc/log/${c}_ligand.txt | head -$n | awk '{print substr($0,13,5) * -0.73349480509}' > /tmp/p1.csv
-		rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_1.pdbqt > /tmp/x4.csv # Extract features and predict binding affinity values for model 4. Update src/rf-extract.cpp and src/feature.hpp before changing the model from 4 to 3 or 2.
-		for i in $(seq 2 $n); do
-			rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_${i}.pdbqt | tail -n +2 >> /tmp/x4.csv
+		for m in {2..4}; do
+			rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_1.pdbqt $m > /tmp/x$m.csv
+			for i in $(seq 2 $n); do
+				rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_${i}.pdbqt $m | tail -n +2 >> /tmp/x$m.csv
+			done
 		done
+		cat /tmp/x2.csv | ./mlrtestp.R model2/set$s/$w2/pdbbind-2007-trn-1-coef.csv $w2 > /tmp/p2.csv
+		tail -n +2 /tmp/x3.csv | rf-predict model3/set$s/$w3/pdbbind-2007-trn-1.rf > /tmp/p3.csv
 		tail -n +2 /tmp/x4.csv | rf-predict model4/set$s/$w4/pdbbind-2007-trn-1.rf > /tmp/p4.csv
-#		tail -n +2 /tmp/x4.csv | rf-predict model3/set$s/$w3/pdbbind-2007-trn-1.rf > /tmp/p4.csv
-#		cat /tmp/x4.csv | ./mlrtestp.R model2/set$s/$w2/pdbbind-2007-trn-1-coef.csv $w2 > /tmp/p4.csv
 		i=0
 		for r in $(paste $pdbbind/seq$n /tmp/p1.csv | sort -k2,2nr | cut -f1); do
 			if [[ $s3 == $r ]]; then
 				rmsdis1[i]=$((rmsdis1[i]+1))
+			fi
+			i=$((i+1))
+		done
+		i=0
+		for r in $(paste $pdbbind/seq$n /tmp/p2.csv | sort -k2,2nr | cut -f1); do
+			if [[ $s3 == $r ]]; then
+				rmsdis2[i]=$((rmsdis2[i]+1))
+			fi
+			i=$((i+1))
+		done
+		i=0
+		for r in $(paste $pdbbind/seq$n /tmp/p3.csv | sort -k2,2nr | cut -f1); do
+			if [[ $s3 == $r ]]; then
+				rmsdis3[i]=$((rmsdis3[i]+1))
 			fi
 			i=$((i+1))
 		done
@@ -61,14 +79,20 @@ for s in 1 2; do
 		done
 	done
 	echo "condition,#,%"
-	for i in {0..8}; do
-		echo "RMSD$[i+1]=RMSDm",${rmsdis1[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis1[i]} * 100 / $k"))%
-	done
 	for i in {0..5}; do
 		echo RMSD1"<"${rmsdts[i]},${rmsd1s[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsd1s[i]} * 100 / $k"))%
 	done
 	for i in {0..5}; do
 		echo RMSDm"<"${rmsdts[i]},${rmsdms[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdms[i]} * 100 / $k"))%
+	done
+	for i in {0..8}; do
+		echo "RMSD$[i+1]=RMSDm",${rmsdis1[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis1[i]} * 100 / $k"))%
+	done
+	for i in {0..8}; do
+		echo "RMSD$[i+1]=RMSDm",${rmsdis2[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis2[i]} * 100 / $k"))%
+	done
+	for i in {0..8}; do
+		echo "RMSD$[i+1]=RMSDm",${rmsdis3[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis3[i]} * 100 / $k"))%
 	done
 	for i in {0..8}; do
 		echo "RMSD$[i+1]=RMSDm",${rmsdis4[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis4[i]} * 100 / $k"))%
