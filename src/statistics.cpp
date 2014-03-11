@@ -1,3 +1,5 @@
+#include <numeric>
+#include <algorithm>
 #include "statistics.hpp"
 
 float pearson(const vector<float>& x, const vector<float>& y)
@@ -61,7 +63,7 @@ float kendall(const vector<float>& x, const vector<float>& y)
 	return numer / (0.5 * n * (n-1));
 }
 
-void stats(const vector<float>& x, const vector<float>& y)
+array<float, 5> stats(const vector<float>& x, const vector<float>& y)
 {
 	const size_t n = y.size();
 	float se1 = 0, se2 = 0;
@@ -70,7 +72,12 @@ void stats(const vector<float>& x, const vector<float>& y)
 		se1 +=  x[i] - y[i];
 		se2 += (x[i] - y[i]) * (x[i] - y[i]);
 	}
-	cout
-	<< "n,rmse,sdev,pcor,scor,kcor" << endl
-	<< n << ',' << sqrt(se2 / n) << ',' << sqrt(se2 / (n - 1))/*(se2 - se1 * se1 / n) / (n - 1)*/ << ',' << pearson(x, y) << ',' << spearman(x, y) << ',' << kendall(x, y) << endl;
+	return // rmse,sdev,pcor,scor,kcor
+	{
+		sqrt(se2 / n),
+		sqrt(se2 / (n - 1)), // (se2 - se1 * se1 / n) / (n - 1)
+		pearson(x, y),
+		spearman(x, y),
+		kendall(x, y),
+	};
 }

@@ -15,7 +15,8 @@ int main(int argc, char* argv[])
 		p.push_back(stof(line.substr(0, c)));
 		y.push_back(stof(line.substr(c + 1)));
 	}
+	const auto s = stats(p, y);
+
 	cout.setf(ios::fixed, ios::floatfield);
-	cout << setprecision(3);
-	stats(p, y);
+	cout << "n,rmse,sdev,pcor,scor,kcor" << endl << y.size() << ',' << setprecision(3) << s[0] << ',' << s[1] << ',' << s[2] << ',' << s[3] << ',' << s[4] << endl;
 }
