@@ -3,15 +3,12 @@ rmsdts=(0.5 1.0 1.5 2.0 2.5 3.0) # RMSD thresholds
 v=(2007 2013)
 for s in 1 2; do
 	echo set$s
-	w2=$(tail -n +2 model2/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4) # Always use PDBbind v2007 as training set, no matter what set is.
-	w3=$(tail -n +2 model3/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4)
-	if [[ ! -s model3/set$s/$w3/pdbbind-2007-trn-1.rf ]]; then
-		rf-train model3/set$s/pdbbind-2007-trn-1-yxi.csv model3/set$s/$w3/pdbbind-2007-trn-1.rf $w3
-	fi
-	w4=$(tail -n +2 model4/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4)
-	if [[ ! -s model4/set$s/$w4/pdbbind-2007-trn-1.rf ]]; then
-		rf-train model4/set$s/pdbbind-2007-trn-1-yxi.csv model4/set$s/$w4/pdbbind-2007-trn-1.rf $w4
-	fi
+	for m in {2..4}; do
+		w[$m]=$(tail -n +2 model$m/set$s/tst-stat.csv | grep 2007,1,1, | cut -d, -f4) # Always use PDBbind v2007 as training set, no matter what set is.
+		if [[ (m -ge 3) && (! -s model$m/set$s/${w[m]}/pdbbind-2007-trn-1.rf) ]]; then
+			rf-train model$m/set$s/pdbbind-2007-trn-1-yxi.csv model$m/set$s/${w[m]}/pdbbind-2007-trn-1.rf ${w[m]}
+		fi
+	done
 	si=$((s-1))
 	pv=$pdbbind/v${v[si]}
 	rmsd1s=(0 0 0 0 0 0)
@@ -46,9 +43,9 @@ for s in 1 2; do
 				rf-extract $pvc/${c}_protein.pdbqt $pvc/out/${c}_ligand_ligand_${i}.pdbqt $m | tail -n +2 >> /tmp/x$m.csv
 			done
 		done
-		cat /tmp/x2.csv | ./mlrtestp.R model2/set$s/$w2/pdbbind-2007-trn-1-coef.csv $w2 > /tmp/p2.csv
-		tail -n +2 /tmp/x3.csv | rf-predict model3/set$s/$w3/pdbbind-2007-trn-1.rf > /tmp/p3.csv
-		tail -n +2 /tmp/x4.csv | rf-predict model4/set$s/$w4/pdbbind-2007-trn-1.rf > /tmp/p4.csv
+		cat /tmp/x2.csv | ./mlrtestp.R model2/set$s/${w[2]}/pdbbind-2007-trn-1-coef.csv ${w[2]} > /tmp/p2.csv
+		tail -n +2 /tmp/x3.csv | rf-predict model3/set$s/${w[3]}/pdbbind-2007-trn-1.rf > /tmp/p3.csv
+		tail -n +2 /tmp/x4.csv | rf-predict model4/set$s/${w[4]}/pdbbind-2007-trn-1.rf > /tmp/p4.csv
 		i=0
 		for r in $(paste $pdbbind/seq$n /tmp/p1.csv | sort -k2,2nr | cut -f1); do
 			if [[ $s3 == $r ]]; then
