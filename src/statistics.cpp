@@ -35,9 +35,6 @@ float spearman(const vector<float>& x, const vector<float>& y)
 	for (size_t i = 0; i < n; ++i)
 	{
 		xrank[xcase[i]] = i + 1;
-	}
-	for (size_t i = 0; i < n; ++i)
-	{
 		yrank[ycase[i]] = i + 1;
 	}
 	return pearson(xrank, yrank);
