@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src/rf-stat.cpp" />
+    <ClCompile Include="src\statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/statistics.hpp" />

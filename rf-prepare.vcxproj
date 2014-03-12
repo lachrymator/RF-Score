@@ -130,6 +130,7 @@
     <ClCompile Include="src/receptor.cpp" />
     <ClCompile Include="src/rf-prepare.cpp" />
     <ClCompile Include="src/scoring_function.cpp" />
+    <ClCompile Include="src\feature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/atom.hpp" />

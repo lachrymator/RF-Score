@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="src/random_forest_test.cpp" />
     <ClCompile Include="src/rf-test.cpp" />
+    <ClCompile Include="src\statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/random_forest_test.hpp" />
