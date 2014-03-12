@@ -1,5 +1,3 @@
-#include <iostream>
-#include <iomanip>
 #include <numeric>
 #include <algorithm>
 #include "random_forest_train.hpp"
