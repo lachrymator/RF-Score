@@ -20,11 +20,7 @@ public:
 	array<size_t, 2> children; ///< Two child nodes
 
 	/// Construct an empty leaf node
-	explicit node()
-	{
-		// Explicitly initialize child nodes because arrays of numeric types are not initialized to zero.
-		children[0] = 0;
-	}
+	explicit node();
 
 	/// Save current node to an ofstream
 	void save(ofstream& ofs) const;

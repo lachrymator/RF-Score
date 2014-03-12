@@ -2,6 +2,10 @@
 #include <algorithm>
 #include "random_forest_train.hpp"
 
+node::node() : children{}
+{
+}
+
 void node::save(ofstream& ofs) const
 {
 	const unsigned int var = this->var;
