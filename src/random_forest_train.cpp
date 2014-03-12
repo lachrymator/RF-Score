@@ -2,8 +2,9 @@
 #include <algorithm>
 #include "random_forest_train.hpp"
 
-node::node() : children{}
+node::node()
 {
+	children[0] = 0;
 }
 
 void node::save(ofstream& ofs) const
