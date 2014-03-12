@@ -69,7 +69,7 @@ array<float, 5> stats(const vector<float>& x, const vector<float>& y)
 		se1 +=  x[i] - y[i];
 		se2 += (x[i] - y[i]) * (x[i] - y[i]);
 	}
-	return // rmse,sdev,pcor,scor,kcor
+	const array<float, 5> r = // rmse,sdev,pcor,scor,kcor
 	{
 		sqrt(se2 / n),
 		sqrt(se2 / (n - 1)), // (se2 - se1 * se1 / n) / (n - 1)
@@ -77,4 +77,5 @@ array<float, 5> stats(const vector<float>& x, const vector<float>& y)
 		spearman(x, y),
 		kendall(x, y),
 	};
+	return r;
 }
