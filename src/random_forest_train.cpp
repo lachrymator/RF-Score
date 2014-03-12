@@ -24,7 +24,7 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 	const size_t num_variables = x.front().size();
 
 	// Create bootstrap samples with replacement
-	reserve(num_samples);
+	reserve((num_samples << 1) - 1);
 	emplace_back();
 	node& root = front();
 	root.samples.resize(num_samples);
