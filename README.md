@@ -85,7 +85,7 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 Variants
 --------
 
-The new RF-Score is trained and tested on the same data sets to make a fair comparison. Two csv files `pdbbind-2007-refined-core-yx42i.csv` and `pdbbind-2007-core-yx42i.csv` are provided and they contain both the 36 RF-Score features, the 5 intermolecular Vina terms, and the flexibility Vina term.
+In addition to the original 36 RF-Score features, more can be used. Two csv files `pdbbind-2007-refined-core-yx42i.csv` and `pdbbind-2007-core-yx42i.csv` are provided and they contain the 36 RF-Score features, the 5 intermolecular Vina terms, and the flexibility Vina term [DOI: 10.1002/jcc.21334].
 
 	rf-train pdbbind-2007-refined-core-yx42i.csv pdbbind-2007-refined-core-x42.rf
 
@@ -147,7 +147,7 @@ The new RF-Score is trained and tested on the same data sets to make a fair comp
 	n,rmse,sdev,pcor,scor,kcor
 	195,1.524,1.528,0.800,0.793,0.599
 
-Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-core-yx47i.csv` are provided and they contain both the 36 RF-Score features, the 5 intermolecular Vina terms, the 5 intramolecular Vina terms and the flexibility Vina term.
+Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-core-yx47i.csv` are provided and they contain the 36 RF-Score features, the 5 intermolecular Vina terms, the 5 intramolecular Vina terms and the flexibility Vina term.
 
 	Training 47 random forests of 500 trees with mtry from 1 to 47 and seed 89757 on 1105 samples using 4 threads
 	mtry = 14 yields the minimum MSE
@@ -212,7 +212,7 @@ Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-co
 	n,rmse,sdev,pcor,scor,kcor
 	195,1.528,1.532,0.796,0.792,0.595
 
-Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-core-yx51i.csv` are provided and they contain both the 36 RF-Score features, the 11 Vina features, and the 4 Cyscore features.
+Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-core-yx51i.csv` are provided and they contain the 36 RF-Score features, the 11 Vina features, and the 4 Cyscore features [DOI: 10.1093/bioinformatics/btu104].
 
 	Training 51 random forests of 500 trees with mtry from 1 to 51 and seed 89757 on 1105 samples using 4 threads
 	mtry = 7 yields the minimum MSE
@@ -432,12 +432,15 @@ License
 [Apache License 2.0]
 
 
-Reference
----------
+References
+----------
 
-Pedro J. Ballester and John B. O. Mitchell. A machine learning approach to predicting protein-ligand binding affinity with applications to molecular docking. Bioinformatics, 26(9):1169-1175,2010. [DOI: 10.1093/bioinformatics/btq112]
-
+Pedro J. Ballester and John B. O. Mitchell. A machine learning approach to predicting protein-ligand binding affinity with applications to molecular docking. Bioinformatics, 26(9):1169-1175, 2010. [DOI: 10.1093/bioinformatics/btq112]
+Oleg Trott and Arthur J. Olson. AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading. Journal of Computational Chemistry, 31:455-461, 2010. [DOI: 10.1002/jcc.21334]
+Yang Cao and Lei Li. Improved protein-ligand binding affinity prediction by using a curvature dependent surface area model. Bioinformatics, 2014. [DOI: 10.1093/bioinformatics/btu104]
 
 [Hongjian Li]: http://www.cse.cuhk.edu.hk/~hjli
 [Apache License 2.0]: http://www.apache.org/licenses/LICENSE-2.0
 [DOI: 10.1093/bioinformatics/btq112]: http://dx.doi.org/10.1093/bioinformatics/btq112
+[DOI: 10.1002/jcc.21334]: http://dx.doi.org/10.1002/jcc.21334
+[DOI: 10.1093/bioinformatics/btu104]: http://dx.doi.org/10.1093/bioinformatics/btu104
