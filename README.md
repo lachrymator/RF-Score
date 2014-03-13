@@ -436,7 +436,9 @@ References
 ----------
 
 Pedro J. Ballester and John B. O. Mitchell. A machine learning approach to predicting protein-ligand binding affinity with applications to molecular docking. Bioinformatics, 26(9):1169-1175, 2010. [DOI: 10.1093/bioinformatics/btq112]
+
 Oleg Trott and Arthur J. Olson. AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading. Journal of Computational Chemistry, 31:455-461, 2010. [DOI: 10.1002/jcc.21334]
+
 Yang Cao and Lei Li. Improved protein-ligand binding affinity prediction by using a curvature dependent surface area model. Bioinformatics, 2014. [DOI: 10.1093/bioinformatics/btu104]
 
 [Hongjian Li]: http://www.cse.cuhk.edu.hk/~hjli
