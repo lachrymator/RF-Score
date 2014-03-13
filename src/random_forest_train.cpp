@@ -61,7 +61,7 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 		float sum = 0;
 		for (const size_t s : n.samples) sum += y[s];
 		n.y = sum / n.samples.size();
-		n.p = n.y * n.y * n.samples.size(); // Equivalent to sum * sum / n.samples.size()
+		n.p = sum * n.y; // = n.y * n.y * n.samples.size() = sum * sum / n.samples.size()
 
 		// Do not split the node if it contains too few samples
 		if (n.samples.size() <= 5) continue;
