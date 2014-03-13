@@ -24,6 +24,22 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 	const size_t num_samples = x.size();
 	const size_t num_variables = x.front().size();
 
+/*	float sum = 0;
+	for (size_t i = 0; i < num_samples; ++i)
+	{
+		sum += y[i];
+	}
+	const float sum_inv = 1 / sum;
+	vector<float> p(num_samples);
+	for (size_t i = 0; i < num_samples; ++i)
+	{
+		p[i] = y[i] * sum_inv;
+	}
+	for (size_t i = 1; i < num_samples; ++i)
+	{
+		p[i] += p[i - 1];
+	}*/
+
 	// Create bootstrap samples with replacement
 	reserve((num_samples << 1) - 1);
 	emplace_back();
@@ -31,7 +47,9 @@ void tree::train(const vector<vector<float>>& x, const vector<float>& y, const s
 	root.samples.resize(num_samples);
 	for (size_t& s : root.samples)
 	{
-		s = static_cast<size_t>(u01() * num_samples);
+		const auto u = u01();
+		s = static_cast<size_t>(u * num_samples);
+//		for (s = 0; s < num_samples - 1 && !(u < p[s]); ++s);
 	}
 
 	// Populate nodes
