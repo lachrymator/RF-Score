@@ -10,7 +10,7 @@ v[2,1]=2002
 v[2,2]=2007
 v[2,3]=2010
 v[2,4]=2012
-m=4 # Update src/rf-prepare.cpp and src/feature.hpp before changing m from 4 to 3 or 2.
+m=4 # Update src/rf-prepare.cpp and src/feature.cpp before changing m from 4 to 3 or 2.
 cd model$m
 echo model$m
 for s in 1 2; do
