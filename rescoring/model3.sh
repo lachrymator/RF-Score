@@ -26,7 +26,7 @@ for m in 3 4 5; do
 				tail -1 $w/pdbbind-$v-trn-stat.csv >> pdbbind-$v-trn-stat.csv
 			done
 			echo -n $v, >> tst-stat.csv
-			tail -n +2 pdbbind-$v-tst-stat.csv | head -1 >> tst-stat.csv
+			tail -n +2 pdbbind-$v-tst-stat.csv | sort -t, -k3,3n -k4,4n -k5,5nr -k6,6nr -k7,7nr | head -1 >> tst-stat.csv
 		done
 		cd ..
 	done
