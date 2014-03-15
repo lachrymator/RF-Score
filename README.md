@@ -367,7 +367,7 @@ Here shows how to prepare testing samples from the PDBbind 2012 core set.
 	tail -n +6 INDEX_core_data.2012 | while read -r line; do
 		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind-2012-core-iy.csv
 	done
-	rf-prepare pdbbind-2012-core-iy.csv pdbbind-2012-core-yx42i.csv
+	rf-prepare pdbbind-2012-core-iy.csv > pdbbind-2012-core-yx42i.csv
 
 Here shows how to prepare training samples from the PDBbind 2012 refined set minus the core set.
 
@@ -376,7 +376,7 @@ Here shows how to prepare training samples from the PDBbind 2012 refined set min
 		if [[ 1 = $(echo ${core} | grep ${line:0:4} | wc -l) ]]; then continue; fi
 		echo $line | cut -d' ' -f1,4 --output-delimiter=, >> pdbbind-2012-refined-core-iy.csv
 	done
-	rf-prepare pdbbind-2012-refined-core-iy.csv pdbbind-2012-refined-core-yx42i.csv
+	rf-prepare pdbbind-2012-refined-core-iy.csv > pdbbind-2012-refined-core-yx42i.csv
 
 ### rf-train
 

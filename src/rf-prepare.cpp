@@ -7,9 +7,9 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc < 3)
+	if (argc < 2)
 	{
-		cout << "Usage: rf-prepare /path/to/PDBbind/v2012/pdbbind-2012-core-iy.csv pdbbind-2012-core-yx42i.csv scheme" << endl;
+		cout << "Usage: rf-prepare /path/to/PDBbind/v2012/pdbbind-2012-core-iy.csv scheme" << endl;
 		return 0;
 	}
 
@@ -69,14 +69,13 @@ int main(int argc, char* argv[])
 		"hydrogenbonding_intra",
 	};
 	string line;
-	ofstream ofs(argv[2]);
-	ofs.setf(ios::fixed, ios::floatfield);
-	ofs << "pbindaff";
+	cout.setf(ios::fixed, ios::floatfield);
+	cout << "pbindaff";
 	if (np == 1)
 	{
 		for (const auto& h : headers)
 		{
-			ofs << ',' << h;
+			cout << ',' << h;
 		}
 	}
 	else
@@ -84,10 +83,10 @@ int main(int argc, char* argv[])
 		for (size_t p = 1; p <= np; ++p)
 		for (const auto& h : headers)
 		{
-			ofs << ',' << h << '_' << p;
+			cout << ',' << h << '_' << p;
 		}
 	}
-	ofs << ",flexibility,PDB\n" << setprecision(4); // nacttors, ninacttors for model 2.
+	cout << ",flexibility,PDB\n" << setprecision(4); // nacttors, ninacttors for model 2.
 	for (ifstream dataifs(argv[1]); getline(dataifs, line);)
 	{
 		const string code = line.substr(0, 4);
@@ -140,11 +139,11 @@ int main(int argc, char* argv[])
 			lig.load(root + code + "/out/" + code + "_ligand_ligand_" + line + ".pdbqt");
 			v = feature(rec, lig);
 		}
-		ofs << pbindaff;
+		cout << pbindaff;
 		for (const auto d : v)
 		{
-			ofs << ',' << d;
+			cout << ',' << d;
 		}
-		ofs << ',' << code << '\n';
+		cout << ',' << code << '\n';
 	}
 }
