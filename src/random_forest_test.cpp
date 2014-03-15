@@ -48,7 +48,7 @@ void forest::load(ifstream& ifs)
 	{
 		t.load(ifs);
 	}
-	nt_inv = 1.f / nt;
+	nt_inv = 1.0f / nt;
 }
 
 float forest::operator()(const vector<float>& x) const
