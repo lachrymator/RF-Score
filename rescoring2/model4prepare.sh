@@ -20,10 +20,10 @@ for s in 1 2; do
 		for trn in {1..6}; do
 			if [[ $vi == 0 ]]; then
 				echo tst-$trn-yxi.csv
-				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-2-set-$s-tst-iy.csv tst-$trn-yxi.csv $trn
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-2-set-$s-tst-iy.csv $trn > tst-$trn-yxi.csv
 			else
 				echo pdbbind-${v[$s,$vi]}-trn-$trn-yxi.csv
-				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-2-set-$s-trn-iy.csv pdbbind-${v[$s,$vi]}-trn-$trn-yxi.csv $trn
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-2-set-$s-trn-iy.csv $trn > pdbbind-${v[$s,$vi]}-trn-$trn-yxi.csv
 			fi
 		done
 	done
