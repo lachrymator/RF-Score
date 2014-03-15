@@ -40,6 +40,8 @@ public:
 
 	/// Predict the y value of the given sample x
 	float operator()(const vector<float>& x) const;
+private:
+	float nt_inv; ///< Inverse of the number of trees
 };
 
 #endif
