@@ -10,7 +10,7 @@ v[2,1]=2002
 v[2,2]=2007
 v[2,3]=2010
 v[2,4]=2012
-for m in 4; do # Update src/rf-prepare.cpp and src/feature.cpp before changing m from 4 to 3 or 2.
+for m in 2 3 4; do
 	cd model$m
 	echo model$m
 	for s in 1 2; do
@@ -19,10 +19,10 @@ for m in 4; do # Update src/rf-prepare.cpp and src/feature.cpp before changing m
 		for vi in {0..4}; do
 			if [[ $vi == 0 ]]; then
 				echo tst-yxi.csv
-				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-tst-iy.csv > tst-yxi.csv
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-tst-iy.csv $m > tst-yxi.csv
 			else
 				echo pdbbind-${v[$s,$vi]}-trn-yxi.csv
-				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-trn-iy.csv > pdbbind-${v[$s,$vi]}-trn-yxi.csv
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-trn-iy.csv $m > pdbbind-${v[$s,$vi]}-trn-yxi.csv
 			fi
 		done
 		cd ..
