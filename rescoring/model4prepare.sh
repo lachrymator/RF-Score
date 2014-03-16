@@ -13,16 +13,19 @@ v[2,4]=2012
 for m in 2 3 4; do
 	cd model$m
 	echo model$m
+	[[ $m == 4 ]] && p=36 || p=0
+	p=$((p+6))
+	q=$((p+6))
 	for s in 1 2; do
 		cd set$s
 		echo set$s
 		for vi in {0..4}; do
 			if [[ $vi == 0 ]]; then
 				echo tst-yxi.csv
-				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-tst-iy.csv $m > tst-yxi.csv
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-tst-iy.csv $m | cut -d, -f1-$p,$q- | sed 's/_inter//g' > tst-yxi.csv
 			else
 				echo pdbbind-${v[$s,$vi]}-trn-yxi.csv
-				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-trn-iy.csv $m > pdbbind-${v[$s,$vi]}-trn-yxi.csv
+				rf-prepare $pdbbind/v${v[$s,$vi]}/rescoring-1-set-$s-trn-iy.csv $m | cut -d, -f1-$p,$q- | sed 's/_inter//g' > pdbbind-${v[$s,$vi]}-trn-yxi.csv
 			fi
 		done
 		cd ..
