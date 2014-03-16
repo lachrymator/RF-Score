@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rf-predict", "rf-predict.vc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rf-stat", "rf-stat.vcxproj", "{CCEEB36A-CC32-458D-9158-64619D21E1C5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rf-inspect", "rf-inspect.vcxproj", "{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -78,6 +80,14 @@ Global
 		{CCEEB36A-CC32-458D-9158-64619D21E1C5}.Release|Win32.Build.0 = Release|Win32
 		{CCEEB36A-CC32-458D-9158-64619D21E1C5}.Release|x64.ActiveCfg = Release|x64
 		{CCEEB36A-CC32-458D-9158-64619D21E1C5}.Release|x64.Build.0 = Release|x64
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Debug|Win32.Build.0 = Debug|Win32
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Debug|x64.ActiveCfg = Debug|x64
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Debug|x64.Build.0 = Debug|x64
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Release|Win32.ActiveCfg = Release|Win32
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Release|Win32.Build.0 = Release|Win32
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Release|x64.ActiveCfg = Release|x64
+		{1A42FE3F-A66A-46CD-84DC-E1084095BAC7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
