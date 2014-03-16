@@ -10,7 +10,7 @@ v[2,1]=2002
 v[2,2]=2007
 v[2,3]=2010
 v[2,4]=2012
-for m in 2 3 4;
+for m in 2 3 4; do
 	cd model$m
 	echo model$m
 	for s in 1 2; do
