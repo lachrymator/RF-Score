@@ -90,3 +90,37 @@ Their intersections are as follows:
 * |2 ∩ 3| = 1178
 * |2 ∩ 4| = 1173
 * |3 ∩ 4| = 2032
+
+
+## Files
+
+The folders and files are organized hierarchically. Model-specific files are in the model{1,2,3,4} folders. Cross-model files are in the set{1,2} folders.
+
+For data files, their nomenclature are as follows:
+
+* i means PDB ID
+* y means measured pKd
+* p means predicted pKd
+
+For example,
+
+* `set1/tst-iy.csv` means the [PDB,pbindaff] file of the test set of dataset 1, i.e. the PDB ID and measured pKd of PDBbind v2007 core set.
+* `model3/set1/89757/pdbbind-2007-tst-iyp.csv` means the [PDB,pbindaff,predicted] file of model 3 on dataset 1 trained on the PDBbind v2007 training set with seed 89757 and tested on the test set.
+* `model3/set1/pdbbind-2007-tst-stat.csv` means the [seed,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1 trained on the PDBbind v2007 training set and tested on the test set, over all seeds.
+* `model3/set1/tst-stat.csv` means the [v,w,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1, over all PDBbind versions. For each v, only the best seed for models 3 and 4 or the best weight for model 2 is shown in the w column.
+
+For script files, their functions and execution orders are as follows:
+
+* `duplicates.sh` computes the number of duplicate complexes between training sets and test set and among training sets in each of the 2 datasets.
+* `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-tst-iyp.csv.
+* `model4prepare.sh` generates model{2,3,4,5}/set{1,2}/{tst-yxi.csv,pdbbind-$v-trn-yxi.csv}.
+* `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-tst-stat.csv.
+* `model2.sh` trains and tests model 2 with a grid search of wNrot in [0.005 to 0.020] with a step size of 0.001, and generates model2/set{1,2}/tst-stat.csv.
+* `model3.sh` trains and tests models 3 and 4 with 10 seeds, and generates model{3,4}/set{1,2}/tst-stat.csv.
+* `maxerr.sh` finds the top 10 complexes with the largest absolute error between measured pKd and model 1 pKd and between measured pKd and model 4 pKd. Its output is saved to maxerr.csv.
+* `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-yxi.csv using multiple linear regression, and writes the intercept and coefficients to model2/set{1,2}/$w/pdbbind-$v-trn-coef.csv.
+* `mlrtest.R` tests model 2 on model2/set{1,2}/tst-yxi.csv, and writes the statistics to model2/set{1,2}/$w/pdbbind-$v-tst-stat.csv.
+* `iypplot.R` plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-tst-iyp.tiff.
+* `idpplot.R` plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-tst-idp.tiff.
+* `varImpPlot.R` plots models{3,4,5}/set{1,2}/$w/pdbbind-$v-trn-varimpplot.tiff.
+* `boxmed.R` plots model{2,3,4,5}/set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
