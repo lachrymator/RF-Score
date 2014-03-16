@@ -7,7 +7,7 @@ RF-Score is a machine learning approach to predicting protein-ligand binding aff
 Compilation
 -----------
 
-Seven executables, `rf-prepare`, `rf-train`, `rf-test`, `rf-stat`, `rf-extract`, `rf-predict` and `rf-score`, will be compiled in the `bin` folder.
+Eight executables, `rf-prepare`, `rf-train`, `rf-test`, `rf-stat`, `rf-extract`, `rf-predict`, `rf-score` and `rf-inspect`, will be compiled in the `bin` folder.
 
 ### Linux, Mac OS X, Solaris and FreeBSD
 
@@ -418,6 +418,12 @@ It loads a random forest from a binary file, parses a receptor and multiple conf
 rf-score is a streamlined combination of rf-extract and rf-predict. The above command is equivalent to
 
 	rf-extract receptor.pdbqt ligand.pdbqt | tail -n +2 | rf-predict pdbbind-2012-refined-core-x42.rf
+
+### rf-inspect
+
+It inspects the node values of a built random forest.
+
+	rf-inspect pdbbind-2012-refined-core-x42.rf | sort -t, -k1,1n
 
 
 Author

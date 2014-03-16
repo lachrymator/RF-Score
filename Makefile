@@ -1,6 +1,6 @@
 CC=g++ -std=c++0x -O3
 
-all: bin/rf-prepare bin/rf-train bin/rf-test bin/rf-score bin/rf-stat bin/rf-extract bin/rf-predict
+all: bin/rf-prepare bin/rf-train bin/rf-test bin/rf-score bin/rf-stat bin/rf-extract bin/rf-predict bin/rf-inspect
 
 bin/rf-prepare: obj/scoring_function.o obj/atom.o obj/receptor.o obj/ligand.o obj/feature.o obj/rf-prepare.o
 	$(CC) -o $@ $^
@@ -21,6 +21,9 @@ bin/rf-extract: obj/scoring_function.o obj/atom.o obj/receptor.o obj/ligand.o ob
 	$(CC) -o $@ $^
 
 bin/rf-predict: obj/random_forest_test.o obj/rf-predict.o
+	$(CC) -o $@ $^
+
+bin/rf-inspect: obj/random_forest_test.o obj/rf-inspect.o
 	$(CC) -o $@ $^
 
 obj/%.o: src/%.cpp
