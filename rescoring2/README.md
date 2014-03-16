@@ -143,7 +143,7 @@ For script files, their functions and execution orders are as follows:
 * `pdbbind.sh` does file format conversion, binding site detection, docking by Vina, RMSD computation, and finding the corresponding pose in schemes 1, 2, 3, 4, all in the PDBbind folder.
 * `duplicates.sh` computes the number of duplicate complexes between training sets and test set and among training sets in each of the 2 datasets.
 * `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-iyp.csv.
-* `model4prepare.sh` generates model4/set{1,2}/{tst-{1,2,3,4,5,6}-yxi.csv,pdbbind-$v-trn-{1,2,3,4,5,6}-yxi.csv}.
+* `model4prepare.sh` generates model{2,3,4}/set{1,2}/{tst-{1,2,3,4,5,6}-yxi.csv,pdbbind-$v-trn-{1,2,3,4,5,6}-yxi.csv}.
 * `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-trn-1-tst-{1,2}-stat.csv.
 * `model2.sh` trains and tests model 2 with a grid search of wNrot in [0.000 to 0.030] with a step size of 0.001, and generates model2/set{1,2}/tst-stat.csv.
 * `model3.sh` trains and tests models 3 and 4 with 10 seeds, and generates model{3,4}/set{1,2}/tst-stat.csv.
