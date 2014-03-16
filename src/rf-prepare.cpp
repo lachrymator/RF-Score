@@ -9,19 +9,13 @@ int main(int argc, char* argv[])
 {
 	if (argc < 2)
 	{
-		cout << "Usage: rf-prepare /path/to/PDBbind/v2012/pdbbind-2012-core-iy.csv scheme" << endl;
+		cout << "Usage: rf-prepare /path/to/PDBbind/v2012/pdbbind-2012-core-iy.csv model scheme" << endl;
 		return 0;
 	}
 
-	// Traverse the PDBbind folder to extract RF-Score features and Vina terms.
-	const string path = argv[1];
-	const string root = path.substr(0, path.find_last_of("/\\") + 1);
-	const string scheme = argc == 3 ? "1" : argv[3];
-	const size_t np = (scheme == "5" ? 9 : (scheme == "6" ? 2 : 1));
-	const size_t nf = 36 + 10; // nf = 10 for models 3 and 2.
-	const array<string, nf> headers =
+	const array<string, 36> h36 =
 	{
-		"6.6", // No L.P features for models 3 and 2.
+		"6.6",
 		"7.6",
 		"8.6",
 		"16.6",
@@ -57,6 +51,9 @@ int main(int argc, char* argv[])
 		"7.53",
 		"8.53",
 		"16.53",
+	};
+	const array<string, 10> h10 =
+	{
 		"gauss1_inter",
 		"gauss2_inter",
 		"repulsion_inter",
@@ -68,12 +65,35 @@ int main(int argc, char* argv[])
 		"hydrophobic_intra",
 		"hydrogenbonding_intra",
 	};
-	string line;
-	cout.setf(ios::fixed, ios::floatfield);
+	const array<string, 1> h1 =
+	{
+		"flexibility",
+	};
+	const array<string, 2> h2 =
+	{
+		"nacttors",
+		"ninacttors",
+	};
+
+	const string path = argv[1];
+	const string root = path.substr(0, path.find_last_of("/\\") + 1);
+	const size_t model = argc == 2 ? 4 : stoul(argv[2]); // model can be 2, 3 or 4.
+	const string scheme = argc == 3 ? "1" : argv[3]; // scheme can be 1, 2, 3, 4, 5 or 6.
+	const size_t nf = (model == 4 ? 36 : 0) + 10;
+	const size_t np = (scheme == "5" ? 9 : (scheme == "6" ? 2 : 1));
+
+	// Construct the header based on model.
 	cout << "pbindaff";
 	if (np == 1)
 	{
-		for (const auto& h : headers)
+		if (model == 4)
+		{
+			for (const auto& h : h36)
+			{
+				cout << ',' << h;
+			}
+		}
+		for (const auto& h : h10)
 		{
 			cout << ',' << h;
 		}
@@ -81,13 +101,40 @@ int main(int argc, char* argv[])
 	else
 	{
 		for (size_t p = 1; p <= np; ++p)
-		for (const auto& h : headers)
 		{
-			cout << ',' << h << '_' << p;
+			if (model == 4)
+			{
+				for (const auto& h : h36)
+				{
+					cout << ',' << h << '_' << p;
+				}
+			}
+			for (const auto& h : h10)
+			{
+				cout << ',' << h << '_' << p;
+			}
 		}
 	}
-	cout << ",flexibility,PDB\n" << setprecision(4); // nacttors, ninacttors for model 2.
-	for (ifstream dataifs(argv[1]); getline(dataifs, line);)
+	if (model == 2)
+	{
+		for (const auto& h : h2)
+		{
+			cout << ',' << h;
+		}
+	}
+	else
+	{
+		for (const auto& h : h1)
+		{
+			cout << ',' << h;
+		}
+	}
+	cout << ",PDB\n" << setprecision(4);
+	cout.setf(ios::fixed, ios::floatfield);
+
+	// Traverse the PDBbind folder to extract RF-Score features and Vina terms.
+	string line;
+	for (ifstream ifs(argv[1]); getline(ifs, line);)
 	{
 		const string code = line.substr(0, 4);
 		const float pbindaff = stof(line.substr(5));
@@ -98,7 +145,7 @@ int main(int argc, char* argv[])
 		{
 			ligand lig;
 			lig.load(root + code + "/" + code + "_ligand.pdbqt");
-			v = feature(rec, lig);
+			v = feature(rec, lig, model);
 		}
 		else if (scheme == "5" || scheme == "6")
 		{
@@ -107,13 +154,13 @@ int main(int argc, char* argv[])
 			const size_t c = stoul(line);
 			const size_t m = min<size_t>(c, np);
 			vector<float> t;
-			v.resize(nf * np + 1); // +2 for model 2.
+			v.resize(nf * np + (model == 2 ? 2 : 1));
 			size_t p = 0;
 			for (size_t i = c; i < np; ++i)
 			{
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_1.pdbqt");
-				t = feature(rec, lig);
+				t = feature(rec, lig, model);
 				for (size_t j = 0; j < nf; ++j)
 				{
 					v[p++] = t[j];
@@ -123,13 +170,21 @@ int main(int argc, char* argv[])
 			{
 				ligand lig;
 				lig.load(root + code + "/out/" + code + "_ligand_ligand_" + to_string(i) + ".pdbqt");
-				t = feature(rec, lig);
+				t = feature(rec, lig, model);
 				for (size_t j = 0; j < nf; ++j)
 				{
 					v[p++] = t[j];
 				}
 			}
-			v[p++] = t.back(); // v[p++] = v[10]; v[p++] = v[11]; for model 2.
+			if (model == 2)
+			{
+				v[p++] = t[10];
+				v[p++] = t[11];
+			}
+			else
+			{
+				v[p++] = t.back();
+			}
 		}
 		else
 		{
@@ -137,7 +192,7 @@ int main(int argc, char* argv[])
 			getline(ifs, line);
 			ligand lig;
 			lig.load(root + code + "/out/" + code + "_ligand_ligand_" + line + ".pdbqt");
-			v = feature(rec, lig);
+			v = feature(rec, lig, model);
 		}
 		cout << pbindaff;
 		for (const auto d : v)
