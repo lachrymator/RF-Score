@@ -83,7 +83,7 @@ array<float, 5> stats(const vector<float>& y, const vector<float>& x)
 	const array<float, 5> s = // rmse,sdev,pcor,scor,kcor
 	{
 		sqrt(se2 / n),
-		sqrt(se2 / (n - 1)), // (se2 - se1 * se1 / n) / (n - 1)
+		sqrt(se2 / (n - 1)),
 		pearson(y, x),
 		spearman(y, x),
 		kendall(y, x),
