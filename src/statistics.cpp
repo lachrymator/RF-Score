@@ -2,10 +2,10 @@
 #include <algorithm>
 #include "statistics.hpp"
 
-float pearson(const vector<float>& x, const vector<float>& y)
+float pearson(const vector<float>& y, const vector<float>& x)
 {
+	const size_t n = y.size();
 	float x1sum = 0, y1sum = 0, x2sum = 0, y2sum = 0, xysum = 0;
-	const size_t n = x.size();
 	for (size_t i = 0; i < n; ++i)
 	{
 		x1sum += x[i];
@@ -17,7 +17,7 @@ float pearson(const vector<float>& x, const vector<float>& y)
 	return (n*xysum-x1sum*y1sum)/sqrt((n*x2sum-x1sum*x1sum)*(n*y2sum-y1sum*y1sum));
 }
 
-float spearman(const vector<float>& x, const vector<float>& y)
+float spearman(const vector<float>& y, const vector<float>& x)
 {
 	const size_t n = y.size();
 	vector<size_t> xcase(n), ycase(n);
@@ -37,7 +37,7 @@ float spearman(const vector<float>& x, const vector<float>& y)
 		xrank[xcase[i]] = i + 1;
 		yrank[ycase[i]] = i + 1;
 	}
-	return pearson(xrank, yrank);
+	return pearson(yrank, xrank);
 }
 
 template <typename T>
@@ -46,7 +46,7 @@ inline int sgn(T x)
 	return (static_cast<T>(0) < x) - (x < static_cast<T>(0));
 }
 
-float kendall(const vector<float>& x, const vector<float>& y)
+float kendall(const vector<float>& y, const vector<float>& x)
 {
 	const size_t n = y.size();
 	float numer = 0;
@@ -60,7 +60,7 @@ float kendall(const vector<float>& x, const vector<float>& y)
 	return numer / (0.5 * n * (n-1));
 }
 
-array<float, 5> stats(const vector<float>& x, const vector<float>& y)
+array<float, 5> stats(const vector<float>& y, const vector<float>& x)
 {
 	const size_t n = y.size();
 	float se1 = 0, se2 = 0;
@@ -73,9 +73,9 @@ array<float, 5> stats(const vector<float>& x, const vector<float>& y)
 	{
 		sqrt(se2 / n),
 		sqrt(se2 / (n - 1)), // (se2 - se1 * se1 / n) / (n - 1)
-		pearson(x, y),
-		spearman(x, y),
-		kendall(x, y),
+		pearson(y, x),
+		spearman(y, x),
+		kendall(y, x),
 	};
 	return r;
 }
