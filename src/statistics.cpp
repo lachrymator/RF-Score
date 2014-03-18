@@ -63,13 +63,24 @@ float kendall(const vector<float>& y, const vector<float>& x)
 array<float, 5> stats(const vector<float>& y, const vector<float>& x)
 {
 	const size_t n = y.size();
+	float x1sum = 0, y1sum = 0, x2sum = 0, xysum = 0;
+	for (size_t i = 0; i < n; ++i)
+	{
+		x1sum += x[i];
+		y1sum += y[i];
+		x2sum += x[i] * x[i];
+		xysum += x[i] * y[i];
+	}
+	const float b = (n*xysum-x1sum*y1sum)/(n*x2sum-x1sum*x1sum);
+	const float a = (y1sum-b*x1sum)/n;
 	float se1 = 0, se2 = 0;
 	for (size_t i = 0; i < n; ++i)
 	{
-		se1 +=  x[i] - y[i];
-		se2 += (x[i] - y[i]) * (x[i] - y[i]);
+		const float r = a + b * x[i];
+		se1 +=  r - y[i];
+		se2 += (r - y[i]) * (r - y[i]);
 	}
-	const array<float, 5> r = // rmse,sdev,pcor,scor,kcor
+	const array<float, 5> s = // rmse,sdev,pcor,scor,kcor
 	{
 		sqrt(se2 / n),
 		sqrt(se2 / (n - 1)), // (se2 - se1 * se1 / n) / (n - 1)
@@ -77,5 +88,5 @@ array<float, 5> stats(const vector<float>& y, const vector<float>& x)
 		spearman(y, x),
 		kendall(y, x),
 	};
-	return r;
+	return s;
 }
