@@ -17,9 +17,10 @@ for m in 3 4 5; do
 				rf-test pdbbind-$v-trn.rf ../pdbbind-$v-trn-yxi.csv > pdbbind-$v-trn-iyp.csv
 				rf-test pdbbind-$v-trn.rf ../tst-yxi.csv > pdbbind-$v-tst-iyp.csv
 				rm pdbbind-$v-trn.rf
-				tail -n +2 pdbbind-$v-trn-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-stat.csv
-				tail -n +2 pdbbind-$v-tst-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-tst-stat.csv
-				../../../iypplot.R $v
+				../../../iypplot.R $v trn
+				../../../iypplot.R $v tst
+#				rm pdbbind-$v-trn-iyp.csv
+#				rm pdbbind-$v-tst-iyp.csv
 				tail -n +6 pdbbind-$v-trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v
 				cd ..
 				echo -n $w, >> pdbbind-$v-tst-stat.csv
