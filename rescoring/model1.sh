@@ -6,10 +6,10 @@ for m in 1; do
 		cd set$s
 		if [[ $s == 1 ]]; then
 			../../iypplot.R 2007 trn
-#			rm pdbbind-2007-trn-iyp.csv
+			rm pdbbind-2007-trn-iyp.csv
 		fi
 		../../iypplot.R 2007 tst
-#		rm pdbbind-2007-tst-iyp.csv
+		rm pdbbind-2007-tst-iyp.csv
 		cd ..
 	done
 	cd ..

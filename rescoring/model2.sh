@@ -18,8 +18,8 @@ for m in 2; do
 				../../../mlrtest.R $v $w tst
 				../../../iypplot.R $v trn
 				../../../iypplot.R $v tst
-#				rm pdbbind-$v-trn-iyp.csv
-#				rm pdbbind-$v-tst-iyp.csv
+				rm pdbbind-$v-trn-iyp.csv
+				rm pdbbind-$v-tst-iyp.csv
 				cd ..
 				echo -n $w, >> pdbbind-$v-tst-stat.csv
 				echo -n $w, >> pdbbind-$v-trn-stat.csv
