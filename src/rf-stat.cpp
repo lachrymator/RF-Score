@@ -1,22 +1,111 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "statistics.hpp"
+#include <vector>
+#include <array>
+#include <numeric>
+#include <algorithm>
 using namespace std;
+
+float pearson(const vector<float>& y, const vector<float>& x)
+{
+	const size_t n = y.size();
+	float x1sum = 0, y1sum = 0, x2sum = 0, y2sum = 0, xysum = 0;
+	for (size_t i = 0; i < n; ++i)
+	{
+		x1sum += x[i];
+		y1sum += y[i];
+		x2sum += x[i] * x[i];
+		y2sum += y[i] * y[i];
+		xysum += x[i] * y[i];
+	}
+	return (n*xysum-x1sum*y1sum)/sqrt((n*x2sum-x1sum*x1sum)*(n*y2sum-y1sum*y1sum));
+}
+
+float spearman(const vector<float>& y, const vector<float>& x)
+{
+	const size_t n = y.size();
+	vector<size_t> xcase(n), ycase(n);
+	iota(xcase.begin(), xcase.end(), 0);
+	iota(ycase.begin(), ycase.end(), 0);
+	sort(xcase.begin(), xcase.end(), [&x](size_t val1, size_t val2)
+	{
+		return x[val1] < x[val2];
+	});
+	sort(ycase.begin(), ycase.end(), [&y](size_t val1, size_t val2)
+	{
+		return y[val1] < y[val2];
+	});
+	vector<float> xrank(n), yrank(n);
+	for (size_t i = 0; i < n; ++i)
+	{
+		xrank[xcase[i]] = i + 1;
+		yrank[ycase[i]] = i + 1;
+	}
+	return pearson(yrank, xrank);
+}
+
+template <typename T>
+inline int sgn(T x)
+{
+	return (static_cast<T>(0) < x) - (x < static_cast<T>(0));
+}
+
+float kendall(const vector<float>& y, const vector<float>& x)
+{
+	const size_t n = y.size();
+	float numer = 0;
+	for (size_t i = 0; i < n - 1; ++i)
+	{
+		for (size_t j = i + 1; j < n; ++j)
+		{
+		    numer += sgn(x[i] - x[j]) * sgn(y[i] - y[j]);
+		}
+	}
+	return numer / (0.5 * n * (n-1));
+}
 
 int main(int argc, char* argv[])
 {
-	vector<float> y, p;
+	// Parse y and x from cin.
+	vector<float> y, x;
 	y.reserve(100);
-	p.reserve(100);
+	x.reserve(100);
 	for (string line; getline(cin, line);)
 	{
 		size_t c = line.find(',');
 		y.push_back(stof(line.substr(0, c)));
-		p.push_back(stof(line.substr(c + 1)));
+		x.push_back(stof(line.substr(c + 1)));
 	}
-	const auto s = stats(y, p);
 
+	// Compute a and b for lm(y ~ x)
+	const size_t n = y.size();
+	float x1sum = 0, y1sum = 0, x2sum = 0, xysum = 0;
+	for (size_t i = 0; i < n; ++i)
+	{
+		x1sum += x[i];
+		y1sum += y[i];
+		x2sum += x[i] * x[i];
+		xysum += x[i] * y[i];
+	}
+	const float b = (n*xysum-x1sum*y1sum)/(n*x2sum-x1sum*x1sum);
+	const float a = (y1sum-b*x1sum)/n;
+
+	// Compute rmse, sdev, pcor, scor, kcor.
+	float se1 = 0, se2 = 0;
+	for (size_t i = 0; i < n; ++i)
+	{
+		const float r = a + b * x[i];
+		se1 +=  r - y[i];
+		se2 += (r - y[i]) * (r - y[i]);
+	}
+	const auto rmse = sqrt(se2 / n);
+	const auto sdev = sqrt(se2 / (n - 2));
+	const auto pcor = pearson(y, x);
+	const auto scor = spearman(y, x);
+	const auto kcor = kendall(y, x);
+
+	// Write statistics.
 	cout.setf(ios::fixed, ios::floatfield);
-	cout << "n,rmse,sdev,pcor,scor,kcor" << endl << y.size() << ',' << setprecision(3) << s[0] << ',' << s[1] << ',' << s[2] << ',' << s[3] << ',' << s[4] << endl;
+	cout << "n,rmse,sdev,pcor,scor,kcor" << endl << setprecision(3) << n << ',' << rmse << ',' << sdev << ',' << pcor << ',' << scor << ',' << kcor << endl;
 }
