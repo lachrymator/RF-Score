@@ -127,11 +127,9 @@
   <ItemGroup>
     <ClCompile Include="src/random_forest_test.cpp" />
     <ClCompile Include="src/rf-test.cpp" />
-    <ClCompile Include="src\statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/random_forest_test.hpp" />
-    <ClInclude Include="src/statistics.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

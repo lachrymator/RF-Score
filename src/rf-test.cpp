@@ -2,14 +2,13 @@
 #include <iomanip>
 #include <string>
 #include "random_forest_test.hpp"
-#include "statistics.hpp"
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc != 4)
+	if (argc != 3)
 	{
-		cout << "Usage: rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-core-yx42i.csv pdbbind-2012-core-iyp.csv" << endl;
+		cout << "Usage: rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-core-yx42i.csv" << endl;
 		return 0;
 	}
 
@@ -17,22 +16,16 @@ int main(int argc, char* argv[])
 	forest f;
 	f.load(argv[1]);
 
-	// Parse testing samples, predict RF-Score and write output to file.
+	// Parse testing samples and predict RF-Score.
+	cout.setf(ios::fixed, ios::floatfield);
+	cout << "PDB,pbindaff,predicted" << endl << setprecision(2);
 	string line;
-	vector<float> p;
-	p.reserve(195);
-	vector<float> y;
-	y.reserve(p.capacity());
-	vector<float> v;
-	ifstream tstifs(argv[2]);
-	getline(tstifs, line);
-	ofstream prdofs(argv[3]);
-	prdofs.setf(ios::fixed, ios::floatfield);
-	prdofs << "PDB,pbindaff,predicted" << endl << setprecision(2);
-	while (getline(tstifs, line))
+	ifstream ifs(argv[2]);
+	getline(ifs, line);
+	while (getline(ifs, line))
 	{
 		size_t c0 = line.find(',');
-		y.push_back(stof(line.substr(0, c0)));
+		const auto y = stof(line.substr(0, c0));
 		vector<float> v;
 		v.reserve(36);
 		while (true)
@@ -42,14 +35,7 @@ int main(int argc, char* argv[])
 			v.push_back(stof(line.substr(c0 + 1, c1 - c0 - 1)));
 			c0 = c1;
 		}
-		p.push_back(f(v));
-		prdofs << line.substr(c0 + 1) << ',' << y.back() << ',' << p.back() << endl;
+		const auto p = f(v);
+		cout << line.substr(c0 + 1) << ',' << y << ',' << p << endl;
 	}
-	prdofs.close();
-	tstifs.close();
-
-	// Evaluate prediction performance on testing samples.
-	const auto s = stats(p, y);
-	cout.setf(ios::fixed, ios::floatfield);
-	cout << "n,rmse,sdev,pcor,scor,kcor" << endl << y.size() << ',' << setprecision(3) << s[0] << ',' << s[1] << ',' << s[2] << ',' << s[3] << ',' << s[4] << endl;
 }

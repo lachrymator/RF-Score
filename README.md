@@ -71,15 +71,15 @@ The original RF-Score is trained on the PDBbind 2007 refined set minus the core 
 	 34   0.264   2.951
 	 35   0.368   3.377
 
-	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-refined-core-yx36i.csv pdbbind-2007-refined-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-refined-core-yx36i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	1105,0.737,0.737,0.952,0.954,0.818
+	1105,0.644,0.645,0.952,0.954,0.818
 
-	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-core-yx36i.csv pdbbind-2007-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x36.rf pdbbind-2007-core-yx36i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	195,1.575,1.579,0.778,0.760,0.566
+	195,1.494,1.502,0.778,0.761,0.567
 
 
 Variants
@@ -137,15 +137,15 @@ In addition to the original 36 RF-Score features, more can be used. Two csv file
 	 40  17.829 172.813
 	 41  17.801 167.038
 
-	rf-test pdbbind-2007-refined-core-x42.rf pdbbind-2007-refined-core-yx42i.csv pdbbind-2007-refined-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x42.rf pdbbind-2007-refined-core-yx42i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	1105,0.645,0.645,0.965,0.967,0.847
+	1105,0.551,0.552,0.965,0.967,0.847
 
-	rf-test pdbbind-2007-refined-core-x42.rf pdbbind-2007-core-yx42i.csv pdbbind-2007-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x42.rf pdbbind-2007-core-yx42i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	195,1.524,1.528,0.800,0.793,0.599
+	195,1.428,1.435,0.800,0.792,0.599
 
 Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-core-yx47i.csv` are provided and they contain the 36 RF-Score features, the 5 intermolecular Vina terms, the 5 intramolecular Vina terms and the flexibility Vina term.
 
@@ -202,15 +202,15 @@ Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-co
 	 45   6.188  42.951
 	 46  14.357 126.615
 
-	rf-test pdbbind-2007-refined-core-x47.rf pdbbind-2007-refined-core-yx47i.csv pdbbind-2007-refined-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x47.rf pdbbind-2007-refined-core-yx47i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	1105,0.601,0.601,0.971,0.972,0.859
+	1105,0.507,0.508,0.971,0.972,0.859
 
-	rf-test pdbbind-2007-refined-core-x47.rf pdbbind-2007-core-yx47i.csv pdbbind-2007-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x47.rf pdbbind-2007-core-yx47i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	195,1.528,1.532,0.796,0.792,0.595
+	195,1.441,1.448,0.796,0.792,0.595
 
 Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-core-yx51i.csv` are provided and they contain the 36 RF-Score features, the 11 Vina features, and the 4 Cyscore features [DOI: 10.1093/bioinformatics/btu104].
 
@@ -271,15 +271,15 @@ Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-co
 	 49  11.673  99.393
 	 50  14.084  80.280
 
-	rf-test pdbbind-2007-refined-core-x51.rf pdbbind-2007-refined-core-yx51i.csv pdbbind-2007-refined-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x51.rf pdbbind-2007-refined-core-yx51i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	1105,0.618,0.618,0.969,0.970,0.855
+	1105,0.523,0.524,0.969,0.970,0.855
 
-	rf-test pdbbind-2007-refined-core-x51.rf pdbbind-2007-core-yx51i.csv pdbbind-2007-core-iyp.csv
+	rf-test pdbbind-2007-refined-core-x51.rf pdbbind-2007-core-yx51i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	195,1.515,1.519,0.804,0.800,0.605
+	195,1.415,1.423,0.804,0.800,0.606
 
 Here is a comparison of prediction performance of the RF-Score variants.
 
@@ -300,10 +300,10 @@ Here is a comparison of prediction performance of the RF-Score variants.
     <td colspan="5">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.737</td><td>0.645</td><td>0.601</td><td>0.618</td>
+    <td>rmse</td><td>0.644</td><td>0.551</td><td>0.507</td><td>0.523</td>
   </tr>
   <tr>
-    <td>sdev</td><td>0.737</td><td>0.645</td><td>0.601</td><td>0.618</td>
+    <td>sdev</td><td>0.645</td><td>0.552</td><td>0.508</td><td>0.524</td>
   </tr>
   <tr>
     <td>pcor</td><td>0.952</td><td>0.965</td><td>0.971</td><td>0.969</td>
@@ -318,19 +318,19 @@ Here is a comparison of prediction performance of the RF-Score variants.
     <td colspan="5">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.575</td><td>1.524</td><td>1.528</td><td>1.515</td>
+    <td>rmse</td><td>1.494</td><td>1.428</td><td>1.441</td><td>1.415</td>
   </tr>
   <tr>
-    <td>sdev</td><td>1.579</td><td>1.528</td><td>1.532</td><td>1.519</td>
+    <td>sdev</td><td>1.502</td><td>1.435</td><td>1.448</td><td>1.423</td>
   </tr>
   <tr>
     <td>pcor</td><td>0.778</td><td>0.800</td><td>0.796</td><td>0.804</td>
   </tr>
   <tr>
-    <td>scor</td><td>0.760</td><td>0.793</td><td>0.792</td><td>0.800</td>
+    <td>scor</td><td>0.761</td><td>0.792</td><td>0.792</td><td>0.800</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.566</td><td>0.599</td><td>0.595</td><td>0.605</td>
+    <td>kcor</td><td>0.567</td><td>0.599</td><td>0.595</td><td>0.606</td>
   </tr>
 </table>
 
@@ -386,28 +386,29 @@ It trains multiple random forests of different mtry values in parallel, selects 
 
 ### rf-test
 
-It loads a random forest from a binary file, predicts the RF-Score values of testing samples, saves them to a csv file, and evaluates the prediction performance.
+It loads a random forest from a binary file, predicts the RF-Score values of testing samples.
 
-	rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-refined-core-yx42i.csv pdbbind-2012-refined-core-iyp.csv
-	rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-core-yx42i.csv pdbbind-2012-core-iyp.csv
+	rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-refined-core-yx42i.csv > pdbbind-2012-refined-core-iyp.csv
+	rf-test pdbbind-2012-refined-core-x42.rf pdbbind-2012-core-yx42i.csv > pdbbind-2012-core-iyp.csv
 
 ### rf-stat
 
 It loads two vectors of values from standard input and computes their n, rmse, sdev, pcor, scor and kcor.
 
-	tail -n +2 pdbbind-2012-core-iyp.csv | cut -d',' -f2,3 | rf-stat
+	tail -n +2 pdbbind-2012-refined-core-iyp.csv | cut -d, -f2,3 | rf-stat
+	tail -n +2 pdbbind-2012-core-iyp.csv | cut -d, -f2,3 | rf-stat
 
 ### rf-extract
 
 It parses a receptor and multiple conformations of a ligand, and extracts their RF-Score features and Vina terms.
 
-	rf-extract receptor.pdbqt ligand.pdbqt
+	rf-extract receptor.pdbqt ligand.pdbqt > x.csv
 
 ### rf-predict
 
 It loads a random forest from a binary file, reads features from standard input, and score them.
 
-	rf-predict pdbbind-2012-refined-core-x42.rf < x.csv
+	tail -n +2 x.csv | rf-predict pdbbind-2012-refined-core-x42.rf
 
 ### rf-score
 
