@@ -14,9 +14,11 @@ for m in 3 4 5; do
 				mkdir -p $w
 				cd $w
 				rf-train ../pdbbind-$v-trn-yxi.csv pdbbind-$v-trn.rf $w > pdbbind-$v-trn.txt
-				rf-test pdbbind-$v-trn.rf ../pdbbind-$v-trn-yxi.csv pdbbind-$v-trn-iyp.csv > pdbbind-$v-trn-stat.csv
-				rf-test pdbbind-$v-trn.rf ../tst-yxi.csv pdbbind-$v-tst-iyp.csv > pdbbind-$v-tst-stat.csv
+				rf-test pdbbind-$v-trn.rf ../pdbbind-$v-trn-yxi.csv > pdbbind-$v-trn-iyp.csv
+				rf-test pdbbind-$v-trn.rf ../tst-yxi.csv > pdbbind-$v-tst-iyp.csv
 				rm pdbbind-$v-trn.rf
+				tail -n +2 pdbbind-$v-trn-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-stat.csv
+				tail -n +2 pdbbind-$v-tst-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-tst-stat.csv
 				../../../iypplot.R $v
 				tail -n +6 pdbbind-$v-trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v
 				cd ..

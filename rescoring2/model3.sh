@@ -22,9 +22,11 @@ for m in 3 4; do
 					mkdir -p $w
 					cd $w
 					rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $w > pdbbind-$v-trn-$trn.txt
-					rf-test pdbbind-$v-trn-$trn.rf ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn-trn-$trn-iyp.csv > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
+					rf-test pdbbind-$v-trn-$trn.rf ../pdbbind-$v-trn-$trn-yxi.csv > pdbbind-$v-trn-$trn-trn-$trn-iyp.csv
+					tail -n +2 pdbbind-$v-trn-$trn-trn-$trn-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					for tst in $tsts; do
-						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv pdbbind-$v-trn-$trn-tst-$tst-iyp.csv > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv > pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
+						tail -n +2 pdbbind-$v-trn-$trn-tst-$tst-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 						../../../iypplot.R $v $trn $tst
 					done
 					rm pdbbind-$v-trn-$trn.rf
