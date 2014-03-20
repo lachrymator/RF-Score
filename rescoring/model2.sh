@@ -16,8 +16,8 @@ for m in 2; do
 				../../../mlrtrain.R $v $w
 				../../../mlrtest.R $v $w trn
 				../../../mlrtest.R $v $w tst
-				../../../iypplot.R $v trn
-				../../../iypplot.R $v tst
+				../../../iyprplot.R $v trn
+				../../../iyprplot.R $v tst
 				rm pdbbind-$v-trn-iyp.csv
 				rm pdbbind-$v-tst-iyp.csv
 				cd ..
