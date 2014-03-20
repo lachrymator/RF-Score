@@ -20,12 +20,3 @@ if (nc == 14) {
 	quit()
 }
 write.csv(c(d["PDB"],round(d["pbindaff"],2),round(d["predicted"],2)),row.names=F,quote=F,file=sprintf("pdbbind-%s-trn-%s-%s-%s-iyp.csv",v,trn,t,ifelse(t=="tst",tst,trn))) # Write the measured binding affinities and the predicted ones in CSV format.
-# Print RMSE, standard deviation, Pearson/Spearman/Kendall correlation coefficients.
-n=nrow(d) # Number of samples.
-se=sum((d["predicted"] - d[1])^2) # Square error.
-rmse=sqrt(se/n)
-sdev=sqrt(se/(n-1))
-pcor=cor(d["predicted"], d[1], method="pearson")
-scor=cor(d["predicted"], d[1], method="spearman")
-kcor=cor(d["predicted"], d[1], method="kendall")
-cat(sprintf("n,rmse,sdev,pcor,scor,kcor\n%d,%.3f,%.3f,%.3f,%.3f,%.3f\n", n, rmse, sdev, pcor, scor, kcor), file=sprintf("pdbbind-%s-trn-%s-%s-%s-stat.csv",v,trn,t,ifelse(t=="tst",tst,trn)))
