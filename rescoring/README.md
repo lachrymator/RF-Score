@@ -101,6 +101,7 @@ For data files, their nomenclature are as follows:
 * i means PDB ID
 * y means measured pKd
 * p means predicted pKd
+* r means regressed pKd, i.e. r=fitted(lm(y~p))
 
 For example,
 
