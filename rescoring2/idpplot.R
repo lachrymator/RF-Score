@@ -3,7 +3,7 @@ args=commandArgs(trailingOnly=T)
 v=args[1]
 trn=args[2]
 tst=args[3]
-idp=read.csv(sprintf("pdbbind-%s-trn-%s-tst-%s-idp.csv",v,trn,tst),check.names=F)
+idp=read.csv(sprintf("pdbbind-%s-trn-%s-tst-%s-idp.csv",v,trn,tst))
 n=nrow(idp)
 ylim=c(2,14) # Set1's range.
 if (n == 382) ylim=c(1,12) # Set2's range.
