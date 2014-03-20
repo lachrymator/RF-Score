@@ -27,12 +27,12 @@ for m in 3 4; do
 					for tst in $tsts; do
 						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv > pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
 						../../../iyprplot.R $v $trn $tst
-#						rm pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
+						rm pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
 					done
 					rm pdbbind-$v-trn-$trn.rf
 					tail -n +6 pdbbind-$v-trn-$trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v $trn
 					if [[ $trn -lt 5 ]]; then
-						cut -d, -f3 pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
+						cut -d, -f3,4 pdbbind-$v-trn-$trn-tst-2-iypr.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idpr.csv
 						../../../idpplot.R $v $trn 2
 					fi
 					cd ..
