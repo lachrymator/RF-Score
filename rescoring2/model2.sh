@@ -25,7 +25,7 @@ for m in 2; do
 					../../../mlrtest.R $v $trn 0 $w trn
 					for tst in $tsts; do
 						../../../mlrtest.R $v $trn $tst $w tst
-						../../../iypplot.R $v $trn $tst
+						../../../iyprplot.R $v $trn $tst
 #						rm pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
 					done
 					if [[ $trn -lt 5 ]]; then
