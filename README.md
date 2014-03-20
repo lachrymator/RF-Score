@@ -149,6 +149,8 @@ In addition to the original 36 RF-Score features, more can be used. Two csv file
 
 Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-core-yx47i.csv` are provided and they contain the 36 RF-Score features, the 5 intermolecular Vina terms, the 5 intramolecular Vina terms and the flexibility Vina term.
 
+	rf-train pdbbind-2007-refined-core-yx47i.csv pdbbind-2007-refined-core-x47.rf
+
 	Training 47 random forests of 500 trees with mtry from 1 to 47 and seed 89757 on 1105 samples using 4 threads
 	mtry = 14 yields the minimum MSE
 	Mean of squared residuals: 2.100
@@ -213,6 +215,8 @@ Another two csv files `pdbbind-2007-refined-core-yx47i.csv` and `pdbbind-2007-co
 	195,1.441,1.448,0.796,0.792,0.595
 
 Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-core-yx51i.csv` are provided and they contain the 36 RF-Score features, the 11 Vina features, and the 4 Cyscore features [DOI: 10.1093/bioinformatics/btu104].
+
+	rf-train pdbbind-2007-refined-core-yx51i.csv pdbbind-2007-refined-core-x51.rf
 
 	Training 51 random forests of 500 trees with mtry from 1 to 51 and seed 89757 on 1105 samples using 4 threads
 	mtry = 7 yields the minimum MSE
