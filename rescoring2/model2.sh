@@ -30,7 +30,7 @@ for m in 2; do
 					done
 					if [[ $trn -lt 5 ]]; then
 						cut -d, -f3,4 pdbbind-$v-trn-$trn-tst-2-iypr.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idpr.csv
-						../../../idpplot.R $v $trn 2
+						../../../idprplot.R $v $trn 2
 					fi
 					cd ..
 					echo -n $w, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
