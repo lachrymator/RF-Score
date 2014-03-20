@@ -3,7 +3,7 @@ args=commandArgs(trailingOnly=T)
 v=args[1]
 trn=args[2]
 tst=args[3]
-d=read.csv(sprintf("pdbbind-%s-trn-%s-tst-%s-iyp.csv",v,trn,tst),check.names=F)
+d=read.csv(sprintf("pdbbind-%s-trn-%s-tst-%s-iyp.csv",v,trn,tst))
 n=nrow(d)
 se=sum((d["predicted"] - d["pbindaff"])^2)
 rmse=sqrt(se/n)
