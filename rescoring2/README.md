@@ -152,7 +152,7 @@ For script files, their functions and execution orders are as follows:
 * `rmsd.sh` computes RMSD relevant statistics.
 * `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-yxi.csv using multiple linear regression, and writes the intercept and coefficients to model2/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-coef.csv.
 * `mlrtest.R` tests model 2 on model2/set{1,2}/tst-{1,2}-yxi.csv, and writes the statistics to model2/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-stat.csv.
-* `iyprplot.R` writes models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-{iypr,stat}.csv and plots models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-iyp.tiff.
+* `iyprplot.R` writes models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-{iypr,stat}.csv and plots models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-{yp,yr}.tiff.
 * `idprplot.R` plots models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-idpr.tiff.
 * `varImpPlot.R` plots models{3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-varimpplot.tiff.
 * `boxmed.R` plots model{2,3,4}/set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, and set{1,2}/pdbbind-2007-trn-{1,2,3,4}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
