@@ -135,7 +135,7 @@ For example,
 
 * `set1/tst-1-iy.csv` means the [PDB,pbindaff] file of the test set in scheme 1 of dataset 1, i.e. the PDB ID and measured pKd of the crystal poses of PDBbind v2007 core set.
 * `set1/tst-2-id.csv` means the [PDB,RMSD1] file of the test set in scheme 2 of dataset 1, i.e. the PDB ID and RMSD of the docked pose with the lowest Vina score of PDBbind v2007 core set.
-* `model3/set1/89757/pdbbind-2007-trn-3-tst-2-iyp.csv` means the [PDB,pbindaff,predicted] file of model 3 on dataset 1 and PDBbind v2007 trained in scheme 3 with seed 89757 and tested in scheme 2.
+* `model3/set1/89757/pdbbind-2007-trn-3-tst-2-iypr.csv` means the [PDB,pbindaff,predicted,regressed] file of model 3 on dataset 1 and PDBbind v2007 trained in scheme 3 with seed 89757 and tested in scheme 2.
 * `model3/set1/pdbbind-2007-trn-4-tst-1-stat.csv` means the [seed,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1 and PDBbind v2007 trained in scheme 4 and tested in scheme 1, over all seeds.
 * `model3/set1/tst-stat.csv` means the [v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1, over all PDBbind versions, all training schemes and all test schemes. For each [v,trn,tst] combination, only the best seed for models 3 and 4 or the best weight for model 2 is shown in the w column.
 

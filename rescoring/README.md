@@ -94,7 +94,7 @@ For data files, their nomenclature are as follows:
 For example,
 
 * `set1/tst-iy.csv` means the [PDB,pbindaff] file of the test set of dataset 1, i.e. the PDB ID and measured pKd of PDBbind v2007 core set.
-* `model3/set1/89757/pdbbind-2007-tst-iyp.csv` means the [PDB,pbindaff,predicted] file of model 3 on dataset 1 trained on the PDBbind v2007 training set with seed 89757 and tested on the test set.
+* `model3/set1/89757/pdbbind-2007-tst-iypr.csv` means the [PDB,pbindaff,predicted,regressed] file of model 3 on dataset 1 trained on the PDBbind v2007 training set with seed 89757 and tested on the test set.
 * `model3/set1/pdbbind-2007-tst-stat.csv` means the [seed,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1 trained on the PDBbind v2007 training set and tested on the test set, over all seeds.
 * `model3/set1/tst-stat.csv` means the [v,w,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1, over all PDBbind versions. For each v, only the best seed for models 3 and 4 or the best weight for model 2 is shown in the w column.
 
