@@ -30,13 +30,13 @@ Model 5 is the same as model 3, except that it uses 5 Vina features, i.e. gauss1
 
 The test set 0) and the four training sets 1), 2), 3), 4) are as follows:
 
-0) PDBbind v2007 core set (N = 195). This test set is the one used in the RF-Score paper. Therefore it has N = 195.
+0) PDBbind v2007 core set (N = 195). This test set is the one used in [DOI: 10.1021/ci9000053]. Therefore it has N = 195.
 
 1) PDBbind v2004 refined set (N = 1091) minus PDBbind v2007 core set (N = 195). Both sets have 138 complexes in common. The 1oko protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. Therefore this training set has N = 1091 - 138 - 1 = 952 complexes.
 
-2) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in the RF-Score paper. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
+2) PDBbind v2007 refined set (N = 1300) minus PDBbind v2007 core set (N = 195). This training set is the one used in [DOI: 10.1021/ci9000053]. Therefore it has N = 1105. Note that every complex in the test set has complexes involving the same protein in this training set.
 
-3) PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195). Both sets have 181 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 181 - 2 = 1878 complexes.
+3) PDBbind v2010 refined set (N = 2061) minus PDBbind v2007 core set (N = 195). Both sets have 182 complexes in common. The 2bo4 protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1xr8 ligand is far away from its protein. Therefore this training set has N = 2061 - 182 - 2 = 1877 complexes.
 
 4) PDBbind v2013 refined set (N = 2959) minus PDBbind v2007 core set (N = 195). Both sets have 165 complexes in common. Therefore this training set has N = 2959 - 165 = 2794 complexes.
 
@@ -47,11 +47,11 @@ Their intersections are as follows:
 * |0 ∩ 3| = 0
 * |0 ∩ 4| = 0
 * |1 ∩ 2| = 786
-* |1 ∩ 3| = 708
+* |1 ∩ 3| = 707
 * |1 ∩ 4| = 695
-* |2 ∩ 3| = 997
+* |2 ∩ 3| = 996
 * |2 ∩ 4| = 909
-* |3 ∩ 4| = 1676
+* |3 ∩ 4| = 1675
 
 ### Dataset 2
 
@@ -112,3 +112,5 @@ For script files, their functions and execution orders are as follows:
 * `iyprplot.R` writes models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-{iypr,stat}.csv and plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-y{p,r}.tiff.
 * `varImpPlot.R` plots models{3,4,5}/set{1,2}/$w/pdbbind-$v-trn-varimpplot.tiff.
 * `boxmed.R` plots model{2,3,4,5}/set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
+
+[DOI: 10.1021/ci9000053]: http://dx.doi.org/10.1021/ci9000053
