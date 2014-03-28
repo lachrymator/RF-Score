@@ -1,28 +1,28 @@
 #include "random_forest_test.hpp"
 
-void node::load(ifstream& ifs)
+void node::load(istream& is)
 {
 	unsigned int var;
 	unsigned int c0;
 	unsigned int c1;
-	ifs.read((char*)&y, 4);
-	ifs.read((char*)&var, 4);
-	ifs.read((char*)&val, 4);
-	ifs.read((char*)&c0, 4);
-	ifs.read((char*)&c1, 4);
+	is.read((char*)&y, 4);
+	is.read((char*)&var, 4);
+	is.read((char*)&val, 4);
+	is.read((char*)&c0, 4);
+	is.read((char*)&c1, 4);
 	this->var = var;
 	this->children[0] = c0;
 	this->children[1] = c1;
 }
 
-void tree::load(ifstream& ifs)
+void tree::load(istream& is)
 {
 	unsigned int nn;
-	ifs.read((char*)&nn, 4);
+	is.read((char*)&nn, 4);
 	resize(nn);
 	for (auto& n : *this)
 	{
-		n.load(ifs);
+		n.load(is);
 	}
 }
 
@@ -39,14 +39,14 @@ void forest::load(const string path)
 	load(ifs);
 }
 
-void forest::load(ifstream& ifs)
+void forest::load(istream& is)
 {
 	unsigned int nt;
-	ifs.read((char*)&nt, 4);
+	is.read((char*)&nt, 4);
 	resize(nt);
 	for (auto& t : *this)
 	{
-		t.load(ifs);
+		t.load(is);
 	}
 	nt_inv = 1.0f / nt;
 }

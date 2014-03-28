@@ -16,14 +16,14 @@ public:
 	array<size_t, 2> children; ///< Two child nodes
 
 	/// Load current node from an ifstream
-	void load(ifstream& ifs);
+	void load(istream& is);
 };
 
 class tree : public vector<node>
 {
 public:
 	/// Load current tree from an ifstream
-	void load(ifstream& ifs);
+	void load(istream& is);
 
 	/// Predict the y value of the given sample x
 	float operator()(const vector<float>& x) const;
@@ -36,7 +36,7 @@ public:
 	void load(const string path);
 
 	/// Load current forest from an ifstream
-	void load(ifstream& ifs);
+	void load(istream& is);
 
 	/// Predict the y value of the given sample x
 	float operator()(const vector<float>& x) const;
