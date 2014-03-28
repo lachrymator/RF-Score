@@ -40,12 +40,6 @@ void forest::load(const string& path)
 	load(ifs);
 }
 
-void forest::loads(const string& str)
-{
-	istringstream iss(str);
-	load(iss);
-}
-
 void forest::load(istream& is)
 {
 	unsigned int nt;

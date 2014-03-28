@@ -35,9 +35,6 @@ public:
 	/// Load current forest from a file
 	void load(const string& path);
 
-	// Load current forest from a string
-	void loads(const string& str);
-
 	/// Load current forest from an istream
 	void load(istream& is);
 
