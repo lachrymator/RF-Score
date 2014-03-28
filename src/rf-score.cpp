@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 4)
 	{
-		cout << "Usage: rf-score pdbbind-2012-refined-core-x42.rf receptor.pdbqt ligand.pdbqt" << endl;
+		cout << "Usage: rf-score pdbbind-2012-refined-core-x47.rf receptor.pdbqt ligand.pdbqt" << endl;
 		return 0;
 	}
 
