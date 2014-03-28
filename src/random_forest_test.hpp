@@ -15,14 +15,14 @@ public:
 	float val; ///< Value used for node split
 	array<size_t, 2> children; ///< Two child nodes
 
-	/// Load current node from an ifstream
+	/// Load current node from an istream
 	void load(istream& is);
 };
 
 class tree : public vector<node>
 {
 public:
-	/// Load current tree from an ifstream
+	/// Load current tree from an istream
 	void load(istream& is);
 
 	/// Predict the y value of the given sample x
@@ -33,9 +33,12 @@ class forest : public vector<tree>
 {
 public:
 	/// Load current forest from a file
-	void load(const string path);
+	void load(const string& path);
 
-	/// Load current forest from an ifstream
+	// Load current forest from a string
+	void loads(const string& str);
+
+	/// Load current forest from an istream
 	void load(istream& is);
 
 	/// Predict the y value of the given sample x

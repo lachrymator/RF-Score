@@ -1,3 +1,4 @@
+#include <sstream>
 #include "random_forest_test.hpp"
 
 void node::load(istream& is)
@@ -33,10 +34,16 @@ float tree::operator()(const vector<float>& x) const
 	return (*this)[k].y;
 }
 
-void forest::load(const string path)
+void forest::load(const string& path)
 {
 	ifstream ifs(path, ios::binary);
 	load(ifs);
+}
+
+void forest::loads(const string& str)
+{
+	istringstream iss(str);
+	load(iss);
 }
 
 void forest::load(istream& is)
