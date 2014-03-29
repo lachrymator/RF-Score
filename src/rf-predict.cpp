@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc != 2)
+	if (argc < 2)
 	{
 		cout << "rf-predict pdbbind-2012-refined-core-x42.rf" << endl;
 		return 0;

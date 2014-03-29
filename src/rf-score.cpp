@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc != 4)
+	if (argc < 4)
 	{
 		cout << "rf-score pdbbind-2013-refined.rf receptor.pdbqt ligand.pdbqt" << endl;
 		return 0;
