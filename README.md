@@ -220,60 +220,60 @@ Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-co
 
 	Training 51 random forests of 500 trees with mtry from 1 to 51 and seed 89757 on 1105 samples using 4 threads
 	mtry = 7 yields the minimum MSE
-	Mean of squared residuals: 2.068
-	            Var explained: 0.538
+	Mean of squared residuals: 2.070
+	            Var explained: 0.537
 	Var %incMSE   Tgini
-	  0  17.956 371.825
-	  1  15.105 267.506
-	  2  17.149 212.953
-	  3  15.148  90.085
-	  4  17.133 133.520
-	  5  16.371 127.821
-	  6  14.988 116.492
-	  7  12.092  52.401
-	  8  14.736 107.410
-	  9  15.373 106.336
-	 10  14.608 102.800
-	 11  11.016  80.499
-	 12  14.156  87.561
-	 13  13.815  85.120
-	 14  10.842  63.618
-	 15   6.986  17.918
-	 16   8.413  34.454
-	 17   8.966  39.781
-	 18   8.360  38.869
-	 19   1.951  15.147
-	 20   3.823  12.122
-	 21   4.175  13.694
-	 22   4.443  11.574
-	 23   4.754   9.109
-	 24   2.843   8.323
-	 25   2.562   8.866
-	 26   3.076   8.351
-	 27  -0.311   5.803
-	 28   2.668   5.099
-	 29   0.339   2.960
-	 30   0.956   4.193
-	 31   1.368   2.985
-	 32   0.199   1.207
-	 33   1.291   1.110
-	 34  -0.662   1.150
-	 35  -0.097   1.253
-	 36  12.436 211.542
-	 37  12.634 279.001
-	 38  11.054 106.103
-	 39  17.435 187.553
-	 40  13.331 122.295
-	 41  13.928 108.240
-	 42  14.576 136.135
-	 43  11.372  86.228
-	 44  15.214 132.365
-	 45   5.522  40.093
-	 46  15.283  95.944
-	 47  21.035 410.688
-	 48  17.779 414.880
-	 49  13.044 102.224
-	 50  15.946  79.611
+	  0  18.932 341.590
+	  1  15.108 282.158
+	  2  16.561 255.213
+	  3  15.023  82.837
+	  4  19.728 150.789
+	  5  17.298 124.116
+	  6  16.026 117.908
+	  7   9.794  51.846
+	  8  15.018 108.394
+	  9  15.085 115.264
+	 10  14.749 101.802
+	 11  11.681  80.289
+	 12  12.588  88.716
+	 13  14.717  91.971
+	 14  11.152  62.988
+	 15   5.998  15.725
+	 16  10.125  38.881
+	 17   8.952  36.383
+	 18   8.992  34.560
+	 19   2.648  16.044
+	 20   2.636  11.648
+	 21   3.018  11.376
+	 22   2.702  12.244
+	 23   1.642   8.514
+	 24   1.428   8.114
+	 25   3.254   9.284
+	 26   2.159   8.799
+	 27   2.608   6.798
+	 28   3.584   2.991
+	 29   2.180   3.838
+	 30   1.826   3.701
+	 31   0.926   3.652
+	 32  -1.213   1.218
+	 33   1.008   1.123
+	 34   0.143   0.925
+	 35   0.175   0.971
+	 36  16.119 201.329
+	 37  13.666 243.712
+	 38  12.096 106.192
+	 39  18.551 208.111
+	 40  13.370 116.859
+	 41  13.126 106.952
+	 42  12.974 151.465
+	 43  12.025  87.249
+	 44  13.410 128.483
+	 45   4.659  38.031
+	 46  12.968  97.050
+	 47  22.278 401.279
+	 48  16.898 410.172
+	 49  14.915  90.904
+	 50   8.681  82.472
 
 	rf-test pdbbind-2007-refined-core-x51.rf pdbbind-2007-refined-core-yx51i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
@@ -283,7 +283,7 @@ Another two csv files `pdbbind-2007-refined-core-yx51i.csv` and `pdbbind-2007-co
 	rf-test pdbbind-2007-refined-core-x51.rf pdbbind-2007-core-yx51i.csv | tail -n +2 | cut -d, -f2,3 | rf-stat
 
 	n,rmse,sdev,pcor,scor,kcor
-	195,1.422,1.430,0.801,0.800,0.604
+	195,1.415,1.423,0.803,0.800,0.606
 
 Here is a comparison of prediction performance of the RF-Score variants.
 
@@ -295,10 +295,10 @@ Here is a comparison of prediction performance of the RF-Score variants.
     <td colspan="5">Evaluation on OOB (out-of-bag) data</td>
   </tr>
   <tr>
-    <td>mse</td><td>2.296</td><td>2.121</td><td>2.106</td><td>2.068</td>
+    <td>mse</td><td>2.296</td><td>2.121</td><td>2.106</td><td>2.070</td>
   </tr>
   <tr>
-    <td>rsq</td><td>0.487</td><td>0.526</td><td>0.529</td><td>0.538</td>
+    <td>rsq</td><td>0.487</td><td>0.526</td><td>0.529</td><td>0.537</td>
   </tr>
   <tr>
     <td colspan="5">Evaluation on training samples (N = 1105)</td>
@@ -322,19 +322,19 @@ Here is a comparison of prediction performance of the RF-Score variants.
     <td colspan="5">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.506</td><td>1.424</td><td>1.425</td><td>1.422</td>
+    <td>rmse</td><td>1.506</td><td>1.424</td><td>1.425</td><td>1.415</td>
   </tr>
   <tr>
-    <td>sdev</td><td>1.514</td><td>1.431</td><td>1.432</td><td>1.430</td>
+    <td>sdev</td><td>1.514</td><td>1.431</td><td>1.432</td><td>1.423</td>
   </tr>
   <tr>
-    <td>pcor</td><td>0.773</td><td>0.800</td><td>0.800</td><td>0.801</td>
+    <td>pcor</td><td>0.773</td><td>0.800</td><td>0.800</td><td>0.803</td>
   </tr>
   <tr>
     <td>scor</td><td>0.759</td><td>0.791</td><td>0.795</td><td>0.800</td>
   </tr>
   <tr>
-    <td>kcor</td><td>0.564</td><td>0.596</td><td>0.601</td><td>0.604</td>
+    <td>kcor</td><td>0.564</td><td>0.596</td><td>0.601</td><td>0.606</td>
   </tr>
 </table>
 
