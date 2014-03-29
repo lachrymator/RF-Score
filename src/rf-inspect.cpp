@@ -6,6 +6,12 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	if (argc < 2)
+	{
+		cout << "rf-inspect pdbbind-2012-refined-core-x42.rf" << endl;
+		return 0;
+	}
+
 	// Load a random forest from file.
 	forest f;
 	f.load(argv[1]);
