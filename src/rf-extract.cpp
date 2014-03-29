@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
-		cout << "Usage: rf-extract receptor.pdbqt ligand.pdbqt model" << endl;
+		cout << "rf-extract receptor.pdbqt ligand.pdbqt model" << endl;
 		return 0;
 	}
 

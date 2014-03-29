@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
-		cout << "Usage: rf-train pdbbind-2012-refined-core-yx42i.csv pdbbind-2012-refined-core-x42.rf seed" << endl;
+		cout << "rf-train pdbbind-2012-refined-core-yx42i.csv pdbbind-2012-refined-core-x42.rf seed" << endl;
 		return 0;
 	}
 
