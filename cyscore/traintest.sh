@@ -6,7 +6,8 @@ for x in 2 4; do
 	cd x$x
 	cd mlr
 	for ntrn in $ntrns; do
-		./mlr.R $ntrn
+		./mlrtrain.R $ntrn
+		./mlrtest.R $ntrn
 		echo $x,MLR,$ntrn,$(tail -1 trn-$ntrn-tst-195-stat.csv),$(tail -1 trn-$ntrn-tst-201-stat.csv),$(tail -1 trn-$ntrn-tst-382-stat.csv)
 	done
 	cd ..

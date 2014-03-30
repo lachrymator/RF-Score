@@ -1,8 +1,7 @@
 #!/usr/bin/env Rscript
 args=commandArgs(trailingOnly=T)
 ntrn=args[1]
-trn=read.csv(sprintf("../trn-%s-yxi.csv",ntrn))
-c=coefficients(lm(pbindaff~Hydrophobic+Ent,trn))
+c=read.csv(sprintf("trn-%s-coef.csv",ntrn))[,2]
 for (ntst in c(195,201,382))
 {
 	d=read.csv(sprintf("../tst-%s-yxi.csv",ntst))
