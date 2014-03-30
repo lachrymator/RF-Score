@@ -167,17 +167,17 @@ The test sets in datasets 1 and 2 are docked by Vina. Let RMSDi denote the RMSD 
 For model 1 trained on PDBbind v2007 in scheme 1
 
 * |RMSD1 < 0.5| = 26
-* |RMSD1 < 1.0| = 61
-* |RMSD1 < 1.5| = 87
+* |RMSD1 < 1.0| = 60
+* |RMSD1 < 1.5| = 86
 * |RMSD1 < 2.0| = 101
 * |RMSD1 < 2.5| = 111
 * |RMSD1 < 3.0| = 116
 * |RMSDm < 0.5| = 27
-* |RMSDm < 1.0| = 74
+* |RMSDm < 1.0| = 73
 * |RMSDm < 1.5| = 121
-* |RMSDm < 2.0| = 148
-* |RMSDm < 2.5| = 161
-* |RMSDm < 3.0| = 169
+* |RMSDm < 2.0| = 149
+* |RMSDm < 2.5| = 162
+* |RMSDm < 3.0| = 170
 
 Therefore, the number of complexes where the pose with the lowest Vina score has RMSD < 2.0 is 101 (101 / 195 = 52%).
 
@@ -186,58 +186,58 @@ The numbers of complexes whose docked pose with the ith (i=0,1,...,9) best model
 For model 1 trained on PDBbind v2007 in scheme 1
 
 * |RMSD1 = RMSDmin| = 94
-* |RMSD2 = RMSDmin| = 26
+* |RMSD2 = RMSDmin| = 27
 * |RMSD3 = RMSDmin| = 13
 * |RMSD4 = RMSDmin| = 13
 * |RMSD5 = RMSDmin| = 10
 * |RMSD6 = RMSDmin| = 11
 * |RMSD7 = RMSDmin| = 14
-* |RMSD8 = RMSDmin| = 7
+* |RMSD8 = RMSDmin| = 6
 * |RMSD9 = RMSDmin| = 7
 
 Therefore, the % of complexes where the pose with the best model 1 score also has the lowest RMSD is 94 / 195 = 48%.
 
-For model 2 trained on PDBbind v2007 in scheme 1 using the best weight 0.015
+For model 2 trained on PDBbind v2007 in scheme 1 using the best weight 0.010
 
-* |RMSD1 = RMSDmin| = 60
-* |RMSD2 = RMSDmin| = 28
-* |RMSD3 = RMSDmin| = 19
-* |RMSD4 = RMSDmin| = 23
-* |RMSD5 = RMSDmin| = 15
-* |RMSD6 = RMSDmin| = 13
-* |RMSD7 = RMSDmin| = 12
-* |RMSD8 = RMSDmin| = 10
-* |RMSD9 = RMSDmin| = 15
-
-Therefore, the % of complexes where the pose with the best model 2 score also has the lowest RMSD is 60 / 195 = 31%.
-
-For model 3 trained on PDBbind v2007 in scheme 1 using the best seed 26894
-
-* |RMSD1 = RMSDmin| = 61
-* |RMSD2 = RMSDmin| = 25
-* |RMSD3 = RMSDmin| = 21
-* |RMSD4 = RMSDmin| = 21
-* |RMSD5 = RMSDmin| = 12
-* |RMSD6 = RMSDmin| = 14
-* |RMSD7 = RMSDmin| = 11
-* |RMSD8 = RMSDmin| = 13
-* |RMSD9 = RMSDmin| = 17
-
-Therefore, the % of complexes where the pose with the best model 3 score also has the lowest RMSD is 61 / 195 = 31%.
-
-For model 4 trained on PDBbind v2007 in scheme 1 using the best seed 26894
-
-* |RMSD1 = RMSDmin| = 60
+* |RMSD1 = RMSDmin| = 59
 * |RMSD2 = RMSDmin| = 32
-* |RMSD3 = RMSDmin| = 23
-* |RMSD4 = RMSDmin| = 10
-* |RMSD5 = RMSDmin| = 9
-* |RMSD6 = RMSDmin| = 20
+* |RMSD3 = RMSDmin| = 16
+* |RMSD4 = RMSDmin| = 21
+* |RMSD5 = RMSDmin| = 21
+* |RMSD6 = RMSDmin| = 12
+* |RMSD7 = RMSDmin| = 8
+* |RMSD8 = RMSDmin| = 13
+* |RMSD9 = RMSDmin| = 13
+
+Therefore, the % of complexes where the pose with the best model 2 score also has the lowest RMSD is 59 / 195 = 30%.
+
+For model 3 trained on PDBbind v2007 in scheme 1 using the best seed 99789
+
+* |RMSD1 = RMSDmin| = 53
+* |RMSD2 = RMSDmin| = 32
+* |RMSD3 = RMSDmin| = 20
+* |RMSD4 = RMSDmin| = 15
+* |RMSD5 = RMSDmin| = 16
+* |RMSD6 = RMSDmin| = 16
 * |RMSD7 = RMSDmin| = 12
 * |RMSD8 = RMSDmin| = 13
-* |RMSD9 = RMSDmin| = 16
+* |RMSD9 = RMSDmin| = 18
 
-Therefore, the % of complexes where the pose with the best model 4 score also has the lowest RMSD is 60 / 195 = 31%.
+Therefore, the % of complexes where the pose with the best model 3 score also has the lowest RMSD is 53 / 195 = 27%.
+
+For model 4 trained on PDBbind v2007 in scheme 1 using the best seed 52857
+
+* |RMSD1 = RMSDmin| = 59
+* |RMSD2 = RMSDmin| = 40
+* |RMSD3 = RMSDmin| = 16
+* |RMSD4 = RMSDmin| = 14
+* |RMSD5 = RMSDmin| = 10
+* |RMSD6 = RMSDmin| = 21
+* |RMSD7 = RMSDmin| = 12
+* |RMSD8 = RMSDmin| = 15
+* |RMSD9 = RMSDmin| = 8
+
+Therefore, the % of complexes where the pose with the best model 4 score also has the lowest RMSD is 59 / 195 = 30%.
 
 ### Rescoring docked poses on dataset 2
 
