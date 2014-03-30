@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ntsts=$(echo 195 201 382)
-ntrns=$(echo 247 1105 2280)
+ntrns=$(echo 247 1105 2280 792 1300 2059 2897)
 echo x,model,ntrn,ntst,rmse,sdev,pcor,scor,kcor
 for x in 2 4; do
 	cd x$x
