@@ -20,6 +20,7 @@ for x in 2 4; do
 	cd rf
 	for ntrn in $ntrns; do
 		rf-train ../trn-$ntrn-yxi.csv trn-$ntrn.rf > trn-$ntrn.txt
+		tail -n +6 trn-$ntrn.txt | awk '{print substr($0,4,8)}' | ../../varimpplot.R $ntrn
 		for ntst in $ntsts; do
 			rf-test trn-$ntrn.rf ../tst-$ntst-yxi.csv > trn-$ntrn-tst-$ntst-iyp.csv
 			../../iyprplot.R $ntrn $ntst
