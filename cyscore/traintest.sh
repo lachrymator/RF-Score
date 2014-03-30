@@ -6,24 +6,18 @@ for x in 2 4; do
 	cd x$x
 	cd mlr
 	for ntrn in $ntrns; do
-		mkdir -p trn-$ntrn
-		cd trn-$ntrn
-		../mlr.R $ntrn
-		echo $x,MLR,$ntrn,$(tail -1 tst-195-stat.csv),$(tail -1 tst-201-stat.csv),$(tail -1 tst-382-stat.csv)
-		cd ..
+		./mlr.R $ntrn
+		echo $x,MLR,$ntrn,$(tail -1 trn-$ntrn-tst-195-stat.csv),$(tail -1 trn-$ntrn-tst-201-stat.csv),$(tail -1 trn-$ntrn-tst-382-stat.csv)
 	done
 	cd ..
 	cd rf
 	for ntrn in $ntrns; do
-		mkdir -p trn-$ntrn
-		cd trn-$ntrn
-		rf-train ../../trn-$ntrn-yxi.csv trn.rf > trn.txt
+		rf-train ../trn-$ntrn-yxi.csv trn-$ntrn.rf > trn-$ntrn.txt
 		for ntst in $ntsts; do
-			rf-test trn.rf ../../tst-$ntst-yxi.csv > tst-$ntst-iyp.csv
-			tail -n +2 tst-$ntst-iyp.csv | cut -d, -f2,3 | rf-stat > tst-$ntst-stat.csv
+			rf-test trn-$ntrn.rf ../tst-$ntst-yxi.csv > trn-$ntrn-tst-$ntst-iyp.csv
+			tail -n +2 trn-$ntrn-tst-$ntst-iyp.csv | cut -d, -f2,3 | rf-stat > trn-$ntrn-tst-$ntst-stat.csv
 		done
-		echo $x,RF,$ntrn,$(tail -1 tst-195-stat.csv),$(tail -1 tst-201-stat.csv),$(tail -1 tst-382-stat.csv)
-		cd ..
+		echo $x,RF,$ntrn,$(tail -1 trn-$ntrn-tst-195-stat.csv),$(tail -1 trn-$ntrn-tst-201-stat.csv),$(tail -1 trn-$ntrn-tst-382-stat.csv)
 	done
 	cd ..
 	cd ..
