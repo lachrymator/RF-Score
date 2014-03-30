@@ -9,6 +9,7 @@ d["regressed"]=fitted(r)
 write.csv(c(d["PDB"],d["pbindaff"],d["predicted"],round(d["regressed"],2)),row.names=F,quote=F,file=sprintf("pdbbind-%s-trn-%s-tst-%s-iypr.csv",v,trn,tst))
 n=nrow(d) # Number of samples.
 xylim=c(0,14)
+if (n == 382) xylim=c(0,12)
 for (p in c("predicted","regressed"))
 {
 	l=substr(p,1,1)
