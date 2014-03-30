@@ -6,9 +6,9 @@ for x in 2 4; do
 	cd x$x
 	cd mlr
 	for ntrn in $ntrns; do
-		./mlrtrain.R $ntrn
+		../mlrtrain.R $ntrn
 		for ntst in $ntsts; do
-			./mlrtest.R $ntrn $ntst
+			../mlrtest.R $ntrn $ntst
 			echo $x,MLR,$ntrn,$(tail -1 trn-$ntrn-tst-$ntst-stat.csv)
 		done
 	done
