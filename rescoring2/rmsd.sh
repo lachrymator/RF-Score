@@ -75,23 +75,22 @@ for s in 1 2; do
 			i=$((i+1))
 		done
 	done
-	echo "condition,#,%"
 	for i in {0..5}; do
-		echo RMSD1"<"${rmsdts[i]},${rmsd1s[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsd1s[i]} * 100 / $k"))%
+		echo "* |RMSD1 < ${rmsdts[i]}| = "${rmsd1s[i]}
 	done
 	for i in {0..5}; do
-		echo RMSDm"<"${rmsdts[i]},${rmsdms[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdms[i]} * 100 / $k"))%
+		echo "* |RMSDm < ${rmsdts[i]}| = "${rmsdms[i]}
 	done
 	for i in {0..8}; do
-		echo "RMSD$[i+1]=RMSDm",${rmsdis1[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis1[i]} * 100 / $k"))%
+		echo "* |RMSD$[i+1] = RMSDm| = "${rmsdis1[i]}
 	done
 	for i in {0..8}; do
-		echo "RMSD$[i+1]=RMSDm",${rmsdis2[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis2[i]} * 100 / $k"))%
+		echo "* |RMSD$[i+1] = RMSDm| = "${rmsdis2[i]}
 	done
 	for i in {0..8}; do
-		echo "RMSD$[i+1]=RMSDm",${rmsdis3[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis3[i]} * 100 / $k"))%
+		echo "* |RMSD$[i+1] = RMSDm| = "${rmsdis3[i]}
 	done
 	for i in {0..8}; do
-		echo "RMSD$[i+1]=RMSDm",${rmsdis4[i]},$(printf "%.0f\n" $(bc -l <<< "${rmsdis4[i]} * 100 / $k"))%
+		echo "* |RMSD$[i+1] = RMSDm| = "${rmsdis4[i]}
 	done
 done
