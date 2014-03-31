@@ -24,6 +24,6 @@ if (n == 2) {
 	h=800
 }
 ord=order(imp)
-tiff(sprintf("trn-%s-varimp.tiff",ntrn), compression="lzw", height=h)
+png(sprintf("trn-%s-varimp.png",ntrn),bg="transparent",width=960,height=h*2,res=120)
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 dotchart(imp[ord,1], labels=labels[ord], xlab="%IncMSE", main="Variable Importance")
