@@ -22,6 +22,9 @@ if (n == 2) {
 } else if (n == 4 + 6 + 36) {
 	labels=c(labels4,labels6,labels36)
 	h=800
+} else if (n == 6 + 36) {
+	labels=c(labels6,labels36)
+	h=800
 }
 ord=order(imp)
 png(sprintf("trn-%s-varimp.png",ntrn),bg="transparent",width=960,height=h*2,res=120)
