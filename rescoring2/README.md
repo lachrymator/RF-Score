@@ -102,7 +102,7 @@ The chosen poses are all the 9 docked poses. If a structure produces less than 9
 
 ### Scheme 6
 
-The chosen poses are the 2 docked poses with the lowest and the second lowest Vina score. If a structure produces less than 2 docked poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1. Therefore there are 10 * 2 + 1 = 21 features for model 2 and 3, and (36 + 10) * 2 + 1 = 93 features for model 4.
+The chosen poses are the 2 docked poses with the lowest and the second lowest Vina score. If a structure produces less than 2 docked poses, the features of the pose with the lowest Vina score are repeated, e.g. 1 + 1. Therefore there are 10 * 2 + 1 = 21 features for models 2 and 3, and (36 + 10) * 2 + 1 = 93 features for model 4.
 
 ## Experiments
 
