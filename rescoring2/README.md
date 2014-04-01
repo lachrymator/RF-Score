@@ -274,46 +274,46 @@ For model 1 trained on PDBbind v2007 in scheme 1
 
 Therefore, the % of complexes where the pose with the best model 1 score also has the lowest RMSD is 208 / 382 = 54%.
 
-For model 2 trained on PDBbind v2007 in scheme 1 using the best weight 0.007
+For model 2 trained on PDBbind v2007 in scheme 1 using the best weight 0.009
 
-* |RMSD1 = RMSDm| = 148
-* |RMSD2 = RMSDm| = 71
-* |RMSD3 = RMSDm| = 41
-* |RMSD4 = RMSDm| = 37
-* |RMSD5 = RMSDm| = 23
-* |RMSD6 = RMSDm| = 20
-* |RMSD7 = RMSDm| = 13
-* |RMSD8 = RMSDm| = 15
+* |RMSD1 = RMSDm| = 143
+* |RMSD2 = RMSDm| = 79
+* |RMSD3 = RMSDm| = 39
+* |RMSD4 = RMSDm| = 39
+* |RMSD5 = RMSDm| = 22
+* |RMSD6 = RMSDm| = 18
+* |RMSD7 = RMSDm| = 16
+* |RMSD8 = RMSDm| = 12
 * |RMSD9 = RMSDm| = 14
 
-Therefore, the % of complexes where the pose with the best model 2 score also has the lowest RMSD is 148 / 382 = 39%.
+Therefore, the % of complexes where the pose with the best model 2 score also has the lowest RMSD is 143 / 382 = 37%.
 
-For model 3 trained on PDBbind v2007 in scheme 1 using the best seed 89757
+For model 3 trained on PDBbind v2007 in scheme 1 using the best seed 72551
 
-* |RMSD1 = RMSDm| = 118
-* |RMSD2 = RMSDm| = 63
-* |RMSD3 = RMSDm| = 36
-* |RMSD4 = RMSDm| = 34
-* |RMSD5 = RMSDm| = 37
-* |RMSD6 = RMSDm| = 36
-* |RMSD7 = RMSDm| = 20
-* |RMSD8 = RMSDm| = 23
-* |RMSD9 = RMSDm| = 15
-
-Therefore, the % of complexes where the pose with the best model 3 score also has the lowest RMSD is 118 / 382 = 31%.
-
-For model 4 trained on PDBbind v2007 in scheme 1 using the best seed 51105
-
-* |RMSD1 = RMSDm| = 140
-* |RMSD2 = RMSDm| = 67
+* |RMSD1 = RMSDm| = 119
+* |RMSD2 = RMSDm| = 58
 * |RMSD3 = RMSDm| = 42
-* |RMSD4 = RMSDm| = 33
-* |RMSD5 = RMSDm| = 32
-* |RMSD6 = RMSDm| = 21
-* |RMSD7 = RMSDm| = 18
-* |RMSD8 = RMSDm| = 14
-* |RMSD9 = RMSDm| = 15
+* |RMSD4 = RMSDm| = 44
+* |RMSD5 = RMSDm| = 31
+* |RMSD6 = RMSDm| = 28
+* |RMSD7 = RMSDm| = 26
+* |RMSD8 = RMSDm| = 22
+* |RMSD9 = RMSDm| = 12
 
-Therefore, the % of complexes where the pose with the best model 4 score also has the lowest RMSD is 140 / 382 = 37%.
+Therefore, the % of complexes where the pose with the best model 3 score also has the lowest RMSD is 119 / 382 = 31%.
+
+For model 4 trained on PDBbind v2007 in scheme 1 using the best seed 72551
+
+* |RMSD1 = RMSDm| = 141
+* |RMSD2 = RMSDm| = 57
+* |RMSD3 = RMSDm| = 52
+* |RMSD4 = RMSDm| = 32
+* |RMSD5 = RMSDm| = 26
+* |RMSD6 = RMSDm| = 18
+* |RMSD7 = RMSDm| = 20
+* |RMSD8 = RMSDm| = 20
+* |RMSD9 = RMSDm| = 16
+
+Therefore, the % of complexes where the pose with the best model 4 score also has the lowest RMSD is 141 / 382 = 37%.
 
 [DOI: 10.1021/ci9000053]: http://dx.doi.org/10.1021/ci9000053
