@@ -2,9 +2,9 @@
 args=commandArgs(trailingOnly=T)
 v=args[1]
 t=args[2]
+c=read.csv(sprintf("pdbbind-%s-trn-coef.csv",v))[,2]
 d=read.csv(sprintf("pdbbind-%s-%s-iyp.csv",v,t))
-r=lm(pbindaff~predicted,d)
-d["regressed"]=fitted(r)
+d["regressed"]=c[1]+c[2]*d["predicted"]
 write.csv(c(d["PDB"],d["pbindaff"],d["predicted"],round(d["regressed"],2)),row.names=F,quote=F,file=sprintf("pdbbind-%s-%s-iypr.csv",v,t))
 n=nrow(d) # Number of samples.
 xylim=c(0,14)
