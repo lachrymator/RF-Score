@@ -101,13 +101,13 @@ For example,
 For script files, their functions and execution orders are as follows:
 
 * `duplicates.sh` computes the number of duplicate complexes between training sets and test set and among training sets in each of the 2 datasets.
-* `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-tst-iyp.csv.
+* `model1prepare.sh` generates model1/set{1,2}/pdbbind-2007-{trn,tst}-iyp.csv.
 * `model4prepare.sh` generates model{2,3,4,5}/set{1,2}/{tst-yxi.csv,pdbbind-$v-trn-yxi.csv}.
-* `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-tst-stat.csv.
+* `model1.sh` tests model 1 and generates model1/set{1,2}/pdbbind-2007-{trn,tst}-stat.csv.
 * `model2.sh` trains and tests model 2 with a grid search of wNrot in [0.005 to 0.020] with a step size of 0.001, and generates model2/set{1,2}/tst-stat.csv.
 * `model3.sh` trains and tests models 3 and 4 with 10 seeds, and generates model{3,4}/set{1,2}/tst-stat.csv.
 * `maxerr.sh` finds the top 10 complexes with the largest absolute error between measured pKd and model 1 pKd and between measured pKd and model 4 pKd. Its output is saved to maxerr.csv.
-* `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-yxi.csv using multiple linear regression, and writes the intercept and coefficients to model2/set{1,2}/$w/pdbbind-$v-trn-coef.csv.
+* `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-yxi.csv using multiple linear regression, and writes the intercept and coefficients to model2/set{1,2}/$w/pdbbind-$v.csv.
 * `mlrtest.R` tests model 2 on model2/set{1,2}/tst-yxi.csv, and writes the statistics to model2/set{1,2}/$w/pdbbind-$v-tst-stat.csv.
 * `couplelm.R` reads pdbbind-$v-trn-iyp.csv and writes pdbbind-$v-trn-coef.csv.
 * `iyprplot.R` writes models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-{iypr,stat}.csv and plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-y{p,r}.tiff.
