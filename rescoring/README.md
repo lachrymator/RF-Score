@@ -109,6 +109,7 @@ For script files, their functions and execution orders are as follows:
 * `maxerr.sh` finds the top 10 complexes with the largest absolute error between measured pKd and model 1 pKd and between measured pKd and model 4 pKd. Its output is saved to maxerr.csv.
 * `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-yxi.csv using multiple linear regression, and writes the intercept and coefficients to model2/set{1,2}/$w/pdbbind-$v-trn-coef.csv.
 * `mlrtest.R` tests model 2 on model2/set{1,2}/tst-yxi.csv, and writes the statistics to model2/set{1,2}/$w/pdbbind-$v-tst-stat.csv.
+* `couplelm.R` reads pdbbind-$v-trn-iyp.csv and writes pdbbind-$v-trn-coef.csv.
 * `iyprplot.R` writes models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-{iypr,stat}.csv and plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-y{p,r}.tiff.
 * `varImpPlot.R` plots models{3,4,5}/set{1,2}/$w/pdbbind-$v-trn-varimpplot.tiff.
 * `boxmed.R` plots model{2,3,4,5}/set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
