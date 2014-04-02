@@ -13,15 +13,14 @@ for m in 3 4 5; do
 				echo $w
 				mkdir -p $w
 				cd $w
-				rf-train ../pdbbind-$v-trn-yxi.csv pdbbind-$v-trn.rf $w > pdbbind-$v-trn.txt
-				rf-test pdbbind-$v-trn.rf ../pdbbind-$v-trn-yxi.csv > pdbbind-$v-trn-iyp.csv
-				rf-test pdbbind-$v-trn.rf ../tst-yxi.csv > pdbbind-$v-tst-iyp.csv
-				rm pdbbind-$v-trn.rf
+				rf-train ../pdbbind-$v-trn-yxi.csv pdbbind-$v.rf $w > pdbbind-$v.txt
+				rf-test pdbbind-$v.rf ../pdbbind-$v-trn-yxi.csv > pdbbind-$v-trn-iyp.csv
+				rf-test pdbbind-$v.rf ../tst-yxi.csv > pdbbind-$v-tst-iyp.csv
 				../../../iyprplot.R $v trn
 				../../../iyprplot.R $v tst
 				rm pdbbind-$v-trn-iyp.csv
 				rm pdbbind-$v-tst-iyp.csv
-				tail -n +6 pdbbind-$v-trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v
+				tail -n +6 pdbbind-$v.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v
 				cd ..
 				echo -n $w, >> pdbbind-$v-tst-stat.csv
 				echo -n $w, >> pdbbind-$v-trn-stat.csv
