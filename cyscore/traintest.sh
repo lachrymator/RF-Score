@@ -11,7 +11,6 @@ for x in 2 4 10 40 46 42; do
 		for ntst in $ntsts; do
 			../mlrtest.R $ntrn $ntst
 			../../iyprplot.R $ntrn $ntst
-			rm trn-$ntrn-tst-$ntst-iyp.csv
 			echo $x,MLR,$ntrn,$(tail -1 trn-$ntrn-tst-$ntst-stat.csv)
 		done
 	done
@@ -24,7 +23,6 @@ for x in 2 4 10 40 46 42; do
 		for ntst in $ntsts; do
 			rf-test trn-$ntrn.rf ../tst-$ntst-yxi.csv > trn-$ntrn-tst-$ntst-iyp.csv
 			../../iyprplot.R $ntrn $ntst
-			rm trn-$ntrn-tst-$ntst-iyp.csv
 			echo $x,RF,$ntrn,$(tail -1 trn-$ntrn-tst-$ntst-stat.csv)
 		done
 	done
