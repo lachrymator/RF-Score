@@ -92,15 +92,16 @@ int main(int argc, char* argv[])
 	const float a = (y1sum-b*x1sum)/n;
 
 	// Compute rmse, sdev, pcor, scor, kcor.
-	float se1 = 0, se2 = 0;
+	float se2p = 0, se2r;
 	for (size_t i = 0; i < n; ++i)
 	{
-		const float r = a + b * x[i];
-		se1 +=  r - y[i];
-		se2 += (r - y[i]) * (r - y[i]);
+		const float p = x[i];
+		const float r = a + b * p;
+		se2p += (p - y[i]) * (p - y[i]);
+		se2r += (r - y[i]) * (r - y[i]);
 	}
-	const auto rmse = sqrt(se2 / n);
-	const auto sdev = sqrt(se2 / (n - 2));
+	const auto rmse = sqrt(se2p / n);
+	const auto sdev = sqrt(se2r / (n - 2));
 	const auto pcor = pearson(y, x);
 	const auto scor = spearman(y, x);
 	const auto kcor = kendall(y, x);
