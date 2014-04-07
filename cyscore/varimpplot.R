@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 args=commandArgs(trailingOnly=T)
-ntrn=args[1]
+trn=args[1]
 labels2=c("Hydrophobic","Ent")
 labels4=c("Hydrophobic","Vdw","HBond","Ent")
 labels6=c("gauss1","gauss2","repulsion","hydrophobic","hydrogenbonding","flexibility")
@@ -27,6 +27,6 @@ if (n == 2) {
 	h=800
 }
 ord=order(imp)
-png(sprintf("trn-%s.png",ntrn),bg="transparent",width=960,height=h*2,res=120)
+png(sprintf("trn-%s.png",trn),bg="transparent",width=960,height=h*2,res=120)
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 dotchart(imp[ord,1], labels=labels[ord], xlab="%IncMSE", main="Variable Importance")

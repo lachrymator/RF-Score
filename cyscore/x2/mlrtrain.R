@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 args=commandArgs(trailingOnly=T)
-ntrn=args[1]
-trn=read.csv(sprintf("../trn-%s-yxi.csv",ntrn))
+trn=args[1]
+trn=read.csv(sprintf("../trn-%s-yxi.csv",trn))
 c=coefficients(lm(pbindaff~Hydrophobic+Ent,trn))
 c[is.na(c)]=0
-write.csv(c,quote=F,file=sprintf("trn-%s.csv",ntrn))
+write.csv(c,quote=F,file=sprintf("trn-%s.csv",trn))
