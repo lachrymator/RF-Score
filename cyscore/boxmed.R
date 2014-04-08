@@ -25,7 +25,7 @@ for (m in c("mlr","rf"))
 		}
 		for (ci in 1:nc)
 		{
-			png(sprintf("%s/tst-%d-%s-boxplot.png",m,tst,statc[ci]),bg="transparent",width=960,height=960,res=120)
+			png(sprintf("%s/tst-%d-%s.png",m,tst,statc[ci]),bg="transparent",width=960,height=960,res=120)
 			par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 			for (xi in 1:nx)
 			{
