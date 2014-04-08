@@ -1,42 +1,42 @@
 #!/usr/bin/env Rscript
-nm=6 # Number of models.
-ns=3 # Number of datasets.
-nv=7 # Number of training sets per dataset.
+nx=6 # Number of features.
+ntsts=3 # Number of test sets.
+ntrns=7 # Number of training sets.
 nc=4 # Number of performance measures.
-nx=c(2,4,10,40,42,46)
-ntsts=c(195,201,382)
-ntrns=c(247,1105,2280,792,1300,2059,2897)
+xs=c(2,4,10,40,42,46)
+tsts=c(195,201,382)
+trns=c(247,1105,2280,792,1300,2059,2897)
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
-for (ntsti in 1:3)
+for (tsti in 1:ntsts)
 {
-	ntst=ntsts[ntsti]
-	box=array(list(),dim=c(nm,nv,nc))
-	for (ntrni in 1:nv)
+	tst=tsts[tsti]
+	box=array(list(),dim=c(nx,ntrns,nc))
+	for (trni in 1:ntrns)
 	{
-		ntrn=ntrns[ntrni]
-		for (m in 1:nm)
+		trn=trns[trni]
+		for (xi in 1:nx)
 		{
-			stat=read.csv(sprintf("x%d/mlr/trn-%d-tst-%d-stat.csv",nx[m],ntrn,ntst))
+			stat=read.csv(sprintf("x%d/mlr/trn-%d-tst-%d-stat.csv",xs[xi],trn,tst))
 			for (ci in 1:nc)
 			{
-				box[m,vi,ci]=stat[statc[ci]]
+				box[xi,trni,ci]=stat[statc[ci]]
 			}
 		}
 	}
 	for (ci in 1:nc)
 	{
-		png(sprintf("tst-%d-%s-boxplot.png",ntst,statc[ci]),bg="transparent",width=960,height=960,res=120)
+		png(sprintf("mlr/tst-%d-%s-boxplot.png",tst,statc[ci]),bg="transparent",width=960,height=960,res=120)
 		par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 #		ylim=c(min(med[,,ci]),max(med[,,ci]))
-		for (m in 1:nm)
+		for (xi in 1:nx)
 		{
-			boxplot(box[m,,ci],xaxt="n",yaxt="n",xlab="",ylab="",border=m)
+			boxplot(box[xi,,ci],xaxt="n",yaxt="n",xlab="",ylab="",border=xi)
 			par(new=T)
 		}
-		title(main=sprintf("Boxplot of %s",statx[ci]),xlab="Number of training complexes",ylab=statx[ci])
-		legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
-		axis(1,at=1:nv,labels=ntrns)
+		title(xlab="Number of training complexes",ylab=statx[ci])
+		legend(ifelse(ci<=2,"topright","bottomright"),title="Features",legend=1:nx,fill=1:nx,cex=1.3)
+		axis(1,at=1:ntrns,labels=trns)
 		axis(2)
 		dev.off()
 	}
