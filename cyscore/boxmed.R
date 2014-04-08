@@ -1,16 +1,13 @@
 #!/usr/bin/env Rscript
 nx=6 # Number of features.
-ntsts=3 # Number of test sets.
 ntrns=7 # Number of training sets.
 nc=4 # Number of performance measures.
 xs=c(2,4,10,40,42,46)
-tsts=c(195,201,382)
 trns=c(247,1105,2280,792,1300,2059,2897)
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
-for (tsti in 1:ntsts)
+for (tst in c(195,201,382))
 {
-	tst=tsts[tsti]
 	box=array(list(),dim=c(nx,ntrns,nc))
 	for (trni in 1:ntrns)
 	{
