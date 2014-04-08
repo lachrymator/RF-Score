@@ -32,7 +32,7 @@ for (tst in c(195,201,382))
 			par(new=T)
 		}
 		title(xlab="Number of training complexes",ylab=statx[ci])
-		legend(ifelse(ci<=2,"topright","bottomright"),title="Features",legend=1:nx,fill=1:nx,cex=1.3)
+		legend(ifelse(ci<=2,"topright","bottomright"),title="Features",legend=xs,fill=1:nx,cex=1.3)
 		axis(1,at=1:ntrns,labels=trns)
 		axis(2)
 		dev.off()
