@@ -6,35 +6,38 @@ xs=c(2,4,10,40,42,46)
 trns=c(247,1105,2280,792,1300,2059,2897)
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
-for (tst in c(195,201,382))
+for (m in c("mlr","rf"))
 {
-	box=array(list(),dim=c(nx,ntrns,nc))
-	for (trni in 1:ntrns)
+	for (tst in c(195,201,382))
 	{
-		trn=trns[trni]
-		for (xi in 1:nx)
+		box=array(list(),dim=c(nx,ntrns,nc))
+		for (trni in 1:ntrns)
 		{
-			stat=read.csv(sprintf("x%d/mlr/trn-%d-tst-%d-stat.csv",xs[xi],trn,tst))
-			for (ci in 1:nc)
+			trn=trns[trni]
+			for (xi in 1:nx)
 			{
-				box[xi,trni,ci]=stat[statc[ci]]
+				stat=read.csv(sprintf("x%d/%s/trn-%d-tst-%d-stat.csv",xs[xi],m,trn,tst))
+				for (ci in 1:nc)
+				{
+					box[xi,trni,ci]=stat[statc[ci]]
+				}
 			}
 		}
-	}
-	for (ci in 1:nc)
-	{
-		png(sprintf("mlr/tst-%d-%s-boxplot.png",tst,statc[ci]),bg="transparent",width=960,height=960,res=120)
-		par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-#		ylim=c(min(med[,,ci]),max(med[,,ci]))
-		for (xi in 1:nx)
+		for (ci in 1:nc)
 		{
-			boxplot(box[xi,,ci],xaxt="n",yaxt="n",xlab="",ylab="",border=xi)
-			par(new=T)
+			png(sprintf("%s/tst-%d-%s-boxplot.png",m,tst,statc[ci]),bg="transparent",width=960,height=960,res=120)
+			par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
+#			ylim=c(min(box[,,ci]),max(box[,,ci]))
+			for (xi in 1:nx)
+			{
+				boxplot(box[xi,,ci],xaxt="n",yaxt="n",xlab="",ylab="",border=xi)
+				par(new=T)
+			}
+			title(xlab="Number of training complexes",ylab=statx[ci])
+			legend(ifelse(ci<=2,"topright","bottomright"),title="Features",legend=xs,fill=1:nx,cex=1.3)
+			axis(1,at=1:ntrns,labels=trns)
+			axis(2)
+			dev.off()
 		}
-		title(xlab="Number of training complexes",ylab=statx[ci])
-		legend(ifelse(ci<=2,"topright","bottomright"),title="Features",legend=xs,fill=1:nx,cex=1.3)
-		axis(1,at=1:ntrns,labels=trns)
-		axis(2)
-		dev.off()
 	}
 }
