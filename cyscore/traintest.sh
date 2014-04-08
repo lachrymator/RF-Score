@@ -2,7 +2,7 @@
 tsts=$(echo 195 201 382)
 trns=$(echo 247 1105 2280 792 1300 2059 2897)
 echo x,model,trn,tst,rmse,sdev,pcor,scor,kcor
-for x in 2 4 10 40 46 42; do
+for x in 2 4 10 40 42 46; do
 	cd x$x
 	mkdir -p mlr
 	cd mlr
