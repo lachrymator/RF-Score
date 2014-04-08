@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 tsts=$(echo 195 201 382)
 trns=$(echo 247 1105 2280 792 1300 2059 2897)
-echo x,model,trn,tst,rmse,sdev,pcor,scor,kcor
+echo model,x,trn,tst,rmse,sdev,pcor,scor,kcor
 for x in 2 4 10 40 42 46; do
 	cd x$x
 	mkdir -p mlr
@@ -11,7 +11,7 @@ for x in 2 4 10 40 42 46; do
 		for tst in $tsts; do
 			../mlrtest.R $trn $tst
 			../../iyprplot.R $trn $tst
-			echo $x,MLR,$trn,$(tail -1 trn-$trn-tst-$tst-stat.csv)
+			echo MLR,$x,$trn,$(tail -1 trn-$trn-tst-$tst-stat.csv)
 		done
 	done
 	cd ..
@@ -23,7 +23,7 @@ for x in 2 4 10 40 42 46; do
 		for tst in $tsts; do
 			rf-test trn-$trn.rf ../tst-$tst-yxi.csv > trn-$trn-tst-$tst-iyp.csv
 			../../iyprplot.R $trn $tst
-			echo $x,RF,$trn,$(tail -1 trn-$trn-tst-$tst-stat.csv)
+			echo RF,$x,$trn,$(tail -1 trn-$trn-tst-$tst-stat.csv)
 		done
 	done
 	cd ..
