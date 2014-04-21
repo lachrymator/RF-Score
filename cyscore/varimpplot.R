@@ -9,24 +9,25 @@ imp=read.table(file("stdin"))
 n=nrow(imp)
 if (n == 2) {
 	labels=labels2;
-	h=480
+	h=3
 } else if (n == 4) {
 	labels=labels4
-	h=480
+	h=4
 } else if (n == 4 + 6) {
 	labels=c(labels4,labels6)
-	h=480
+	h=5
 } else if (n == 4 + 36) {
 	labels=c(labels4,labels36)
-	h=800
+	h=10
 } else if (n == 4 + 6 + 36) {
 	labels=c(labels4,labels6,labels36)
-	h=800
+	h=11
 } else if (n == 6 + 36) {
 	labels=c(labels6,labels36)
-	h=800
+	h=10
 }
 ord=order(imp)
-png(sprintf("trn-%s.png",trn),bg="transparent",width=960,height=h*2,res=120)
+setEPS()
+postscript(sprintf("trn-%s.eps",trn),height=4)
 par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 dotchart(imp[ord,1], labels=labels[ord], xlab="%IncMSE", main="Variable Importance")
