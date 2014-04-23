@@ -6,7 +6,7 @@ tst=args[3]
 s=args[4]
 p=read.csv(sprintf("pdbbind-%s-trn-%s-tst-%s-iyp.csv",v,trn,tst))
 id=sprintf("../../set%s/tst-2-id.csv",s) # model 1
-if (!file.exists(id)) id=paset("../",id,sep="") # models 2,3,4
+if (!file.exists(id)) id=paste("../",id,sep="") # models 2,3,4
 d=read.csv(id)
 n=nrow(d)
 tiff(sprintf("pdbbind-%s-trn-%s-tst-%s-dp.tiff",v,trn,tst),compress="lzw")
