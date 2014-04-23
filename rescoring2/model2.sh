@@ -23,6 +23,7 @@ for m in 2; do
 					cd $w
 					../../../mlrtrain.R $v $trn $w
 					../../../mlrtest.R $v $trn 0 $w trn
+					tail -n +2 pdbbind-$v-trn-$trn-trn-$trn-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					for tst in $tsts; do
 						../../../mlrtest.R $v $trn $tst $w tst
 						../../../iypplot.R $v $trn $tst
