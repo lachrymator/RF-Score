@@ -26,14 +26,13 @@ for m in 3 4; do
 					tail -n +2 pdbbind-$v-trn-$trn-trn-$trn-iyp.csv | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-$trn-trn-$trn-stat.csv
 					for tst in $tsts; do
 						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv > pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
-						../../../iyprplot.R $v $trn $tst
-						rm pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
+						../../../iypplot.R $v $trn $tst
 					done
 					rm pdbbind-$v-trn-$trn.rf
 					tail -n +6 pdbbind-$v-trn-$trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v $trn
 					if [[ $trn -lt 5 ]]; then
-						cut -d, -f3,4 pdbbind-$v-trn-$trn-tst-2-iypr.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idpr.csv
-						../../../idprplot.R $v $trn 2
+						cut -d, -f3 pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
+						../../../idpplot.R $v $trn 2
 					fi
 					cd ..
 					echo -n $w, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv
