@@ -28,8 +28,7 @@ for m in 2; do
 						../../../iypplot.R $v $trn $tst
 					done
 					if [[ $trn -lt 5 ]]; then
-						cut -d, -f3 pdbbind-$v-trn-$trn-tst-2-iyp.csv | paste -d, ../../../set$s/tst-2-id.csv - > pdbbind-$v-trn-$trn-tst-2-idp.csv
-						../../../idpplot.R $v $trn 2
+						../../../idpplot.R $v $trn 2 $s
 					fi
 					cd ..
 					echo -n $w, >> pdbbind-$v-trn-$trn-trn-$trn-stat.csv

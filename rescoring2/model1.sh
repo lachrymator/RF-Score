@@ -7,8 +7,7 @@ for m in 1; do
 		for tst in 1 2; do
 			../../iypplot.R 2007 1 $tst
 		done
-		cut -d, -f3 pdbbind-2007-trn-1-tst-2-iyp.csv | paste -d, ../../set$s/tst-2-id.csv - > pdbbind-2007-trn-1-tst-2-idp.csv
-		../../idpplot.R 2007 1 2
+		../../idpplot.R 2007 1 2 $s
 		cd ..
 	done
 	cd ..
