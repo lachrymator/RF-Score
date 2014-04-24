@@ -18,7 +18,7 @@ for m in 3 4; do
 					cd $w
 					rf-train ../pdbbind-$v-trn-$trn-yxi.csv pdbbind-$v-trn-$trn.rf $w > pdbbind-$v-trn-$trn.txt
 					for tst in $tsts; do
-						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv | tail -n +2 | rf-stat > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv | tail -n +2 | cut -d, -f2,3 | rf-stat > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 					done
 					cd ..
 					for tst in $tsts; do
