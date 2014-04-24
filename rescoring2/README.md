@@ -154,7 +154,7 @@ For script files, their functions and execution orders are as follows:
 * `iypplot.R` writes models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-{iyp,stat}.csv and plots models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-yp.tiff.
 * `idpplot.R` plots models{1,2,3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2}-dp.tiff.
 * `varImpPlot.R` plots models{3,4}/set{1,2}/$w/pdbbind-$v-trn-{1,2,3,4,5,6}-varimpplot.tiff.
-* `boxmed.R` plots model{2,3,4}/set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, and set{1,2}/pdbbind-2007-trn-{1,2,3,4}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
+* `statplot.R` plots model{2,3,4}/set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/trn-{1,2,3,4,5,6}-tst-{1,2,5,6}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, and set{1,2}/pdbbind-2007-trn-{1,2,3,4}-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
 * `mlrtestp.R` tests model 2 on docked poses, and writes predicted pKd values to standard output. This R script is called by `rmsd.sh`.
 
 ## Results
