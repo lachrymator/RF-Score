@@ -42,3 +42,20 @@ Their intersections are as follows:
 * |1 ∩ 2| = 592
 * |1 ∩ 3| = 536
 * |2 ∩ 3| = 1178
+
+## Files
+
+The folders and files are organized hierarchically. Model-specific files are in the model{1,2,3,4} folders. Cross-model files are in the set3 folder.
+
+For data files, their nomenclature are as follows:
+
+* 0 means all
+* 1 means HSP90
+* 2 means CAH2
+* 3 means TRY1
+* 4 means HIVPR
+* 5 means THRB
+
+For example,
+
+* `set3/trn-0-tst-1-rmse.csv` means the median plot of RMSE of the four models trained on all complexes and tested on HSP90 complexes.
