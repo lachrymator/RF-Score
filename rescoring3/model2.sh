@@ -22,8 +22,10 @@ for m in 2; do
 						cut -d, -f2 ../../../set3/tst-$tst-iy.csv | paste -d, - pdbbind-$v-trn-$trn-tst-$tst-p.csv | rf-stat > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 					done
 					cd ..
-					echo -n $w, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
-					tail -1 $w/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+					for tst in $tsts; do
+						echo -n $w, >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						tail -1 $w/pdbbind-$v-trn-$trn-tst-$tst-stat.csv >> pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+					done
 				done
 				for tst in $tsts; do
 					b=$(tail -n +2 pdbbind-$v-trn-$trn-tst-$tst-stat.csv | sort -t, -k3,3n -k4,4n -k5,5nr -k6,6nr -k7,7nr | head -1)
