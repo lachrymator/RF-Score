@@ -26,7 +26,7 @@ RF::VinaElem
 
 The test set 0) and the three training sets 1), 2), 3) are as follows:
 
-0) PDBbind v2013 refined set (N = 2959) minus PDBbind v2010 refined set (N = 2061). Both sets have 1842 complexes in common. The 2bo4 and 1xr8 complexes are excluded from PDBbind v2010 refined set, so they are added back to this test set. Therefore this test set has N = 2959 - 1842 + 2 = 1119 complexes.
+0) PDBbind v2013 refined set (N = 2959) minus PDBbind v2010 refined set (N = 2061). Both sets have 1842 complexes in common. The 3rv4 protein consists of two Cs atoms which Vina does not support. The 2bo4 and 1xr8 complexes are excluded from PDBbind v2010 refined set, so they are added back to this test set. Therefore this test set has N = 2959 - 1842 - 1 + 2 = 1118 complexes.
 
 1) PDBbind v2002 refined set (N = 800). The 1tha protein fails PDB-to-PDBQT conversion by prepare_receptor4.py. The 1lkk, 1mfi, 7std, 1cet, 2std, 1els, 1c3x ligands fail PDB-to-PDBQT conversion by prepare_ligand4.py. It and the test set have 29 complexes in common. Therefore this training set has N = 800 - 8 - 29 = 763 complexes.
 
