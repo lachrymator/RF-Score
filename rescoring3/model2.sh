@@ -12,7 +12,7 @@ for m in 2; do
 				for tst in $tsts; do
 					echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
 				done
-				for w in $(seq 0.005 0.001 0.020); do
+				for w in $(seq 0.000 0.001 0.050); do
 					echo $w
 					mkdir -p $w
 					cd $w
