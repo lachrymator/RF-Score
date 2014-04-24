@@ -20,6 +20,7 @@ for m in 2; do
 					for tst in $tsts; do
 						../../../mlrtest.R $v $trn $tst $w
 						cut -d, -f2 ../../../set3/tst-$tst-iy.csv | paste -d, - pdbbind-$v-trn-$trn-tst-$tst-p.csv | rf-stat > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
+						rm pdbbind-$v-trn-$trn-tst-$tst-p.csv
 					done
 					cd ..
 					for tst in $tsts; do
