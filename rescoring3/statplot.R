@@ -21,11 +21,11 @@ for (trn in 0:0)
 			for (vi in 1:nv)
 			{
 				v=setv[vi]
-				trn_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-trn-%s-stat.csv",2,s,v,trn,trn))
-				ntrn[vi]=trn_stat["n"][1,1]
+				trn_yxi=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn))
+				ntrn[vi]=nrow(trn_yxi)
 				for (m in 1:nm)
 				{
-					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,1,trn),tst))
+					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),trn,tst))
 					for (ci in 1:nc)
 					{
 						med[m,vi,ci]=median(tst_stat[statc[ci]][,])
