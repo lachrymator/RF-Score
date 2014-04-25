@@ -304,7 +304,7 @@ Here is a comparison of prediction performance of the RF-Score variants.
     <td colspan="5">Evaluation on training samples (N = 1105)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>0.619</td><td>0.518</td><td>0.517</td><td>0.524</td>
+    <td>rmse</td><td>0.708</td><td>0.608</td><td>0.608</td><td>0.619</td>
   </tr>
   <tr>
     <td>sdev</td><td>0.620</td><td>0.518</td><td>0.517</td><td>0.525</td>
@@ -322,7 +322,7 @@ Here is a comparison of prediction performance of the RF-Score variants.
     <td colspan="5">Evaluation on testing samples (N = 195)</td>
   </tr>
   <tr>
-    <td>rmse</td><td>1.506</td><td>1.424</td><td>1.425</td><td>1.415</td>
+    <td>rmse</td><td>1.578</td><td>1.512</td><td>1.520</td><td>1.513</td>
   </tr>
   <tr>
     <td>sdev</td><td>1.514</td><td>1.431</td><td>1.432</td><td>1.423</td>
