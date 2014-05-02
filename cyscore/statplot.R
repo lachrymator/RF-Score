@@ -9,7 +9,7 @@ statx=c("RMSE","SD","Rp","Rs")
 nm=length(ms) # Number of models.
 ntrn=length(trns) # Number of training sets.
 nc=length(statc) # Number of performance measures.
-#setEPS()
+setEPS()
 med=array(dim=c(nm,ntrn,nc))
 for (trni in 1:ntrn)
 {
@@ -26,7 +26,7 @@ for (trni in 1:ntrn)
 for (ci in 1:nc)
 {
 	ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
-	png(sprintf("tst-%d-%s.png",tst,statc[ci]),bg="transparent",width=960,height=960,res=120)
+	postscript(sprintf("tst-%d-%s.eps",tst,statc[ci]))
 	par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 	for (mi in 1:nm)
 	{
