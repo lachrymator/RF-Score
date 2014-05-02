@@ -2,8 +2,8 @@
 ms=c("mlr","rf","rf","rf")
 xs=c(4,4,10,46)
 ts=c("MLR::Cyscore","RF::Cyscore","RF::CyscoreVina","RF::CyscoreVinaElem")
-trns=c(592,1184,1776,2367)
-tst=592
+trns=c(247,1105) # 247,2696 592,1184,1776,2367
+tst=195 # 201 592
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
 nm=length(ms) # Number of models.
@@ -33,8 +33,8 @@ for (ci in 1:nc)
 		plot(trns,med[mi,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=mi,col=mi)
 		par(new=T)
 	}
-	title(xlab="Number of training complexes",ylab=statx[ci])
-	legend("right",title="Models",legend=ts,fill=1:nm,cex=1.3)
+	title(main=sprintf("# test samples = %d, # training samples = %s",tst,paste(trns,collapse=", ")),xlab="Number of training complexes",ylab=statx[ci])
+	legend(ifelse(ci<=2,"bottomleft","topleft"),title="Models",legend=ts,fill=1:nm,cex=1.3)
 	axis(1)
 	axis(2)
 	dev.off()
