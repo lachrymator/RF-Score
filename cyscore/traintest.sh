@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-tsts=$(echo 195 201 382)
-trns=$(echo 247 1105 2280 792 1300 2059 2897)
+tsts=$(echo 195 201 382 592)
+trns=$(echo 247 1105 2280 792 1300 2059 2897 592 1184 1776 2367)
 echo model,x,trn,tst,rmse,sdev,pcor,scor,kcor
 for x in 2 4 10 40 42 46; do
 	cd x$x
