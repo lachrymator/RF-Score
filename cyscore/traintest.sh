@@ -45,3 +45,4 @@ for x in 4 10 46; do
 	cd ..
 	cd ..
 done
+#sort -t, -k4,4n -k1,1 -k2,2n -k3,3n traintest.csv | cut -d, -f1-3,5-8 | sed -e 's/,/ \& /g' | awk '{print $0"\\\\"}'
