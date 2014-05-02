@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 ms=c("mlr","rf","rf","rf")
 xs=c(4,4,10,46)
+ts=c("MLR::Cyscore","RF::Cyscore","RF::CyscoreVina","RF::CyscoreVinaElem")
 trns=c(592,1184,1776,2367)
 tst=592
 statc=c("rmse","sdev","pcor","scor")
@@ -8,11 +9,6 @@ statx=c("RMSE","SD","Rp","Rs")
 nm=length(ms) # Number of models.
 ntrn=length(trns) # Number of training sets.
 nc=length(statc) # Number of performance measures.
-ts=array(nm)
-for (mi in 1:nm)
-{
-	ts[mi]=paste(toupper(ms[mi]),xs[mi],sep="-x")
-}
 #setEPS()
 med=array(dim=c(nm,ntrn,nc))
 for (trni in 1:ntrn)
