@@ -10,7 +10,7 @@ for x in 2 4 10 40 42 46; do
 		../mlrtrain.R $trn
 		for tst in $tsts; do
 			../mlrtest.R $trn $tst
-			../../iyprplot.R $trn $tst
+			../../iypplot.R $trn $tst
 			echo MLR,$x,$trn,$(tail -1 trn-$trn-tst-$tst-stat.csv)
 		done
 	done
@@ -22,7 +22,7 @@ for x in 2 4 10 40 42 46; do
 		tail -n +6 trn-$trn.txt | awk '{print substr($0,4,8)}' | ../../varimpplot.R $trn
 		for tst in $tsts; do
 			rf-test trn-$trn.rf ../tst-$tst-yxi.csv > trn-$trn-tst-$tst-iyp.csv
-			../../iyprplot.R $trn $tst
+			../../iypplot.R $trn $tst
 			echo RF,$x,$trn,$(tail -1 trn-$trn-tst-$tst-stat.csv)
 		done
 	done
