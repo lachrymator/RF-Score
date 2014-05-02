@@ -108,5 +108,5 @@ int main(int argc, char* argv[])
 
 	// Write statistics.
 	cout.setf(ios::fixed, ios::floatfield);
-	cout << "n,rmse,sdev,pcor,scor,kcor" << endl << setprecision(3) << n << ',' << rmse << ',' << sdev << ',' << pcor << ',' << scor << ',' << kcor << endl;
+	cout << "n,rmse,sdev,pcor,scor,kcor" << endl << n << ',' << setprecision(2) << rmse << ',' << sdev << ',' << setprecision(3) << pcor << ',' << scor << ',' << kcor << endl;
 }

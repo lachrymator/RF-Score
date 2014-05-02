@@ -18,7 +18,7 @@ for (p in c("predicted","regressed"))
 	rmse=sqrt(sum((d[p]-d["pbindaff"])^2)/n)
 	if (p == "predicted")
 	{
-		cat(sprintf("n,rmse,sdev,pcor,scor,kcor\n%d,%.3f,%.3f,%.3f,%.3f,%.3f\n", n, rmse, sdev, pcor, scor, kcor), file=sprintf("pdbbind-%s-%s-stat.csv",v,t))
+		cat(sprintf("n,rmse,sdev,pcor,scor,kcor\n%d,%.2f,%.2f,%.3f,%.3f,%.3f\n", n, rmse, sdev, pcor, scor, kcor), file=sprintf("pdbbind-%s-%s-stat.csv",v,t))
 	}
 	l=substr(p,1,1)
 	tiff(sprintf("pdbbind-%s-%s-y%s.tiff",v,t,l),compress="lzw")

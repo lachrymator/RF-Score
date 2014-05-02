@@ -10,7 +10,7 @@ sdev=summary(lm(pbindaff~predicted,d))$sigma
 pcor=cor(d["predicted"], d["pbindaff"], method="pearson")
 scor=cor(d["predicted"], d["pbindaff"], method="spearman")
 kcor=cor(d["predicted"], d["pbindaff"], method="kendall")
-cat(sprintf("n,rmse,sdev,pcor,scor,kcor\n%d,%.3f,%.3f,%.3f,%.3f,%.3f\n", n, rmse, sdev, pcor, scor, kcor), file=sprintf("trn-%s-tst-%s-stat.csv",trn,tst))
+cat(sprintf("n,rmse,sdev,pcor,scor,kcor\n%d,%.2f,%.2f,%.3f,%.3f,%.3f\n", n, rmse, sdev, pcor, scor, kcor), file=sprintf("trn-%s-tst-%s-stat.csv",trn,tst))
 setEPS()
 postscript(sprintf("trn-%s-tst-%s-yp.eps",trn,tst))
 par(cex.lab=1.5,cex.axis=1.5,cex.main=1.5)
