@@ -2,8 +2,8 @@
 ms=c("mlr","rf","rf","rf")
 xs=c(4,4,10,46)
 ts=c("MLR::Cyscore","RF::Cyscore","RF::CyscoreVina","RF::CyscoreVinaElem")
-trns=c(247,1105) # 247,2696 592,1184,1776,2367
-tst=195 # 201 592
+trns=c(247,1105) # 247,1105 247,2696 592,1184,1776,2367
+tst=195 # 195 201 592
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
 nm=length(ms) # Number of models.
