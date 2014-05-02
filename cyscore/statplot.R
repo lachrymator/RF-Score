@@ -19,7 +19,7 @@ for (trni in 1:ntrn)
 		stat=read.csv(sprintf("x%d/%s/trn-%d-tst-%d-stat.csv",xs[mi],ms[mi],trn,tst))
 		for (ci in 1:nc)
 		{
-			med[mi,trni,ci]=median(stat[statc[ci]][,])
+			med[mi,trni,ci]=stat[statc[ci]][,]
 		}
 	}
 }
