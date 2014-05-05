@@ -58,4 +58,5 @@ For data files, their nomenclature are as follows:
 
 For example,
 
-* `set3/trn-0-tst-1-rmse.csv` means the median plot of RMSE of the four models trained on all complexes and tested on HSP90 complexes.
+* `set3/trn-0-tst-1-rmse.tiff` means the median plot of RMSE of the four models trained on all complexes of PDBbind v2002, v2007 and v2012 refined sets and tested on HSP90 complexes of PDBbind v2013\v2010 refined set.
+* `set3/trn-2-tst-2-rmse.tiff` means the median plot of RMSE of the four models trained on CAH2, non-CAH2 and all complexes of PDBbind v2010 refined set and tested on CAH2 complexes of PDBbind v2013\v2010 refined set.
