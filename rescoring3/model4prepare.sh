@@ -39,9 +39,9 @@ for m in 2 3 4; do
 				grep ",$c" pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-$trn-yxi.csv
 			done
 			echo pdbbind-2010-trn-m$trn-yxi.csv
-			head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-m$trn-yxi.csv
+			head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-0$trn-yxi.csv
 			for c in $(cut -d, -f1 ../../set3/pdbbind-2010-trn-0-iy.csv ../../set3/pdbbind-2010-trn-$trn-iy.csv | sort | uniq -u); do
-				grep ",$c" pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-m$trn-yxi.csv
+				grep ",$c" pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-0$trn-yxi.csv
 			done
 		done
 		cd ..
