@@ -7,7 +7,7 @@ for m in 2; do
 		for trn in 0; do
 			echo trn$trn
 			tsts=$(seq 0 5)
-			for v in $(ls -1 pdbbind-*-trn-0-yxi.csv | cut -d- -f2); do
+			for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | cut -d- -f2); do
 				echo $v
 				for tst in $tsts; do
 					echo w,n,rmse,sdev,pcor,scor,kcor > pdbbind-$v-trn-$trn-tst-$tst-stat.csv
