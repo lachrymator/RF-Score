@@ -13,7 +13,7 @@ for (trn in 0:0)
 	{
 		# Plot figures with y axis being the performance measure, x axis being the numbers of training complexes, and legends being the models.
 		cat(sprintf("set$s/trn-$trn-tst-$tst-$c.tiff\n"))
-		s=3
+		for (s in 3:3)
 		{
 			cat(sprintf("set%d\n",s))
 			ntrn=array(dim=nv)
