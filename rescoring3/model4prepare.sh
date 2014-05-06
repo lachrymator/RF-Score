@@ -13,12 +13,12 @@ for m in 2 3 4; do
 			if [[ $vi == 0 ]]; then
 				for tst in {0..5}; do
 					echo tst-$tst-yxi.csv
-					rf-prepare $pdbbind/v${v[$vi]}/rescoring-3-set-$s-tst-$tst-iy.csv $m | cut -d, -f1-$p,$q- | sed 's/_inter//g' > tst-$tst-yxi.csv
+					rf-prepare $pdbbind/v${v[$vi]}/rescoring-3-set-$s-tst-$tst-iy.csv $m 2 | cut -d, -f1-$p,$q- | sed 's/_inter//g' > tst-$tst-yxi.csv
 				done
 			else
 				for trn in 0; do
 					echo pdbbind-${v[$vi]}-trn-$trn-yxi.csv
-					rf-prepare $pdbbind/v${v[$vi]}/rescoring-3-set-$s-trn-$trn-iy.csv $m | cut -d, -f1-$p,$q- | sed 's/_inter//g' > pdbbind-${v[$vi]}-trn-$trn-yxi.csv
+					rf-prepare $pdbbind/v${v[$vi]}/rescoring-3-set-$s-trn-$trn-iy.csv $m 2 | cut -d, -f1-$p,$q- | sed 's/_inter//g' > pdbbind-${v[$vi]}-trn-$trn-yxi.csv
 				done
 			fi
 		done
