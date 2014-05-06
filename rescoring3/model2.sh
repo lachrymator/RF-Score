@@ -43,7 +43,7 @@ for m in 2; do
 			done
 		done
 		echo v,trn,tst,w,n,rmse,sdev,pcor,scor,kcor > tst-stat.csv
-		sort -t, -k1,1n tst-stat-0.csv >> tst-stat.csv
+		sort -t, -k1,1n -k2,2n -k3,3n tst-stat-0.csv >> tst-stat.csv
 		rm tst-stat-0.csv
 		cd ..
 	done
