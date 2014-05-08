@@ -37,6 +37,50 @@ for m in 2 3 4; do
 			head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-$trn-yxi.csv
 			([[ $trn -le 5 ]] && cut -d, -f1 ../../set3/pdbbind-2010-trn-$trn-iy.csv || cut -d, -f1 ../../set3/pdbbind-2010-trn-0-iy.csv ../../set3/pdbbind-2010-trn-$((trn-5))-iy.csv | sort | uniq -u) | grep -f - pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-$trn-yxi.csv
 		done
+		mmm=$(tail -n +2 pdbbind-2010-trn-0-yxi.csv | awk -F, '
+		{
+			for (i=2; i<NF; ++i) {
+				if (min[i]=="") {
+					min[i]=$i
+				} else if (min[i]>$i) {
+					min[i]=$i
+				}
+				if (max[i]=="") {
+					max[i]=$i
+				} else if (max[i]<$i) {
+					max[i]=$i
+				}
+			}
+		} END {
+			for (i=2; i<NF; ++i) {
+				printf ",%.4f",max[i]-min[i]
+			}
+		}
+		');
+		for tst in {1..5}; do
+			echo pdbbind-2010-trn-${tst}k*-yxi.csv
+			for yxi in $(tail -n +2 tst-$tst-yxi.csv); do
+				tail -n +2 pdbbind-2010-trn-0-yxi.csv | awk -F, -v mmm=$mmm -v yxi=$yxi '
+				BEGIN {
+					split(mmm,mmma,",")
+					split(yxi,yxia,",")
+				} function abs(x) {
+					return x < 0 ? -x : x
+				} {
+					s=0
+					for (i=2; i<NF; ++i) {
+						s+=abs(yxia[i]-$i)/mmma[i]
+					}
+					printf "%.4f\t%s\n",s,$NF
+				}
+				' | sort -k1,1n | head -100 | cut -f2 | tee >(head -10 >> pdbbind-2010-trn-${tst}k10-i.csv) >(head -50 >> pdbbind-2010-trn-${tst}k50-i.csv) >> pdbbind-2010-trn-${tst}k100-i.csv
+			done
+			for k in 10 50 100; do
+				head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-${tst}k$k-yxi.csv
+				sort pdbbind-2010-trn-${tst}k$k-i.csv | uniq | grep -f - pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-${tst}k$k-yxi.csv
+				rm pdbbind-2010-trn-${tst}k$k-i.csv
+			done
+		done
 		cd ..
 	done
 	cd ..
