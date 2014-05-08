@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 	const float a = (y1sum-b*x1sum)/n;
 
 	// Compute rmse, sdev, pcor, scor, kcor.
-	float se2p = 0, se2r;
+	float se2p = 0, se2r = 0;
 	for (size_t i = 0; i < n; ++i)
 	{
 		const float p = x[i];
