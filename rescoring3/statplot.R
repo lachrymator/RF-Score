@@ -72,9 +72,30 @@ for (s in 3:3)
 				}
 			}
 		}
-		for (trn in tst:tst)
+		statplot(s,tst,tst,ntrn,med)
+	}
+	for (tst in 1:5)
+	{
+		tv=c(10+tst,15+tst,20+tst)
+		nt=length(tv)
+		ntrn=array(dim=nt)
+		med=array(dim=c(nm,nt,nc))
+		for (ti in 1:nt)
 		{
-			statplot(s,trn,tst,ntrn,med)
+			trn=tv[ti]
+			for (v in c(2010))
+			{
+				ntrn[ti]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn)))
+				for (m in 1:nm)
+				{
+					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,0,trn),tst))
+					for (ci in 1:nc)
+					{
+						med[m,ti,ci]=median(tst_stat[statc[ci]][,])
+					}
+				}
+			}
 		}
+		statplot(s,10+tst,tst,ntrn,med)
 	}
 }
