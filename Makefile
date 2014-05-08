@@ -30,4 +30,4 @@ obj/%.o: src/%.cpp
 	$(CC) -o $@ $< -c
 
 clean:
-	rm -f bin/* obj/*
+	rm -f bin/rf-prepare bin/rf-train bin/rf-test bin/rf-stat bin/rf-extract bin/rf-predict bin/rf-score bin/rf-inspect obj/*
