@@ -3,6 +3,26 @@ nm=4 # Number of models.
 nc=4 # Number of performance measures.
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
+statplot = function(s,trn,tst,ntrn,med) {
+	cat(sprintf("set%d/trn-%s-tst-%s-%s.tiff\n",s,trn,tst,"{rmse,sdev,pcor,scor}"))
+	for (ci in 1:nc)
+	{
+		ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
+		tiff(sprintf("set%d/trn-%s-tst-%s-%s.tiff",s,trn,tst,statc[ci]),compression="lzw")
+		par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
+		for (m in 2:nm)
+		{
+			plot(ntrn,med[m,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
+			par(new=T)
+		}
+		abline(h=med[1,,ci])
+		title(main=sprintf("Median of %s",statx[ci]),xlab=sprintf("Number of training complexes (N=%s)",paste(ntrn,collapse=",")),ylab=statx[ci])
+		legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
+		axis(1)
+		axis(2)
+		dev.off()
+	}
+}
 for (s in 3:3)
 {
 	cat(sprintf("set%d\n",s))
@@ -27,24 +47,7 @@ for (s in 3:3)
 					}
 				}
 			}
-			cat(sprintf("set%d/trn-%s-tst-%s-%s.tiff\n",s,trn,tst,"{rmse,sdev,pcor,scor}"))
-			for (ci in 1:nc)
-			{
-				ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
-				tiff(sprintf("set%d/trn-%s-tst-%s-%s.tiff",s,trn,tst,statc[ci]),compression="lzw")
-				par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-				for (m in 2:nm)
-				{
-					plot(ntrn,med[m,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
-					par(new=T)
-				}
-				abline(h=med[1,,ci])
-				title(main=sprintf("Median of %s",statx[ci]),xlab=sprintf("Number of training complexes (N=%s)",paste(ntrn,collapse=",")),ylab=statx[ci])
-				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
-				axis(1)
-				axis(2)
-				dev.off()
-			}
+			statplot(s,trn,tst,ntrn,med)
 		}
 	}
 	for (tst in 1:5)
@@ -71,24 +74,7 @@ for (s in 3:3)
 		}
 		for (trn in tst:tst)
 		{
-			cat(sprintf("set%d/trn-%s-tst-%s-%s.tiff\n",s,trn,tst,"{rmse,sdev,pcor,scor}"))
-			for (ci in 1:nc)
-			{
-				ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
-				tiff(sprintf("set%d/trn-%s-tst-%s-%s.tiff",s,trn,tst,statc[ci]),compression="lzw")
-				par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
-				for (m in 2:nm)
-				{
-					plot(ntrn,med[m,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
-					par(new=T)
-				}
-				abline(h=med[1,,ci])
-				title(main=sprintf("Median of %s",statx[ci]),xlab=sprintf("Number of training complexes (N=%s)",paste(ntrn,collapse=",")),ylab=statx[ci])
-				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
-				axis(1)
-				axis(2)
-				dev.off()
-			}
+			statplot(s,trn,tst,ntrn,med)
 		}
 	}
 }
