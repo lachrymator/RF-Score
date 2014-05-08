@@ -9,7 +9,7 @@ for m in 3 4; do
 			if [[ $trn == 0 ]]; then
 				tsts=$(seq 0 5)
 			else
-				tsts=$(($trn % 5))
+				tsts=$((1 + ($trn - 1) % 5))
 			fi
 			for v in $(ls -1 pdbbind-*-trn-$trn-yxi.csv | cut -d- -f2); do
 				echo $v
