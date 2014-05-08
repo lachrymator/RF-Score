@@ -1,28 +1,23 @@
 #!/usr/bin/env Rscript
 nm=4 # Number of models.
-nv=3 # Number of training sets per dataset.
 nc=4 # Number of performance measures.
-setv=c(2002,2007,2010)
 statc=c("rmse","sdev","pcor","scor")
 statx=c("RMSE","SD","Rp","Rs")
-for (trn in 0:0)
+for (s in 3:3)
 {
-	cat(sprintf("trn%s\n",trn))
-	tsts = 0:5
-	for (tst in tsts)
+	cat(sprintf("set%d\n",s))
+	vv=c(2002,2007,2010)
+	nv=length(vv)
+	for (tst in 0:5)
 	{
-		# Plot figures with y axis being the performance measure, x axis being the numbers of training complexes, and legends being the models.
-		cat(sprintf("set$s/trn-$trn-tst-$tst-$c.tiff\n"))
-		for (s in 3:3)
+		for (trn in 0:0)
 		{
-			cat(sprintf("set%d\n",s))
 			ntrn=array(dim=nv)
 			med=array(dim=c(nm,nv,nc))
 			for (vi in 1:nv)
 			{
-				v=setv[vi]
-				trn_yxi=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn))
-				ntrn[vi]=nrow(trn_yxi)
+				v=vv[vi]
+				ntrn[vi]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn)))
 				for (m in 1:nm)
 				{
 					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),trn,tst))
@@ -32,6 +27,7 @@ for (trn in 0:0)
 					}
 				}
 			}
+			cat(sprintf("set%d/trn-%s-tst-%s-%s.tiff\n",s,trn,tst,"{rmse,sdev,pcor,scor}"))
 			for (ci in 1:nc)
 			{
 				ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
@@ -43,7 +39,7 @@ for (trn in 0:0)
 					par(new=T)
 				}
 				abline(h=med[1,,ci])
-				title(main=sprintf("Median of %s",statx[ci]),xlab="Number of training complexes",ylab=statx[ci])
+				title(main=sprintf("Median of %s",statx[ci]),xlab=sprintf("Number of training complexes (N=%s)",paste(ntrn,collapse=",")),ylab=statx[ci])
 				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
 				axis(1)
 				axis(2)
@@ -51,36 +47,31 @@ for (trn in 0:0)
 			}
 		}
 	}
-}
-for (trn in 1:5)
-{
-	cat(sprintf("trn%s\n",trn))
-	trnv = c(trn,trn+5,0)
-	tsts = trn:trn
-	for (tst in tsts)
+	for (tst in 1:5)
 	{
-		# Plot figures with y axis being the performance measure, x axis being the numbers of training complexes, and legends being the models.
-		cat(sprintf("set$s/trn-$trn-tst-$tst-$c.tiff\n"))
-		for (s in 3:3)
+		tv=c(tst,tst+5,0)
+		nt=length(tv)
+		ntrn=array(dim=nt)
+		med=array(dim=c(nm,nt,nc))
+		for (ti in 1:nt)
 		{
-			cat(sprintf("set%d\n",s))
-			ntrn=array(dim=nv)
-			med=array(dim=c(nm,nv,nc))
-			for (vi in 1:nv)
+			trn=tv[ti]
+			for (v in c(2010))
 			{
-				v=2010
-				trnt=trnv[vi]
-				trn_yxi=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trnt))
-				ntrn[vi]=nrow(trn_yxi)
+				ntrn[ti]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn)))
 				for (m in 1:nm)
 				{
-					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,0,trnt),tst))
+					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,0,trn),tst))
 					for (ci in 1:nc)
 					{
-						med[m,vi,ci]=median(tst_stat[statc[ci]][,])
+						med[m,ti,ci]=median(tst_stat[statc[ci]][,])
 					}
 				}
 			}
+		}
+		for (trn in tst:tst)
+		{
+			cat(sprintf("set%d/trn-%s-tst-%s-%s.tiff\n",s,trn,tst,"{rmse,sdev,pcor,scor}"))
 			for (ci in 1:nc)
 			{
 				ylim=c(min(med[,,ci],na.rm=T),max(med[,,ci],na.rm=T))
@@ -92,7 +83,7 @@ for (trn in 1:5)
 					par(new=T)
 				}
 				abline(h=med[1,,ci])
-				title(main=sprintf("Median of %s",statx[ci]),xlab="Number of training complexes",ylab=statx[ci])
+				title(main=sprintf("Median of %s",statx[ci]),xlab=sprintf("Number of training complexes (N=%s)",paste(ntrn,collapse=",")),ylab=statx[ci])
 				legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
 				axis(1)
 				axis(2)
