@@ -57,8 +57,8 @@ for m in 2 3 4; do
 			}
 		}
 		');
+		ks=(10 50 100)
 		for tst in {1..5}; do
-			echo pdbbind-2010-trn-${tst}k*-yxi.csv
 			for yxi in $(tail -n +2 tst-$tst-yxi.csv); do
 				tail -n +2 pdbbind-2010-trn-0-yxi.csv | awk -F, -v mmm=$mmm -v yxi=$yxi '
 				BEGIN {
@@ -73,12 +73,18 @@ for m in 2 3 4; do
 					}
 					printf "%.4f\t%s\n",s,$NF
 				}
-				' | sort -k1,1n | head -100 | cut -f2 | tee >(head -10 >> pdbbind-2010-trn-${tst}k10-i.csv) >(head -50 >> pdbbind-2010-trn-${tst}k50-i.csv) >> pdbbind-2010-trn-${tst}k100-i.csv
+				' | sort -k1,1n | head -100 | cut -f2 > pdbbind-2010-trn-$tst-i.csv
+				for i in {0..2}; do
+					head -${ks[$i]} pdbbind-2010-trn-$tst-i.csv >> pdbbind-2010-trn-$((10+i*5+tst))-i.csv
+				done
 			done
-			for k in 10 50 100; do
-				head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-${tst}k$k-yxi.csv
-				sort pdbbind-2010-trn-${tst}k$k-i.csv | uniq | grep -f - pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-${tst}k$k-yxi.csv
-				rm pdbbind-2010-trn-${tst}k$k-i.csv
+			rm pdbbind-2010-trn-$tst-i.csv
+			for i in {0..2}; do
+				trn=$((10+i*5+tst))
+				echo pdbbind-2010-trn-$trn-yxi.csv
+				head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-$trn-yxi.csv
+				sort pdbbind-2010-trn-$trn-i.csv | uniq | grep -f - pdbbind-2010-trn-0-yxi.csv >> pdbbind-2010-trn-$trn-yxi.csv
+				rm pdbbind-2010-trn-$trn-i.csv
 			done
 		done
 		cd ..
