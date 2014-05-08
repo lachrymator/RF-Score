@@ -49,14 +49,36 @@ The folders and files are organized hierarchically. Model-specific files are in 
 
 For data files, their nomenclature are as follows:
 
-* 0 means all
-* 1 means HSP90
-* 2 means CAH2
-* 3 means TRY1
-* 4 means HIVPR
-* 5 means THRB
+*  0 means all
+*  1 means HSP90
+*  2 means CAH2
+*  3 means TRY1
+*  4 means HIVPR
+*  5 means THRB
+*  6 means all\HSP90
+*  7 means all\CAH2
+*  8 means all\TRY1
+*  9 means all\HIVPR
+* 10 means all\THRB
+* 11 means the 10 nearest neighbours in PDBbind v2010 refined set for each HSP90 complex in the test set
+* 12 means the 10 nearest neighbours in PDBbind v2010 refined set for each CAH2 complex in the test set
+* 13 means the 10 nearest neighbours in PDBbind v2010 refined set for each TRY1 complex in the test set
+* 14 means the 10 nearest neighbours in PDBbind v2010 refined set for each HIVPR complex in the test set
+* 15 means the 10 nearest neighbours in PDBbind v2010 refined set for each THRB complex in the test set
+* 16 means the 50 nearest neighbours in PDBbind v2010 refined set for each HSP90 complex in the test set
+* 17 means the 50 nearest neighbours in PDBbind v2010 refined set for each CAH2 complex in the test set
+* 18 means the 50 nearest neighbours in PDBbind v2010 refined set for each TRY1 complex in the test set
+* 19 means the 50 nearest neighbours in PDBbind v2010 refined set for each HIVPR complex in the test set
+* 20 means the 50 nearest neighbours in PDBbind v2010 refined set for each THRB complex in the test set
+* 21 means the 100 nearest neighbours in PDBbind v2010 refined set for each HSP90 complex in the test set
+* 22 means the 100 nearest neighbours in PDBbind v2010 refined set for each CAH2 complex in the test set
+* 23 means the 100 nearest neighbours in PDBbind v2010 refined set for each TRY1 complex in the test set
+* 24 means the 100 nearest neighbours in PDBbind v2010 refined set for each HIVPR complex in the test set
+* 25 means the 100 nearest neighbours in PDBbind v2010 refined set for each THRB complex in the test set
 
 For example,
 
+* `set3/trn-0-tst-0-rmse.tiff` means the median plot of RMSE of the four models trained on all complexes of PDBbind v2002, v2007 and v2012 refined sets and tested on all complexes of PDBbind v2013\v2010 refined set.
 * `set3/trn-0-tst-1-rmse.tiff` means the median plot of RMSE of the four models trained on all complexes of PDBbind v2002, v2007 and v2012 refined sets and tested on HSP90 complexes of PDBbind v2013\v2010 refined set.
 * `set3/trn-2-tst-2-rmse.tiff` means the median plot of RMSE of the four models trained on CAH2, non-CAH2 and all complexes of PDBbind v2010 refined set and tested on CAH2 complexes of PDBbind v2013\v2010 refined set.
+* `set3/trn-13-tst-3-rmse.tiff` means the median plot of RMSE of the four models trained on PDBbind v2010 refined set complexes identified as the 10 nearest neighbours of TRY1 complexes in the test set and tested on TRY1 complexes of PDBbind v2013\v2010 refined set.
