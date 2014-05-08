@@ -12,11 +12,11 @@ statplot = function(s,trn,tst,ntrn,med) {
 		par(cex.lab=1.3,cex.axis=1.3,cex.main=1.3)
 		for (m in 2:nm)
 		{
-			plot(ntrn,med[m,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
+			plot(ntrn[m,],med[m,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=m,col=m)
 			par(new=T)
 		}
 		abline(h=med[1,,ci])
-		title(main=sprintf("Median of %s",statx[ci]),xlab=sprintf("Number of training complexes (N=%s)",paste(ntrn,collapse=",")),ylab=statx[ci])
+		title(main=sprintf("Median of %s",statx[ci]),xlab="Number of training complexes",ylab=statx[ci])
 		legend(ifelse(ci<=2,"topright","bottomright"),title="Models",legend=1:nm,fill=1:nm,cex=1.3)
 		axis(1)
 		axis(2)
@@ -32,14 +32,14 @@ for (s in 3:3)
 	{
 		for (trn in 0:0)
 		{
-			ntrn=array(dim=nv)
+			ntrn=array(dim=c(nm,nv))
 			med=array(dim=c(nm,nv,nc))
 			for (vi in 1:nv)
 			{
 				v=vv[vi]
-				ntrn[vi]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn)))
 				for (m in 1:nm)
 				{
+					if (m > 1) ntrn[m,vi]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",m,s,v,trn)))
 					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),trn,tst))
 					for (ci in 1:nc)
 					{
@@ -54,16 +54,16 @@ for (s in 3:3)
 	{
 		tv=c(tst,tst+5,0)
 		nt=length(tv)
-		ntrn=array(dim=nt)
+		ntrn=array(dim=c(nm,nt))
 		med=array(dim=c(nm,nt,nc))
 		for (ti in 1:nt)
 		{
 			trn=tv[ti]
 			for (v in c(2010))
 			{
-				ntrn[ti]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn)))
 				for (m in 1:nm)
 				{
+					if (m > 1) ntrn[m,ti]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",m,s,v,trn)))
 					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,0,trn),tst))
 					for (ci in 1:nc)
 					{
@@ -78,16 +78,16 @@ for (s in 3:3)
 	{
 		tv=c(10+tst,15+tst,20+tst)
 		nt=length(tv)
-		ntrn=array(dim=nt)
+		ntrn=array(dim=c(nm,nt))
 		med=array(dim=c(nm,nt,nc))
 		for (ti in 1:nt)
 		{
 			trn=tv[ti]
 			for (v in c(2010))
 			{
-				ntrn[ti]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",2,s,v,trn)))
 				for (m in 1:nm)
 				{
+					if (m > 1) ntrn[m,ti]=nrow(read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-yxi.csv",m,s,v,trn)))
 					tst_stat=read.csv(sprintf("model%d/set%s/pdbbind-%s-trn-%s-tst-%s-stat.csv",m,s,ifelse(m==1,2007,v),ifelse(m==1,0,trn),tst))
 					for (ci in 1:nc)
 					{
