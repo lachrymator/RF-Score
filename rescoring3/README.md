@@ -75,10 +75,20 @@ For data files, their nomenclature are as follows:
 * 23 means the 100 nearest neighbours in PDBbind v2010 refined set for each TRY1 complex in the test set
 * 24 means the 100 nearest neighbours in PDBbind v2010 refined set for each HIVPR complex in the test set
 * 25 means the 100 nearest neighbours in PDBbind v2010 refined set for each THRB complex in the test set
+* 26 means the 150 nearest neighbours in PDBbind v2010 refined set for each HSP90 complex in the test set
+* 27 means the 150 nearest neighbours in PDBbind v2010 refined set for each CAH2 complex in the test set
+* 28 means the 150 nearest neighbours in PDBbind v2010 refined set for each TRY1 complex in the test set
+* 29 means the 150 nearest neighbours in PDBbind v2010 refined set for each HIVPR complex in the test set
+* 30 means the 150 nearest neighbours in PDBbind v2010 refined set for each THRB complex in the test set
+* 31 means the 200 nearest neighbours in PDBbind v2010 refined set for each HSP90 complex in the test set
+* 32 means the 200 nearest neighbours in PDBbind v2010 refined set for each CAH2 complex in the test set
+* 33 means the 200 nearest neighbours in PDBbind v2010 refined set for each TRY1 complex in the test set
+* 34 means the 200 nearest neighbours in PDBbind v2010 refined set for each HIVPR complex in the test set
+* 35 means the 200 nearest neighbours in PDBbind v2010 refined set for each THRB complex in the test set
 
 For example,
 
 * `set3/trn-0-tst-0-rmse.tiff` means the median plot of RMSE of the four models trained on all complexes of PDBbind v2002, v2007 and v2012 refined sets and tested on all complexes of PDBbind v2013\v2010 refined set.
 * `set3/trn-0-tst-1-rmse.tiff` means the median plot of RMSE of the four models trained on all complexes of PDBbind v2002, v2007 and v2012 refined sets and tested on HSP90 complexes of PDBbind v2013\v2010 refined set.
 * `set3/trn-2-tst-2-rmse.tiff` means the median plot of RMSE of the four models trained on CAH2, non-CAH2 and all complexes of PDBbind v2010 refined set and tested on CAH2 complexes of PDBbind v2013\v2010 refined set.
-* `set3/trn-13-tst-3-rmse.tiff` means the median plot of RMSE of the four models trained on PDBbind v2010 refined set complexes identified as the 10, 50, 100 nearest neighbours of TRY1 complexes in the test set and tested on TRY1 complexes of PDBbind v2013\v2010 refined set.
+* `set3/trn-13-tst-3-rmse.tiff` means the median plot of RMSE of the four models trained on PDBbind v2010 refined set complexes identified as the 10, 50, 100, 150, 200 nearest neighbours of TRY1 complexes in the test set and tested on TRY1 complexes of PDBbind v2013\v2010 refined set.
