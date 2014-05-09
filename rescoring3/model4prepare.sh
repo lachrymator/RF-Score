@@ -74,12 +74,12 @@ for m in 2 3 4; do
 					printf "%.4f\t%s\n",s,$NF
 				}
 				' | sort -k1,1n | head -$(IFS=$'\n' sort -nr <<< "${ks[*]}") | cut -f2 > pdbbind-2010-trn-$tst-i.csv
-				for i in {0..4}; do
+				for i in $(seq 0 $((${#ks[*]}-1))); do
 					head -${ks[$i]} pdbbind-2010-trn-$tst-i.csv >> pdbbind-2010-trn-$((10+i*5+tst))-i.csv
 				done
 			done
 			rm pdbbind-2010-trn-$tst-i.csv
-			for i in {0..4}; do
+			for i in $(seq 0 $((${#ks[*]}-1))); do
 				trn=$((10+i*5+tst))
 				echo pdbbind-2010-trn-$trn-yxi.csv
 				head -1 pdbbind-2010-trn-0-yxi.csv > pdbbind-2010-trn-$trn-yxi.csv
