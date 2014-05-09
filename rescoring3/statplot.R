@@ -76,7 +76,7 @@ for (s in 3:3)
 	}
 	for (tst in 1:5)
 	{
-		tv=c(10+tst,15+tst,20+tst)
+		tv=c(10+tst,15+tst,20+tst,25+tst,30+tst)
 		nt=length(tv)
 		ntrn=array(dim=c(nm,nt))
 		med=array(dim=c(nm,nt,nc))

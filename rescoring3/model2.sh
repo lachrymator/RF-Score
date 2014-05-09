@@ -4,7 +4,7 @@ for m in 2; do
 	for s in 3; do
 		echo set$s
 		cd set$s
-		for trn in {0..25}; do
+		for trn in {0..35}; do
 			echo trn$trn
 			if [[ $trn == 0 ]]; then
 				tsts=$(seq 0 5)
