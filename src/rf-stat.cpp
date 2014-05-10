@@ -2,8 +2,6 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-#include <array>
-#include <numeric>
 #include <algorithm>
 using namespace std;
 
