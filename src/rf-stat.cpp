@@ -35,10 +35,17 @@ float spearman(const vector<float>& y, const vector<float>& x)
 		return y[val1] < y[val2];
 	});
 	vector<float> xrank(n), yrank(n);
-	for (size_t i = 0; i < n; ++i)
+	for (size_t i = 0, j; i < n;)
 	{
-		xrank[xcase[i]] = i + 1;
-		yrank[ycase[i]] = i + 1;
+		for (j = i + 1; j < n && x[xcase[j]] == x[xcase[i]]; ++j);
+		const float r = (i + j + 1) * 0.5f;
+		for (; i < j; xrank[xcase[i++]] = r);
+	}
+	for (size_t i = 0, j; i < n;)
+	{
+		for (j = i + 1; j < n && y[ycase[j]] == y[ycase[i]]; ++j);
+		const float r = (i + j + 1) * 0.5f;
+		for (; i < j; yrank[ycase[i++]] = r);
 	}
 	return pearson(yrank, xrank);
 }
