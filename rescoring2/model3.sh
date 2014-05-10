@@ -28,7 +28,6 @@ for m in 3 4; do
 						rf-test pdbbind-$v-trn-$trn.rf ../tst-$tst-yxi.csv > pdbbind-$v-trn-$trn-tst-$tst-iyp.csv
 						../../../iypplot.R $v $trn $tst
 					done
-					rm pdbbind-$v-trn-$trn.rf
 					tail -n +6 pdbbind-$v-trn-$trn.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v $trn
 					if [[ $trn -lt 5 ]]; then
 						../../../idpplot.R $v $trn 2 $s
