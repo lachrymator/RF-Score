@@ -8,8 +8,7 @@ for m in 1; do
 		for t in trn tst; do
 			echo PDB,pbindaff,predicted > pdbbind-2007-$t-iyp.csv
 			v=$([[ $s == 1 || $t == "trn" ]] && echo 2007 || echo 2013)
-			for iy in $(cat $pdbbind/v$v/rescoring-1-set-$s-$t-iy.csv); do
-				c=${iy:0:4}
+			for c in $(cut -d, -f1 $pdbbind/v$v/rescoring-1-set-$s-$t-iy.csv); do
 				tail -n +18 $pdbbind/v$v/${c}/out/${c}_ligand_ligand_0.txt | head -1
 			done | cut -d' ' -f2 | awk '{printf "%.2f\n", $1*-0.73349480509}' | paste -d, $t-iy.csv - >> pdbbind-2007-$t-iyp.csv
 		done
