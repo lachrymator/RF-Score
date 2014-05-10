@@ -33,7 +33,7 @@ for (ci in 1:nc)
 		plot(trns,med[mi,,ci],ylim=ylim,type="b",xaxt="n",yaxt="n",xlab="",ylab="",pch=mi,col=mi)
 		par(new=T)
 	}
-	title(main=sprintf("# training samples = %s, # test samples = %s",paste(trns,collapse=","),tst),xlab="Number of training complexes",ylab=statx[ci])
+	title(xlab=sprintf("Number of training complexes (N=%s)",paste(trns,collapse=",")),ylab=statx[ci])
 	legend(ifelse(ci<=2,"bottomleft","topleft"),title="Models",legend=ts,fill=1:nm,cex=1.3)
 	axis(1)
 	axis(2)
