@@ -89,12 +89,11 @@ For data files, their nomenclature are as follows:
 * i means PDB ID
 * y means measured pKd
 * p means predicted pKd
-* r means regressed pKd, i.e. r=fitted(lm(y~p))
 
 For example,
 
 * `set1/tst-iy.csv` means the [PDB,pbindaff] file of the test set of dataset 1, i.e. the PDB ID and measured pKd of PDBbind v2007 core set.
-* `model3/set1/89757/pdbbind-2007-tst-iypr.csv` means the [PDB,pbindaff,predicted,regressed] file of model 3 on dataset 1 trained on the PDBbind v2007 training set with seed 89757 and tested on the test set.
+* `model3/set1/89757/pdbbind-2007-tst-iyp.csv` means the [PDB,pbindaff,predicted] file of model 3 on dataset 1 trained on the PDBbind v2007 training set with seed 89757 and tested on the test set.
 * `model3/set1/pdbbind-2007-tst-stat.csv` means the [seed,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1 trained on the PDBbind v2007 training set and tested on the test set, over all seeds.
 * `model3/set1/tst-stat.csv` means the [v,w,n,rmse,sdev,pcor,scor,kcor] file of model 3 on dataset 1, over all PDBbind versions. For each v, only the best seed for models 3 and 4 or the best weight for model 2 is shown in the w column.
 
@@ -110,7 +109,7 @@ For script files, their functions and execution orders are as follows:
 * `mlrtrain.R` trains model 2 on model2/set{1,2}/$w/pdbbind-$v-trn-yxi.csv using multiple linear regression, and writes the intercept and coefficients to model2/set{1,2}/$w/pdbbind-$v.csv.
 * `mlrtest.R` tests model 2 on model2/set{1,2}/tst-yxi.csv, and writes the statistics to model2/set{1,2}/$w/pdbbind-$v-tst-stat.csv.
 * `couplelm.R` reads pdbbind-$v-trn-iyp.csv and writes pdbbind-$v-trn-coef.csv.
-* `iyprplot.R` writes models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-{iypr,stat}.csv and plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-y{p,r}.tiff.
+* `iypplot.R` writes models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-stat.csv and plots models{1,2,3,4,5}/set{1,2}/$w/pdbbind-$v-{trn,tst}-yp.tiff.
 * `varImpPlot.R` plots models{3,4,5}/set{1,2}/$w/pdbbind-$v-trn-varimpplot.tiff.
 * `statplot.R` plots model{2,3,4,5}/set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/pdbbind-$v-tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff, set{1,2}/tst-{rmse,sdev,pcor,scor,kcor}-{boxplot,median}.tiff. This R script is self contained and requires no command line arguments. It is not called in any bash scripts and therefore should be called in the end.
 

@@ -16,11 +16,8 @@ for m in 3 4 5; do
 				rf-train ../pdbbind-$v-trn-yxi.csv pdbbind-$v.rf $w > pdbbind-$v.txt
 				rf-test pdbbind-$v.rf ../pdbbind-$v-trn-yxi.csv > pdbbind-$v-trn-iyp.csv
 				rf-test pdbbind-$v.rf ../tst-yxi.csv > pdbbind-$v-tst-iyp.csv
-				../../../couplelm.R $v
-				../../../iyprplot.R $v trn
-				../../../iyprplot.R $v tst
-				rm pdbbind-$v-trn-iyp.csv
-				rm pdbbind-$v-tst-iyp.csv
+				../../../iypplot.R $v trn
+				../../../iypplot.R $v tst
 				tail -n +6 pdbbind-$v.txt | awk '{print substr($0,4,8)}' | ../../../varImpPlot.R $v
 				cd ..
 				echo -n $w, >> pdbbind-$v-tst-stat.csv
